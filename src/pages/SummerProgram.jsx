@@ -1,209 +1,299 @@
-import React, { useEffect } from 'react';
-import { Calendar, Clock, Users, BookOpen, Award, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  Calendar, 
+  Clock, 
+  Users, 
+  BookOpen, 
+  Award, 
+  ArrowRight,
+  Brain,
+  Star,
+  ChevronDown,
+  Code,
+  Sparkles,
+  Target,
+  Check,
+  PlayCircle
+} from 'lucide-react';
 
 export default function SummerProgram() {
+  const [activeWeek, setActiveWeek] = useState(1);
+  const [activeSession, setActiveSession] = useState(0);
+  const [showBadge, setShowBadge] = useState(false);
+  const [isTimelineAnimated, setIsTimelineAnimated] = useState(false);
+  const [hoveredBadgeIndex, setHoveredBadgeIndex] = useState(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+            if (entry.target.classList.contains('badge-trigger')) {
+              setShowBadge(true);
+            }
+            if (entry.target.classList.contains('timeline-trigger')) {
+              setIsTimelineAnimated(true);
+            }
           }
         });
       },
-      {
-        threshold: 0.1,
-        rootMargin: '0px'
-      }
+      { threshold: 0.1, rootMargin: '0px' }
     );
 
-    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+    document.querySelectorAll('.animate-on-scroll, .badge-trigger, .timeline-trigger').forEach((element) => {
       observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
 
+  const sessions = {
+    1: [
+      {
+        title: "Introduction to AI",
+        description: "Basic concepts and Python setup",
+        outcomes: ["Understanding AI fundamentals", "Python environment setup", "First program"],
+        icon: <Brain className="w-6 h-6" />
+      },
+      {
+        title: "Machine Learning Basics",
+        description: "Core ML concepts and applications",
+        outcomes: ["Data analysis basics", "Simple ML models", "Practice exercises"],
+        icon: <Code className="w-6 h-6" />
+      }
+    ],
+    2: [
+      {
+        title: "Advanced Concepts",
+        description: "Deep learning and neural networks",
+        outcomes: ["Neural network basics", "Model training", "AI ethics"],
+        icon: <Sparkles className="w-6 h-6" />
+      },
+      {
+        title: "Project Work",
+        description: "Build your own AI application",
+        outcomes: ["Project planning", "Implementation", "Presentation"],
+        icon: <Target className="w-6 h-6" />
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       {/* Background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute top-40 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
       </div>
 
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
-              Summer AI Program
-              <span className="block text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                For Middle School Students
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              A 2-week immersive journey into the world of Artificial Intelligence
-            </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-on-scroll from-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
+                <Star className="w-4 h-4" />
+                Applications Open for Summer 2024
+              </div>
+              <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
+                Transform Your Summer with
+                <span className="block text-5xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mt-2">
+                  AI Learning
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Join our 2-week intensive program designed specifically for middle school students
+              </p>
+              <div className="flex gap-4">
+                <a 
+                  href="https://forms.google.com/your-form-link" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  Apply Now
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-300 hover:border-blue-600 transition-colors duration-300">
+                  <PlayCircle className="w-5 h-5 text-blue-600" />
+                  Watch Demo
+                </button>
+              </div>
+            </div>
+            <div className="relative animate-on-scroll from-right">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl transform rotate-3"></div>
+              <div className="relative bg-white rounded-2xl p-8 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <Brain className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Learn AI Fundamentals</h3>
+                      <p className="text-gray-600">From basics to practical applications</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                      <Code className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Build Projects</h3>
+                      <p className="text-gray-600">Hands-on coding experience</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
+                      <Award className="w-6 h-6 text-pink-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Earn Certificate</h3>
+                      <p className="text-gray-600">Recognition of achievement</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Timeline Section */}
+      <section className="bg-white py-24 relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Program Timeline</h2>
+            <p className="text-xl text-gray-600">Your journey to AI mastery</p>
+          </div>
+
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex rounded-full bg-gray-100 p-1">
+              {[1, 2].map((week) => (
+                <button
+                  key={week}
+                  onClick={() => setActiveWeek(week)}
+                  className={`px-8 py-3 rounded-full transition-all duration-300 ${
+                    activeWeek === week 
+                      ? 'bg-blue-600 text-white shadow-lg' 
+                      : 'text-gray-600 hover:text-blue-600'
+                  }`}
+                >
+                  Week {week}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-8 relative">
+            <div className="absolute inset-y-0 left-[50%] w-0.5 bg-gray-200"/>
+            {sessions[activeWeek].map((session, index) => (
+              <div
+                key={session.title}
+                className={`relative grid md:grid-cols-2 gap-8 ${
+                  index % 2 === 0 ? 'md:pr-12' : 'md:pl-12 md:transform md:translate-x-1/2'
+                }`}
+              >
+                <div 
+                  className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 timeline-trigger ${
+                    index % 2 === 0 ? 'md:text-right' : ''
+                  } ${isTimelineAnimated ? 'animate-in from-left' : ''}`}
+                >
+                  <div className={`flex items-center gap-4 mb-4 ${
+                    index % 2 === 0 ? 'justify-end' : ''
+                  }`}>
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      {session.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold">{session.title}</h3>
+                      <p className="text-gray-600">{session.description}</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-2">
+                    {session.outcomes.map((outcome) => (
+                      <li key={outcome} className="flex items-center gap-2 text-gray-600">
+                        <Check className="w-4 h-4 text-green-500 flex-shrink-0"/>
+                        {outcome}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Achievement Badges Section */}
+      <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Program Achievements</h2>
+            <p className="text-xl text-gray-600">Earn badges as you progress</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <Brain className="w-8 h-8 text-blue-600" />,
+                title: "AI Explorer",
+                description: "Complete introduction to AI"
+              },
+              {
+                icon: <Code className="w-8 h-8 text-purple-600" />,
+                title: "Code Master",
+                description: "Build your first AI model"
+              },
+              {
+                icon: <Target className="w-8 h-8 text-pink-600" />,
+                title: "Project Pro",
+                description: "Complete project implementation"
+              },
+              {
+                icon: <Award className="w-8 h-8 text-yellow-600" />,
+                title: "AI Graduate",
+                description: "Program completion"
+              }
+            ].map((badge, index) => (
+              <div 
+                key={badge.title}
+                className="relative bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                onMouseEnter={() => setHoveredBadgeIndex(index)}
+                onMouseLeave={() => setHoveredBadgeIndex(null)}
+              >
+                <div className={`w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center transition-transform duration-300 ${hoveredBadgeIndex === index ? 'scale-110' : ''}`}>
+                  {badge.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{badge.title}</h3>
+                <p className="text-gray-600">{badge.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+          <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join our innovative summer program and discover the exciting world of artificial intelligence
+          </p>
+          <div className="flex justify-center gap-4">
             <a 
               href="https://forms.google.com/your-form-link" 
-              target="_blank" 
+              target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               Apply Now
               <ArrowRight className="w-5 h-5" />
             </a>
-          </div>
-
-          {/* Program Stats */}
-          <div className="grid grid-cols-4 gap-8 stagger-children">
-            {[
-              ['6th-8th', 'Grade Level'],
-              ['$300', 'Program Fee'],
-              ['2 Weeks', 'Duration'],
-              ['4 Hours', 'Weekly Time']
-            ].map(([number, label], index) => (
-              <div 
-                key={label} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
-              >
-                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {number}
-                </div>
-                <div className="text-gray-600">{label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Program Overview */}
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Program Overview</h2>
-            <p className="text-xl text-gray-600">
-              Discover the exciting world of AI through hands-on projects and interactive learning
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <BookOpen className="w-8 h-8 text-blue-600" />,
-                title: "Curriculum Highlights",
-                points: [
-                  "Introduction to AI concepts",
-                  "Basic programming with Python",
-                  "Machine learning fundamentals",
-                  "Ethics in AI"
-                ]
-              },
-              {
-                icon: <Users className="w-8 h-8 text-blue-600" />,
-                title: "Learning Experience",
-                points: [
-                  "Small group sessions",
-                  "Interactive workshops",
-                  "Hands-on projects",
-                  "Expert mentorship"
-                ]
-              },
-              {
-                icon: <Award className="w-8 h-8 text-blue-600" />,
-                title: "Program Benefits",
-                points: [
-                  "Project portfolio",
-                  "Certificate of completion",
-                  "Ongoing learning resources",
-                  "Community access"
-                ]
-              }
-            ].map((section, index) => (
-              <div 
-                key={section.title} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
-              >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {section.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {section.title}
-                </h3>
-                <ul className="space-y-2">
-                  {section.points.map((point) => (
-                    <li key={point} className="flex items-center gap-2 text-gray-600">
-                      <div className="w-1.5 h-1.5 bg-blue-600 rounded-full"/>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Schedule Section */}
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Program Schedule</h2>
-            <p className="text-gray-600">Two weeks of engaging AI education</p>
-          </div>
-
-          <div className="grid gap-8">
-            <div className="animate-on-scroll bg-white rounded-xl p-8">
-              <div className="flex items-center gap-4 mb-6">
-                <Calendar className="w-8 h-8 text-blue-600" />
-                <div>
-                  <h3 className="text-xl font-semibold">Weekly Sessions</h3>
-                  <p className="text-gray-600">Tuesday & Thursday, 4:00 PM - 6:00 PM EST</p>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="font-semibold mb-4">Week 1</h4>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-blue-600 mt-1" />
-                      <div>
-                        <p className="font-medium">Session 1</p>
-                        <p className="text-gray-600">Introduction to AI & Python Basics</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-blue-600 mt-1" />
-                      <div>
-                        <p className="font-medium">Session 2</p>
-                        <p className="text-gray-600">Machine Learning Fundamentals</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-4">Week 2</h4>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-blue-600 mt-1" />
-                      <div>
-                        <p className="font-medium">Session 3</p>
-                        <p className="text-gray-600">AI Applications & Projects</p>
-                      </div>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-blue-600 mt-1" />
-                      <div>
-                        <p className="font-medium">Session 4</p>
-                        <p className="text-gray-600">Project Presentations & Future in AI</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <button className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-white text-white hover:bg-white/10 transition-all duration-300">
+              Learn More
+            </button>
           </div>
         </div>
       </section>
