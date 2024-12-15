@@ -4,7 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 const links = [
   {to: '/', text: 'Home'},
   {to: '/summer-program', text: 'Summer Program'},
-  {to: '/contact-us', text: 'Contact Us'}
+  {to: '/contact-us', text: 'Contact Us'},
+  {to: '/learn', text: 'Learn'}
 ]
 
 export default function Navigation() {
