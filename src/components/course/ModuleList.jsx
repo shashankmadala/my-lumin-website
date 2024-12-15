@@ -118,3 +118,5 @@ export function ModuleList({
     </div>
   );
 }
+
+export default ModuleList;
