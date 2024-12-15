@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import SummerProgram from './pages/SummerProgram.jsx';
+import ContactUs from './pages/ContactUs.jsx';
 import Navigation from './components/Navigation.jsx';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
+            <Route path='/contact-us' element={<ContactUs />} />
           </Routes>
         </main>
       </div>
