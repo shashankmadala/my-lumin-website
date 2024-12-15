@@ -1,111 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Mail,
-  MessageCircle,
-  Globe,
-  Twitter,
-  Instagram,
-  Linkedin,
-  ExternalLink,
-  Clock,
-  ChevronDown,
-  MessagesSquare,
-  ArrowRight,
-  Plus
-} from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ArrowRight, Check, Brain, Users, Rocket } from 'lucide-react';
+import '../styles/animations.css'; // Import the animations
 
-export default function ContactUs() {
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [activeFaq, setActiveFaq] = useState(null);
-  const [isAnimated, setIsAnimated] = useState(false);
-
+export default function HomePage() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
-            setIsAnimated(true);
           }
         });
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.1,
+        rootMargin: '0px'
+      }
     );
 
-    document.querySelectorAll('.animate-on-scroll, .stagger-children > *').forEach((element) => {
+    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
       observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
-
-  const contactMethods = [
-    {
-      icon: <MessageCircle className="w-6 h-6 text-blue-600" />,
-      title: "Live Chat Support",
-      description: "Get instant help with your questions about our programs",
-      action: "Start Chat",
-      link: "#chat",
-    },
-    {
-      icon: <Mail className="w-6 h-6 text-purple-600" />,
-      title: "Email Support",
-      description: "We'll respond to your inquiries within 24 hours",
-      action: "support@luminai.edu",
-      link: "mailto:support@luminai.edu",
-    },
-    {
-      icon: <MessagesSquare className="w-6 h-6 text-pink-600" />,
-      title: "Schedule a Call",
-      description: "Book a consultation with our education team",
-      action: "Book Now",
-      link: "#schedule",
-    }
-  ];
-
-  const faqItems = [
-    {
-      question: "What age groups are your AI programs designed for?",
-      answer: "Our programs are specifically tailored for students aged 11-14 (middle school). We've carefully designed our curriculum to be engaging and age-appropriate while teaching real AI concepts."
-    },
-    {
-      question: "Do students need prior coding experience?",
-      answer: "No prior coding experience is required! Our program starts from the basics and gradually builds up to more complex concepts. It's designed to be accessible for beginners while still challenging those with some coding experience."
-    },
-    {
-      question: "What technology requirements are needed?",
-      answer: "Students need a computer (Windows, Mac, or Chromebook) with a stable internet connection. All necessary software and tools are provided through our online learning platform."
-    },
-    {
-      question: "How long are the programs?",
-      answer: "Our standard program runs for 8 weeks with two 90-minute sessions per week. We also offer intensive summer programs and shorter workshop series."
-    },
-    {
-      question: "What makes Lumin AI's teaching approach unique?",
-      answer: "We combine project-based learning with real-world applications. Our approach focuses on hands-on experience, creative problem-solving, and ethical AI development, making complex concepts accessible and engaging."
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: <Twitter className="w-5 h-5" />,
-      name: "Twitter",
-      handle: "@LuminAI",
-      link: "https://twitter.com/LuminAI"
-    },
-    {
-      icon: <Linkedin className="w-5 h-5" />,
-      name: "LinkedIn",
-      handle: "Lumin AI",
-      link: "https://linkedin.com/company/luminai"
-    },
-    {
-      icon: <Instagram className="w-5 h-5" />,
-      name: "Instagram",
-      handle: "@lumin.ai",
-      link: "https://instagram.com/lumin.ai"
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
@@ -119,145 +37,211 @@ export default function ContactUs() {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center animate-on-scroll from-bottom">
+          {/* Search Bar */}
+          <div className="max-w-3xl mx-auto mb-16 animate-on-scroll">
+            <div className="bg-white/80 backdrop-blur-md rounded-full shadow-lg flex items-center p-2 mb-8 transition-all duration-300 hover:shadow-xl">
+              <input 
+                type="text" 
+                placeholder="Find AI Learning Resources..." 
+                className="flex-1 px-4 py-2 text-gray-500 outline-none text-lg bg-transparent"
+              />
+              <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-md">
+                Explore →
+              </button>
+            </div>
+          </div>
+
+          <div className="text-center mb-16 animate-on-scroll from-bottom">
             <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
-              Get in Touch
-              <span className="block text-5xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mt-2">
-                We're Here to Help You Learn
+              AI Education
+              <span className="block text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                Made Easy
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have questions about our AI education programs? Our team is ready to help you
-              explore the exciting world of artificial intelligence.
+            <p className="text-xl text-gray-600 mb-8">
+              Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
             </p>
           </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-4 gap-8 stagger-children">
+            {[
+              ['10,000+', 'Students'],
+              ['50+', 'Courses'],
+              ['95%', 'Success Rate'],
+              ['4.9/5', 'Rating']
+            ].map(([number, label], index) => (
+              <div 
+                key={label} 
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+              >
+                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                  {number}
+                </div>
+                <div className="text-gray-600">{label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Contact Methods */}
-      <section className="py-12 relative">
+      {/* Wave Separator */}
+      <div className="w-full">
+        <svg className="w-full h-24" viewBox="0 0 1440 100" preserveAspectRatio="none">
+          <path 
+            d="M0,40 C320,80 420,10 720,40 C1020,70 1380,20 1440,30 L1440,100 L0,100 Z" 
+            fill="white" 
+            className="transition-all duration-300"
+          />
+        </svg>
+      </div>
+
+      {/* Why Choose Section */}
+      <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8 stagger-children">
-            {contactMethods.map((method, index) => (
-              <a
-                href={method.link}
-                key={method.title}
-                className="animate-on-scroll from-bottom bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
-                style={{ animationDelay: `${index * 200}ms` }}
+          <div className="text-center mb-16 animate-on-scroll from-bottom">
+            <h2 className="text-5xl font-bold mb-4">Why Choose Lumin AI?</h2>
+            <p className="text-xl text-gray-600">
+              Comprehensive AI education designed for the next generation
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-16">
+            {[
+              {
+                icon: <Brain className="w-8 h-8 text-blue-600"/>,
+                title: "Expert-Led Learning",
+                description: "Learn from industry professionals and AI experts through carefully crafted curriculum"
+              },
+              {
+                icon: <Users className="w-8 h-8 text-blue-600"/>,
+                title: "Community Driven",
+                description: "Join a vibrant community of learners and get support when you need it"
+              },
+              {
+                icon: <Rocket className="w-8 h-8 text-blue-600"/>,
+                title: "Hands-on Practice",
+                description: "Apply your knowledge with real-world projects and practical exercises"
+              }
+            ].map((feature, index) => (
+              <div 
+                key={feature.title}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex items-start gap-16 group hover:bg-gray-50 rounded-2xl p-8 transition-all duration-500 hover:shadow-lg`}
               >
-                <div className="w-12 h-12 mb-4 rounded-xl flex items-center justify-center bg-gray-50 transition-all duration-500 group-hover:scale-110">
+                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-100 group-hover:shadow-md">
                   <div className="transform transition-transform duration-500 group-hover:rotate-12">
-                    {method.icon}
+                    {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {method.title}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {method.description}
-                </p>
-                <div className="text-blue-600 font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
-                  {method.action}
-                  <ArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-white relative">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-12 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600">Find quick answers to common questions about our AI education programs</p>
-          </div>
-          
-          <div className="space-y-4 stagger-children">
-            {faqItems.map((item, index) => (
-              <div
-                key={index}
-                className="animate-on-scroll from-right bg-gray-50 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-md"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <button
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-100 transition-all duration-300 group"
-                >
-                  <span className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                    {item.question}
-                  </span>
-                  <ChevronDown 
-                    className={`w-5 h-5 text-gray-500 transition-transform duration-500 ${
-                      activeFaq === index ? 'transform rotate-180' : ''
-                    } group-hover:text-blue-600`}
-                  />
-                </button>
-                <div 
-                  className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    activeFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <div className="px-6 py-4 text-gray-600">{item.answer}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Support Hours & Social */}
-      <section className="py-16 bg-gray-50 relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Support Hours */}
-            <div className="animate-on-scroll from-left bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-              <div className="flex items-center gap-3 mb-6">
-                <Clock className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold">Support Hours</h2>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-gray-900">Online Support Hours</h3>
-                  <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                  <p className="text-gray-600">Weekend: 10:00 AM - 4:00 PM EST</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">
-                    Outside these hours? Check our FAQ section above or leave us a message,
-                    and we'll get back to you on the next business day.
+                <div className="transform transition-all duration-500 group-hover:translate-x-2">
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 text-lg leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                    {feature.description}
                   </p>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Social Links */}
-            <div className="animate-on-scroll from-right bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-              <div className="flex items-center gap-3 mb-6">
-                <Globe className="w-6 h-6 text-blue-600" />
-                <h2 className="text-2xl font-bold">Connect With Us</h2>
+      {/* Featured Courses */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">Featured Courses</h2>
+            <p className="text-gray-600">Start your AI journey today</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                duration: '8 weeks',
+                title: 'AI Fundamentals',
+                topics: ['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications']
+              },
+              {
+                duration: '10 weeks',
+                title: 'Deep Learning',
+                topics: ['Neural Architecture', 'Computer Vision', 'Natural Language Processing', 'Advanced Topics']
+              },
+              {
+                duration: '12 weeks',
+                title: 'AI Applications',
+                topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
+              }
+            ].map((course, index) => (
+              <div 
+                key={course.title} 
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"/>
+                  <span className="text-sm text-gray-500">{course.duration}</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                  {course.title}
+                </h3>
+                <ul className="space-y-2">
+                  {course.topics.map((topic) => (
+                    <li key={topic} className="flex items-center gap-2 text-gray-600">
+                      <Check className="w-4 h-4 text-green-500"/>
+                      {topic}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="space-y-6">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={social.name}
-                    href={social.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 text-gray-600 hover:text-blue-600 transition-all duration-300 group"
-                  >
-                    <div className="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-50">
-                      {social.icon}
-                    </div>
-                    <div className="transform transition-all duration-300 group-hover:translate-x-2">
-                      <h3 className="font-semibold">{social.name}</h3>
-                      <p className="text-sm">{social.handle}</p>
-                    </div>
-                  </a>
-                ))}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-white py-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">What Our Students Say</h2>
+            <p className="text-xl text-gray-600">Hear from our successful students</p>
+          </div>
+
+          <div className="flex gap-8">
+            {[
+              {
+                name: 'Jane Doe',
+                role: 'AI Engineer',
+                quote: 'Lumin AI has transformed my career. The hands-on projects and expert guidance were invaluable.'
+              },
+              {
+                name: 'John Smith',
+                role: 'Data Scientist',
+                quote: 'The community support and real-world applications made learning AI enjoyable and effective.'
+              },
+              {
+                name: 'Emily Johnson',
+                role: 'Machine Learning Specialist',
+                quote: 'The curriculum is well-structured and the instructors are top-notch. Highly recommend Lumin AI!'
+              }
+            ].map((testimonial, index) => (
+              <div 
+                key={testimonial.name} 
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex-1 flex items-start gap-6 bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+              >
+                <img 
+                  src="/api/placeholder/48/48" 
+                  alt={testimonial.name} 
+                  className="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold mb-1 group-hover:text-blue-600 transition-colors duration-300">
+                    {testimonial.name}
+                  </h3>
+                  <p className="text-blue-600 text-sm mb-3">{testimonial.role}</p>
+                  <p className="text-gray-600">{testimonial.quote}</p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
