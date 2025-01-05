@@ -1,6 +1,5 @@
-// components/ModuleList.jsx
 import React from 'react';
-import { ChevronDown, CheckCircle, Lock } from 'lucide-react';
+import { ChevronDown, CheckCircle, Brain } from 'lucide-react';
 
 export function ModuleList({ 
   modules, 
@@ -9,16 +8,8 @@ export function ModuleList({
   setActiveModule, 
   setActiveLesson 
 }) {
-  const isModuleAvailable = (moduleId) => {
-    const module = modules.find(m => m.id === moduleId);
-    if (!module.prerequisites?.length) return true;
-    
-    return module.prerequisites.every(preReqId => {
-      const preReqModule = modules.find(m => m.id === preReqId);
-      const preReqLessons = preReqModule.lessons.map(l => l.id);
-      return preReqLessons.every(lessonId => progress.completedLessons.includes(lessonId));
-    });
-  };
+  // Always allow access to modules
+  const isModuleAvailable = () => true;
 
   return (
     <div className="space-y-8">
@@ -33,7 +24,6 @@ export function ModuleList({
       {/* Module List */}
       <div className="space-y-4">
         {modules.map((module) => {
-          const isAvailable = isModuleAvailable(module.id);
           const moduleLessons = module.lessons.map(l => l.id);
           const completedCount = moduleLessons.filter(id => 
             progress.completedLessons.includes(id)
@@ -43,24 +33,17 @@ export function ModuleList({
           return (
             <div 
               key={module.id}
-              className={`bg-white rounded-xl shadow-sm ${
-                !isAvailable ? 'opacity-75' : ''
-              }`}
+              className="bg-white rounded-xl shadow-sm"
             >
               <button
-                onClick={() => isAvailable && setActiveModule(
+                onClick={() => setActiveModule(
                   activeModule === module.id ? null : module.id
                 )}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 disabled:hover:bg-white"
-                disabled={!isAvailable}
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                    {isAvailable ? (
-                      module.icon && <module.icon className="w-6 h-6 text-indigo-600" />
-                    ) : (
-                      <Lock className="w-6 h-6 text-gray-400" />
-                    )}
+                    <Brain className="w-6 h-6 text-indigo-600" />
                   </div>
                   <div className="text-left">
                     <h3 className="text-lg font-semibold">
