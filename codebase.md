@@ -511,9 +511,15 @@ export default FinalAssessment;
 # src/components/course/LessonView.jsx
 
 ```jsx
+// src/components/course/LessonView.jsx
+
 import React, { useState } from 'react';
-import { ChevronLeft, FileText, HelpCircle, CheckCircle, ArrowRight } from 'lucide-react';
+import { ChevronLeft, FileText, HelpCircle, CheckCircle, ArrowRight, Play, Pause } from 'lucide-react';
 import { QuizSection } from './QuizSection';
+import PatternGame from '../interactive/PatternGame';
+import AISimulator from '../interactive/AISimulator';
+import DecisionTreeBuilder from '../interactive/DecisionTreeBuilder';
+import LearningComparison from '../interactive/LearningComparison';
 
 export function LessonView({
   lesson,
@@ -524,6 +530,82 @@ export function LessonView({
   setActiveTab
 }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [showInteractive, setShowInteractive] = useState(true);
+
+  // Function to render the appropriate interactive component based on lesson ID
+  const renderInteractiveComponent = () => {
+    switch (lesson.id) {
+      case "1.1":
+        return (
+          <AISimulator
+            title="AI Decision Making Simulator"
+            description="See how AI processes and makes decisions"
+            mode="basic"
+          />
+        );
+      case "1.2":
+        return (
+          <AISimulator
+            title="AI in Daily Life"
+            description="Explore AI applications in your daily routine"
+            mode="everyday"
+          />
+        );
+      case "1.3":
+        return (
+          <PatternGame
+            difficulty="beginner"
+            patterns={[
+              { sequence: [2, 4, 6, 8], answer: 10, type: "numeric" },
+              { sequence: ["🔴", "🔵", "🔴", "🔵"], answer: "🔴", type: "visual" }
+            ]}
+          />
+        );
+      case "1.4":
+        return (
+          <DecisionTreeBuilder
+            scenario="weather-activity"
+            difficulty="beginner"
+          />
+        );
+      case "2.1":
+        return (
+          <AISimulator
+            title="Training Data Lab"
+            description="Build and test your own training dataset"
+            mode="training"
+          />
+        );
+      case "2.2":
+        return (
+          <PatternGame
+            difficulty="intermediate"
+            patterns={[
+              { sequence: [1, 3, 6, 10], answer: 15, type: "numeric" },
+              { sequence: ["🟦", "🟨", "🟦", "🟨"], answer: "🟦", type: "visual" }
+            ]}
+          />
+        );
+      case "2.3":
+        return (
+          <DecisionTreeBuilder
+            scenario="pet-classifier"
+            difficulty="intermediate"
+          />
+        );
+      case "2.4":
+        return (
+          <LearningComparison
+            scenarios={[
+              { type: "supervised", task: "image-classification" },
+              { type: "unsupervised", task: "customer-grouping" }
+            ]}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -565,10 +647,36 @@ export function LessonView({
       {/* Content */}
       <div className="bg-white rounded-xl shadow-sm">
         <div className="p-8">
-          <h1 className="text-3xl font-bold mb-6">{lesson.title}</h1>
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold">{lesson.title}</h1>
+            {renderInteractiveComponent() && (
+              <button
+                onClick={() => setShowInteractive(!showInteractive)}
+                className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:text-indigo-700"
+              >
+                {showInteractive ? (
+                  <>
+                    <Pause className="w-4 h-4" />
+                    Hide Interactive
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-4 h-4" />
+                    Show Interactive
+                  </>
+                )}
+              </button>
+            )}
+          </div>
           
           {activeTab === 'article' ? (
             <>
+              {showInteractive && renderInteractiveComponent() && (
+                <div className="mb-8 border rounded-xl p-6 bg-gray-50">
+                  {renderInteractiveComponent()}
+                </div>
+              )}
+
               <div className="prose max-w-none">
                 {lesson.article.split('\n').map((paragraph, index) => (
                   <p key={index} className="mb-4">{paragraph}</p>
@@ -842,6 +950,944 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
 export default QuizSection;
 ```
 
+# src/components/interactive/AiConceptExplorer.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { Brain, Bot, ChevronRight, Lightbulb } from 'lucide-react';
+
+const AiConceptExplorer = () => {
+  const [selectedConcept, setSelectedConcept] = useState(null);
+  const [interactionCount, setInteractionCount] = useState(0);
+
+  const concepts = [
+    {
+      id: 'reasoning',
+      title: 'AI Reasoning',
+      icon: <Brain className="w-6 h-6" />,
+      examples: [
+        { input: 'Should I bring an umbrella?', 
+          thinking: ['Check weather data', 'Analyze precipitation probability', 'Consider time of day'],
+          output: 'Yes, 80% chance of rain this afternoon' 
+        },
+        { input: 'Plan my study schedule', 
+          thinking: ['Review available time slots', 'Consider subject priorities', 'Account for breaks'],
+          output: 'Recommended 2-hour blocks with 15-minute breaks' 
+        }
+      ]
+    },
+    {
+      id: 'learning',
+      title: 'Machine Learning',
+      icon: <Bot className="w-6 h-6" />,
+      examples: [
+        { input: 'Cat vs Dog Images', 
+          thinking: ['Analyze shapes', 'Identify features', 'Compare patterns'],
+          output: 'Image classified as "Cat" with 95% confidence' 
+        },
+        { input: 'Email Classification', 
+          thinking: ['Scan content', 'Check sender history', 'Evaluate patterns'],
+          output: 'Email categorized as "Important"' 
+        }
+      ]
+    },
+    {
+      id: 'adaptation',
+      title: 'AI Adaptation',
+      icon: <Lightbulb className="w-6 h-6" />,
+      examples: [
+        { input: 'User prefers dark mode', 
+          thinking: ['Record preference', 'Update UI settings', 'Apply to all screens'],
+          output: 'Theme automatically switches to dark mode at sunset' 
+        },
+        { input: 'User often orders pizza on Fridays', 
+          thinking: ['Analyze ordering patterns', 'Identify preferences', 'Note timing'],
+          output: 'Suggestion: "Order your usual pizza for Friday night?"' 
+        }
+      ]
+    }
+  ];
+
+  const handleConceptClick = (concept) => {
+    setSelectedConcept(concept);
+    setInteractionCount(prev => prev + 1);
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <h3 className="text-xl font-semibold mb-6">Explore AI Concepts</h3>
+      
+      <div className="grid md:grid-cols-3 gap-6">
+        {concepts.map((concept) => (
+          <button
+            key={concept.id}
+            onClick={() => handleConceptClick(concept)}
+            className={`p-4 rounded-xl transition-all duration-300 ${
+              selectedConcept?.id === concept.id
+                ? 'bg-blue-50 border-2 border-blue-200'
+                : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+            }`}
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                {concept.icon}
+              </div>
+              <span className="font-medium">{concept.title}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {selectedConcept && (
+        <div className="mt-8 p-6 bg-gray-50 rounded-xl">
+          <h4 className="font-medium mb-4">Example Scenarios:</h4>
+          {selectedConcept.examples.map((example, index) => (
+            <div key={index} className="mb-6 last:mb-0">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="font-medium">Input:</span>
+                <span className="text-gray-600">{example.input}</span>
+              </div>
+              
+              <div className="ml-4 mb-2">
+                <span className="text-sm text-gray-500">AI Thinking Process:</span>
+                <div className="ml-2">
+                  {example.thinking.map((thought, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
+                      <ChevronRight className="w-4 h-4" />
+                      {thought}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="font-medium">Output:</span>
+                <span className="text-blue-600">{example.output}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {interactionCount >= 3 && (
+        <div className="mt-6 p-4 bg-green-50 rounded-lg text-green-700">
+          <p className="font-medium">Great exploration! You've discovered how AI:</p>
+          <ul className="ml-4 mt-2 list-disc">
+            <li>Processes information systematically</li>
+            <li>Uses data to make decisions</li>
+            <li>Adapts to patterns and preferences</li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AiConceptExplorer;
+```
+
+# src/components/interactive/AiDailyExplorer.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { Home, Phone, ShoppingBag, Music, Camera, MessageCircle } from 'lucide-react';
+
+const AiDailyExplorer = () => {
+  const [selectedScene, setSelectedScene] = useState(null);
+  const [discoveredAI, setDiscoveredAI] = useState([]);
+  const [feedback, setFeedback] = useState('');
+
+  const scenes = [
+    {
+      id: 'morning',
+      title: 'Morning Routine',
+      icon: <Home className="w-6 h-6" />,
+      items: [
+        {
+          name: 'Smart Speaker',
+          aiFeatures: ['Voice Recognition', 'Natural Language Processing', 'Personalized Recommendations'],
+          location: { x: 30, y: 40 }
+        },
+        {
+          name: 'Smart Thermostat',
+          aiFeatures: ['Learning Patterns', 'Energy Optimization', 'Automated Adjustments'],
+          location: { x: 70, y: 60 }
+        },
+        {
+          name: 'Coffee Maker',
+          aiFeatures: ['Schedule Learning', 'Usage Pattern Recognition'],
+          location: { x: 50, y: 30 }
+        }
+      ]
+    },
+    {
+      id: 'commute',
+      title: 'Daily Commute',
+      icon: <Phone className="w-6 h-6" />,
+      items: [
+        {
+          name: 'Navigation App',
+          aiFeatures: ['Route Optimization', 'Traffic Prediction', 'ETA Calculation'],
+          location: { x: 40, y: 50 }
+        },
+        {
+          name: 'Music App',
+          aiFeatures: ['Song Recommendations', 'Playlist Generation', 'Mood Detection'],
+          location: { x: 60, y: 30 }
+        }
+      ]
+    },
+    {
+      id: 'shopping',
+      title: 'Shopping',
+      icon: <ShoppingBag className="w-6 h-6" />,
+      items: [
+        {
+          name: 'Online Store',
+          aiFeatures: ['Product Recommendations', 'Search Optimization', 'Price Tracking'],
+          location: { x: 45, y: 45 }
+        },
+        {
+          name: 'Shopping Assistant',
+          aiFeatures: ['Size Recommendations', 'Style Matching', 'Inventory Prediction'],
+          location: { x: 55, y: 65 }
+        }
+      ]
+    }
+  ];
+
+  const handleItemClick = (item) => {
+    if (!discoveredAI.includes(item.name)) {
+      setDiscoveredAI([...discoveredAI, item.name]);
+      setFeedback(`Great find! ${item.name} uses AI for: ${item.aiFeatures.join(', ')}`);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <h3 className="text-xl font-semibold mb-6">Spot AI in Your Daily Life</h3>
+
+      {/* Scene Selection */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {scenes.map((scene) => (
+          <button
+            key={scene.id}
+            onClick={() => setSelectedScene(scene)}
+            className={`p-4 rounded-xl transition-all duration-300 ${
+              selectedScene?.id === scene.id
+                ? 'bg-purple-50 border-2 border-purple-200'
+                : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                {scene.icon}
+              </div>
+              <span className="font-medium">{scene.title}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Interactive Scene */}
+      {selectedScene && (
+        <div className="relative h-96 bg-gray-50 rounded-xl overflow-hidden">
+          {selectedScene.items.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => handleItemClick(item)}
+              style={{
+                position: 'absolute',
+                left: `${item.location.x}%`,
+                top: `${item.location.y}%`,
+                transform: 'translate(-50%, -50%)'
+              }}
+              className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                discoveredAI.includes(item.name)
+                  ? 'bg-green-100 ring-4 ring-green-200'
+                  : 'bg-purple-100 hover:bg-purple-200'
+              }`}
+            >
+              {discoveredAI.includes(item.name) ? (
+                <Check className="w-6 h-6 text-green-600" />
+              ) : (
+                <Search className="w-6 h-6 text-purple-600" />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Feedback */}
+      {feedback && (
+        <div className="mt-6 p-4 bg-purple-50 rounded-lg">
+          <p className="text-purple-700">{feedback}</p>
+        </div>
+      )}
+
+      {/* Progress */}
+      <div className="mt-6">
+        <div className="flex justify-between mb-2">
+          <span className="text-sm text-gray-600">AI Features Discovered</span>
+          <span className="text-sm font-medium">{discoveredAI.length} / {
+            selectedScene ? selectedScene.items.length : '0'
+          }</span>
+        </div>
+        <div className="h-2 bg-gray-100 rounded-full">
+          <div
+            className="h-full bg-purple-600 rounded-full transition-all duration-300"
+            style={{
+              width: selectedScene
+                ? `${(discoveredAI.length / selectedScene.items.length) * 100}%`
+                : '0%'
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AiDailyExplorer;
+```
+
+# src/components/interactive/AISimulator.jsx
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { Brain, AlertCircle, Check } from 'lucide-react';
+
+const AISimulator = ({ title, description, mode }) => {
+  const [input, setInput] = useState('');
+  const [processing, setProcessing] = useState(false);
+  const [result, setResult] = useState(null);
+  const [confidence, setConfidence] = useState(0);
+
+  const processInput = () => {
+    setProcessing(true);
+    // Simulate AI processing
+    setTimeout(() => {
+      let simulatedResult;
+      switch (mode) {
+        case 'basic':
+          simulatedResult = {
+            decision: input.length > 5 ? 'Complex Input' : 'Simple Input',
+            confidence: Math.random() * 40 + 60
+          };
+          break;
+        case 'everyday':
+          simulatedResult = {
+            decision: input.includes('weather') ? 'Weather Query' : 'General Query',
+            confidence: Math.random() * 30 + 70
+          };
+          break;
+        case 'training':
+          simulatedResult = {
+            decision: input.split(' ').length > 3 ? 'Good Training Data' : 'Insufficient Data',
+            confidence: Math.random() * 50 + 50
+          };
+          break;
+        default:
+          simulatedResult = {
+            decision: 'Unknown Query Type',
+            confidence: Math.random() * 100
+          };
+      }
+      setResult(simulatedResult.decision);
+      setConfidence(simulatedResult.confidence);
+      setProcessing(false);
+    }, 1500);
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+          <Brain className="w-6 h-6 text-blue-600" />
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">{title}</h3>
+          <p className="text-gray-600">{description}</p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Enter your query..."
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <button
+          onClick={processInput}
+          disabled={processing || !input}
+          className={`w-full py-2 rounded-lg transition-colors duration-300 ${
+            processing || !input
+              ? 'bg-gray-100 text-gray-400'
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}
+        >
+          {processing ? 'Processing...' : 'Analyze'}
+        </button>
+
+        {result && (
+          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-medium">Result:</span>
+              <span className="text-blue-600">{Math.round(confidence)}% confident</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="w-5 h-5 text-green-500" />
+              <span>{result}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AISimulator;
+```
+
+# src/components/interactive/DecisionTreeBuilder.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { GitBranch, Check, X } from 'lucide-react';
+
+const DecisionTreeBuilder = ({ scenario, difficulty }) => {
+  const [nodes, setNodes] = useState([]);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const scenarios = {
+    'weather-activity': {
+      question: 'Is it raining?',
+      options: [
+        { text: 'Yes', leads_to: 'Indoor activities' },
+        { text: 'No', leads_to: 'Check temperature' }
+      ]
+    },
+    'pet-classifier': {
+      question: 'Does it bark?',
+      options: [
+        { text: 'Yes', leads_to: 'Likely a dog' },
+        { text: 'No', leads_to: 'Check if it meows' }
+      ]
+    }
+  };
+
+  const currentScenario = scenarios[scenario] || scenarios['weather-activity'];
+
+  const addNode = (option) => {
+    setNodes([...nodes, option]);
+    setCurrentStep(prev => prev + 1);
+  };
+
+  const resetTree = () => {
+    setNodes([]);
+    setCurrentStep(0);
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+          <GitBranch className="w-6 h-6 text-purple-600" />
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">Decision Tree Builder</h3>
+          <p className="text-gray-600">{`Build a ${difficulty} decision tree for ${scenario}`}</p>
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        {/* Current Question */}
+        <div className="p-4 bg-gray-50 rounded-lg">
+          <h4 className="font-medium mb-2">Current Question:</h4>
+          <p>{currentScenario.question}</p>
+        </div>
+
+        {/* Options */}
+        <div className="grid grid-cols-2 gap-4">
+          {currentScenario.options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => addNode(option)}
+              className="p-4 border rounded-lg hover:bg-gray-50 transition-colors duration-300 text-left"
+            >
+              <div className="font-medium mb-1">{option.text}</div>
+              <div className="text-sm text-gray-600">Leads to: {option.leads_to}</div>
+            </button>
+          ))}
+        </div>
+
+        {/* Tree Visualization */}
+        {nodes.length > 0 && (
+          <div className="mt-8">
+            <div className="flex justify-between items-center mb-4">
+              <h4 className="font-medium">Your Decision Tree</h4>
+              <button
+                onClick={resetTree}
+                className="text-sm text-red-600 hover:text-red-700"
+              >
+                Reset Tree
+              </button>
+            </div>
+            <div className="space-y-2">
+              {nodes.map((node, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg"
+                >
+                  <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <span className="font-medium">{node.text}</span>
+                    <span className="text-gray-600 ml-2">→ {node.leads_to}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default DecisionTreeBuilder;
+```
+
+# src/components/interactive/LearningComparison.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { BookOpen, ArrowRight, Check } from 'lucide-react';
+
+const LearningComparison = ({ scenarios }) => {
+  const [activeScenario, setActiveScenario] = useState(0);
+  const [userAnswers, setUserAnswers] = useState({});
+
+  const scenarioData = {
+    'supervised': {
+      'image-classification': {
+        title: 'Image Classification',
+        description: 'Train AI to recognize different objects',
+        steps: [
+          'Collect labeled images',
+          'Train the model',
+          'Test with new images'
+        ],
+        key_features: [
+          'Requires labeled data',
+          'Clear right/wrong answers',
+          'Good for classification tasks'
+        ]
+      }
+    },
+    'unsupervised': {
+      'customer-grouping': {
+        title: 'Customer Grouping',
+        description: 'Group similar customers together',
+        steps: [
+          'Collect customer data',
+          'Find patterns',
+          'Create groups'
+        ],
+        key_features: [
+          'No labels needed',
+          'Discovers hidden patterns',
+          'Good for clustering tasks'
+        ]
+      }
+    }
+  };
+
+  const getCurrentScenario = () => {
+    const { type, task } = scenarios[activeScenario];
+    return scenarioData[type][task];
+  };
+
+  const handleAnswer = (questionId, answer) => {
+    setUserAnswers(prev => ({
+      ...prev,
+      [questionId]: answer
+    }));
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+          <BookOpen className="w-6 h-6 text-green-600" />
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">Learning Types Comparison</h3>
+          <p className="text-gray-600">Compare different learning approaches</p>
+        </div>
+      </div>
+
+      {/* Scenario Navigation */}
+      <div className="flex gap-4 mb-6">
+        {scenarios.map((scenario, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveScenario(index)}
+            className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
+              activeScenario === index
+                ? 'bg-green-600 text-white'
+                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+            }`}
+          >
+            {scenario.type.charAt(0).toUpperCase() + scenario.type.slice(1)}
+          </button>
+        ))}
+      </div>
+
+      {/* Current Scenario Content */}
+      <div className="space-y-6">
+        <div className="p-4 bg-gray-50 rounded-lg">
+          <h4 className="font-medium mb-2">{getCurrentScenario().title}</h4>
+          <p className="text-gray-600">{getCurrentScenario().description}</p>
+        </div>
+
+        {/* Steps */}
+        <div>
+          <h4 className="font-medium mb-3">Process Steps:</h4>
+          <div className="space-y-2">
+            {getCurrentScenario().steps.map((step, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg"
+              >
+                <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                  {index + 1}
+                </div>
+                <span>{step}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Key Features */}
+        <div>
+          <h4 className="font-medium mb-3">Key Features:</h4>
+          <div className="space-y-2">
+            {getCurrentScenario().key_features.map((feature, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 p-2"
+              >
+                <Check className="w-4 h-4 text-green-500" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Interactive Quiz */}
+        <div className="p-4 bg-gray-50 rounded-lg">
+          <h4 className="font-medium mb-3">Quick Check:</h4>
+          <div className="space-y-4">
+            <div>
+              <p className="mb-2">Is this type of learning good for classification tasks?</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleAnswer('classification', true)}
+                  className={`px-4 py-2 rounded-lg ${
+                    userAnswers.classification === true
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-200 hover:bg-gray-300'
+                  }`}
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => handleAnswer('classification', false)}
+                  className={`px-4 py-2 rounded-lg ${
+                    userAnswers.classification === false
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-200 hover:bg-gray-300'
+                  }`}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LearningComparison;
+```
+
+# src/components/interactive/MLTrainingGame.jsx
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { Brain, Target, RefreshCw, AlertCircle } from 'lucide-react';
+
+const MLTrainingGame = () => {
+  const [gameState, setGameState] = useState('training'); // training, testing, results
+  const [trainingData, setTrainingData] = useState([]);
+  const [modelAccuracy, setModelAccuracy] = useState(0);
+  const [testResults, setTestResults] = useState([]);
+  const [feedback, setFeedback] = useState('');
+
+  const shapes = ['circle', 'square', 'triangle'];
+  const colors = ['red', 'blue', 'green'];
+
+  const generateShape = () => {
+    const shape = shapes[Math.floor(Math.random() * shapes.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    return { shape, color };
+  };
+
+  const [currentShape, setCurrentShape] = useState(generateShape());
+
+  const handleClassification = (classification) => {
+    if (gameState === 'training') {
+      setTrainingData(prev => [...prev, { ...currentShape, classification }]);
+      if (trainingData.length >= 5) {
+        setGameState('testing');
+        setModelAccuracy(calculateAccuracy());
+      } else {
+        setCurrentShape(generateShape());
+      }
+    } else if (gameState === 'testing') {
+      const isCorrect = evaluateClassification(currentShape, classification);
+      setTestResults(prev => [...prev, isCorrect]);
+      if (testResults.length >= 4) {
+        setGameState('results');
+      } else {
+        setCurrentShape(generateShape());
+      }
+    }
+  };
+
+  const calculateAccuracy = () => {
+    // Simulate model accuracy based on consistency of training data
+    const consistencyScore = trainingData.reduce((score, item) => {
+      const similarItems = trainingData.filter(
+        other => other.shape === item.shape && 
+                 other.color === item.color && 
+                 other.classification === item.classification
+      );
+      return score + (similarItems.length / trainingData.length);
+    }, 0);
+
+    return Math.min(85 + (consistencyScore * 10), 95);
+  };
+
+  const evaluateClassification = (shape, classification) => {
+    // Find similar shapes in training data
+    const similarExamples = trainingData.filter(
+      item => item.shape === shape.shape && item.color === shape.color
+    );
+    
+    if (similarExamples.length === 0) return Math.random() > 0.5;
+    
+    // Return true if classification matches the most common classification for similar shapes
+    const mostCommonClassification = similarExamples.reduce(
+      (acc, curr) => {
+        acc[curr.classification] = (acc[curr.classification] || 0) + 1;
+        return acc;
+      },
+      {}
+    );
+
+    return classification === Object.entries(mostCommonClassification)
+      .sort((a, b) => b[1] - a[1])[0][0];
+  };
+
+  const resetGame = () => {
+    setGameState('training');
+    setTrainingData([]);
+    setTestResults([]);
+    setModelAccuracy(0);
+    setCurrentShape(generateShape());
+  };
+
+  const renderShape = () => {
+    const shapeStyles = {
+      circle: 'rounded-full',
+      square: 'rounded-none',
+      triangle: 'triangle'
+    };
+
+    const colorStyles = {
+      red: 'bg-red-500',
+      blue: 'bg-blue-500',
+      green: 'bg-green-500'
+    };
+
+    return (
+      <div className={`w-24 h-24 ${colorStyles[currentShape.color]} ${shapeStyles[currentShape.shape]}`} />
+    );
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+          <Brain className="w-6 h-6 text-blue-600" />
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold">ML Training Game</h3>
+          <p className="text-gray-600">
+            {gameState === 'training' ? 'Train the model' : 
+             gameState === 'testing' ? 'Test the model' : 
+             'See your results'}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center gap-6">
+        {/* Shape Display */}
+        <div className="p-8 bg-gray-50 rounded-xl">
+          {renderShape()}
+        </div>
+
+        {/* Controls */}
+        {gameState !== 'results' && (
+          <div className="grid grid-cols-2 gap-4 w-full">
+            <button
+              onClick={() => handleClassification('safe')}
+              className="px-6 py-3 bg-green-100 text-green-700 rounded-lg hover:bg-green-200"
+            >
+              Safe
+            </button>
+            <button
+              onClick={() => handleClassification('unsafe')}
+              className="px-6 py-3 bg-red-100 text-red-700 rounded-lg hover:bg-red-200"
+            >
+              Unsafe
+            </button>
+          </div>
+        )}
+
+        {/* Progress */}
+        <div className="w-full">
+          {gameState === 'training' && (
+            <>
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Training Progress</span>
+                <span>{trainingData.length}/5 examples</span>
+              </div>
+              <div className="h-2 bg-gray-100 rounded-full">
+                <div
+                  className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                  style={{ width: `${(trainingData.length / 5) * 100}%` }}
+                />
+              </div>
+            </>
+          )}
+
+          {gameState === 'testing' && (
+            <div className="text-center">
+              <div className="text-lg font-medium mb-2">
+                Model Accuracy: {modelAccuracy.toFixed(1)}%
+              </div>
+              <div className="text-sm text-gray-600">
+                Test Case {testResults.length + 1}/5
+              </div>
+            </div>
+          )}
+
+          {gameState === 'results' && (
+            <div className="text-center">
+              <div className="text-2xl font-bold mb-4">
+                Final Score: {(testResults.filter(r => r).length / testResults.length * 100).toFixed(1)}%
+              </div>
+              <button
+                onClick={resetGame}
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
+                Play Again
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MLTrainingGame;
+```
+
+# src/components/interactive/PatternGame.jsx
+
+```jsx
+
+import React, { useState } from 'react';
+import { Check, X } from 'lucide-react';
+
+const PatternGame = () => {
+  const [sequence, setSequence] = useState([2, 4, 6, 8]);
+  const [userAnswer, setUserAnswer] = useState('');
+  const [feedback, setFeedback] = useState('');
+
+  const checkAnswer = () => {
+    if (parseInt(userAnswer) === 10) { // Next number in sequence
+      setFeedback('Correct! The pattern adds 2 each time.');
+    } else {
+      setFeedback('Try again! Look at how the numbers change.');
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 mb-8 shadow-sm">
+      <h3 className="text-xl font-semibold mb-4">Pattern Recognition Game</h3>
+      
+      <div className="flex gap-4 items-center mb-6">
+        {sequence.map((num, index) => (
+          <div key={index} className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center font-bold">
+            {num}
+          </div>
+        ))}
+        <div className="w-12 h-12 bg-blue-50 rounded-lg border-2 border-dashed border-blue-300 flex items-center justify-center">
+          ?
+        </div>
+      </div>
+
+      <div className="flex gap-4 mb-4">
+        <input
+          type="number"
+          value={userAnswer}
+          onChange={(e) => setUserAnswer(e.target.value)}
+          className="w-24 px-3 py-2 border rounded-lg"
+          placeholder="Next?"
+        />
+        <button
+          onClick={checkAnswer}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          Check
+        </button>
+      </div>
+
+      {feedback && (
+        <div className={`p-4 rounded-lg ${feedback.includes('Correct') ? 'bg-green-50' : 'bg-yellow-50'}`}>
+          {feedback}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default PatternGame;
+```
+
 # src/components/Navigation.jsx
 
 ```jsx
@@ -893,14 +1939,15 @@ export default function Navigation() {
 # src/data/courseData.js
 
 ```js
-import module1 from './modules/module1';
-import module2 from './modules/module2';
-import module3 from './modules/module3';
+// src/data/courseData.js
+
+import module1 from './modules/module1.js';
+import module2 from './modules/module2.js';
 
 const courseData = {
   title: "AI 101: Foundations of Artificial Intelligence",
   description: "Master the fundamentals of artificial intelligence and machine learning",
-  modules: [module1, module2, module3]
+  modules: [module1,module2]
 };
 
 export default courseData;
@@ -912,338 +1959,1012 @@ export default courseData;
 // src/data/modules/module1.js
 
 const module1 = {
-    id: 1,
-    title: "Introduction to AI",
-    description: "Understanding artificial intelligence fundamentals",
-    prerequisites: [],
-    icon: "Brain",
-    
+  id: 1,
+  title: "Introduction to AI",
+  description: "Understanding artificial intelligence fundamentals",
+  prerequisites: [],
+  icon: "Brain",
+  themeColor: "blue",
+  
+  interactiveFeatures: {
     virtualLab: {
-      id: "ai-basics-lab",
-      title: "AI Experimentation Lab",
-      experiments: [
-        {
-          id: "image-classifier",
-          title: "Image Classification",
-          description: "Train a simple AI to recognize basic shapes",
-          setup: {
-            tools: ["canvas", "classifier", "dataset"],
-            initialData: {
-              shapes: ["circle", "square", "triangle"],
-              samples: 10
-            },
-            interface: {
-              drawingCanvas: true,
-              predictionDisplay: true,
-              confidenceMeters: true
-            }
-          },
-          steps: [
-            "Draw shapes to train the AI",
-            "Watch it learn patterns",
-            "Test with new drawings",
-            "See confidence scores"
-          ]
+      enabled: true,
+      components: {
+        aiSimulator: {
+          type: "interactive",
+          features: ["decision-making", "pattern-recognition", "learning"]
         },
-        {
-          id: "pattern-finder",
-          title: "Pattern Recognition",
-          description: "Discover how AI finds patterns in data",
-          interactive: {
-            dataPoints: [
-              { x: "size", y: "speed", correlation: true },
-              { x: "color", y: "category", correlation: false }
+        conceptMap: {
+          type: "dragAndDrop",
+          elements: ["core-concepts", "applications", "future"]
+        }
+      }
+    }
+  },
+
+  lessons: [
+    {
+      id: "1.1",
+      title: "What is Artificial Intelligence?",
+      duration: "30 min",
+      interactive: {
+        primaryDemo: {
+          type: "aiSimulation",
+          title: "AI Decision Making",
+          interface: {
+            input: {
+              type: "imageUpload",
+              accept: "image/*",
+              placeholder: "Upload an image to see AI in action"
+            },
+            process: {
+              visualizer: {
+                type: "networkGraph",
+                animate: true,
+                showSteps: true
+              }
+            },
+            output: {
+              display: "results",
+              showConfidence: true
+            }
+          }
+        },
+        conceptExplorer: {
+          type: "interactiveMap",
+          title: "AI Concepts Explorer",
+          elements: [
+            {
+              id: "narrow-ai",
+              title: "Narrow AI",
+              examples: ["Siri", "Chess AI", "Image Recognition"],
+              interactive: true
+            },
+            {
+              id: "general-ai",
+              title: "General AI",
+              description: "Human-level intelligence",
+              status: "theoretical"
+            },
+            {
+              id: "super-ai",
+              title: "Superintelligent AI",
+              description: "Beyond human capabilities",
+              status: "future"
+            }
+          ]
+        }
+      },
+      article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations.
+
+Breaking Down AI
+At its core, AI is built on a few key ideas:
+
+Algorithms: Step-by-step instructions that tell a computer how to solve a problem. In AI, these algorithms are designed to adapt and improve over time by learning from data.
+
+Data: Data is the fuel for AI. Machines learn patterns and make predictions based on the data they are fed. The more data, the better AI systems can perform.
+
+Learning: AI systems can "learn" from examples. For example, if you show an AI hundreds of pictures of cats and dogs, it can learn to tell the difference between them.
+
+Types of AI:
+1. Narrow AI (Weak AI): Designed for specific tasks
+2. General AI (Strong AI): Theoretical human-level intelligence
+3. Superintelligent AI: Beyond human capabilities
+
+Core Subfields:
+• Machine Learning (ML)
+• Natural Language Processing (NLP)
+• Computer Vision
+• Robotics`,
+      quiz: {
+        questions: [
+          {
+            question: "What is the primary purpose of Artificial Intelligence?",
+            options: [
+              "To perform tasks that typically require human intelligence",
+              "To replace all human jobs",
+              "To store large amounts of data",
+              "To make computers run faster"
             ],
-            userControls: ["add-point", "remove-point", "run-analysis"]
+            correct: 0,
+            explanation: "AI's primary purpose is to develop systems capable of performing tasks that traditionally require human intelligence, such as problem-solving, pattern recognition, and language understanding."
+          },
+          {
+            question: "Which of these is NOT one of the main types of AI discussed?",
+            options: [
+              "Narrow AI",
+              "General AI",
+              "Quantum AI",
+              "Superintelligent AI"
+            ],
+            correct: 2,
+            explanation: "The three main types of AI discussed are Narrow AI (Weak AI), General AI (Strong AI), and Superintelligent AI. Quantum AI was not mentioned as one of the main types."
+          }
+        ],
+        interactiveQuiz: {
+          enabled: true,
+          features: {
+            conceptMapping: true,
+            instantFeedback: true,
+            visualExplanations: true
           }
         }
-      ]
+      }
     },
-  
-    lessons: [
-      {
-        id: "1.1",
-        title: "What is Artificial Intelligence?",
-        duration: "25 min",
-        interactive: {
-          type: "conceptMap",
-          title: "AI Concept Explorer",
-          description: "Build and explore AI concepts interactively",
-          features: {
-            dragAndDrop: {
-              elements: [
-                { id: "ai", label: "AI Core", type: "main" },
-                { id: "ml", label: "Machine Learning", type: "subfield" },
-                { id: "nlp", label: "Natural Language", type: "subfield" },
-                { id: "vision", label: "Computer Vision", type: "subfield" }
-              ],
-              dropZones: [
-                { id: "core", label: "Core Concepts" },
-                { id: "applications", label: "Applications" }
+    {
+      id: "1.2",
+      title: "Finding AI in Everyday Life",
+      duration: "35 min",
+      interactive: {
+        virtualEnvironment: {
+          type: "3dExploration",
+          title: "AI in Your World",
+          scenes: [
+            {
+              id: "smart-home",
+              type: "interactive",
+              devices: [
+                {
+                  id: "smart-speaker",
+                  type: "voice-assistant",
+                  interactions: ["command", "response"],
+                  demo: true
+                },
+                {
+                  id: "smart-thermostat",
+                  type: "learning-system",
+                  features: ["pattern-recognition", "automation"],
+                  demo: true
+                }
               ]
             },
-            simulation: {
-              title: "AI Decision Making",
-              steps: [
-                { id: "input", label: "Data Input", animation: "dataFlow" },
-                { id: "process", label: "Processing", animation: "compute" },
-                { id: "output", label: "Decision", animation: "result" }
+            {
+              id: "smartphone",
+              type: "interactive",
+              features: [
+                {
+                  id: "text-prediction",
+                  type: "nlp",
+                  demo: true
+                },
+                {
+                  id: "face-recognition",
+                  type: "computer-vision",
+                  demo: true
+                }
               ]
-            },
-            liveDemo: {
-              type: "imageClassifier",
-              options: ["cat", "dog", "bird"],
-              feedback: true
             }
-          }
+          ]
         },
-        article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations.
-  
-  Breaking Down AI:
-  At its core, AI is built on a few key ideas:
-  
-  Algorithms: Step-by-step instructions that tell a computer how to solve a problem. In AI, these algorithms are designed to adapt and improve over time by learning from data.
-  
-  Data: The fuel for AI. Machines learn patterns and make predictions based on the data they are fed. The more data, the better AI systems can perform.
-  
-  Learning: AI systems can "learn" from examples. For example, if you show an AI hundreds of pictures of cats and dogs, it can learn to tell the difference between them.
-  
-  Types of AI:
-  1. Narrow AI (Weak AI): Designed for specific tasks
-  2. General AI (Strong AI): Theoretical human-level intelligence
-  3. Superintelligent AI: Beyond human capabilities
-  
-  Core Subfields:
-  • Machine Learning (ML)
-  • Natural Language Processing (NLP)
-  • Computer Vision
-  • Robotics`,
-        quiz: {
-          questions: [
+        aiSpotter: {
+          type: "game",
+          title: "Spot the AI",
+          challenges: [
             {
-              question: "What is the primary purpose of Artificial Intelligence?",
-              options: [
-                "To perform tasks that typically require human intelligence",
-                "To replace all human jobs",
-                "To store large amounts of data",
-                "To make computers run faster"
-              ],
-              correct: 0,
-              explanation: "AI's primary purpose is to develop systems capable of performing tasks that traditionally require human intelligence, such as problem-solving, pattern recognition, and language understanding."
+              scene: "daily-life",
+              objective: "Find 5 AI applications",
+              hints: true
             },
             {
-              question: "Which of these is NOT one of the main types of AI discussed?",
-              options: [
-                "Narrow AI",
-                "General AI",
-                "Quantum AI",
-                "Superintelligent AI"
-              ],
-              correct: 2,
-              explanation: "The three main types of AI discussed are Narrow AI (Weak AI), General AI (Strong AI), and Superintelligent AI. Quantum AI was not mentioned as one of the main types."
+              scene: "technology",
+              objective: "Identify AI features",
+              hints: true
             }
-          ],
-          interactiveQuiz: {
-            type: "buildSystem",
-            title: "Build an AI System",
-            description: "Arrange the components to create a working AI system",
-            components: [
-              { id: "data", label: "Data Collection", type: "input" },
-              { id: "process", label: "Processing Unit", type: "process" },
-              { id: "learn", label: "Learning Module", type: "process" },
-              { id: "output", label: "Output System", type: "output" }
+          ]
+        }
+      },
+      article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere.
+
+Everyday Applications of AI:
+
+1. Smartphones:
+• AI helps predict the next word as you type
+• Virtual assistants understand voice commands
+• Facial recognition uses AI to unlock your phone securely
+
+2. Streaming Services:
+• Netflix, Spotify, and YouTube use AI for recommendations
+• AI analyzes viewing habits for content suggestions
+• Personalized playlists based on your preferences
+
+3. Online Shopping:
+• Product recommendations based on browsing history
+• Chatbots for customer service
+• Price optimization and inventory management
+
+4. Social Media:
+• Personalized content feeds
+• Automatic photo tagging
+• Content moderation
+
+5. Transportation:
+• AI-powered navigation
+• Ride-sharing optimization
+• Self-driving vehicle systems
+
+6. Healthcare:
+• Medical image analysis
+• Health monitoring
+• Disease prediction
+
+7. Gaming:
+• Adaptive gameplay
+• NPC behavior
+• Procedural generation`,
+      quiz: {
+        questions: [
+          {
+            question: "Which of these is NOT a common application of AI in smartphones?",
+            options: [
+              "Predictive text",
+              "Voice assistants",
+              "Battery manufacturing",
+              "Facial recognition"
             ],
-            feedback: {
-              success: "Great job! Your AI system is working correctly.",
-              hints: ["Start with data input", "Think about processing flow"]
+            correct: 2,
+            explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical production process, not an AI application."
+          },
+          {
+            question: "How does AI improve streaming services?",
+            options: [
+              "By creating new content",
+              "By providing personalized recommendations",
+              "By increasing internet speed",
+              "By reducing subscription costs"
+            ],
+            correct: 1,
+            explanation: "AI primarily improves streaming services by analyzing user behavior and providing personalized content recommendations, helping users discover content they might enjoy."
+          }
+        ],
+        interactiveElements: {
+          virtualAssistant: {
+            enabled: true,
+            features: ["voice-control", "real-time-response"]
+          },
+          aiExplorer: {
+            type: "interactive-demo",
+            scenarios: ["smart-home", "mobile", "online"]
+          }
+        }
+      }
+    },
+    {
+      id: "1.3",
+      title: "Simple Pattern Recognition Activities",
+      duration: "40 min",
+      interactive: {
+        patternGame: {
+          type: "interactive",
+          title: "Pattern Detective",
+          levels: [
+            {
+              id: "numeric",
+              sequences: [
+                {
+                  pattern: [2, 4, 6, 8],
+                  type: "arithmetic",
+                  difficulty: "easy"
+                },
+                {
+                  pattern: [1, 3, 6, 10],
+                  type: "geometric",
+                  difficulty: "medium"
+                }
+              ]
+            },
+            {
+              id: "visual",
+              patterns: [
+                {
+                  sequence: ["🔴", "🔵", "🔴", "🔵"],
+                  type: "alternating",
+                  difficulty: "easy"
+                },
+                {
+                  sequence: ["🔺", "🔺", "🔸", "🔺", "🔺", "🔸"],
+                  type: "complex",
+                  difficulty: "hard"
+                }
+              ]
             }
+          ]
+        },
+        drawingRecognizer: {
+          type: "canvas",
+          title: "AI Vision Simulator",
+          features: {
+            realTimeRecognition: true,
+            confidenceDisplay: true,
+            explanationMode: true
           }
         }
       },
-      {
-        id: "1.2",
-        title: "Finding AI in Everyday Life",
-        duration: "30 min",
-        interactive: {
-          type: "virtualEnvironment",
-          title: "AI in Your Home",
-          description: "Explore and interact with AI in a virtual home",
-          features: {
-            rooms: [
-              {
-                id: "living_room",
-                aiDevices: [
-                  {
-                    id: "smart_tv",
-                    type: "recommendation",
-                    interactions: ["suggest", "learn", "adapt"]
-                  },
-                  {
-                    id: "thermostat",
-                    type: "learning",
-                    interactions: ["adjust", "optimize", "predict"]
-                  }
-                ]
-              },
-              {
-                id: "kitchen",
-                aiDevices: [
-                  {
-                    id: "smart_assistant",
-                    type: "voice",
-                    interactions: ["command", "respond", "learn"]
-                  },
-                  {
-                    id: "smart_fridge",
-                    type: "inventory",
-                    interactions: ["track", "order", "suggest"]
-                  }
-                ]
-              }
+      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that humans and machines alike rely on to make sense of the world.
+
+What Is Pattern Recognition?
+Pattern recognition is about finding order in chaos. Imagine trying to guess the next number in this sequence: 2, 4, 6, 8. You quickly notice the numbers increase by 2 each time. This is a simple example of pattern recognition.
+
+Why Is It Important?
+In AI, pattern recognition allows machines to:
+• Classify Data
+• Detect Anomalies
+• Make Predictions
+
+Activities:
+1. Spot the Pattern
+2. Pattern Matching Game
+3. Feature Recognition Exercise
+
+How AI Recognizes Patterns:
+• Feature Extraction
+• Data Comparison
+• Decision Making
+• Continuous Learning`,
+      quiz: {
+        questions: [
+          {
+            question: "What is the main purpose of pattern recognition in AI?",
+            options: [
+              "To create new patterns",
+              "To identify trends and structures in data",
+              "To store information",
+              "To increase processing speed"
             ],
-            challenges: [
-              {
-                id: "find_ai",
-                title: "AI Scavenger Hunt",
-                tasks: ["Find 5 AI devices", "Test each feature", "Observe learning"]
-              },
-              {
-                id: "optimize",
-                title: "AI Optimization",
-                tasks: ["Adjust settings", "Monitor learning", "Improve efficiency"]
-              }
-            ]
+            correct: 1,
+            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to make sense of complex information."
+          },
+          {
+            question: "Which of these is NOT a common challenge in pattern recognition?",
+            options: [
+              "Handling ambiguous data",
+              "Processing complex patterns",
+              "Creating new patterns",
+              "Dealing with noise"
+            ],
+            correct: 2,
+            explanation: "Creating new patterns is not a challenge of pattern recognition. Pattern recognition focuses on identifying existing patterns rather than creating new ones."
           }
-        },
-        article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere.
-  
-  Everyday Applications of AI:
-  
-  1. Smartphones:
-  • AI helps predict the next word as you type
-  • Virtual assistants understand voice commands
-  • Facial recognition for secure unlocking
-  
-  2. Streaming Services:
-  • Netflix, Spotify, and YouTube recommendations
-  • Content suggestions based on viewing habits
-  • Personalized playlists and watchlists
-  
-  3. Online Shopping:
-  • Product recommendations based on browsing
-  • Chatbots for customer service
-  • Price optimization and inventory management
-  
-  4. Social Media:
-  • Personalized content feeds
-  • Automatic photo tagging
-  • Content moderation
-  
-  5. Transportation:
-  • Navigation and traffic prediction
-  • Ride-sharing optimization
-  • Self-driving vehicle systems
-  
-  6. Healthcare:
-  • Medical image analysis
-  • Health monitoring through wearables
-  • Disease prediction and diagnosis
-  
-  7. Gaming:
-  • Adaptive gameplay difficulty
-  • NPC behavior and responses
-  • Procedural content generation`,
-        quiz: {
-          questions: [
-            {
-              question: "Which of these is NOT a common application of AI in smartphones?",
-              options: [
-                "Predictive text",
-                "Voice assistants",
-                "Battery manufacturing",
-                "Facial recognition"
-              ],
-              correct: 2,
-              explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical production process, not an AI application."
-            },
-            {
-              question: "How does AI improve streaming services?",
-              options: [
-                "By creating new content",
-                "By providing personalized recommendations",
-                "By increasing internet speed",
-                "By reducing subscription costs"
-              ],
-              correct: 1,
-              explanation: "AI primarily improves streaming services by analyzing user behavior and providing personalized content recommendations, helping users discover content they might enjoy."
-            }
-          ],
-          interactiveQuiz: {
-            type: "aiSpotting",
-            title: "Spot the AI",
-            description: "Identify AI applications in everyday scenarios",
-            scenarios: [
-              {
-                id: "smartphone",
-                scene: "phoneScreen",
-                aiFeatures: ["predictive_text", "face_id", "voice_assistant"],
-                userTask: "Identify AI features"
-              },
-              {
-                id: "smart_home",
-                scene: "homeInterface",
-                aiFeatures: ["temperature_learning", "security_system", "lighting_optimization"],
-                userTask: "Find AI-powered systems"
-              }
-            ],
-            feedback: {
-              success: "You've got a good eye for AI!",
-              hint: "Look for systems that learn and adapt"
-            }
+        ],
+        interactiveQuiz: {
+          patternGames: {
+            enabled: true,
+            types: ["sequence", "visual", "audio"],
+            difficulty: "adaptive"
           }
         }
       }
-    ],
-  
-    handsonProjects: [
-      {
-        id: "ai-detector",
-        title: "Build an AI Detection Tool",
-        description: "Create a simple tool that identifies AI in everyday objects",
-        difficulty: "beginner",
-        duration: "45 min",
-        tools: ["web-interface", "ai-api", "database"],
-        steps: [
+    },
+    {
+      id: "1.4",
+      title: "Basic Machine Learning Concepts Through Games",
+      duration: "45 min",
+      interactive: {
+        mlPlayground: {
+          type: "sandbox",
+          title: "Machine Learning Lab",
+          experiments: [
+            {
+              id: "virtual-pet",
+              type: "reinforcement",
+              title: "Train Your AI Pet",
+              features: {
+                commands: ["sit", "stay", "fetch"],
+                feedback: true,
+                learning: true
+              }
+            },
+            {
+              id: "image-classifier",
+              type: "supervised",
+              title: "Image Detective",
+              features: {
+                upload: true,
+                train: true,
+                test: true
+              }
+            }
+          ]
+        },
+        teachableMachine: {
+          type: "hands-on",
+          features: [
+            {
+              id: "image-model",
+              input: "camera",
+              output: "classification"
+            },
+            {
+              id: "sound-model",
+              input: "microphone",
+              output: "recognition"
+            }
+          ]
+        }
+      },
+      article: `Machine Learning (ML) is one of the most exciting areas of Artificial Intelligence (AI). It enables computers to learn from data and improve their performance without being explicitly programmed.
+
+What Is Machine Learning?
+At its core, machine learning involves three key steps:
+1. Training
+2. Testing
+3. Improving
+
+Types of Machine Learning:
+1. Supervised Learning:
+   • Learning from labeled data
+   • Classification tasks
+   • Prediction tasks
+
+2. Unsupervised Learning:
+   • Finding patterns in unlabeled data
+   • Grouping similar items
+   • Discovering structures
+
+3. Reinforcement Learning:
+   • Learning through trial and error
+   • Reward-based improvement
+   • Strategy development`,
+      quiz: {
+        questions: [
           {
-            id: 1,
-            title: "Setup Detection Parameters",
-            interactive: true,
-            completion: false
+            question: "What are the three main steps in machine learning?",
+            options: [
+              "Training, Testing, Improving",
+              "Writing, Reading, Running",
+              "Coding, Testing, Deploying",
+              "Planning, Building, Testing"
+            ],
+            correct: 0,
+            explanation: "The three main steps in machine learning are Training (learning from data), Testing (verifying accuracy), and Improving (refining the model based on results)."
           },
           {
-            id: 2,
-            title: "Train Your Detector",
-            interactive: true,
-            completion: false
-          },
-          {
-            id: 3,
-            title: "Test and Improve",
-            interactive: true,
-            completion: false
+            question: "Which type of machine learning uses labeled data?",
+            options: [
+              "Unsupervised Learning",
+              "Supervised Learning",
+              "Reinforcement Learning",
+              "Transfer Learning"
+            ],
+            correct: 1,
+            explanation: "Supervised learning uses labeled data where the correct outputs are known during training, allowing the system to learn from examples with known answers."
           }
-        ]
+        ],
+        practicalExercises: {
+          virtualLab: {
+            enabled: true,
+            experiments: ["classification", "clustering", "reinforcement"],
+            difficulty: "beginner"
+          }
+        }
       }
-    ]
-  };
-  
-  export default module1;
+    }
+  ],
+
+  progressTracking: {
+    enabled: true,
+    features: {
+      lessonProgress: true,
+      quizScores: true,
+      interactiveCompletion: true
+    }
+  },
+
+  gamification: {
+    enabled: true,
+    elements: {
+      badges: [
+        {
+          id: "ai-explorer",
+          title: "AI Explorer",
+          condition: "Complete first lesson"
+        },
+        {
+          id: "pattern-master",
+          title: "Pattern Master",
+          condition: "Perfect score on pattern recognition"
+        }
+      ],
+      achievements: true,
+      leaderboard: false
+    }
+  }
+};
+
+export default module1;
 ```
 
 # src/data/modules/module2.js
 
 ```js
+// src/data/modules/module2.js
 
+const module2 = {
+    id: 2,
+    title: "Machine Learning Fundamentals",
+    description: "Explore core machine learning concepts and techniques",
+    prerequisites: [1],
+    icon: "Database",
+    themeColor: "purple",
+  
+    interactiveFeatures: {
+      dataLab: {
+        enabled: true,
+        components: {
+          dataVisualizer: {
+            type: "interactive",
+            features: ["data-exploration", "pattern-analysis", "visualization"]
+          },
+          experimentStation: {
+            type: "hands-on",
+            tools: ["data-collection", "labeling", "testing"]
+          }
+        }
+      }
+    },
+  
+    lessons: [
+      {
+        id: "2.1",
+        title: "Introduction to Training Data",
+        duration: "35 min",
+        interactive: {
+          dataCollector: {
+            type: "interactive",
+            title: "Build Your Dataset",
+            features: {
+              collection: {
+                tools: ["image-upload", "text-input", "sensor-data"],
+                guidance: true
+              },
+              labeling: {
+                interface: "drag-drop",
+                categories: ["positive", "negative", "neutral"]
+              },
+              visualization: {
+                charts: ["distribution", "correlation", "timeline"],
+                realTime: true
+              }
+            }
+          },
+          dataQualityChecker: {
+            type: "tool",
+            features: [
+              {
+                id: "bias-detector",
+                name: "Bias Checker",
+                visualization: true
+              },
+              {
+                id: "quality-metrics",
+                name: "Data Quality Score",
+                realTime: true
+              }
+            ]
+          },
+          practicalExercises: {
+            type: "hands-on",
+            activities: [
+              {
+                id: "fruit-classifier",
+                title: "Fruit Classification Dataset",
+                steps: [
+                  "Collect fruit images",
+                  "Label dataset",
+                  "Test quality",
+                  "Improve data"
+                ]
+              },
+              {
+                id: "weather-predictor",
+                title: "Weather Prediction Data",
+                dataTypes: ["temperature", "humidity", "pressure"]
+              }
+            ]
+          }
+        },
+        article: `In the world of Artificial Intelligence (AI) and Machine Learning (ML), training data is like the teacher in a classroom. It provides the examples and information that AI systems need to learn and improve.
+  
+  What Is Training Data?
+  Training data is the information that we give to an AI system so it can learn how to perform a specific task. Think of it as a collection of examples that teach the system what to do. For example:
+  • If you're teaching an AI to recognize cats and dogs, the training data would include many images of cats and dogs, each labeled correctly.
+  • If you're building a system to predict the weather, the training data might include past weather conditions like temperature, humidity, and rainfall.
+  
+  Why Is Training Data Important?
+  AI systems learn by finding patterns in the training data. The quality and quantity of this data directly affect how well the AI performs. Here's why:
+  • Accuracy: High-quality, accurate data helps the AI make better predictions or decisions.
+  • Diversity: Diverse data ensures the AI can handle different situations.
+  • Volume: Large datasets provide more examples for the AI to learn from.
+  
+  How Training Data Works:
+  1. Collecting Data: Gather data that represents your problem
+  2. Labeling Data: Add correct answers to your data
+  3. Feeding Data: Let the AI analyze the patterns
+  4. Testing & Improving: Verify and enhance accuracy`,
+        quiz: {
+          questions: [
+            {
+              question: "Why is training data important for AI systems?",
+              options: [
+                "To help AI systems learn patterns and improve accuracy",
+                "To make computers run faster",
+                "To store information permanently",
+                "To replace human workers"
+              ],
+              correct: 0,
+              explanation: "Training data is essential because it provides examples that help AI systems learn patterns and improve their accuracy in making predictions or decisions."
+            },
+            {
+              question: "What is NOT a key aspect of training data quality?",
+              options: [
+                "Accuracy",
+                "Diversity",
+                "Speed of collection",
+                "Volume"
+              ],
+              correct: 2,
+              explanation: "While accuracy, diversity, and volume are crucial aspects of training data quality, the speed of collection is not a primary factor in determining data quality."
+            }
+          ],
+          interactiveQuiz: {
+            type: "data-quality-assessment",
+            tasks: [
+              {
+                type: "evaluation",
+                data: "sample-dataset",
+                goal: "Identify quality issues"
+              },
+              {
+                type: "improvement",
+                task: "Suggest improvements",
+                options: ["clean", "augment", "balance"]
+              }
+            ]
+          }
+        }
+      },
+      {
+        id: "2.2",
+        title: "Pattern Matching Exercises",
+        duration: "40 min",
+        interactive: {
+          patternMatcher: {
+            type: "game",
+            title: "Pattern Detective",
+            activities: [
+              {
+                id: "sequence-finder",
+                type: "numeric",
+                patterns: [
+                  {
+                    sequence: [2, 4, 6, 8],
+                    difficulty: "easy",
+                    hints: true
+                  },
+                  {
+                    sequence: [1, 3, 6, 10, 15],
+                    difficulty: "medium",
+                    hints: true
+                  }
+                ]
+              },
+              {
+                id: "visual-patterns",
+                type: "image",
+                sets: [
+                  {
+                    theme: "shapes",
+                    elements: ["circle", "square", "triangle"],
+                    rules: ["color", "size", "rotation"]
+                  },
+                  {
+                    theme: "symbols",
+                    elements: ["emoji", "icons", "characters"],
+                    rules: ["sequence", "grouping"]
+                  }
+                ]
+              }
+            ]
+          },
+          visualizer: {
+            type: "interactive",
+            tools: [
+              {
+                id: "pattern-highlight",
+                type: "overlay",
+                features: ["highlight", "annotate", "explain"]
+              },
+              {
+                id: "pattern-analyzer",
+                type: "analysis",
+                metrics: ["frequency", "correlation", "similarity"]
+              }
+            ]
+          }
+        },
+        article: `Pattern matching is a foundational skill in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data.
+  
+  What Is Pattern Matching?
+  Pattern matching is the process of finding similarities or consistent arrangements in data. For example:
+  • Text Patterns: Recognizing similar greetings or phrases
+  • Visual Patterns: Identifying common features in images
+  • Numerical Patterns: Detecting trends in data sequences
+  
+  Why Is Pattern Matching Important?
+  Pattern matching helps AI systems:
+  • Classify Data
+  • Predict Outcomes
+  • Detect Anomalies
+  • Enhance Decision-Making
+  
+  How AI Matches Patterns:
+  1. Feature Extraction
+  2. Similarity Metrics
+  3. Classification Models
+  4. Pattern Recognition`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the primary purpose of pattern matching in AI?",
+              options: [
+                "To find similarities and structures in data",
+                "To create new patterns",
+                "To store information",
+                "To speed up computers"
+              ],
+              correct: 0,
+              explanation: "Pattern matching in AI is primarily used to identify similarities and structures in data, enabling systems to recognize and learn from patterns."
+            },
+            {
+              question: "Which is NOT a common application of pattern matching?",
+              options: [
+                "Image recognition",
+                "Text analysis",
+                "Data storage",
+                "Fraud detection"
+              ],
+              correct: 2,
+              explanation: "While pattern matching is used in image recognition, text analysis, and fraud detection, data storage is not a pattern matching application."
+            }
+          ],
+          practicalExercise: {
+            type: "interactive-patterns",
+            tasks: [
+              {
+                type: "sequence",
+                data: [1, 3, 5, "?"],
+                goal: "Complete the sequence"
+              },
+              {
+                type: "visual",
+                patterns: ["🔵", "🔴", "🔵", "?"],
+                goal: "Predict next symbol"
+              }
+            ]
+          }
+        }
+      },
+      {
+        id: "2.3",
+        title: "Simple Decision Trees",
+        duration: "35 min",
+        interactive: {
+          treeBuilder: {
+            type: "interactive",
+            title: "Decision Tree Constructor",
+            features: {
+              builder: {
+                type: "drag-drop",
+                elements: ["nodes", "branches", "leaves"],
+                validation: true
+              },
+              simulator: {
+                type: "live",
+                data: "sample-scenarios",
+                visualization: true
+              }
+            },
+            exercises: [
+              {
+                id: "weather-tree",
+                scenario: "Weather Activity Planner",
+                variables: ["temperature", "precipitation", "wind"],
+                outcomes: ["indoor", "outdoor", "reschedule"]
+              },
+              {
+                id: "pet-classifier",
+                scenario: "Pet Species Identifier",
+                features: ["size", "fur", "sound"],
+                outcomes: ["dog", "cat", "bird"]
+              }
+            ]
+          },
+          treeVisualizer: {
+            type: "animation",
+            features: [
+              "path-highlighting",
+              "decision-explanation",
+              "performance-metrics"
+            ]
+          }
+        },
+        article: `A decision tree is a type of algorithm used in AI and Machine Learning to make decisions based on a series of questions.
+  
+  What Is a Decision Tree?
+  Components:
+  • Root Node: Starting question
+  • Branches: Possible answers
+  • Leaves: Final decisions
+  
+  Why Are Decision Trees Important?
+  • Easy to Understand
+  • Work with Various Data Types
+  • Flexible Applications
+  
+  How Decision Trees Work:
+  1. Splitting Data
+  2. Creating Branches
+  3. Making Decisions
+  4. Evaluating Results
+  
+  Applications:
+  • Healthcare Diagnosis
+  • Financial Decisions
+  • Product Recommendations
+  • Game AI Behavior`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the main component at the top of a decision tree?",
+              options: [
+                "Root node",
+                "Leaf",
+                "Branch",
+                "Decision"
+              ],
+              correct: 0,
+              explanation: "The root node is the main component at the top of a decision tree, representing the first question or decision point."
+            },
+            {
+              question: "Which is NOT a benefit of decision trees?",
+              options: [
+                "Easy to understand",
+                "Works with various data types",
+                "Always 100% accurate",
+                "Flexible applications"
+              ],
+              correct: 2,
+              explanation: "While decision trees have many benefits, being always 100% accurate is not one of them. They can make mistakes and may need refinement."
+            }
+          ],
+          practicalExercise: {
+            type: "tree-building",
+            scenario: "Build a decision tree for choosing a mode of transportation",
+            steps: ["Add root", "Create branches", "Define outcomes"],
+            validation: true
+          }
+        }
+      },
+      {
+        id: "2.4",
+        title: "Supervised vs. Unsupervised Learning",
+        duration: "40 min",
+        interactive: {
+          learningLab: {
+            type: "comparative",
+            title: "Learning Methods Explorer",
+            experiments: [
+              {
+                id: "supervised-demo",
+                type: "interactive",
+                scenario: "Image Classification",
+                steps: [
+                  "Label training data",
+                  "Train model",
+                  "Test predictions"
+                ]
+              },
+              {
+                id: "unsupervised-demo",
+                type: "interactive",
+                scenario: "Customer Clustering",
+                steps: [
+                  "Input raw data",
+                  "Discover patterns",
+                  "Analyze groups"
+                ]
+              }
+            ],
+            comparison: {
+              type: "side-by-side",
+              features: [
+                "data-requirements",
+                "process-visualization",
+                "outcome-analysis"
+              ]
+            }
+          },
+          experimentStation: {
+            type: "hands-on",
+            activities: [
+              {
+                id: "fruit-sorter",
+                type: "supervised",
+                task: "Classify fruits by features"
+              },
+              {
+                id: "customer-groups",
+                type: "unsupervised",
+                task: "Discover customer segments"
+              }
+            ]
+          }
+        },
+        article: `In Machine Learning, there are two main approaches to teaching AI systems: supervised and unsupervised learning.
+  
+  Supervised Learning:
+  • Learning with labeled data
+  • System knows correct answers
+  • Examples: Spam detection, image classification
+  
+  Unsupervised Learning:
+  • Learning without labels
+  • Discovers patterns independently
+  • Examples: Customer segmentation, anomaly detection
+  
+  Key Differences:
+  1. Data Requirements:
+     • Supervised: Labeled data
+     • Unsupervised: Unlabeled data
+  
+  2. Applications:
+     • Supervised: Classification, prediction
+     • Unsupervised: Clustering, pattern discovery`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the key difference between supervised and unsupervised learning?",
+              options: [
+                "Use of labeled vs. unlabeled data",
+                "Processing speed",
+                "Cost of implementation",
+                "Number of algorithms"
+              ],
+              correct: 0,
+              explanation: "The key difference is that supervised learning uses labeled data (with known correct answers), while unsupervised learning works with unlabeled data to discover patterns."
+            },
+            {
+              question: "Which type of learning is best suited for customer segmentation?",
+              options: [
+                "Supervised learning",
+                "Unsupervised learning",
+                "Both types equally",
+                "Neither type"
+              ],
+              correct: 1,
+              explanation: "Unsupervised learning is best suited for customer segmentation as it can discover natural groupings in data without predefined labels."
+            }
+          ],
+          practicalExercise: {
+            type: "learning-comparison",
+            scenarios: [
+              {
+                type: "supervised",
+                task: "Email classification",
+                data: "labeled-emails"
+              },
+              {
+                type: "unsupervised",
+                task: "Customer grouping",
+                data: "customer-behaviors"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  };
+  
+  export default module2;
 ```
 
 # src/data/modules/module3.js
