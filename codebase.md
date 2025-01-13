@@ -104,6 +104,8 @@ export default [
     "preview": "vite preview"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
     "lucide-react": "^0.294.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -246,59 +248,112 @@ This is a file of the type: SVG Image
 import React from 'react';
 
 const ArticleView = ({ article }) => {
-  // Split article into sections based on line breaks
-  const sections = article.split('\n\n').filter(Boolean);
-  
+  const processContent = (text) => {
+    // Split content by bullet points while preserving structure
+    const sections = text.split('\n').reduce((acc, line) => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) return acc;
+      
+      if (trimmedLine.startsWith('•')) {
+        const lastSection = acc[acc.length - 1];
+        if (lastSection && Array.isArray(lastSection.items)) {
+          lastSection.items.push(trimmedLine.substring(1).trim());
+          return acc;
+        }
+        return [...acc, { type: 'list', items: [trimmedLine.substring(1).trim()] }];
+      }
+      
+      if (trimmedLine.endsWith(':')) {
+        return [...acc, { type: 'header', content: trimmedLine.slice(0, -1) }];
+      }
+      
+      return [...acc, { type: 'paragraph', content: trimmedLine }];
+    }, []);
+
+    return sections;
+  };
+
+  const sections = processContent(article);
+
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="prose max-w-none">
+    <div className="max-w-4xl mx-auto relative">
+      {/* Decorative elements */}
+      <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"/>
+      <div className="absolute top-1/4 -left-4 w-24 h-24 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"/>
+      <div className="absolute bottom-1/4 -right-8 w-24 h-24 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"/>
+
+      <article className="relative bg-white rounded-2xl p-8 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.1)] backdrop-blur-sm border border-gray-100">
+        {/* Subtle corner decoration */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-indigo-50 to-transparent rounded-tr-2xl -z-10"/>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-50 to-transparent rounded-bl-2xl -z-10"/>
+
         {sections.map((section, index) => {
-          // Check if section is a heading (starts with word followed by :)
-          const isHeading = /^[A-Za-z\s]+:/.test(section);
-          
-          if (isHeading) {
-            const [heading, ...content] = section.split(':');
-            return (
-              <div key={index} className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  {heading.trim()}
-                </h2>
-                <div className="text-gray-600 leading-relaxed">
-                  {content.join(':').trim()}
+          switch (section.type) {
+            case 'header':
+              return (
+                <div key={index} className="relative">
+                  <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4 first:mt-0 relative">
+                    {section.content}
+                    <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"/>
+                  </h2>
                 </div>
-              </div>
-            );
+              );
+              
+            case 'list':
+              return (
+                <div key={index} className="mb-6 last:mb-0">
+                  <ul className="space-y-3">
+                    {section.items.map((item, i) => {
+                      if (item.endsWith(':')) {
+                        return (
+                          <li key={i} className="mt-6 first:mt-0">
+                            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                              {item.slice(0, -1)}
+                            </h3>
+                          </li>
+                        );
+                      }
+                      
+                      return (
+                        <li key={i} className="flex items-start gap-3 pl-4 group">
+                          <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex-shrink-0 mt-2 group-hover:scale-150 transition-transform duration-300"/>
+                          <span className="text-gray-600 leading-relaxed">
+                            {item}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+              
+            case 'paragraph':
+              return (
+                <div key={index} className={`relative ${index === 0 ? 'mb-8' : 'mb-4 last:mb-0'}`}>
+                  {index === 0 && (
+                    <div className="absolute -left-2 -right-2 top-0 h-full bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 opacity-30 rounded-lg -z-10"/>
+                  )}
+                  <p className={`text-gray-600 leading-relaxed relative ${
+                    index === 0 ? 'text-lg p-4' : ''
+                  }`}>
+                    {section.content}
+                  </p>
+                </div>
+              );
+              
+            default:
+              return null;
           }
-          
-          // Check if section contains bullet points
-          if (section.includes('•')) {
-            const [title, ...bullets] = section.split('\n');
-            return (
-              <div key={index} className="mb-8">
-                {title && !title.includes('•') && (
-                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                    {title.trim()}
-                  </h3>
-                )}
-                <ul className="space-y-2 text-gray-600">
-                  {bullets.map((bullet, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-blue-500 font-bold mt-1">•</span>
-                      <span className="leading-relaxed">{bullet.replace('•', '').trim()}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-          
-          // Regular paragraph
-          return (
-            <p key={index} className="text-gray-600 leading-relaxed mb-6">
-              {section}
-            </p>
-          );
         })}
+      </article>
+      
+      <div className="mt-8 flex justify-end">
+        <button className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+          Continue to Quiz
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
       </div>
     </div>
   );
@@ -310,25 +365,73 @@ export default ArticleView;
 # src/components/course/Certificate.jsx
 
 ```jsx
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Download, Share2, ChevronLeft } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
-export function Certificate({ progress, onBack }) {
+const Certificate = ({ progress, onBack }) => {
+  const [studentName, setStudentName] = useState('');
+  const [isEditing, setIsEditing] = useState(true);
+  const certificateRef = useRef(null);
+  
   const currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
 
-  const downloadCertificate = () => {
-    // In a real implementation, this would generate and download a PDF
-    alert('Certificate download functionality would be implemented here');
+  const handleSubmitName = (e) => {
+    e.preventDefault();
+    if (studentName.trim()) {
+      setIsEditing(false);
+    }
   };
 
-  const shareCertificate = () => {
-    // In a real implementation, this would open sharing options
-    alert('Certificate sharing functionality would be implemented here');
+  const downloadCertificate = async () => {
+    const certificate = certificateRef.current;
+    const canvas = await html2canvas(certificate, {
+      scale: 2,
+      logging: false,
+      useCORS: true
+    });
+    
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'px',
+      format: [canvas.width, canvas.height]
+    });
+    
+    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+    pdf.save(`AI_Course_Certificate_${studentName.replace(/\s+/g, '_')}.pdf`);
   };
+
+  if (isEditing) {
+    return (
+      <div className="max-w-md mx-auto mt-12">
+        <div className="bg-white rounded-xl p-8 shadow-lg">
+          <h2 className="text-2xl font-bold mb-6">Enter Your Name for the Certificate</h2>
+          <form onSubmit={handleSubmitName}>
+            <input
+              type="text"
+              value={studentName}
+              onChange={(e) => setStudentName(e.target.value)}
+              placeholder="Your Full Name"
+              className="w-full px-4 py-2 border rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Generate Certificate
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -340,62 +443,65 @@ export function Certificate({ progress, onBack }) {
         Back to course
       </button>
 
-      <div className="bg-white rounded-xl shadow-sm p-8">
-        <div className="border-8 border-indigo-100 rounded-xl p-8">
-          <div className="text-center">
-            <div className="text-4xl font-serif text-gray-900 mb-2">Certificate of Completion</div>
-            <div className="text-gray-600 mb-8">Lumin AI - AI 101 Course</div>
+      {/* Certificate */}
+      <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+        <div 
+          ref={certificateRef}
+          className="border-8 border-blue-100 rounded-xl p-12 relative overflow-hidden"
+        >
+          {/* Background Decorations */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-50 to-transparent rounded-full opacity-50" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-50 to-transparent rounded-full opacity-50" />
+          
+          <div className="text-center relative">
+            <div className="text-4xl font-serif text-gray-900 mb-4">Certificate of Completion</div>
+            <div className="text-xl text-gray-600 mb-8">AI 101: Foundations of Artificial Intelligence</div>
 
             <div className="text-xl mb-2">This certifies that</div>
-            <div className="text-3xl font-bold text-indigo-600 mb-6">Student Name</div>
+            <div className="text-3xl font-bold text-blue-600 mb-8">{studentName}</div>
 
             <div className="text-lg mb-8">
               has successfully completed the AI 101 Course with a score of{' '}
-              <span className="font-bold">{progress.finalAssessmentScore}%</span>
+              <span className="font-bold">{Math.round(progress.finalAssessmentScore)}%</span>
             </div>
 
-            <div className="text-gray-600 mb-8">{currentDate}</div>
+            <div className="text-gray-600 mb-12">{currentDate}</div>
 
-            <div className="flex justify-center gap-4 mt-12">
-              <button
-                onClick={downloadCertificate}
-                className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-              >
-                <Download className="w-5 h-5" />
-                Download Certificate
-              </button>
-              <button
-                onClick={shareCertificate}
-                className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <Share2 className="w-5 h-5" />
-                Share
-              </button>
+            <div className="flex justify-center gap-16">
+              <div className="text-center">
+                <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
+                <div className="text-gray-600">Course Instructor</div>
+              </div>
+              <div className="text-center">
+                <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
+                <div className="text-gray-600">Program Director</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 bg-blue-50 rounded-xl p-6">
-        <h3 className="text-xl font-bold text-blue-900 mb-2">What's Next?</h3>
-        <p className="text-blue-800 mb-4">
-          Continue your AI learning journey with our advanced courses or join our community to connect with other learners.
-        </p>
-        <div className="flex gap-4">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-            Browse Advanced Courses
-          </button>
-          <button className="px-4 py-2 border border-blue-300 rounded-lg hover:bg-blue-100 transition-colors">
-            Join Community
-          </button>
-        </div>
+      {/* Actions */}
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={downloadCertificate}
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Download className="w-5 h-5" />
+          Download Certificate
+        </button>
+        <button
+          onClick={() => setIsEditing(true)}
+          className="flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+        >
+          Edit Name
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Certificate;
-
 ```
 
 # src/components/course/FinalAssessment.jsx
@@ -573,6 +679,198 @@ export function FinalAssessment({ onComplete, onBack }) {
 }
 export default FinalAssessment;
 
+```
+
+# src/components/course/FinalExam.jsx
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, AlertCircle, Check, X, Trophy } from 'lucide-react';
+
+const FinalExam = ({ onComplete, onBack }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
+  const [finalScore, setFinalScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(90 * 60); // 90 minutes in seconds
+
+  // Final exam questions
+  const questions = [
+    {
+      question: "What is the primary goal of artificial intelligence?",
+      options: [
+        "To create intelligent machines that can perform human-like tasks",
+        "To replace human workers",
+        "To store large amounts of data",
+        "To make computers run faster"
+      ],
+      correct: 0
+    },
+    {
+      question: "Which type of learning uses labeled data?",
+      options: [
+        "Unsupervised learning",
+        "Supervised learning",
+        "Reinforcement learning",
+        "Transfer learning"
+      ],
+      correct: 1
+    },
+    // Add remaining 48 questions here...
+  ];
+
+  useEffect(() => {
+    if (!showResults && timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            calculateAndShowResults();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft, showResults]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  const calculateAndShowResults = () => {
+    const totalQuestions = questions.length;
+    const correctAnswers = Object.entries(answers).filter(
+      ([qIndex, answer]) => questions[parseInt(qIndex)].correct === answer
+    ).length;
+    const score = (correctAnswers / totalQuestions) * 100;
+    setFinalScore(score);
+    setShowResults(true);
+    onComplete(score);
+  };
+
+  const handleAnswer = (answerIndex) => {
+    setAnswers(prev => ({
+      ...prev,
+      [currentQuestion]: answerIndex
+    }));
+  };
+
+  const moveToNext = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+    } else {
+      calculateAndShowResults();
+    }
+  };
+
+  if (showResults) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
+        <div className="text-center">
+          <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Trophy className="w-10 h-10 text-blue-600" />
+          </div>
+          <h2 className="text-3xl font-bold mb-4">Exam Complete!</h2>
+          <p className="text-xl mb-4">Your Score: {finalScore.toFixed(1)}%</p>
+          
+          {finalScore >= 60 ? (
+            <div>
+              <p className="text-green-600 mb-6">Congratulations! You've passed the exam!</p>
+              <button
+                onClick={() => onComplete(finalScore)}
+                className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700"
+              >
+                View Certificate
+              </button>
+            </div>
+          ) : (
+            <div>
+              <p className="text-red-600 mb-6">Keep studying and try again when you're ready.</p>
+              <button
+                onClick={onBack}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              >
+                Return to Course
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+        >
+          <ChevronLeft className="w-5 h-5" />
+          Back to course
+        </button>
+        <div className="text-right">
+          <div className="text-xl font-bold mb-1">Final Exam</div>
+          <div className="text-gray-600">Time Remaining: {formatTime(timeLeft)}</div>
+        </div>
+      </div>
+
+      {/* Question Card */}
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="mb-6">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <span>Question {currentQuestion + 1} of {questions.length}</span>
+            <span>{Math.round((currentQuestion / questions.length) * 100)}% Complete</span>
+          </div>
+          <div className="w-full bg-gray-200 h-2 rounded-full">
+            <div 
+              className="h-2 bg-blue-600 rounded-full transition-all duration-300"
+              style={{ width: `${(currentQuestion / questions.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        <h3 className="text-xl font-medium mb-6">{questions[currentQuestion].question}</h3>
+
+        <div className="space-y-4">
+          {questions[currentQuestion].options.map((option, index) => (
+            <button
+              key={index}
+              onClick={() => handleAnswer(index)}
+              className={`w-full p-4 text-left rounded-lg border transition-all duration-300 ${
+                answers[currentQuestion] === index
+                  ? 'bg-blue-50 border-blue-300'
+                  : 'hover:bg-gray-50 border-gray-200'
+              }`}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-8 flex justify-end">
+          <button
+            onClick={moveToNext}
+            disabled={answers[currentQuestion] === undefined}
+            className={`px-6 py-3 rounded-lg transition-all duration-300 ${
+              answers[currentQuestion] === undefined
+                ? 'bg-gray-100 text-gray-400'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
+            }`}
+          >
+            {currentQuestion === questions.length - 1 ? 'Submit Exam' : 'Next Question'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FinalExam;
 ```
 
 # src/components/course/LessonView.jsx
@@ -781,17 +1079,23 @@ export default LessonView;
 
 ```jsx
 import React from 'react';
-import { ChevronDown, CheckCircle, Brain } from 'lucide-react';
+import { ChevronDown, CheckCircle, Brain, Target, Lock, PlayCircle } from 'lucide-react';
 
-export function ModuleList({ 
+const ModuleList = ({ 
   modules, 
   progress, 
   activeModule, 
   setActiveModule, 
   setActiveLesson 
-}) {
-  // Always allow access to modules
-  const isModuleAvailable = () => true;
+}) => {
+  const isModuleAvailable = (moduleId) => {
+    if (moduleId === 1) return true;
+    const previousModule = moduleId - 1;
+    const previousModuleLessons = modules
+      .find(m => m.id === previousModule)
+      ?.lessons.map(l => l.id) || [];
+    return previousModuleLessons.every(id => progress.completedLessons.includes(id));
+  };
 
   return (
     <div className="space-y-8">
@@ -803,34 +1107,50 @@ export function ModuleList({
         </p>
       </div>
 
-      {/* Module List */}
-      <div className="space-y-4">
+      {/* Module Grid */}
+      <div className="grid gap-6">
         {modules.map((module) => {
           const moduleLessons = module.lessons.map(l => l.id);
           const completedCount = moduleLessons.filter(id => 
             progress.completedLessons.includes(id)
           ).length;
           const percentComplete = (completedCount / moduleLessons.length) * 100;
+          const isAvailable = isModuleAvailable(module.id);
 
           return (
             <div 
               key={module.id}
-              className="bg-white rounded-xl shadow-sm"
+              className={`bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${
+                !isAvailable ? 'opacity-75' : 'hover:shadow-md'
+              }`}
             >
               <button
-                onClick={() => setActiveModule(
+                onClick={() => isAvailable && setActiveModule(
                   activeModule === module.id ? null : module.id
                 )}
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
+                disabled={!isAvailable}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                    <Brain className="w-6 h-6 text-indigo-600" />
+                  <div className="relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center">
+                      <Brain className="w-6 h-6 text-blue-600" />
+                    </div>
+                    {percentComplete === 100 && (
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                    )}
                   </div>
                   <div className="text-left">
-                    <h3 className="text-lg font-semibold">
-                      Module {module.id}: {module.title}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-semibold">
+                        Module {module.id}: {module.title}
+                      </h3>
+                      {!isAvailable && (
+                        <Lock className="w-4 h-4 text-gray-400" />
+                      )}
+                    </div>
                     <div className="flex items-center gap-4">
                       <p className="text-gray-600">{module.description}</p>
                       <span className="text-sm text-gray-500">
@@ -840,14 +1160,9 @@ export function ModuleList({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  {percentComplete === 100 && (
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                  )}
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
-                    activeModule === module.id ? 'rotate-180' : ''
-                  }`} />
-                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
+                  activeModule === module.id ? 'rotate-180' : ''
+                }`} />
               </button>
 
               {/* Lessons List */}
@@ -855,25 +1170,43 @@ export function ModuleList({
                 activeModule === module.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
               }`}>
                 <div className="px-6 pb-4 space-y-2">
-                  {module.lessons.map((lesson) => (
-                    <button
-                      key={lesson.id}
-                      onClick={() => setActiveLesson(lesson)}
-                      className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-left"
-                    >
-                      <div className="w-5 h-5">
-                        {progress.completedLessons.includes(lesson.id) ? (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
-                        ) : (
-                          <div className="w-5 h-5 border-2 border-gray-300 rounded-full" />
+                  {module.lessons.map((lesson, index) => {
+                    const isCompleted = progress.completedLessons.includes(lesson.id);
+                    const previousLessonId = index > 0 ? module.lessons[index - 1].id : null;
+                    const isAvailable = index === 0 || progress.completedLessons.includes(previousLessonId);
+
+                    return (
+                      <button
+                        key={lesson.id}
+                        onClick={() => isAvailable && setActiveLesson(lesson)}
+                        disabled={!isAvailable}
+                        className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 ${
+                          isAvailable 
+                            ? 'hover:bg-gray-50 cursor-pointer' 
+                            : 'opacity-50 cursor-not-allowed'
+                        }`}
+                      >
+                        <div className="w-5 h-5">
+                          {isCompleted ? (
+                            <CheckCircle className="w-5 h-5 text-green-500" />
+                          ) : isAvailable ? (
+                            <PlayCircle className="w-5 h-5 text-blue-500" />
+                          ) : (
+                            <Lock className="w-5 h-5 text-gray-400" />
+                          )}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="font-medium">{lesson.title}</div>
+                          <div className="text-sm text-gray-600">{lesson.duration}</div>
+                        </div>
+                        {progress.quizScores[lesson.id] && (
+                          <div className="px-2 py-1 bg-green-100 rounded-md text-sm text-green-700">
+                            {progress.quizScores[lesson.id]}%
+                          </div>
                         )}
-                      </div>
-                      <div>
-                        <div className="font-medium">{lesson.title}</div>
-                        <div className="text-sm text-gray-600">{lesson.duration}</div>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -882,9 +1215,112 @@ export function ModuleList({
       </div>
     </div>
   );
-}
+};
 
 export default ModuleList;
+```
+
+# src/components/course/ProgressTracker.jsx
+
+```jsx
+import React from 'react';
+import { Trophy, Flame, Target, Brain, BookOpen } from 'lucide-react';
+
+const ProgressTracker = ({ progress, totalLessons }) => {
+  if (!progress || !progress.completedLessons) {
+    return null;
+  }
+
+  const percentComplete = totalLessons > 0 
+    ? Math.round((progress.completedLessons.length / totalLessons) * 100)
+    : 0;
+
+  const stats = [
+    {
+      icon: <Target className="w-5 h-5 text-blue-500" />,
+      label: "Progress",
+      value: `${percentComplete}%`,
+      detail: `${progress.completedLessons.length}/${totalLessons} lessons`
+    },
+    {
+      icon: <Flame className="w-5 h-5 text-orange-500" />,
+      label: "Streak",
+      value: progress.streak || 0,
+      detail: "days"
+    },
+    {
+      icon: <Brain className="w-5 h-5 text-purple-500" />,
+      label: "Quiz Avg",
+      value: progress.quizScores ? 
+        Object.values(progress.quizScores).length > 0
+          ? Math.round(
+              Object.values(progress.quizScores).reduce((a, b) => a + b, 0) / 
+              Object.values(progress.quizScores).length
+            )
+          : 0
+        : 0,
+      detail: "score"
+    },
+    {
+      icon: <Trophy className="w-5 h-5 text-yellow-500" />,
+      label: "Badges",
+      value: progress.badges ? progress.badges.length : 0,
+      detail: "earned"
+    }
+  ];
+
+  return (
+    <div className="mb-12 relative">
+      <div className="absolute -top-4 -left-4 w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+      <div className="absolute top-0 -right-4 w-32 h-32 bg-purple-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+      <div className="absolute -bottom-4 left-20 w-32 h-32 bg-pink-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+
+      <div className="bg-white rounded-2xl p-6 shadow-lg relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl" />
+        
+        <div className="relative">
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-semibold">Course Progress</h3>
+              <span className="text-sm text-gray-500">{percentComplete}% Complete</span>
+            </div>
+            <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div 
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 ease-in-out"
+                style={{ width: `${percentComplete}%` }}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-4 gap-4">
+            {stats.map((stat) => (
+              <div 
+                key={stat.label}
+                className="bg-gray-50 rounded-xl p-4 hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  {stat.icon}
+                  <span className="text-sm text-gray-600">{stat.label}</span>
+                </div>
+                <div className="text-2xl font-bold mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-500">{stat.detail}</div>
+              </div>
+            ))}
+          </div>
+
+          {progress.lastAccessed && (
+            <div className="mt-6 flex items-center gap-2 text-sm text-gray-600">
+              <BookOpen className="w-4 h-4" />
+              Last activity: {new Date(progress.lastAccessed).toLocaleDateString()}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProgressTracker;
 ```
 
 # src/components/course/QuizSection.jsx
@@ -1957,17 +2393,17 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const links = [
-  {to: '/', text: 'Home'},
-  {to: '/summer-program', text: 'Summer Program'},
-  {to: '/learn', text: 'Learn'},
-  {to: '/contact-us', text: 'Contact'}
-]
+  { to: '/', text: 'Home', id: 'home' },
+  { to: '/summer-program', text: 'Summer Program', id: 'summer' },
+  { to: '/learn', text: 'Learn', id: 'learn' },
+  { to: '/contact-us', text: 'Contact', id: 'contact' }
+];
 
 export default function Navigation() {
   const location = useLocation();
 
   return (
-    <nav className="fixed w-full z-50 bg-white/60 backdrop-blur-xl border-bx border-gray-100/50">
+    <nav className="fixed w-full z-50 bg-white/60 backdrop-blur-xl border-b border-gray-100/50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center h-16">
           <div className="flex items-center gap-2 group">
@@ -1981,15 +2417,16 @@ export default function Navigation() {
             </Link>
           </div>
           <div className="flex ml-8 gap-6">
-            {links.map(({ to, text }) =>  
-            <Link 
-              to={to}
-              className="relative text-gray-600 hover:text-blue-600 transition-colors duration-300 group"
-            >
-              {text}
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"/>
-            </Link>
-            )}
+            {links.map(({ to, text, id }) => (
+              <Link 
+                key={id}
+                to={to}
+                className="relative text-gray-600 hover:text-blue-600 transition-colors duration-300 group"
+              >
+                {text}
+                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"/>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
@@ -5224,25 +5661,22 @@ export default function HomePage() {
 
 ```jsx
 import React, { useState, useEffect } from 'react';
+import { Brain, Book, Trophy, ArrowLeft, Award, Lock } from 'lucide-react';
 import Navigation from '../components/Navigation';
-import {
-  BookOpen, Brain, Code, ChevronRight, ChevronDown, CheckCircle,
-  Clock, Star, ArrowRight, PlayCircle, FileText, Target, CircleDot,
-  X, Check, Award, Trophy, Zap
-} from 'lucide-react';
-import { default as ModuleList } from '../components/course/ModuleList';
-import { default as LessonView } from '../components/course/LessonView';
-import { default as QuizSection } from '../components/course/QuizSection';
-import { default as FinalAssessment } from '../components/course/FinalAssessment';
-import { default as Certificate } from '../components/course/Certificate';
+import ModuleList from '../components/course/ModuleList';
+import LessonView from '../components/course/LessonView';
+import FinalExam from '../components/course/FinalExam';
+import Certificate from '../components/course/Certificate';
+import ProgressTracker from '../components/course/ProgressTracker';
 import courseData from '../data/courseData';
 
 export default function Learn() {
   const [activeModule, setActiveModule] = useState(null);
   const [activeLesson, setActiveLesson] = useState(null);
   const [activeTab, setActiveTab] = useState('article');
-  const [showFinalAssessment, setShowFinalAssessment] = useState(false);
+  const [showFinalExam, setShowFinalExam] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('courseProgress');
@@ -5253,8 +5687,9 @@ export default function Learn() {
       streak: 0,
       lastAccessed: null,
       badges: [],
-      finalAssessmentScore: null,
-      certificateIssued: false
+      finalExamScore: null,
+      certificateIssued: false,
+      examAttempts: 0
     };
   });
 
@@ -5276,69 +5711,209 @@ export default function Learn() {
     }
   }, []);
 
-  const calculateProgress = () => {
-    if (!courseData?.modules) return 0;
-
-    const totalLessons = courseData.modules.reduce(
+  const calculateTotalLessons = () => {
+    return courseData.modules.reduce(
       (acc, module) => acc + module.lessons.length,
       0
     );
+  };
+
+  const calculateProgress = () => {
+    const totalLessons = calculateTotalLessons();
     return totalLessons > 0 ? (progress.completedLessons.length / totalLessons) * 100 : 0;
+  };
+
+  const hasCompletedAllLessons = () => {
+    const totalLessons = calculateTotalLessons();
+    return progress.completedLessons.length === totalLessons;
+  };
+
+  const handleStartExam = () => {
+    if (!hasCompletedAllLessons()) {
+      alert('Complete all lessons before taking the final exam.');
+      return;
+    }
+    setShowFinalExam(true);
+  };
+
+  const handleExamCompletion = (score) => {
+    setProgress(prev => ({
+      ...prev,
+      finalExamScore: score,
+      examAttempts: prev.examAttempts + 1
+    }));
+
+    if (score >= 60) {
+      setShowCertificate(true);
+    }
+    setShowFinalExam(false);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-
+      
+      {/* Progress Bar */}
       <div className="fixed top-16 left-0 right-0 h-1 bg-gray-100 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-500"
-          style={{ width: `${calculateProgress()}%` }}
-        />
+      <div 
+  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 progress-bar"
+  style={{ width: `${calculateProgress()}%` }}
+/>
       </div>
 
       <main className="pt-20 pb-16">
         <div className="max-w-7xl mx-auto px-4">
-          {showFinalAssessment ? (
-            <FinalAssessment 
-              onComplete={(score) => {
-                setProgress(prev => ({
-                  ...prev,
-                  finalAssessmentScore: score
-                }));
-                if (score >= 50) {
-                  setShowCertificate(true);
-                }
-                setShowFinalAssessment(false);
-              }}
-              onBack={() => setShowFinalAssessment(false)}
+          {showFinalExam ? (
+            <FinalExam 
+              onComplete={handleExamCompletion}
+              onBack={() => setShowFinalExam(false)}
             />
           ) : showCertificate ? (
             <Certificate 
               progress={progress}
               onBack={() => setShowCertificate(false)}
             />
-          ) : activeLesson ? (
-            <LessonView 
-              lesson={activeLesson}
-              progress={progress}
-              setProgress={setProgress}
-              onBack={() => setActiveLesson(null)}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
           ) : (
-            <ModuleList 
-              modules={courseData.modules}
-              progress={progress}
-              activeModule={activeModule}
-              setActiveModule={setActiveModule}
-              setActiveLesson={setActiveLesson}
-              onStartAssessment={() => setShowFinalAssessment(true)}
-            />
+            <div className="grid grid-cols-12 gap-8">
+              {/* Sidebar Toggle (Mobile) */}
+              <button
+                className="fixed bottom-4 right-4 lg:hidden z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300"
+                onClick={() => setShowSidebar(!showSidebar)}
+              >
+                <Brain className="w-6 h-6" />
+              </button>
+
+              {/* Main Content */}
+              <div className={`${activeLesson ? 'col-span-12 lg:col-span-8' : 'col-span-12'}`}>
+                {activeLesson ? (
+                  <div>
+                    <button
+                      onClick={() => setActiveLesson(null)}
+                      className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors duration-300"
+                    >
+                      <ArrowLeft className="w-5 h-5" />
+                      Back to Modules
+                    </button>
+                    <LessonView 
+                      lesson={activeLesson}
+                      progress={progress}
+                      setProgress={setProgress}
+                      onBack={() => setActiveLesson(null)}
+                      activeTab={activeTab}
+                      setActiveTab={setActiveTab}
+                    />
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    {/* Progress Tracker */}
+                    <ProgressTracker 
+                      progress={progress}
+                      totalLessons={calculateTotalLessons()}
+                    />
+
+                    {/* Quick Actions */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                      <button 
+                        onClick={handleStartExam}
+                        disabled={!hasCompletedAllLessons()}
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
+                          !hasCompletedAllLessons() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Trophy className="w-5 h-5 text-yellow-500" />
+                          <span>Final Exam</span>
+                        </div>
+                        {!hasCompletedAllLessons() && <Lock className="w-4 h-4 text-gray-400" />}
+                        {progress.examAttempts > 0 && (
+                          <span className="text-sm text-gray-500">
+                            Best: {progress.finalExamScore}%
+                          </span>
+                        )}
+                      </button>
+                      
+                      <button 
+                        onClick={() => setShowCertificate(true)}
+                        disabled={!progress.finalExamScore || progress.finalExamScore < 60}
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
+                          (!progress.finalExamScore || progress.finalExamScore < 60) 
+                            ? 'opacity-50 cursor-not-allowed' 
+                            : 'hover:bg-gray-50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <Award className="w-5 h-5 text-green-500" />
+                          <span>Certificate</span>
+                        </div>
+                        {(!progress.finalExamScore || progress.finalExamScore < 60) && (
+                          <Lock className="w-4 h-4 text-gray-400" />
+                        )}
+                      </button>
+                      
+                      <button 
+                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3 hover:bg-gray-50"
+                        onClick={() => setActiveModule(courseData.modules[0].id)}
+                      >
+                        <Brain className="w-5 h-5 text-blue-500" />
+                        <span>Learning Path</span>
+                      </button>
+                    </div>
+
+                    {/* Module List */}
+                    <ModuleList 
+                      modules={courseData.modules}
+                      progress={progress}
+                      activeModule={activeModule}
+                      setActiveModule={setActiveModule}
+                      setActiveLesson={setActiveLesson}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Sidebar (visible in lesson view) */}
+              {activeLesson && (
+                <div className={`col-span-12 lg:col-span-4 ${
+                  showSidebar ? 'fixed lg:relative inset-0 lg:inset-auto z-40' : 'hidden lg:block'
+                }`}>
+                  <div className="h-full bg-white p-6 rounded-xl shadow-lg overflow-y-auto">
+                    <h3 className="text-xl font-semibold mb-4">Course Contents</h3>
+                    <div className="space-y-4">
+                      {courseData.modules.map(module => (
+                        <div key={module.id} className="space-y-2">
+                          <div className="font-medium text-gray-900">{module.title}</div>
+                          <div className="pl-4 space-y-1">
+                            {module.lessons.map(lesson => (
+                              <button
+                                key={lesson.id}
+                                onClick={() => setActiveLesson(lesson)}
+                                className={`w-full text-left px-2 py-1 rounded ${
+                                  activeLesson.id === lesson.id
+                                    ? 'bg-blue-50 text-blue-600'
+                                    : 'text-gray-600 hover:bg-gray-50'
+                                }`}
+                              >
+                                {lesson.title}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </main>
+
+      <style jsx>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          100% { background-position: 200% 50%; }
+        }
+      `}</style>
     </div>
   );
 }
@@ -5698,9 +6273,23 @@ export default function SummerProgram() {
   .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
 ```
 
-# tailwind.config.js
+# src/styles/learn.css
 
-```js
+```css
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  
+  .progress-bar {
+    background-size: 200% 100%;
+    animation: gradient 2s linear infinite;
+  }
+```
+
+# tailwind.config.cjs
+
+```cjs
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

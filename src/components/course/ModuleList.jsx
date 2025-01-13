@@ -1,16 +1,13 @@
 import React from 'react';
-import { ChevronDown, CheckCircle, Brain } from 'lucide-react';
+import { ChevronDown, CheckCircle, Brain, PlayCircle } from 'lucide-react';
 
-export function ModuleList({ 
+const ModuleList = ({ 
   modules, 
   progress, 
   activeModule, 
   setActiveModule, 
   setActiveLesson 
-}) {
-  // Always allow access to modules
-  const isModuleAvailable = () => true;
-
+}) => {
   return (
     <div className="space-y-8">
       {/* Course Overview */}
@@ -21,8 +18,8 @@ export function ModuleList({
         </p>
       </div>
 
-      {/* Module List */}
-      <div className="space-y-4">
+      {/* Module Grid */}
+      <div className="grid gap-6">
         {modules.map((module) => {
           const moduleLessons = module.lessons.map(l => l.id);
           const completedCount = moduleLessons.filter(id => 
@@ -33,22 +30,29 @@ export function ModuleList({
           return (
             <div 
               key={module.id}
-              className="bg-white rounded-xl shadow-sm"
+              className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
             >
               <button
-                onClick={() => setActiveModule(
-                  activeModule === module.id ? null : module.id
-                )}
+                onClick={() => setActiveModule(activeModule === module.id ? null : module.id)}
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                    <Brain className="w-6 h-6 text-indigo-600" />
+                  <div className="relative">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center">
+                      <Brain className="w-6 h-6 text-blue-600" />
+                    </div>
+                    {percentComplete === 100 && (
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                      </div>
+                    )}
                   </div>
                   <div className="text-left">
-                    <h3 className="text-lg font-semibold">
-                      Module {module.id}: {module.title}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-semibold">
+                        Module {module.id}: {module.title}
+                      </h3>
+                    </div>
                     <div className="flex items-center gap-4">
                       <p className="text-gray-600">{module.description}</p>
                       <span className="text-sm text-gray-500">
@@ -58,14 +62,9 @@ export function ModuleList({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  {percentComplete === 100 && (
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                  )}
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
-                    activeModule === module.id ? 'rotate-180' : ''
-                  }`} />
-                </div>
+                <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${
+                  activeModule === module.id ? 'rotate-180' : ''
+                }`} />
               </button>
 
               {/* Lessons List */}
@@ -73,25 +72,34 @@ export function ModuleList({
                 activeModule === module.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
               }`}>
                 <div className="px-6 pb-4 space-y-2">
-                  {module.lessons.map((lesson) => (
-                    <button
-                      key={lesson.id}
-                      onClick={() => setActiveLesson(lesson)}
-                      className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 text-left"
-                    >
-                      <div className="w-5 h-5">
-                        {progress.completedLessons.includes(lesson.id) ? (
-                          <CheckCircle className="w-5 h-5 text-green-500" />
-                        ) : (
-                          <div className="w-5 h-5 border-2 border-gray-300 rounded-full" />
+                  {module.lessons.map((lesson) => {
+                    const isCompleted = progress.completedLessons.includes(lesson.id);
+
+                    return (
+                      <button
+                        key={lesson.id}
+                        onClick={() => setActiveLesson(lesson)}
+                        className="w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 hover:bg-gray-50"
+                      >
+                        <div className="w-5 h-5">
+                          {isCompleted ? (
+                            <CheckCircle className="w-5 h-5 text-green-500" />
+                          ) : (
+                            <PlayCircle className="w-5 h-5 text-blue-500" />
+                          )}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="font-medium">{lesson.title}</div>
+                          <div className="text-sm text-gray-600">{lesson.duration}</div>
+                        </div>
+                        {progress.quizScores[lesson.id] && (
+                          <div className="px-2 py-1 bg-green-100 rounded-md text-sm text-green-700">
+                            {progress.quizScores[lesson.id]}%
+                          </div>
                         )}
-                      </div>
-                      <div>
-                        <div className="font-medium">{lesson.title}</div>
-                        <div className="text-sm text-gray-600">{lesson.duration}</div>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -100,6 +108,6 @@ export function ModuleList({
       </div>
     </div>
   );
-}
+};
 
 export default ModuleList;

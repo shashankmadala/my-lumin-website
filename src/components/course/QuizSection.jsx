@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Check, X, AlertCircle } from 'lucide-react';
+import { Check, X, AlertCircle, Trophy, ArrowRight, RefreshCcw } from 'lucide-react';
 
 export function QuizSection({ lesson, progress, setProgress, onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showExplanation, setShowExplanation] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [quizScore, setQuizScore] = useState(0);
 
   const handleAnswer = (questionIndex, answerIndex) => {
     if (answers[questionIndex] !== undefined) return;
@@ -21,18 +23,51 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
         ([qIndex, answer]) => lesson.quiz.questions[qIndex].correct === answer
       ).length;
       
-      const score = (correctAnswers / lesson.quiz.questions.length) * 100;
+      const score = Math.round((correctAnswers / lesson.quiz.questions.length) * 100);
+      setQuizScore(score);
       
-      if (score >= 70) {
-        setProgress(prev => ({
-          ...prev,
-          completedLessons: [...prev.completedLessons, lesson.id],
-          quizScores: { ...prev.quizScores, [lesson.id]: score }
-        }));
-        setTimeout(onComplete, 2000);
-      }
+      setProgress(prev => ({
+        ...prev,
+        completedLessons: [...prev.completedLessons, lesson.id],
+        quizScores: { ...prev.quizScores, [lesson.id]: score }
+      }));
+      setShowResults(true);
     }
   };
+
+  if (showResults) {
+    return (
+      <div className="text-center space-y-6">
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+          <Trophy className="w-10 h-10 text-blue-600" />
+        </div>
+        <h2 className="text-2xl font-bold">Quiz Complete!</h2>
+        <p className="text-xl">Your Score: {quizScore}%</p>
+        
+        <div className="flex justify-center gap-4 mt-8">
+          <button
+            onClick={() => {
+              setAnswers({});
+              setCurrentQuestion(0);
+              setShowResults(false);
+              setShowExplanation(false);
+            }}
+            className="px-6 py-3 bg-white border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center gap-2"
+          >
+            <RefreshCcw className="w-5 h-5" />
+            Retake Quiz
+          </button>
+          <button
+            onClick={onComplete}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            Next Lesson
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const currentQ = lesson.quiz.questions[currentQuestion];
 
@@ -108,7 +143,7 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
             setCurrentQuestion(prev => prev + 1);
             setShowExplanation(false);
           }}
-          className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Next Question
         </button>
