@@ -1943,11 +1943,16 @@ export default function Navigation() {
 
 import module1 from './modules/module1.js';
 import module2 from './modules/module2.js';
+import module3 from './modules/module3.js';
+import module4 from './modules/module4.js';
+import module5 from './modules/module5.js';
+import module6 from './modules/module6.js';
+
 
 const courseData = {
   title: "AI 101: Foundations of Artificial Intelligence",
   description: "Master the fundamentals of artificial intelligence and machine learning",
-  modules: [module1,module2]
+  modules: [module1,module2,module3,module4,module5,module6]
 };
 
 export default courseData;
@@ -2970,7 +2975,1298 @@ const module2 = {
 # src/data/modules/module3.js
 
 ```js
+// src/data/modules/module3.js
 
+const module3 = {
+    id: 3,
+    title: "Advanced AI Concepts",
+    description: "Explore advanced concepts in AI systems, algorithms, and neural networks",
+    prerequisites: [1, 2],
+    icon: "Network",
+    themeColor: "green",
+  
+    interactiveFeatures: {
+      aiLab: {
+        enabled: true,
+        components: {
+          systemVisualizer: {
+            type: "interactive",
+            features: ["system-comparison", "architecture-exploration", "network-visualization"]
+          },
+          conceptMap: {
+            type: "dragAndDrop",
+            elements: ["systems", "algorithms", "neural-networks"]
+          }
+        }
+      }
+    },
+  
+    lessons: [
+      {
+        id: "3.1",
+        title: "Types of AI Systems",
+        duration: "35 min",
+        article: `Artificial Intelligence (AI) is not just one system or technology; it encompasses a wide range of systems with varying capabilities and functionalities. Understanding the different types of AI systems can help us see how they are designed, what they can do, and how they are applied in the real world.
+  
+  Reactive Machines
+  Reactive machines are the simplest type of AI. They operate based solely on the current input and do not rely on memory or past experiences. They cannot learn from previous interactions and only perform specific tasks they are programmed for.
+  
+  Examples:
+  • Chess-playing AI: IBM's Deep Blue, which defeated chess champion Garry Kasparov, is a reactive machine. It evaluates possible moves in the moment without learning from past games.
+  • Basic Recommendation Systems: Simple systems that suggest products based on your most recent clicks or searches.
+  
+  Limited Memory
+  Limited memory AI systems can store and use past data for a short time. They analyze recent experiences or data points to make decisions, but they do not retain this information permanently.
+  
+  Examples:
+  • Self-Driving Cars: These vehicles analyze recent sensor data to identify pedestrians, traffic lights, and other vehicles, using it to make real-time driving decisions.
+  • Virtual Assistants: Systems like Siri or Alexa can temporarily remember context, such as a follow-up question about a previous command.
+  
+  Theory of Mind
+  Theory of mind AI is a concept that refers to systems capable of understanding emotions, intentions, and social interactions. While this type of AI is still theoretical, it represents a significant step toward creating machines that can interact with humans more naturally and empathetically.
+  
+  Potential Applications:
+  • Social Robotics: Robots designed to assist in caregiving or education, capable of understanding and responding to human emotions.
+  • Advanced Virtual Assistants: Systems that adapt their tone and suggestions based on the user's mood or context.
+  
+  Self-Aware AI
+  Self-aware AI represents the most advanced and hypothetical type of AI. These systems would possess self-awareness, consciousness, and the ability to understand their existence and goals.`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the main characteristic of reactive machines?",
+              options: [
+                "They operate based only on current input",
+                "They learn from past experiences",
+                "They can store memories",
+                "They have self-awareness"
+              ],
+              correct: 0,
+              explanation: "Reactive machines are the simplest type of AI that operate solely based on current input and cannot learn from past experiences."
+            },
+            {
+              question: "Which type of AI system is used in self-driving cars?",
+              options: [
+                "Reactive Machines",
+                "Limited Memory",
+                "Theory of Mind",
+                "Self-Aware AI"
+              ],
+              correct: 1,
+              explanation: "Self-driving cars use Limited Memory AI systems to analyze recent sensor data and make real-time driving decisions."
+            },
+            {
+              question: "What is the most advanced and hypothetical type of AI discussed?",
+              options: [
+                "Reactive Machines",
+                "Limited Memory",
+                "Theory of Mind",
+                "Self-Aware AI"
+              ],
+              correct: 3,
+              explanation: "Self-Aware AI represents the most advanced and hypothetical type of AI, capable of possessing consciousness and understanding its own existence."
+            }
+          ]
+        }
+      },
+      {
+        id: "3.2",
+        title: "Basic Algorithms in AI",
+        duration: "40 min",
+        article: `Algorithms are the foundation of Artificial Intelligence (AI) and Machine Learning (ML). They are sets of instructions that guide computers in solving problems and making decisions. Understanding basic algorithms helps us see how AI systems learn, adapt, and improve.
+  
+  What Is an Algorithm?
+  An algorithm is a step-by-step procedure for performing a task or solving a problem. It's like a recipe: you follow specific steps to achieve a desired outcome. In AI, algorithms help machines process data and make sense of it.
+  
+  For example:
+  • A sorting algorithm arranges numbers or words in order (e.g., smallest to largest).
+  • A search algorithm finds specific information, like a name in a list.
+  
+  Common Types of AI Algorithms
+  
+  1. Linear Regression:
+  • Used for predicting a continuous value (e.g., house prices based on size).
+  • Works by finding the best-fit line that minimizes errors between predicted and actual values.
+  
+  2. Logistic Regression:
+  • Used for classification tasks (e.g., determining whether an email is spam or not).
+  • Outputs probabilities to classify data into categories.
+  
+  3. Decision Trees:
+  • Use a flowchart-like structure to make decisions based on a series of questions.
+  • Example: Deciding whether to play outside based on weather conditions.
+  
+  4. K-Nearest Neighbors (KNN):
+  • A simple algorithm that classifies data points based on the closest examples.
+  • Example: Grouping similar fruits based on color and shape.
+  
+  5. Clustering Algorithms:
+  • Group similar data points together without predefined labels.
+  • Example: Grouping customers based on purchasing behavior.
+  
+  How Algorithms Process Data:
+  1. Input: Provide data for the algorithm to process (e.g., images, numbers, or text).
+  2. Processing: The algorithm performs calculations or applies rules to find patterns or make decisions.
+  3. Output: The result could be a prediction, classification, or decision.`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the primary purpose of an algorithm in AI?",
+              options: [
+                "To store data permanently",
+                "To provide step-by-step instructions for solving problems",
+                "To connect to the internet",
+                "To create user interfaces"
+              ],
+              correct: 1,
+              explanation: "An algorithm is a step-by-step procedure that guides computers in solving problems and making decisions."
+            },
+            {
+              question: "Which algorithm type is best suited for predicting continuous values?",
+              options: [
+                "Linear Regression",
+                "Logistic Regression",
+                "Decision Trees",
+                "Clustering Algorithms"
+              ],
+              correct: 0,
+              explanation: "Linear Regression is specifically used for predicting continuous values, such as house prices based on size."
+            },
+            {
+              question: "What is the main purpose of clustering algorithms?",
+              options: [
+                "To predict future values",
+                "To classify emails as spam",
+                "To group similar data points together",
+                "To make sequential decisions"
+              ],
+              correct: 2,
+              explanation: "Clustering algorithms are designed to group similar data points together without predefined labels."
+            }
+          ]
+        }
+      },
+      {
+        id: "3.3",
+        title: "Data Collection and Processing",
+        duration: "35 min",
+        article: `Data is the lifeblood of Artificial Intelligence (AI) systems. Before an AI can learn, predict, or make decisions, it needs data—lots of it. But raw data is rarely ready for immediate use. It must be collected, cleaned, and processed to ensure it's accurate and useful.
+  
+  Why Is Data Collection Important?
+  Data collection is the first step in creating AI systems. The quality and quantity of data directly impact how well the AI performs. Here's why it's important:
+  
+  1. Accuracy: High-quality data ensures the AI makes reliable predictions.
+  2. Relevance: The data must align with the problem the AI is solving.
+  3. Diversity: Diverse datasets prevent bias and help AI systems generalize better.
+  
+  How Is Data Collected?
+  Data can come from many sources, depending on the AI's purpose:
+  
+  1. Sensors: Devices like cameras, microphones, and IoT sensors gather real-world information.
+  2. Databases: Existing datasets, such as customer records or medical histories.
+  3. Surveys and Forms: Direct input from users.
+  4. Web Scraping: Extracting information from websites.
+  
+  Data Cleaning: Preparing for Use
+  Raw data often contains errors, duplicates, or irrelevant information. Data cleaning steps include:
+  
+  1. Removing Errors: Identifying and correcting mistakes.
+  2. Eliminating Duplicates: Ensuring no data point is counted twice.
+  3. Handling Missing Data: Filling in gaps or deciding how to work around them.
+  4. Standardizing Formats: Making sure data is consistent.
+  
+  Data Processing: Making Data Usable
+  Once cleaned, the data is processed to extract meaningful insights:
+  
+  1. Feature Extraction: Identifying the most important characteristics.
+  2. Normalization: Scaling data to a consistent range.
+  3. Encoding: Converting non-numerical data into numerical formats.`,
+        quiz: {
+          questions: [
+            {
+              question: "Why is data collection important for AI systems?",
+              options: [
+                "To make the system run faster",
+                "To reduce storage costs",
+                "To ensure accurate and reliable predictions",
+                "To simplify programming"
+              ],
+              correct: 2,
+              explanation: "Data collection is crucial because the quality and quantity of data directly impact how well the AI performs and makes predictions."
+            },
+            {
+              question: "What is the purpose of data cleaning?",
+              options: [
+                "To make data smaller",
+                "To remove useful information",
+                "To make data look prettier",
+                "To fix errors and inconsistencies"
+              ],
+              correct: 3,
+              explanation: "Data cleaning is the process of fixing errors, removing duplicates, and handling missing values to make the data usable."
+            },
+            {
+              question: "Which of these is NOT a common source of data collection?",
+              options: [
+                "Sensors",
+                "Databases",
+                "Random generation",
+                "Web scraping"
+              ],
+              correct: 2,
+              explanation: "Random generation is not a common source of data collection. Data is typically collected from real sources like sensors, databases, surveys, and web scraping."
+            }
+          ]
+        }
+      },
+      {
+        id: "3.4",
+        title: "Neural Networks Fundamentals",
+        duration: "45 min",
+        article: `Neural networks are a cornerstone of modern Artificial Intelligence (AI). Inspired by the structure of the human brain, neural networks enable machines to recognize patterns, process data, and make decisions.
+  
+  What Is a Neural Network?
+  A neural network is a series of algorithms designed to recognize relationships in data. It consists of layers of interconnected nodes (or neurons) that process information.
+  
+  Key Components:
+  1. Input Layer: The first layer that receives data, such as images, text, or numerical values.
+  2. Hidden Layers: Layers between the input and output, where the network processes and transforms data.
+  3. Output Layer: Produces the final result, such as a classification or prediction.
+  
+  How Neural Networks Work
+  Neural networks learn by adjusting the connections (or weights) between neurons:
+  
+  1. Data Input: The network receives data (e.g., an image of a cat).
+  2. Forward Propagation: Data flows through the network, with each neuron applying transformations.
+  3. Error Calculation: The network compares its output with the correct answer.
+  4. Backward Propagation: The network adjusts weights to reduce errors.
+  
+  Types of Neural Networks:
+  
+  1. Feedforward Neural Networks:
+  • Data flows in one direction
+  • Used for basic prediction tasks
+  
+  2. Convolutional Neural Networks (CNNs):
+  • Specialized for image processing
+  • Used in computer vision applications
+  
+  3. Recurrent Neural Networks (RNNs):
+  • Designed for sequential data
+  • Used in language processing
+  
+  4. Deep Neural Networks:
+  • Multiple layers for complex patterns
+  • Used in advanced AI applications`,
+        quiz: {
+          questions: [
+            {
+              question: "What inspired the design of neural networks?",
+              options: [
+                "Computer circuits",
+                "The human brain",
+                "Mathematical equations",
+                "Social networks"
+              ],
+              correct: 1,
+              explanation: "Neural networks were inspired by the structure of the human brain, with interconnected nodes similar to neurons."
+            },
+            {
+              question: "Which type of neural network is best suited for image processing?",
+              options: [
+                "Feedforward Neural Networks",
+                "Recurrent Neural Networks",
+                "Convolutional Neural Networks",
+                "Basic Neural Networks"
+              ],
+              correct: 2,
+              explanation: "Convolutional Neural Networks (CNNs) are specifically designed for and excel at image processing tasks."
+            },
+            {
+              question: "What is the purpose of backward propagation?",
+              options: [
+                "To input data into the network",
+                "To generate random weights",
+                "To adjust weights and reduce errors",
+                "To delete unnecessary neurons"
+              ],
+              correct: 2,
+              explanation: "Backward propagation is the process of adjusting the weights between neurons to reduce errors and improve the network's performance."
+            }
+          ]
+        }
+      }
+    ],
+  
+    progressTracking: {
+      enabled: true,
+      features: {
+        lessonProgress: true,
+        quizScores: true,
+        interactiveCompletion: true
+      }
+    },
+  
+    gamification: {
+      enabled: true,
+      elements: {
+        badges: [
+          {
+            id: "system-master",
+            title: "AI Systems Master",
+            condition: "Complete all lessons in module 3"
+          },
+          {
+            id: "neural-expert",
+            title: "Neural Network Expert",
+            condition: "Perfect score on neural networks quiz"
+          }
+        ],
+        achievements: true,
+        leaderboard: false
+      }
+    }
+  };
+  
+  export default module3;
+```
+
+# src/data/modules/module4.js
+
+```js
+// src/data/modules/module4.js
+
+const module4 = {
+    id: 4,
+    title: "AI Applications and Technologies",
+    description: "Explore how AI is applied in computer vision, natural language processing, robotics, and gaming",
+    prerequisites: [1, 2, 3],
+    icon: "Robot",
+    themeColor: "indigo",
+  
+    interactiveFeatures: {
+      aiLab: {
+        enabled: true,
+        components: {
+          visionDemo: {
+            type: "interactive",
+            features: ["image-recognition", "object-detection", "scene-analysis"]
+          },
+          nlpWorkbench: {
+            type: "playground",
+            tools: ["text-analysis", "sentiment-detection", "language-translation"]
+          },
+          robotSimulator: {
+            type: "simulation",
+            features: ["path-planning", "sensor-integration", "control-systems"]
+          },
+          gameAIStudio: {
+            type: "development",
+            tools: ["npc-behavior", "procedural-generation", "difficulty-scaling"]
+          }
+        }
+      }
+    },
+  
+    lessons: [
+      {
+        id: "4.1",
+        title: "Computer Vision Fundamentals",
+        duration: "40 min",
+        article: `Computer vision is a field of Artificial Intelligence (AI) that enables machines to interpret and analyze visual information from the world, such as images or videos. This technology powers many applications, from facial recognition to self-driving cars. Understanding the basics of computer vision helps us see how machines can "see" and interact with their environments.
+  
+  Unlike humans, machines rely on algorithms and data to make sense of visual information. These algorithms process pixels in images to identify patterns and extract meaning.
+  
+  How Does Computer Vision Work?
+  Computer vision systems follow these steps:
+  
+  1. Image Acquisition:
+  • Capturing images or videos using cameras or sensors
+  • Converting visual data into digital format
+  
+  2. Preprocessing:
+  • Preparing the image by resizing, filtering, or enhancing it
+  • Removing noise and standardizing formats
+  
+  3. Feature Extraction:
+  • Identifying key characteristics like edges, shapes, or textures
+  • Creating numerical representations of visual elements
+  
+  4. Analysis:
+  • Applying algorithms to recognize objects, classify scenes, or detect movement
+  • Using machine learning models to interpret visual data
+  
+  5. Decision Making:
+  • Using extracted information to perform tasks
+  • Generating appropriate responses or actions
+  
+  Key Techniques in Computer Vision:
+  1. Object Detection:
+  • Locating and identifying specific objects in images
+  • Drawing bounding boxes around detected objects
+  
+  2. Image Segmentation:
+  • Dividing images into meaningful segments
+  • Analyzing different parts of an image separately
+  
+  3. Pattern Recognition:
+  • Identifying recurring patterns and features
+  • Classifying objects based on learned patterns
+  
+  Real-World Applications:
+  • Healthcare: Analyzing medical images for diagnosis
+  • Retail: Enabling automated checkout systems
+  • Transportation: Assisting self-driving cars
+  • Manufacturing: Inspecting products for defects
+  • Security: Implementing surveillance and access control`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the first step in computer vision processing?",
+              options: [
+                "Feature extraction",
+                "Image acquisition",
+                "Analysis",
+                "Decision making"
+              ],
+              correct: 1,
+              explanation: "Image acquisition is the first step where visual data is captured through cameras or sensors and converted into digital format."
+            },
+            {
+              question: "Which technique involves dividing an image into meaningful segments?",
+              options: [
+                "Object detection",
+                "Pattern recognition",
+                "Image segmentation",
+                "Feature extraction"
+              ],
+              correct: 2,
+              explanation: "Image segmentation is the technique of dividing images into meaningful segments for separate analysis."
+            },
+            {
+              question: "How do machines process visual information differently from humans?",
+              options: [
+                "They don't process visual information",
+                "They use algorithms and data to analyze pixels",
+                "They rely on intuition",
+                "They only see in black and white"
+              ],
+              correct: 1,
+              explanation: "Unlike humans who process visual information intuitively, machines rely on algorithms and data to analyze pixels and extract meaning from images."
+            }
+          ]
+        }
+      },
+      {
+        id: "4.2",
+        title: "Natural Language Processing",
+        duration: "35 min",
+        article: `Natural Language Processing (NLP) is a branch of Artificial Intelligence (AI) that focuses on enabling machines to understand, interpret, and generate human language. From voice assistants to translation tools, NLP powers many of the technologies we use every day.
+  
+  What Is Natural Language Processing?
+  NLP involves teaching computers to:
+  • Recognize speech and text
+  • Understand the meaning of words and sentences
+  • Generate responses or translate text into different languages
+  
+  For example, when you ask Siri for the weather, NLP allows the system to understand your question and provide an accurate response.
+  
+  How Does NLP Work?
+  NLP combines linguistics and computer science to process language. Here are the key steps:
+  
+  1. Text Preprocessing:
+  • Preparing text by removing irrelevant details
+  • Converting text into machine-readable format
+  • Examples: Tokenization, removing punctuation, converting to lowercase
+  
+  2. Parsing and Analysis:
+  • Understanding sentence structure using syntax and semantics
+  • Identifying parts of speech and grammatical relationships
+  • Example: Identifying subjects, verbs, and objects
+  
+  3. Feature Extraction:
+  • Converting words into numerical representations
+  • Using techniques like word embeddings (e.g., Word2Vec)
+  
+  4. Model Training:
+  • Teaching machines to analyze and respond to language
+  • Using machine learning algorithms to improve understanding
+  
+  Key Techniques in NLP:
+  
+  1. Sentiment Analysis:
+  • Determining emotions or opinions in text
+  • Example: Analyzing customer reviews
+  
+  2. Named Entity Recognition (NER):
+  • Identifying names, dates, or locations
+  • Example: Highlighting "New York" in text
+  
+  3. Language Translation:
+  • Converting text between languages
+  • Example: Google Translate
+  
+  4. Text Summarization:
+  • Condensing large texts into summaries
+  • Example: Creating news briefs
+  
+  Applications in Different Industries:
+  • Healthcare: Extracting information from medical records
+  • Education: Powering language learning applications
+  • Finance: Analyzing market sentiment
+  • Customer Service: Enabling chatbots and automated responses`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the primary goal of Natural Language Processing?",
+              options: [
+                "To create visual content",
+                "To enable machines to understand and process human language",
+                "To store data efficiently",
+                "To improve computer hardware"
+              ],
+              correct: 1,
+              explanation: "NLP's primary goal is to enable machines to understand, interpret, and generate human language."
+            },
+            {
+              question: "What is tokenization in NLP?",
+              options: [
+                "Creating security tokens",
+                "Breaking text into individual words or units",
+                "Encrypting data",
+                "Converting text to images"
+              ],
+              correct: 1,
+              explanation: "Tokenization is the process of breaking text into individual words or units during the preprocessing stage."
+            },
+            {
+              question: "Which NLP technique analyzes emotions in text?",
+              options: [
+                "Named Entity Recognition",
+                "Tokenization",
+                "Sentiment Analysis",
+                "Language Translation"
+              ],
+              correct: 2,
+              explanation: "Sentiment Analysis is the NLP technique used to determine emotions or opinions expressed in text."
+            }
+          ]
+        }
+      },
+      {
+        id: "4.3",
+        title: "Robotics Fundamentals",
+        duration: "45 min",
+        article: `Robotics is an interdisciplinary field combining mechanical engineering, electrical engineering, and computer science to create machines that can perform tasks autonomously or semi-autonomously. When integrated with Artificial Intelligence (AI), robotics becomes even more powerful, enabling robots to learn, adapt, and interact with their environments.
+  
+  What Are Robots?
+  A robot is a programmable machine capable of carrying out a series of actions automatically. Robots come in various shapes and sizes, from robotic arms in factories to autonomous drones and humanoid robots.
+  
+  Core Components:
+  1. Mechanical Structure:
+  • Physical body (wheels, arms, legs)
+  • Designed for specific purposes and tasks
+  
+  2. Sensors and Actuators:
+  • Sensors gather environmental data
+  • Actuators execute physical actions
+  
+  3. Control System:
+  • Processes data and determines actions
+  • Often powered by AI algorithms
+  
+  How Robots Work:
+  Robots operate through a cycle of:
+  
+  1. Sensing:
+  • Using cameras, microphones, proximity sensors
+  • Gathering data about surroundings
+  
+  2. Processing:
+  • Analyzing sensor input
+  • Making decisions using AI or algorithms
+  
+  3. Acting:
+  • Executing chosen actions
+  • Moving, gripping, or communicating
+  
+  Types of Robots:
+  
+  1. Industrial Robots:
+  • Used in manufacturing
+  • Example: Assembly line robots
+  
+  2. Service Robots:
+  • Assist in daily tasks
+  • Example: Robot vacuums
+  
+  3. Humanoid Robots:
+  • Resemble human form
+  • Example: Social interaction robots
+  
+  4. Autonomous Vehicles:
+  • Self-driving transportation
+  • Example: Delivery drones
+  
+  Applications Across Industries:
+  • Manufacturing: Assembly and quality control
+  • Healthcare: Surgical assistance and patient care
+  • Agriculture: Automated farming
+  • Space Exploration: Planetary rovers
+  • Education: Teaching tools and demonstrations`,
+        quiz: {
+          questions: [
+            {
+              question: "What are the three main components of a robot?",
+              options: [
+                "Software, Hardware, Network",
+                "Mechanical Structure, Sensors/Actuators, Control System",
+                "CPU, Memory, Storage",
+                "Input, Output, Processing"
+              ],
+              correct: 1,
+              explanation: "The three main components of a robot are its mechanical structure (physical body), sensors and actuators (for gathering data and executing actions), and control system (for processing and decision-making)."
+            },
+            {
+              question: "Which type of robot is primarily used in manufacturing?",
+              options: [
+                "Service Robots",
+                "Humanoid Robots",
+                "Industrial Robots",
+                "Autonomous Vehicles"
+              ],
+              correct: 2,
+              explanation: "Industrial robots are primarily used in manufacturing for tasks like assembly, welding, and quality control."
+            },
+            {
+              question: "What is the first step in a robot's operational cycle?",
+              options: [
+                "Acting",
+                "Processing",
+                "Sensing",
+                "Decision making"
+              ],
+              correct: 2,
+              explanation: "Sensing is the first step in a robot's operational cycle, where it gathers information about its environment through various sensors."
+            }
+          ]
+        }
+      },
+      {
+        id: "4.4",
+        title: "AI in Gaming",
+        duration: "40 min",
+        article: `Artificial Intelligence (AI) is revolutionizing the gaming industry, creating more immersive and challenging experiences for players. From designing intelligent opponents to generating entire game worlds, AI enhances both the development process and gameplay itself.
+  
+  What Is AI in Gaming?
+  AI in gaming involves using algorithms to simulate human-like behavior or automate processes within a game. These algorithms allow non-player characters (NPCs) to:
+  • Make decisions and adapt to players' actions
+  • React dynamically to different scenarios
+  • Provide challenges that keep players engaged
+  
+  Key Roles of AI in Gaming:
+  
+  1. Game Design and Development:
+  • Automating content creation
+  • Generating terrain and environments
+  • Example: Procedural generation in Minecraft
+  
+  2. NPC Behavior:
+  • Creating intelligent characters
+  • Adapting to player strategies
+  • Example: Enemy AI in strategy games
+  
+  3. Difficulty Balancing:
+  • Adjusting challenge levels
+  • Maintaining player engagement
+  • Example: Dynamic difficulty adjustment
+  
+  4. Procedural Content Generation:
+  • Creating unique levels and maps
+  • Ensuring replayability
+  • Example: Randomly generated dungeons
+  
+  How AI Works in Gaming:
+  
+  1. Finite State Machines (FSM):
+  • Basic AI decision-making
+  • Switching between predefined states
+  • Example: NPC behavior patterns
+  
+  2. Pathfinding Algorithms:
+  • Navigation through game worlds
+  • Obstacle avoidance
+  • Example: A* algorithm for movement
+  
+  3. Machine Learning:
+  • Adapting to player behavior
+  • Improving AI strategies
+  • Example: Learning from gameplay data
+  
+  Applications and Features:
+  • Immersive Storytelling
+  • Enhanced Realism
+  • Multiplayer Matchmaking
+  • Cheat Detection
+  • Personalized Experiences
+  
+  Future Developments:
+  • Dynamic Game Worlds
+  • Hyper-Realistic NPCs
+  • Advanced VR Integration
+  • Player-Centric Experiences`,
+        quiz: {
+          questions: [
+            {
+              question: "What is procedural content generation in gaming?",
+              options: [
+                "Manual creation of game levels",
+                "Automatic generation of game content",
+                "Player-created content",
+                "Downloadable content"
+              ],
+              correct: 1,
+              explanation: "Procedural content generation is the automatic creation of game content like levels, maps, or terrain using algorithms."
+            },
+            {
+              question: "Which AI technique is used for NPC navigation?",
+              options: [
+                "Pathfinding algorithms",
+                "Content generation",
+                "Difficulty balancing",
+                "State machines"
+              ],
+              correct: 0,
+              explanation: "Pathfinding algorithms, such as A*, are used to help NPCs navigate through game worlds and avoid obstacles."
+            },
+            {
+              question: "What is the purpose of dynamic difficulty adjustment?",
+              options: [
+                "To make games harder",
+                "To maintain player engagement by adjusting challenge levels",
+                "To create new levels",
+                "To improve graphics"
+              ],
+              correct: 1,
+              explanation: "Dynamic difficulty adjustment helps maintain player engagement by automatically adjusting the game's challenge level based on player performance."
+            }
+          ]
+        }
+      }
+    ],
+  
+    progressTracking: {
+      enabled: true,
+      features: {
+        lessonProgress: true,
+        quizScores: true,
+        interactiveCompletion: true
+      }
+    },
+  
+    gamification: {
+      enabled: true,
+      elements: {
+        badges: [
+          {
+            id: "tech-pioneer",
+            title: "Technology Pioneer",
+            condition: "Complete all lessons in module 4"
+          },
+          {
+            id: "ai-innovator",
+            title: "AI Innovator",
+            condition: "Score 90%+ on all module 4 quizzes"
+          }
+        ],
+        achievements: true,
+        leaderboard: false
+      }
+    }
+  };
+  
+  export default module4;
+```
+
+# src/data/modules/module5.js
+
+```js
+// src/data/modules/module5.js
+
+const module5 = {
+    id: 5,
+    title: "Ethics and Society in AI",
+    description: "Explore ethical considerations, responsible use, and societal impacts of artificial intelligence",
+    prerequisites: [1, 2, 3, 4],
+    icon: "Shield",
+    themeColor: "orange",
+  
+    interactiveFeatures: {
+      ethicsLab: {
+        enabled: true,
+        components: {
+          biasDetector: {
+            type: "interactive",
+            features: ["data-analysis", "bias-identification", "mitigation-strategies"]
+          },
+          privacySimulator: {
+            type: "simulation",
+            features: ["data-protection", "privacy-risks", "safeguards"]
+          },
+          ethicsWorkshop: {
+            type: "scenario-based",
+            elements: ["case-studies", "decision-making", "impact-analysis"]
+          }
+        }
+      }
+    },
+  
+    lessons: [
+      {
+        id: "5.1",
+        title: "Understanding Bias in AI",
+        duration: "40 min",
+        article: `Bias in Artificial Intelligence (AI) systems refers to instances where the decisions or predictions made by AI models are unfairly influenced by skewed or incomplete data. Understanding bias is critical for creating AI systems that are accurate, fair, and inclusive.
+  
+  What Causes Bias in AI?
+  Bias in AI usually stems from problems in the data or the way the model is developed. Common causes include:
+  
+  1. Biased Training Data:
+  • If the dataset reflects societal biases or lacks diversity, the AI will likely replicate those biases
+  • Example: A hiring algorithm trained on data from a predominantly male workforce might favor male candidates
+  
+  2. Incomplete Data:
+  • Missing or underrepresented groups in the dataset can lead to unfair outcomes
+  • Example: Facial recognition systems performing poorly on certain skin tones due to lack of diverse training images
+  
+  3. Human Bias:
+  • Developers' assumptions and decisions can inadvertently introduce bias
+  • Example: Framing a problem in a way that prioritizes certain outcomes over others
+  
+  4. Algorithmic Bias:
+  • The model itself may emphasize certain patterns in ways that amplify bias
+  • Example: Recommender systems favoring popular products over niche options
+  
+  Types of Bias:
+  1. Selection Bias: When data doesn't represent the target population accurately
+  2. Confirmation Bias: When AI prioritizes data that confirms preexisting assumptions
+  3. Implicit Bias: When bias arises from subtle and unintended influences
+  
+  Real-World Examples:
+  • Hiring algorithms favoring certain demographics
+  • Healthcare AI systems underdiagnosing specific groups
+  • Facial recognition accuracy varying by ethnicity
+  • Loan approval systems showing demographic disparities
+  
+  How to Mitigate Bias:
+  1. Diversify Data: Ensure training datasets are representative
+  2. Regular Auditing: Test systems for biased outcomes
+  3. Diverse Teams: Include varied perspectives in development
+  4. Ethical Guidelines: Establish clear standards for fairness`,
+        quiz: {
+          questions: [
+            {
+              question: "What is the main cause of bias in AI systems?",
+              options: [
+                "Hardware limitations",
+                "Problems in training data and model development",
+                "User errors",
+                "Network connectivity"
+              ],
+              correct: 1,
+              explanation: "Bias in AI primarily stems from problems in the training data and how models are developed, including biased or incomplete data and human assumptions in the development process."
+            },
+            {
+              question: "Which is an example of selection bias in AI?",
+              options: [
+                "An AI system running slowly",
+                "Data not representing all population groups equally",
+                "Users misusing the system",
+                "Software bugs"
+              ],
+              correct: 1,
+              explanation: "Selection bias occurs when the data collected for training does not accurately represent all groups in the target population."
+            },
+            {
+              question: "What is one effective way to mitigate bias in AI?",
+              options: [
+                "Using faster computers",
+                "Ensuring diverse and representative training data",
+                "Reducing system costs",
+                "Simplifying the algorithms"
+              ],
+              correct: 1,
+              explanation: "Using diverse and representative training data is one of the most effective ways to mitigate bias in AI systems."
+            }
+          ]
+        }
+      },
+      {
+        id: "5.2",
+        title: "Privacy and Data Protection",
+        duration: "35 min",
+        article: `Privacy is a critical concern in the development and use of Artificial Intelligence (AI). As AI systems rely on large amounts of data to function effectively, protecting individuals' personal information and ensuring ethical data practices are essential for building trust and preventing harm.
+  
+  Why Is Privacy Important in AI?
+  AI systems often process sensitive information such as:
+  • Personal details (name, address, age)
+  • Financial data (credit card transactions)
+  • Health records (medical diagnoses)
+  
+  Without proper safeguards, this data could be misused, leading to:
+  • Identity theft
+  • Discrimination
+  • Loss of trust
+  • Privacy violations
+  
+  Common Privacy Risks in AI:
+  
+  1. Data Breaches:
+  • Unauthorized access to sensitive information
+  • Example: Healthcare AI systems exposing patient records
+  
+  2. Data Misuse:
+  • Using data beyond original intent without consent
+  • Example: Social media analyzing behavior for targeted ads
+  
+  3. Reidentification:
+  • Identifying individuals from anonymized data
+  • Example: Combining datasets to deduce someone's identity
+  
+  Best Practices for Privacy:
+  
+  1. Data Minimization:
+  • Collect only necessary data
+  • Example: Chatbots not storing personal information
+  
+  2. Anonymization:
+  • Remove personally identifiable information
+  • Example: Masking names in health records
+  
+  3. Secure Storage:
+  • Use encryption and access controls
+  • Example: Secure cloud storage with restricted access
+  
+  4. Transparency:
+  • Inform users about data collection and use
+  • Example: Clear privacy policies and consent forms`,
+        quiz: {
+          questions: [
+            {
+              question: "Why is privacy protection important in AI systems?",
+              options: [
+                "To make systems run faster",
+                "To protect sensitive personal information",
+                "To reduce costs",
+                "To improve graphics"
+              ],
+              correct: 1,
+              explanation: "Privacy protection is crucial in AI to prevent misuse of sensitive personal information and maintain user trust."
+            },
+            {
+              question: "What is data minimization?",
+              options: [
+                "Making data smaller in size",
+                "Collecting only necessary data",
+                "Deleting all data",
+                "Compressing data files"
+              ],
+              correct: 1,
+              explanation: "Data minimization means collecting only the data that is necessary for the specific task or purpose."
+            },
+            {
+              question: "Which is an example of good privacy practice in AI?",
+              options: [
+                "Collecting all available data",
+                "Using encryption for sensitive data",
+                "Sharing data freely",
+                "Ignoring user consent"
+              ],
+              correct: 1,
+              explanation: "Using encryption for sensitive data is a good privacy practice as it helps protect information from unauthorized access."
+            }
+          ]
+        }
+      },
+      {
+        id: "5.3",
+        title: "Digital Citizenship and AI",
+        duration: "35 min",
+        article: `Digital citizenship refers to the responsible and ethical use of technology in online interactions and activities. As Artificial Intelligence (AI) increasingly shapes the digital world, understanding digital citizenship is essential for fostering safe, respectful, and productive online behaviors.
+  
+  What Is Digital Citizenship?
+  Digital citizenship involves:
+  • Protecting personal information
+  • Communicating respectfully
+  • Evaluating digital content
+  • Promoting ethical practices
+  
+  Key Principles:
+  
+  1. Respect:
+  • Treating others kindly in digital interactions
+  • Example: Reporting rather than engaging in cyberbullying
+  
+  2. Responsibility:
+  • Using technology ethically and productively
+  • Example: Fact-checking before sharing information
+  
+  3. Safety:
+  • Protecting digital identity and privacy
+  • Example: Using strong passwords and privacy settings
+  
+  4. Critical Thinking:
+  • Understanding how AI influences online content
+  • Example: Recognizing AI-generated content
+  
+  Applications in AI Context:
+  
+  1. Social Media:
+  • Understanding algorithm-driven content
+  • Practicing responsible sharing
+  • Identifying misinformation
+  
+  2. Online Learning:
+  • Using AI tools responsibly
+  • Citing sources appropriately
+  • Maintaining academic integrity
+  
+  3. Digital Privacy:
+  • Managing personal data
+  • Understanding AI data collection
+  • Protecting sensitive information`,
+        quiz: {
+          questions: [
+            {
+              question: "What is a key principle of digital citizenship?",
+              options: [
+                "Sharing all information freely",
+                "Treating others with respect online",
+                "Using as much technology as possible",
+                "Ignoring privacy settings"
+              ],
+              correct: 1,
+              explanation: "Treating others with respect in online interactions is a fundamental principle of digital citizenship."
+            },
+            {
+              question: "How does AI influence digital citizenship?",
+              options: [
+                "It has no influence",
+                "It shapes online content and interactions",
+                "It only affects games",
+                "It only impacts businesses"
+              ],
+              correct: 1,
+              explanation: "AI significantly influences digital citizenship by shaping online content, recommendations, and interactions."
+            },
+            {
+              question: "What is an important digital safety practice?",
+              options: [
+                "Sharing passwords",
+                "Using strong passwords and privacy settings",
+                "Ignoring security updates",
+                "Posting personal information publicly"
+              ],
+              correct: 1,
+              explanation: "Using strong passwords and privacy settings is crucial for maintaining digital safety."
+            }
+          ]
+        }
+      },
+      {
+        id: "5.4",
+        title: "Career Opportunities in AI",
+        duration: "45 min",
+        article: `Artificial Intelligence (AI) is one of the most rapidly growing fields, offering diverse career opportunities across industries. From developing cutting-edge algorithms to applying AI in healthcare or entertainment, AI careers are dynamic, innovative, and impactful.
+  
+  Key Career Paths:
+  
+  1. Machine Learning Engineer:
+  • Develop and optimize ML models
+  • Skills: Python, TensorFlow, mathematics
+  • Applications: Recommendation systems, fraud detection
+  
+  2. Data Scientist:
+  • Analyze data and create predictive models
+  • Skills: Statistics, programming, data visualization
+  • Applications: Pattern recognition, decision support
+  
+  3. AI Research Scientist:
+  • Advance AI technologies through research
+  • Skills: Deep learning, academic research
+  • Applications: New algorithms, theoretical advances
+  
+  4. Computer Vision Engineer:
+  • Work on image recognition systems
+  • Skills: CNN architectures, image processing
+  • Applications: Medical imaging, autonomous vehicles
+  
+  Industries Using AI:
+  
+  1. Healthcare:
+  • Disease diagnosis
+  • Treatment planning
+  • Drug discovery
+  
+  2. Finance:
+  • Fraud detection
+  • Risk assessment
+  • Algorithmic trading
+  
+  3. Education:
+  • Personalized learning
+  • Assessment systems
+  • Educational tools
+  
+  4. Entertainment:
+  • Game AI
+  • Content recommendation
+  • Virtual reality
+  
+  Preparing for an AI Career:
+  
+  1. Education:
+  • Degrees in computer science, mathematics
+  • Specialized AI/ML certifications
+  • Continuous learning
+  
+  2. Skills Development:
+  • Programming languages
+  • Machine learning frameworks
+  • Problem-solving abilities
+  
+  3. Practical Experience:
+  • Personal projects
+  • Internships
+  • Open source contributions`,
+        quiz: {
+          questions: [
+            {
+              question: "What skills are essential for a machine learning engineer?",
+              options: [
+                "Artistic ability",
+                "Programming and mathematics",
+                "Sales experience",
+                "Physical fitness"
+              ],
+              correct: 1,
+              explanation: "Machine learning engineers need strong programming skills and mathematical understanding to develop and optimize AI models."
+            },
+            {
+              question: "Which industry is NOT a major employer of AI professionals?",
+              options: [
+                "Healthcare",
+                "Finance",
+                "Agriculture",
+                "Professional sports"
+              ],
+              correct: 3,
+              explanation: "While AI is used in many industries, professional sports is not currently a major employer of AI professionals compared to healthcare, finance, or technology sectors."
+            },
+            {
+              question: "What is the best way to prepare for an AI career?",
+              options: [
+                "Wait for job opportunities",
+                "Study and gain practical experience",
+                "Focus only on theory",
+                "Avoid technology"
+              ],
+              correct: 1,
+              explanation: "The best preparation for an AI career involves both studying relevant subjects and gaining practical experience through projects and internships."
+            }
+          ]
+        }
+      }
+    ],
+  
+    progressTracking: {
+      enabled: true,
+      features: {
+        lessonProgress: true,
+        quizScores: true,
+        interactiveCompletion: true
+      }
+    },
+  
+    gamification: {
+      enabled: true,
+      elements: {
+        badges: [
+          {
+            id: "ethics-champion",
+            title: "Ethics Champion",
+            condition: "Complete all lessons in module 5"
+          },
+          {
+            id: "privacy-expert",
+            title: "Privacy Expert",
+            condition: "Score 90%+ on privacy quiz"
+          }
+        ],
+        achievements: true,
+        leaderboard: false
+      }
+    }
+  };
+  
+  export default module5;
+```
+
+# src/data/modules/module6.js
+
+```js
+const module6 = {
+    id: 6,
+    title: "Future of AI and Advanced Applications",
+    description: "Discover cutting-edge AI developments and future possibilities",
+    prerequisites: [1, 2, 3, 4, 5],
+    icon: "Zap",
+    themeColor: "purple",
+    
+    lessons: [
+      {
+        id: "6.1",
+        title: "Emerging AI Technologies",
+        duration: "45 min",
+        article: `The future of AI holds incredible potential for transforming various aspects of society. Understanding emerging technologies and trends is crucial for staying ahead in the field.
+  
+  Key Areas:
+  • Quantum AI
+  • Neuromorphic Computing
+  • Edge AI
+  • Explainable AI
+  
+  Emerging Applications:
+  1. Environmental Protection
+  2. Space Exploration
+  3. Personalized Medicine
+  4. Advanced Robotics
+  
+  Future Challenges:
+  • Computational Limits
+  • Energy Efficiency
+  • Ethical Considerations
+  • Human-AI Collaboration`,
+        quiz: {
+          questions: [
+            {
+              question: "What is Edge AI?",
+              options: [
+                "AI processing on local devices",
+                "AI for graphics processing",
+                "AI in cloud computing",
+                "AI for social media"
+              ],
+              correct: 0,
+              explanation: "Edge AI refers to AI processing that occurs on local devices (at the 'edge' of the network) rather than in the cloud, enabling faster responses and better privacy."
+            }
+          ]
+        }
+      }
+    ]
+  };
+
+  export default module6;
 ```
 
 # src/index.css

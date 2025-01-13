@@ -1,5 +1,3 @@
-// src/components/course/LessonView.jsx
-
 import React, { useState } from 'react';
 import { ChevronLeft, FileText, HelpCircle, CheckCircle, ArrowRight, Play, Pause } from 'lucide-react';
 import { QuizSection } from './QuizSection';
@@ -7,8 +5,9 @@ import PatternGame from '../interactive/PatternGame';
 import AISimulator from '../interactive/AISimulator';
 import DecisionTreeBuilder from '../interactive/DecisionTreeBuilder';
 import LearningComparison from '../interactive/LearningComparison';
+import ArticleView from './ArticleView';
 
-export function LessonView({
+function LessonView({
   lesson,
   progress,
   setProgress,
@@ -164,11 +163,7 @@ export function LessonView({
                 </div>
               )}
 
-              <div className="prose max-w-none">
-                {lesson.article.split('\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4">{paragraph}</p>
-                ))}
-              </div>
+              <ArticleView article={lesson.article} />
               
               {!progress.completedLessons.includes(lesson.id) && (
                 <div className="mt-8 flex justify-center">
