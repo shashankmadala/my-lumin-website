@@ -66,8 +66,8 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-4 gap-8 stagger-children">
             {[
-              ['10,000+', 'Students'],
-              ['50+', 'Courses'],
+              ['5,000+', 'Students'],
+              ['20+', 'Modules'],
               ['95%', 'Success Rate'],
               ['4.9/5', 'Rating']
             ].map(([number, label], index) => (
