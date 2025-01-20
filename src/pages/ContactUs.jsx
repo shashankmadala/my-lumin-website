@@ -42,16 +42,15 @@ const ContactUs = () => {
       icon: <MessageCircle className="w-6 h-6" />,
       title: "Live Chat Support",
       description: "Get instant help with your questions",
-      action: "Chat Now",
-      link: "#chat",
+      action: "609-200-0017",
       color: "blue"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Support",
       description: "We'll respond within 24 hours",
-      action: "support@luminai.edu",
-      link: "mailto:support@luminai.edu",
+      action: "luminai321@gmail.com",
+      link: "mailto:luminai321@gmail.com",
       color: "purple"
     },
     {
@@ -99,8 +98,8 @@ const ContactUs = () => {
       answer: "Students need a computer (Windows, Mac, or Chromebook) with a stable internet connection. All other software and tools will be provided through our online learning platform."
     },
     {
-      question: "How long are the programs?",
-      answer: "Our standard program runs for 8 weeks with 2 sessions per week. Each session is 90 minutes long. We also offer intensive summer programs and shorter workshop series."
+      question: "How long are the summer programs?",
+      answer: "Our standard program runs for 2 weeks with 4 sessions per week. Each session is 60-90 minutes long."
     },
     {
       question: "Is there any homework or outside practice required?",
@@ -170,7 +169,7 @@ const ContactUs = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600">Find quick answers to common questions about our AI education programs</p>
+            <p className="text-gray-600">Find quick answers to common questions about our organization and what we offer!</p>
           </div>
           
           <div className="space-y-4">

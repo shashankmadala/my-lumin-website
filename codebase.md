@@ -216,6 +216,8 @@ import SummerProgram from './pages/SummerProgram.jsx';
 import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
+import Teams from './pages/Teams.jsx';
+import Founders from './pages/Founders.jsx';
 
 function App() {
   return (
@@ -227,6 +229,8 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
             <Route path='/contact-us' element={<ContactUs />} />
+            <Route path='/Teams' element={<Teams />} />
+            <Route path='/Founders' element={<Founders />} />
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
@@ -877,13 +881,9 @@ export default FinalExam;
 
 ```jsx
 import React, { useState } from 'react';
-import { ChevronLeft, FileText, HelpCircle, CheckCircle, ArrowRight, Play, Pause } from 'lucide-react';
-import { QuizSection } from './QuizSection';
-import PatternGame from '../interactive/PatternGame';
-import AISimulator from '../interactive/AISimulator';
-import DecisionTreeBuilder from '../interactive/DecisionTreeBuilder';
-import LearningComparison from '../interactive/LearningComparison';
+import { FileText, HelpCircle } from 'lucide-react';
 import ArticleView from './ArticleView';
+import QuizSection from './QuizSection';
 
 function LessonView({
   lesson,
@@ -893,95 +893,10 @@ function LessonView({
   activeTab,
   setActiveTab
 }) {
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [showInteractive, setShowInteractive] = useState(true);
-
-  // Function to render the appropriate interactive component based on lesson ID
-  const renderInteractiveComponent = () => {
-    switch (lesson.id) {
-      case "1.1":
-        return (
-          <AISimulator
-            title="AI Decision Making Simulator"
-            description="See how AI processes and makes decisions"
-            mode="basic"
-          />
-        );
-      case "1.2":
-        return (
-          <AISimulator
-            title="AI in Daily Life"
-            description="Explore AI applications in your daily routine"
-            mode="everyday"
-          />
-        );
-      case "1.3":
-        return (
-          <PatternGame
-            difficulty="beginner"
-            patterns={[
-              { sequence: [2, 4, 6, 8], answer: 10, type: "numeric" },
-              { sequence: ["🔴", "🔵", "🔴", "🔵"], answer: "🔴", type: "visual" }
-            ]}
-          />
-        );
-      case "1.4":
-        return (
-          <DecisionTreeBuilder
-            scenario="weather-activity"
-            difficulty="beginner"
-          />
-        );
-      case "2.1":
-        return (
-          <AISimulator
-            title="Training Data Lab"
-            description="Build and test your own training dataset"
-            mode="training"
-          />
-        );
-      case "2.2":
-        return (
-          <PatternGame
-            difficulty="intermediate"
-            patterns={[
-              { sequence: [1, 3, 6, 10], answer: 15, type: "numeric" },
-              { sequence: ["🟦", "🟨", "🟦", "🟨"], answer: "🟦", type: "visual" }
-            ]}
-          />
-        );
-      case "2.3":
-        return (
-          <DecisionTreeBuilder
-            scenario="pet-classifier"
-            difficulty="intermediate"
-          />
-        );
-      case "2.4":
-        return (
-          <LearningComparison
-            scenarios={[
-              { type: "supervised", task: "image-classification" },
-              { type: "unsupervised", task: "customer-grouping" }
-            ]}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="max-w-4xl mx-auto">
       {/* Navigation */}
-      <div className="flex items-center justify-between mb-8">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-        >
-          <ChevronLeft className="w-5 h-5" />
-          Back to modules
-        </button>
+      <div className="flex justify-between mb-8">
         <div className="flex gap-2">
           <button
             onClick={() => setActiveTab('article')}
@@ -1013,56 +928,18 @@ function LessonView({
         <div className="p-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold">{lesson.title}</h1>
-            {renderInteractiveComponent() && (
-              <button
-                onClick={() => setShowInteractive(!showInteractive)}
-                className="flex items-center gap-2 px-4 py-2 text-indigo-600 hover:text-indigo-700"
-              >
-                {showInteractive ? (
-                  <>
-                    <Pause className="w-4 h-4" />
-                    Hide Interactive
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-4 h-4" />
-                    Show Interactive
-                  </>
-                )}
-              </button>
-            )}
           </div>
           
           {activeTab === 'article' ? (
-            <>
-              {showInteractive && renderInteractiveComponent() && (
-                <div className="mb-8 border rounded-xl p-6 bg-gray-50">
-                  {renderInteractiveComponent()}
-                </div>
-              )}
-
-              <ArticleView article={lesson.article} />
-              
-              {!progress.completedLessons.includes(lesson.id) && (
-                <div className="mt-8 flex justify-center">
-                  <button
-                    onClick={() => setActiveTab('quiz')}
-                    className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-                  >
-                    Take Quiz
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </>
+            <ArticleView article={lesson.article} />
           ) : (
             <QuizSection
               lesson={lesson}
               progress={progress}
               setProgress={setProgress}
               onComplete={() => {
-                setQuizCompleted(true);
-                setTimeout(() => onBack(), 2000);
+                setActiveTab('article');
+                onBack();
               }}
             />
           )}
@@ -1079,7 +956,7 @@ export default LessonView;
 
 ```jsx
 import React from 'react';
-import { ChevronDown, CheckCircle, Brain, Target, Lock, PlayCircle } from 'lucide-react';
+import { ChevronDown, CheckCircle, Brain, PlayCircle } from 'lucide-react';
 
 const ModuleList = ({ 
   modules, 
@@ -1088,15 +965,6 @@ const ModuleList = ({
   setActiveModule, 
   setActiveLesson 
 }) => {
-  const isModuleAvailable = (moduleId) => {
-    if (moduleId === 1) return true;
-    const previousModule = moduleId - 1;
-    const previousModuleLessons = modules
-      .find(m => m.id === previousModule)
-      ?.lessons.map(l => l.id) || [];
-    return previousModuleLessons.every(id => progress.completedLessons.includes(id));
-  };
-
   return (
     <div className="space-y-8">
       {/* Course Overview */}
@@ -1115,21 +983,15 @@ const ModuleList = ({
             progress.completedLessons.includes(id)
           ).length;
           const percentComplete = (completedCount / moduleLessons.length) * 100;
-          const isAvailable = isModuleAvailable(module.id);
 
           return (
             <div 
               key={module.id}
-              className={`bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${
-                !isAvailable ? 'opacity-75' : 'hover:shadow-md'
-              }`}
+              className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md"
             >
               <button
-                onClick={() => isAvailable && setActiveModule(
-                  activeModule === module.id ? null : module.id
-                )}
+                onClick={() => setActiveModule(activeModule === module.id ? null : module.id)}
                 className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
-                disabled={!isAvailable}
               >
                 <div className="flex items-center gap-4">
                   <div className="relative">
@@ -1147,9 +1009,6 @@ const ModuleList = ({
                       <h3 className="text-lg font-semibold">
                         Module {module.id}: {module.title}
                       </h3>
-                      {!isAvailable && (
-                        <Lock className="w-4 h-4 text-gray-400" />
-                      )}
                     </div>
                     <div className="flex items-center gap-4">
                       <p className="text-gray-600">{module.description}</p>
@@ -1170,29 +1029,20 @@ const ModuleList = ({
                 activeModule === module.id ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
               }`}>
                 <div className="px-6 pb-4 space-y-2">
-                  {module.lessons.map((lesson, index) => {
+                  {module.lessons.map((lesson) => {
                     const isCompleted = progress.completedLessons.includes(lesson.id);
-                    const previousLessonId = index > 0 ? module.lessons[index - 1].id : null;
-                    const isAvailable = index === 0 || progress.completedLessons.includes(previousLessonId);
 
                     return (
                       <button
                         key={lesson.id}
-                        onClick={() => isAvailable && setActiveLesson(lesson)}
-                        disabled={!isAvailable}
-                        className={`w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 ${
-                          isAvailable 
-                            ? 'hover:bg-gray-50 cursor-pointer' 
-                            : 'opacity-50 cursor-not-allowed'
-                        }`}
+                        onClick={() => setActiveLesson(lesson)}
+                        className="w-full flex items-center gap-4 p-4 rounded-lg transition-all duration-300 hover:bg-gray-50"
                       >
                         <div className="w-5 h-5">
                           {isCompleted ? (
                             <CheckCircle className="w-5 h-5 text-green-500" />
-                          ) : isAvailable ? (
-                            <PlayCircle className="w-5 h-5 text-blue-500" />
                           ) : (
-                            <Lock className="w-5 h-5 text-gray-400" />
+                            <PlayCircle className="w-5 h-5 text-blue-500" />
                           )}
                         </div>
                         <div className="flex-1 text-left">
@@ -1327,12 +1177,14 @@ export default ProgressTracker;
 
 ```jsx
 import React, { useState } from 'react';
-import { Check, X, AlertCircle } from 'lucide-react';
+import { Check, X, AlertCircle, Trophy, ArrowRight, RefreshCcw } from 'lucide-react';
 
 export function QuizSection({ lesson, progress, setProgress, onComplete }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showExplanation, setShowExplanation] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [quizScore, setQuizScore] = useState(0);
 
   const handleAnswer = (questionIndex, answerIndex) => {
     if (answers[questionIndex] !== undefined) return;
@@ -1349,18 +1201,51 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
         ([qIndex, answer]) => lesson.quiz.questions[qIndex].correct === answer
       ).length;
       
-      const score = (correctAnswers / lesson.quiz.questions.length) * 100;
+      const score = Math.round((correctAnswers / lesson.quiz.questions.length) * 100);
+      setQuizScore(score);
       
-      if (score >= 70) {
-        setProgress(prev => ({
-          ...prev,
-          completedLessons: [...prev.completedLessons, lesson.id],
-          quizScores: { ...prev.quizScores, [lesson.id]: score }
-        }));
-        setTimeout(onComplete, 2000);
-      }
+      setProgress(prev => ({
+        ...prev,
+        completedLessons: [...prev.completedLessons, lesson.id],
+        quizScores: { ...prev.quizScores, [lesson.id]: score }
+      }));
+      setShowResults(true);
     }
   };
+
+  if (showResults) {
+    return (
+      <div className="text-center space-y-6">
+        <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+          <Trophy className="w-10 h-10 text-blue-600" />
+        </div>
+        <h2 className="text-2xl font-bold">Quiz Complete!</h2>
+        <p className="text-xl">Your Score: {quizScore}%</p>
+        
+        <div className="flex justify-center gap-4 mt-8">
+          <button
+            onClick={() => {
+              setAnswers({});
+              setCurrentQuestion(0);
+              setShowResults(false);
+              setShowExplanation(false);
+            }}
+            className="px-6 py-3 bg-white border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors flex items-center gap-2"
+          >
+            <RefreshCcw className="w-5 h-5" />
+            Retake Quiz
+          </button>
+          <button
+            onClick={onComplete}
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+          >
+            Next Lesson
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const currentQ = lesson.quiz.questions[currentQuestion];
 
@@ -1436,7 +1321,7 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
             setCurrentQuestion(prev => prev + 1);
             setShowExplanation(false);
           }}
-          className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+          className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Next Question
         </button>
@@ -2389,11 +2274,20 @@ export default PatternGame;
 # src/components/Navigation.jsx
 
 ```jsx
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
 
 const links = [
   { to: '/', text: 'Home', id: 'home' },
+  {
+    text: 'About',
+    id: 'about',
+    dropdown: [
+      { to: '/founders', text: 'Founders', id: 'founders' },
+      { to: '/team', text: 'Our Team', id: 'team' }
+    ]
+  },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
   { to: '/learn', text: 'Learn', id: 'learn' },
   { to: '/contact-us', text: 'Contact', id: 'contact' }
@@ -2401,11 +2295,31 @@ const links = [
 
 export default function Navigation() {
   const location = useLocation();
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpenDropdown(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleDropdownClick = (linkId) => {
+    setOpenDropdown(openDropdown === linkId ? null : linkId);
+  };
 
   return (
     <nav className="fixed w-full z-50 bg-white/60 backdrop-blur-xl border-b border-gray-100/50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center h-16">
+          {/* Logo */}
           <div className="flex items-center gap-2 group">
             <Link to="/" className="flex items-center gap-2">
               <div className="w-8 h-8 relative overflow-hidden">
@@ -2416,16 +2330,51 @@ export default function Navigation() {
               </span>
             </Link>
           </div>
+
+          {/* Navigation Links */}
           <div className="flex ml-8 gap-6">
-            {links.map(({ to, text, id }) => (
-              <Link 
-                key={id}
-                to={to}
-                className="relative text-gray-600 hover:text-blue-600 transition-colors duration-300 group"
+            {links.map((link) => (
+              <div
+                key={link.id}
+                className="relative flex items-center h-16"
+                ref={link.dropdown ? dropdownRef : null}
               >
-                {text}
-                <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"/>
-              </Link>
+                {link.dropdown ? (
+                  <div className="h-full flex items-center">
+                    <button 
+                      onClick={() => handleDropdownClick(link.id)}
+                      className="flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors duration-300 px-2"
+                    >
+                      {link.text}
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                        openDropdown === link.id ? 'rotate-180' : ''
+                      }`} />
+                    </button>
+                    {openDropdown === link.id && (
+                      <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.id}
+                            to={item.to}
+                            className="block px-4 py-2 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300"
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {item.text}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link 
+                    to={link.to}
+                    className="flex items-center h-full px-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 relative group"
+                  >
+                    {link.text}
+                    <span className="absolute inset-x-0 -bottom-[1px] h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"/>
+                  </Link>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -5180,16 +5129,15 @@ const ContactUs = () => {
       icon: <MessageCircle className="w-6 h-6" />,
       title: "Live Chat Support",
       description: "Get instant help with your questions",
-      action: "Chat Now",
-      link: "#chat",
+      action: "609-200-0017",
       color: "blue"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Support",
       description: "We'll respond within 24 hours",
-      action: "support@luminai.edu",
-      link: "mailto:support@luminai.edu",
+      action: "luminai321@gmail.com",
+      link: "mailto:luminai321@gmail.com",
       color: "purple"
     },
     {
@@ -5237,8 +5185,8 @@ const ContactUs = () => {
       answer: "Students need a computer (Windows, Mac, or Chromebook) with a stable internet connection. All other software and tools will be provided through our online learning platform."
     },
     {
-      question: "How long are the programs?",
-      answer: "Our standard program runs for 8 weeks with 2 sessions per week. Each session is 90 minutes long. We also offer intensive summer programs and shorter workshop series."
+      question: "How long are the summer programs?",
+      answer: "Our standard program runs for 2 weeks with 4 sessions per week. Each session is 60-90 minutes long."
     },
     {
       question: "Is there any homework or outside practice required?",
@@ -5308,7 +5256,7 @@ const ContactUs = () => {
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600">Find quick answers to common questions about our AI education programs</p>
+            <p className="text-gray-600">Find quick answers to common questions about our organization and what we offer!</p>
           </div>
           
           <div className="space-y-4">
@@ -5402,6 +5350,114 @@ const ContactUs = () => {
 export default ContactUs;
 ```
 
+# src/pages/Founders.jsx
+
+```jsx
+import React from 'react';
+import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
+
+const founders = [
+  {
+    name: "Shashank Madala",
+    role: "Founder & CEO",
+    bio: "Passionate about making AI education accessible to everyone. Started Lumin AI to transform how students learn about artificial intelligence.",
+    image: "/api/placeholder/400/400", // Replace with actual image path
+    links: {
+      linkedin: "https://linkedin.com/in/your-profile",
+      github: "https://github.com/your-profile",
+      email: "mailto:your-email@luminai.edu"
+    }
+  },
+  {
+    name: "Ayur Munipalli",
+    role: "Co-Founder & CTO",
+    bio: "Dedicated to building innovative educational technology solutions. Leads the technical vision and development of Lumin AI's learning platform.",
+    image: "/api/placeholder/400/400", // Replace with actual image path
+    links: {
+      linkedin: "https://linkedin.com/in/your-profile",
+      github: "https://github.com/your-profile",
+      email: "mailto:your-email@luminai.edu"
+    }
+  }
+];
+
+export default function Founders() {
+  return (
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
+      </div>
+
+      <div className="pt-32 pb-24 relative">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold mb-4">Our Founders</h1>
+            <p className="text-xl text-gray-600">
+              Meet the team behind Lumin AI's mission to revolutionize AI education
+            </p>
+          </div>
+
+          {/* Founders Grid */}
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {founders.map((founder) => (
+              <div 
+                key={founder.name}
+                className="relative group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl transform rotate-6 group-hover:rotate-12 transition-transform duration-300"/>
+                <div className="relative bg-white rounded-2xl p-8 transform hover:-rotate-3 transition-transform duration-300 shadow-lg">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-48 h-48 rounded-full overflow-hidden mb-6 border-4 border-blue-100 group-hover:scale-105 transition-transform duration-300">
+                      <img 
+                        src={founder.image} 
+                        alt={founder.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h2 className="text-2xl font-bold mb-2">{founder.name}</h2>
+                    <p className="text-blue-600 font-medium mb-4">{founder.role}</p>
+                    <p className="text-gray-600 mb-6">{founder.bio}</p>
+                    
+                    {/* Social Links */}
+                    <div className="flex gap-4">
+                      <a 
+                        href={founder.links.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                      >
+                        <LinkedinIcon className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                      </a>
+                      <a 
+                        href={founder.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                      >
+                        <GithubIcon className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                      </a>
+                      <a 
+                        href={founder.links.email}
+                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                      >
+                        <Mail className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
 # src/pages/Home.jsx
 
 ```jsx
@@ -5473,8 +5529,8 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-4 gap-8 stagger-children">
             {[
-              ['10,000+', 'Students'],
-              ['50+', 'Courses'],
+              ['5,000+', 'Students'],
+              ['20+', 'Modules'],
               ['95%', 'Success Rate'],
               ['4.9/5', 'Rating']
             ].map(([number, label], index) => (
@@ -5661,7 +5717,7 @@ export default function HomePage() {
 
 ```jsx
 import React, { useState, useEffect } from 'react';
-import { Brain, Book, Trophy, ArrowLeft, Award, Lock } from 'lucide-react';
+import { Brain, Book, Trophy, ArrowLeft, Award } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import ModuleList from '../components/course/ModuleList';
 import LessonView from '../components/course/LessonView';
@@ -5669,6 +5725,7 @@ import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
 import courseData from '../data/courseData';
+import '../styles/learn.css';
 
 export default function Learn() {
   const [activeModule, setActiveModule] = useState(null);
@@ -5697,7 +5754,6 @@ export default function Learn() {
     localStorage.setItem('courseProgress', JSON.stringify(progress));
   }, [progress]);
 
-  // Update streak
   useEffect(() => {
     const today = new Date().toDateString();
     if (progress.lastAccessed !== today) {
@@ -5723,16 +5779,8 @@ export default function Learn() {
     return totalLessons > 0 ? (progress.completedLessons.length / totalLessons) * 100 : 0;
   };
 
-  const hasCompletedAllLessons = () => {
-    const totalLessons = calculateTotalLessons();
-    return progress.completedLessons.length === totalLessons;
-  };
-
   const handleStartExam = () => {
-    if (!hasCompletedAllLessons()) {
-      alert('Complete all lessons before taking the final exam.');
-      return;
-    }
+    // Temporarily removed completion check for testing
     setShowFinalExam(true);
   };
 
@@ -5755,10 +5803,10 @@ export default function Learn() {
       
       {/* Progress Bar */}
       <div className="fixed top-16 left-0 right-0 h-1 bg-gray-100 z-50">
-      <div 
-  className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 progress-bar"
-  style={{ width: `${calculateProgress()}%` }}
-/>
+        <div 
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 progress-bar"
+          style={{ width: `${calculateProgress()}%` }}
+        />
       </div>
 
       <main className="pt-20 pb-16">
@@ -5815,16 +5863,12 @@ export default function Learn() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                       <button 
                         onClick={handleStartExam}
-                        disabled={!hasCompletedAllLessons()}
-                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
-                          !hasCompletedAllLessons() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
-                        }`}
+                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between"
                       >
                         <div className="flex items-center gap-3">
                           <Trophy className="w-5 h-5 text-yellow-500" />
                           <span>Final Exam</span>
                         </div>
-                        {!hasCompletedAllLessons() && <Lock className="w-4 h-4 text-gray-400" />}
                         {progress.examAttempts > 0 && (
                           <span className="text-sm text-gray-500">
                             Best: {progress.finalExamScore}%
@@ -5834,24 +5878,14 @@ export default function Learn() {
                       
                       <button 
                         onClick={() => setShowCertificate(true)}
-                        disabled={!progress.finalExamScore || progress.finalExamScore < 60}
-                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
-                          (!progress.finalExamScore || progress.finalExamScore < 60) 
-                            ? 'opacity-50 cursor-not-allowed' 
-                            : 'hover:bg-gray-50'
-                        }`}
+                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
                       >
-                        <div className="flex items-center gap-3">
-                          <Award className="w-5 h-5 text-green-500" />
-                          <span>Certificate</span>
-                        </div>
-                        {(!progress.finalExamScore || progress.finalExamScore < 60) && (
-                          <Lock className="w-4 h-4 text-gray-400" />
-                        )}
+                        <Award className="w-5 h-5 text-green-500" />
+                        <span>Certificate</span>
                       </button>
                       
                       <button 
-                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3 hover:bg-gray-50"
+                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
                         onClick={() => setActiveModule(courseData.modules[0].id)}
                       >
                         <Brain className="w-5 h-5 text-blue-500" />
@@ -5907,13 +5941,6 @@ export default function Learn() {
           )}
         </div>
       </main>
-
-      <style jsx>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 200% 50%; }
-        }
-      `}</style>
     </div>
   );
 }
@@ -6221,6 +6248,175 @@ export default function SummerProgram() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+```
+
+# src/pages/Teams.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { MapPin, Users, Building, Sparkles } from 'lucide-react';
+
+const chapters = [
+  {
+    name: "Bay Area Chapter",
+    location: "San Francisco, CA",
+    description: "Leading innovation in AI education across Silicon Valley",
+    members: [
+      { name: "Alex Chen", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+      { name: "Sarah Johnson", role: "Education Director", image: "/api/placeholder/64/64" },
+      { name: "James Wilson", role: "Technical Lead", image: "/api/placeholder/64/64" },
+      { name: "Maya Patel", role: "Outreach Coordinator", image: "/api/placeholder/64/64" }
+    ]
+  },
+  {
+    name: "New York Chapter",
+    location: "New York, NY",
+    description: "Bringing AI education to the heart of the East Coast",
+    members: [
+      { name: "David Kim", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+      { name: "Emily Rodriguez", role: "Education Director", image: "/api/placeholder/64/64" },
+      { name: "Michael Chang", role: "Technical Lead", image: "/api/placeholder/64/64" },
+      { name: "Sofia Martinez", role: "Community Manager", image: "/api/placeholder/64/64" }
+    ]
+  },
+  {
+    name: "Texas Chapter",
+    location: "Austin, TX",
+    description: "Fostering AI innovation in the Lone Star State",
+    members: [
+      { name: "Robert Turner", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+      { name: "Lisa Wang", role: "Education Director", image: "/api/placeholder/64/64" },
+      { name: "Chris Anderson", role: "Technical Lead", image: "/api/placeholder/64/64" },
+      { name: "Emma Davis", role: "Events Coordinator", image: "/api/placeholder/64/64" }
+    ]
+  }
+];
+
+export default function Team() {
+  const [activeChapter, setActiveChapter] = useState(chapters[0]);
+  const [hoveredMember, setHoveredMember] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
+        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
+      </div>
+
+      <div className="pt-32 pb-24 relative">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-bold mb-4">Our Team</h1>
+            <p className="text-xl text-gray-600">
+              Meet the dedicated individuals bringing AI education to your community
+            </p>
+          </div>
+
+          {/* Chapter Stats */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <Building className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-2">{chapters.length}</h3>
+              <p className="text-gray-600">Active Chapters</p>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-purple-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-2">
+                {chapters.reduce((acc, chapter) => acc + chapter.members.length, 0)}
+              </h3>
+              <p className="text-gray-600">Team Members</p>
+            </div>
+            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                <Sparkles className="w-6 h-6 text-pink-600" />
+              </div>
+              <h3 className="text-2xl font-bold mb-2">1000+</h3>
+              <p className="text-gray-600">Students Impacted</p>
+            </div>
+          </div>
+
+          {/* Chapter Selection */}
+          <div className="flex justify-center mb-16">
+            <div className="inline-flex rounded-lg bg-white shadow-sm p-2">
+              {chapters.map((chapter) => (
+                <button
+                  key={chapter.name}
+                  onClick={() => setActiveChapter(chapter)}
+                  className={`px-6 py-3 rounded-lg transition-all duration-300 ${
+                    activeChapter.name === chapter.name
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-600 hover:text-blue-600'
+                  }`}
+                >
+                  {chapter.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Chapter Display */}
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+              {/* Chapter Header */}
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white">
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="w-5 h-5" />
+                  <span>{activeChapter.location}</span>
+                </div>
+                <h2 className="text-3xl font-bold mb-2">{activeChapter.name}</h2>
+                <p className="text-blue-100">{activeChapter.description}</p>
+              </div>
+
+              {/* Team Members */}
+              <div className="p-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {activeChapter.members.map((member, index) => (
+                    <div 
+                      key={member.name}
+                      className="group bg-gray-50 rounded-xl p-6 hover:bg-blue-50 transition-all duration-300 hover:shadow-md"
+                      onMouseEnter={() => setHoveredMember(member.name)}
+                      onMouseLeave={() => setHoveredMember(null)}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+                          <img 
+                            src={member.image} 
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold group-hover:text-blue-600 transition-colors duration-300">
+                            {member.name}
+                          </h3>
+                          <p className="text-gray-600">{member.role}</p>
+                        </div>
+                      </div>
+                      <div className={`mt-4 overflow-hidden transition-all duration-300 ${
+                        hoveredMember === member.name ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
+                      }`}>
+                        <p className="text-sm text-gray-600">
+                          Passionate about bringing AI education to students and building the next generation of innovators.
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
