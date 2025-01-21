@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Download, Share2, ChevronLeft } from 'lucide-react';
+import { Download, ChevronLeft } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -94,8 +94,7 @@ const Certificate = ({ progress, onBack }) => {
             <div className="text-3xl font-bold text-blue-600 mb-8">{studentName}</div>
 
             <div className="text-lg mb-8">
-              has successfully completed the AI 101 Course with a score of{' '}
-              <span className="font-bold">{Math.round(progress.finalAssessmentScore)}%</span>
+              has successfully completed the AI 101 Course
             </div>
 
             <div className="text-gray-600 mb-12">{currentDate}</div>
@@ -103,11 +102,13 @@ const Certificate = ({ progress, onBack }) => {
             <div className="flex justify-center gap-16">
               <div className="text-center">
                 <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
-                <div className="text-gray-600">Course Instructor</div>
+                <div className="text-gray-600">Shashank Madala</div>
+                <div className="text-sm text-gray-500">Co-Founder & Co-CEO</div>
               </div>
               <div className="text-center">
                 <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
-                <div className="text-gray-600">Program Director</div>
+                <div className="text-gray-600">Ayur Munipalli</div>
+                <div className="text-sm text-gray-500">Co-Founder & Co-CEO</div>
               </div>
             </div>
           </div>

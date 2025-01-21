@@ -140,6 +140,14 @@ export default {
 }
 ```
 
+# public/images/ayur.png
+
+This is a binary file of the type: Image
+
+# public/images/shashank1.png
+
+This is a binary file of the type: Image
+
 # public/vite.svg
 
 This is a file of the type: SVG Image
@@ -216,7 +224,7 @@ import SummerProgram from './pages/SummerProgram.jsx';
 import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
-import Teams from './pages/Teams.jsx';
+import Team from './pages/Team.jsx';
 import Founders from './pages/Founders.jsx';
 
 function App() {
@@ -229,8 +237,8 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
             <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='/Teams' element={<Teams />} />
-            <Route path='/Founders' element={<Founders />} />
+            <Route path='/team' element={<Team />} />
+            <Route path='/founders' element={<Founders />} />
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
@@ -250,8 +258,9 @@ This is a file of the type: SVG Image
 
 ```jsx
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-const ArticleView = ({ article }) => {
+const ArticleView = ({ article, onContinueToQuiz }) => {
   const processContent = (text) => {
     // Split content by bullet points while preserving structure
     const sections = text.split('\n').reduce((acc, line) => {
@@ -352,11 +361,12 @@ const ArticleView = ({ article }) => {
       </article>
       
       <div className="mt-8 flex justify-end">
-        <button className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+        <button 
+          onClick={onContinueToQuiz}
+          className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+        >
           Continue to Quiz
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
+          <ArrowRight className="w-5 h-5" />
         </button>
       </div>
     </div>
@@ -370,7 +380,7 @@ export default ArticleView;
 
 ```jsx
 import React, { useState, useRef } from 'react';
-import { Download, Share2, ChevronLeft } from 'lucide-react';
+import { Download, ChevronLeft } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -465,8 +475,7 @@ const Certificate = ({ progress, onBack }) => {
             <div className="text-3xl font-bold text-blue-600 mb-8">{studentName}</div>
 
             <div className="text-lg mb-8">
-              has successfully completed the AI 101 Course with a score of{' '}
-              <span className="font-bold">{Math.round(progress.finalAssessmentScore)}%</span>
+              has successfully completed the AI 101 Course
             </div>
 
             <div className="text-gray-600 mb-12">{currentDate}</div>
@@ -474,11 +483,13 @@ const Certificate = ({ progress, onBack }) => {
             <div className="flex justify-center gap-16">
               <div className="text-center">
                 <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
-                <div className="text-gray-600">Course Instructor</div>
+                <div className="text-gray-600">Shashank Madala</div>
+                <div className="text-sm text-gray-500">Co-Founder & Co-CEO</div>
               </div>
               <div className="text-center">
                 <div className="w-40 h-0.5 bg-gray-400 mb-2"></div>
-                <div className="text-gray-600">Program Director</div>
+                <div className="text-gray-600">Ayur Munipalli</div>
+                <div className="text-sm text-gray-500">Co-Founder & Co-CEO</div>
               </div>
             </div>
           </div>
@@ -880,7 +891,7 @@ export default FinalExam;
 # src/components/course/LessonView.jsx
 
 ```jsx
-import React, { useState } from 'react';
+import React from 'react';
 import { FileText, HelpCircle } from 'lucide-react';
 import ArticleView from './ArticleView';
 import QuizSection from './QuizSection';
@@ -893,6 +904,10 @@ function LessonView({
   activeTab,
   setActiveTab
 }) {
+  const handleContinueToQuiz = () => {
+    setActiveTab('quiz');
+  };
+
   return (
     <div className="max-w-4xl mx-auto">
       {/* Navigation */}
@@ -931,7 +946,10 @@ function LessonView({
           </div>
           
           {activeTab === 'article' ? (
-            <ArticleView article={lesson.article} />
+            <ArticleView 
+              article={lesson.article} 
+              onContinueToQuiz={handleContinueToQuiz}
+            />
           ) : (
             <QuizSection
               lesson={lesson}
@@ -5359,91 +5377,96 @@ import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
 const founders = [
   {
     name: "Shashank Madala",
-    role: "Founder & CEO",
-    bio: "Passionate about making AI education accessible to everyone. Started Lumin AI to transform how students learn about artificial intelligence.",
-    image: "/api/placeholder/400/400", // Replace with actual image path
+    role: "Founder & Co-CEO",
+    bio: "Committed to revolutionizing STEM education through accessible AI learning. Leads Lumin AI's mission to empower the next generation of innovators.",
+    vision: "Empowering every student to understand and shape the future of AI technology.",
+    image: "/images/shashank1.png",
     links: {
-      linkedin: "https://linkedin.com/in/your-profile",
+      linkedin: "https://www.linkedin.com/in/shashank-madala-320989295/",
       github: "https://github.com/your-profile",
-      email: "mailto:your-email@luminai.edu"
+      email: "mailto:madala.shashank@gmail.com"
     }
   },
   {
     name: "Ayur Munipalli",
-    role: "Co-Founder & CTO",
-    bio: "Dedicated to building innovative educational technology solutions. Leads the technical vision and development of Lumin AI's learning platform.",
-    image: "/api/placeholder/400/400", // Replace with actual image path
+    role: "Founder & Co-CEO",
+    bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
+    vision: "Making complex AI concepts approachable and exciting for every student.",
+    image: "images/ayur.png",
     links: {
-      linkedin: "https://linkedin.com/in/your-profile",
-      github: "https://github.com/your-profile",
-      email: "mailto:your-email@luminai.edu"
+      linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
+      github: "https://github.com/ayurmunipalli",
+      email: "mailto:26munipallia@gmail.com"
     }
   }
 ];
 
 export default function Founders() {
   return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-      </div>
-
-      <div className="pt-32 pb-24 relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <div className="pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-4">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold mb-4">Our Founders</h1>
-            <p className="text-xl text-gray-600">
-              Meet the team behind Lumin AI's mission to revolutionize AI education
+          <div className="text-center mb-20">
+            <h1 className="text-5xl font-bold mb-6">
+              Our Founders
+            </h1>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Passionate leaders dedicated to transforming AI education
             </p>
           </div>
 
-          {/* Founders Grid */}
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          {/* Founders Cards */}
+          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
             {founders.map((founder) => (
               <div 
                 key={founder.name}
-                className="relative group"
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl transform rotate-6 group-hover:rotate-12 transition-transform duration-300"/>
-                <div className="relative bg-white rounded-2xl p-8 transform hover:-rotate-3 transition-transform duration-300 shadow-lg">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-48 h-48 rounded-full overflow-hidden mb-6 border-4 border-blue-100 group-hover:scale-105 transition-transform duration-300">
+                <div className="flex flex-col items-center">
+                  {/* Profile Image */}
+                  <div className="relative mb-8">
+                    <div className="w-48 h-48 rounded-full overflow-hidden shadow-lg mb-4">
                       <img 
                         src={founder.image} 
                         alt={founder.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="text-center">
                     <h2 className="text-2xl font-bold mb-2">{founder.name}</h2>
-                    <p className="text-blue-600 font-medium mb-4">{founder.role}</p>
+                    <div className="text-blue-600 font-medium mb-6 inline-block bg-blue-50 px-4 py-1 rounded-full">
+                      {founder.role}
+                    </div>
                     <p className="text-gray-600 mb-6">{founder.bio}</p>
-                    
+                    <p className="text-gray-800 italic mb-8 text-sm">"{founder.vision}"</p>
+
                     {/* Social Links */}
-                    <div className="flex gap-4">
+                    <div className="flex justify-center gap-6">
                       <a 
                         href={founder.links.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
                       >
-                        <LinkedinIcon className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                        <LinkedinIcon className="w-6 h-6 text-gray-600 hover:text-blue-600" />
                       </a>
                       <a 
                         href={founder.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
                       >
-                        <GithubIcon className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                        <GithubIcon className="w-6 h-6 text-gray-600 hover:text-blue-600" />
                       </a>
                       <a 
                         href={founder.links.email}
-                        className="p-2 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors duration-300"
+                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
                       >
-                        <Mail className="w-5 h-5 text-gray-600 hover:text-blue-600" />
+                        <Mail className="w-6 h-6 text-gray-600 hover:text-blue-600" />
                       </a>
                     </div>
                   </div>
@@ -5725,7 +5748,6 @@ import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
 import courseData from '../data/courseData';
-import '../styles/learn.css';
 
 export default function Learn() {
   const [activeModule, setActiveModule] = useState(null);
@@ -5774,13 +5796,20 @@ export default function Learn() {
     );
   };
 
+  const isAllLessonsCompleted = () => {
+    return progress.completedLessons.length === calculateTotalLessons();
+  };
+
   const calculateProgress = () => {
     const totalLessons = calculateTotalLessons();
     return totalLessons > 0 ? (progress.completedLessons.length / totalLessons) * 100 : 0;
   };
 
   const handleStartExam = () => {
-    // Temporarily removed completion check for testing
+    if (!isAllLessonsCompleted()) {
+      alert('Please complete all lessons before taking the final exam.');
+      return;
+    }
     setShowFinalExam(true);
   };
 
@@ -5863,7 +5892,10 @@ export default function Learn() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                       <button 
                         onClick={handleStartExam}
-                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between"
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
+                          !isAllLessonsCompleted() ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                        disabled={!isAllLessonsCompleted()}
                       >
                         <div className="flex items-center gap-3">
                           <Trophy className="w-5 h-5 text-yellow-500" />
@@ -5878,7 +5910,10 @@ export default function Learn() {
                       
                       <button 
                         onClick={() => setShowCertificate(true)}
-                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
+                        disabled={!progress.finalExamScore || progress.finalExamScore < 60}
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3 ${
+                          (!progress.finalExamScore || progress.finalExamScore < 60) ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
                       >
                         <Award className="w-5 h-5 text-green-500" />
                         <span>Certificate</span>
@@ -6067,10 +6102,6 @@ export default function SummerProgram() {
                   Apply Now
                   <ArrowRight className="w-5 h-5" />
                 </a>
-                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-300 hover:border-blue-600 transition-colors duration-300">
-                  <PlayCircle className="w-5 h-5 text-blue-600" />
-                  Watch Demo
-                </button>
               </div>
             </div>
             <div className="relative animate-on-scroll from-right">
@@ -6234,7 +6265,7 @@ export default function SummerProgram() {
           </p>
           <div className="flex justify-center gap-4">
             <a 
-              href="https://forms.google.com/your-form-link" 
+              href="https://forms.gle/PLSuUZvRf2tArXCM6" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -6253,7 +6284,7 @@ export default function SummerProgram() {
 }
 ```
 
-# src/pages/Teams.jsx
+# src/pages/Team.jsx
 
 ```jsx
 import React, { useState } from 'react';

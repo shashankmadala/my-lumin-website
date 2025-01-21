@@ -116,10 +116,6 @@ export default function SummerProgram() {
                   Apply Now
                   <ArrowRight className="w-5 h-5" />
                 </a>
-                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-300 hover:border-blue-600 transition-colors duration-300">
-                  <PlayCircle className="w-5 h-5 text-blue-600" />
-                  Watch Demo
-                </button>
               </div>
             </div>
             <div className="relative animate-on-scroll from-right">
@@ -283,7 +279,7 @@ export default function SummerProgram() {
           </p>
           <div className="flex justify-center gap-4">
             <a 
-              href="https://forms.google.com/your-form-link" 
+              href="https://forms.gle/PLSuUZvRf2tArXCM6" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"

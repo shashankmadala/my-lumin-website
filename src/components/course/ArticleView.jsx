@@ -1,6 +1,7 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-const ArticleView = ({ article }) => {
+const ArticleView = ({ article, onContinueToQuiz }) => {
   const processContent = (text) => {
     // Split content by bullet points while preserving structure
     const sections = text.split('\n').reduce((acc, line) => {
@@ -101,11 +102,12 @@ const ArticleView = ({ article }) => {
       </article>
       
       <div className="mt-8 flex justify-end">
-        <button className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+        <button 
+          onClick={onContinueToQuiz}
+          className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+        >
           Continue to Quiz
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-          </svg>
+          <ArrowRight className="w-5 h-5" />
         </button>
       </div>
     </div>

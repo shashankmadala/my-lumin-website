@@ -19,7 +19,7 @@ const founders = [
     role: "Founder & Co-CEO",
     bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
     vision: "Making complex AI concepts approachable and exciting for every student.",
-    image: "/api/placeholder/400/400",
+    image: "images/ayur.png",
     links: {
       linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
       github: "https://github.com/ayurmunipalli",

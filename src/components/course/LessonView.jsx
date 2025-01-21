@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FileText, HelpCircle } from 'lucide-react';
 import ArticleView from './ArticleView';
 import QuizSection from './QuizSection';
@@ -11,6 +11,10 @@ function LessonView({
   activeTab,
   setActiveTab
 }) {
+  const handleContinueToQuiz = () => {
+    setActiveTab('quiz');
+  };
+
   return (
     <div className="max-w-4xl mx-auto">
       {/* Navigation */}
@@ -49,7 +53,10 @@ function LessonView({
           </div>
           
           {activeTab === 'article' ? (
-            <ArticleView article={lesson.article} />
+            <ArticleView 
+              article={lesson.article} 
+              onContinueToQuiz={handleContinueToQuiz}
+            />
           ) : (
             <QuizSection
               lesson={lesson}

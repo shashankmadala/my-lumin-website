@@ -6,8 +6,8 @@ import LessonView from '../components/course/LessonView';
 import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
+import PathView from '../components/course/PathView';  // Add this import
 import courseData from '../data/courseData';
-import '../styles/learn.css';
 
 export default function Learn() {
   const [activeModule, setActiveModule] = useState(null);
@@ -16,6 +16,7 @@ export default function Learn() {
   const [showFinalExam, setShowFinalExam] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
+  const [showLearningPath, setShowLearningPath] = useState(false);  // Add this state
 
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('courseProgress');
@@ -56,13 +57,20 @@ export default function Learn() {
     );
   };
 
+  const isAllLessonsCompleted = () => {
+    return progress.completedLessons.length === calculateTotalLessons();
+  };
+
   const calculateProgress = () => {
     const totalLessons = calculateTotalLessons();
     return totalLessons > 0 ? (progress.completedLessons.length / totalLessons) * 100 : 0;
   };
 
   const handleStartExam = () => {
-    // Temporarily removed completion check for testing
+    if (!isAllLessonsCompleted()) {
+      alert('Please complete all lessons before taking the final exam.');
+      return;
+    }
     setShowFinalExam(true);
   };
 
@@ -103,6 +111,24 @@ export default function Learn() {
               progress={progress}
               onBack={() => setShowCertificate(false)}
             />
+          ) : showLearningPath ? (  // Add this condition
+            <>
+              <button
+                onClick={() => setShowLearningPath(false)}
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                Back to Course
+              </button>
+              <PathView 
+                modules={courseData.modules}
+                progress={progress}
+                setActiveLesson={(lesson) => {
+                  setActiveLesson(lesson);
+                  setShowLearningPath(false);
+                }}
+              />
+            </>
           ) : (
             <div className="grid grid-cols-12 gap-8">
               {/* Sidebar Toggle (Mobile) */}
@@ -145,7 +171,10 @@ export default function Learn() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                       <button 
                         onClick={handleStartExam}
-                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between"
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between ${
+                          !isAllLessonsCompleted() ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                        disabled={!isAllLessonsCompleted()}
                       >
                         <div className="flex items-center gap-3">
                           <Trophy className="w-5 h-5 text-yellow-500" />
@@ -159,16 +188,22 @@ export default function Learn() {
                       </button>
                       
                       <button 
-                        onClick={() => setShowCertificate(true)}
-                        className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
+                        onClick={() => progress.finalExamScore >= 60 ? setShowCertificate(true) : null}
+                        disabled={!progress.finalExamScore || progress.finalExamScore < 60}
+                        className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3 ${
+                          (!progress.finalExamScore || progress.finalExamScore < 60) ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
                       >
                         <Award className="w-5 h-5 text-green-500" />
                         <span>Certificate</span>
+                        {(!progress.finalExamScore || progress.finalExamScore < 60) && (
+                          <span className="text-sm text-red-500 ml-2">(Pass exam first)</span>
+                        )}
                       </button>
                       
                       <button 
                         className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
-                        onClick={() => setActiveModule(courseData.modules[0].id)}
+                        onClick={() => setShowLearningPath(true)}  // Update this onClick
                       >
                         <Brain className="w-5 h-5 text-blue-500" />
                         <span>Learning Path</span>
