@@ -2,6 +2,7 @@ import React from 'react';
 import { FileText, HelpCircle } from 'lucide-react';
 import ArticleView from './ArticleView';
 import QuizSection from './QuizSection';
+import PatternGame from './PatternGame';
 
 function LessonView({
   lesson,
@@ -13,6 +14,16 @@ function LessonView({
 }) {
   const handleContinueToQuiz = () => {
     setActiveTab('quiz');
+  };
+
+  const handleGameComplete = (score) => {
+    if (score > 0 && setProgress) {
+      setProgress(prev => ({
+        ...prev,
+        completedLessons: [...prev.completedLessons, lesson.id],
+        quizScores: { ...prev.quizScores, [lesson.id]: Math.round(score) }
+      }));
+    }
   };
 
   return (
@@ -53,10 +64,41 @@ function LessonView({
           </div>
           
           {activeTab === 'article' ? (
-            <ArticleView 
-              article={lesson.article} 
-              onContinueToQuiz={handleContinueToQuiz}
-            />
+            <div>
+              {lesson.id === "1.3" ? (
+                <>
+                  {/* Introduction section of the article */}
+                  <div className="mb-8">
+                    <ArticleView 
+                      article={lesson.article.split('Key Concepts')[0]} 
+                      onContinueToQuiz={null}
+                    />
+                  </div>
+                  
+                  {/* Interactive Game Section */}
+                  <div className="mb-8">
+                    <h2 className="text-2xl font-bold mb-6">Practice Pattern Recognition</h2>
+                    <div className="mb-6">
+                      <p className="text-gray-600">Put your pattern recognition skills to the test with this interactive exercise. Try to identify the patterns and predict the next number in each sequence.</p>
+                    </div>
+                    <PatternGame onComplete={handleGameComplete} />
+                  </div>
+
+                  {/* Rest of the article content */}
+                  <div className="mt-8">
+                    <ArticleView 
+                      article={"Key Concepts" + lesson.article.split('Key Concepts')[1]} 
+                      onContinueToQuiz={handleContinueToQuiz}
+                    />
+                  </div>
+                </>
+              ) : (
+                <ArticleView 
+                  article={lesson.article} 
+                  onContinueToQuiz={handleContinueToQuiz}
+                />
+              )}
+            </div>
           ) : (
             <QuizSection
               lesson={lesson}

@@ -9,7 +9,6 @@ const links = [
     id: 'about',
     dropdown: [
       { to: '/founders', text: 'Founders', id: 'founders' },
-      { to: '/team', text: 'Our Team', id: 'team' }
     ]
   },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },

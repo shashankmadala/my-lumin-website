@@ -95,7 +95,7 @@ export default function SummerProgram() {
             <div className="animate-on-scroll from-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
                 <Star className="w-4 h-4" />
-                Applications Open for Summer 2024
+                Applications Open for Summer 2025
               </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
                 Transform Your Summer with
@@ -108,7 +108,7 @@ export default function SummerProgram() {
               </p>
               <div className="flex gap-4">
                 <a 
-                  href="https://forms.google.com/your-form-link" 
+                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -287,9 +287,6 @@ export default function SummerProgram() {
               Apply Now
               <ArrowRight className="w-5 h-5" />
             </a>
-            <button className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-white text-white hover:bg-white/10 transition-all duration-300">
-              Learn More
-            </button>
           </div>
         </div>
       </section>

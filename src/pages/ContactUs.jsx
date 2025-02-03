@@ -58,7 +58,7 @@ const ContactUs = () => {
       title: "Schedule a Call",
       description: "Book a quick call with our team",
       action: "Schedule Now",
-      link: "#schedule",
+      link: "https://calendly.com/luminai321",
       color: "pink"
     }
   ];
@@ -66,9 +66,9 @@ const ContactUs = () => {
   const socialLinks = [
     {
       icon: <Twitter className="w-5 h-5" />,
-      name: "Twitter",
-      handle: "@LuminAI",
-      link: "https://twitter.com/LuminAI"
+      name: "X",
+      handle: "@LuminLearningAI",
+      link: "https://x.com/LuminLearningAI"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,

@@ -278,102 +278,104 @@ Everyday Applications of AI:
         patternGame: {
           type: "interactive",
           title: "Pattern Detective",
-          levels: [
+          description: "Test your pattern recognition skills",
+          component: "PatternGame"
+        },
+        practicalExercises: {
+          type: "hands-on",
+          activities: [
             {
-              id: "numeric",
-              sequences: [
-                {
-                  pattern: [2, 4, 6, 8],
-                  type: "arithmetic",
-                  difficulty: "easy"
-                },
-                {
-                  pattern: [1, 3, 6, 10],
-                  type: "geometric",
-                  difficulty: "medium"
-                }
-              ]
-            },
-            {
-              id: "visual",
-              patterns: [
-                {
-                  sequence: ["🔴", "🔵", "🔴", "🔵"],
-                  type: "alternating",
-                  difficulty: "easy"
-                },
-                {
-                  sequence: ["🔺", "🔺", "🔸", "🔺", "🔺", "🔸"],
-                  type: "complex",
-                  difficulty: "hard"
-                }
-              ]
+              id: "pattern-analysis",
+              type: "exercise",
+              title: "Pattern Analysis",
+              task: "Identify and explain patterns"
             }
           ]
-        },
-        drawingRecognizer: {
-          type: "canvas",
-          title: "AI Vision Simulator",
-          features: {
-            realTimeRecognition: true,
-            confidenceDisplay: true,
-            explanationMode: true
-          }
         }
       },
-      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that humans and machines alike rely on to make sense of the world.
-
-What Is Pattern Recognition?
-Pattern recognition is about finding order in chaos. Imagine trying to guess the next number in this sequence: 2, 4, 6, 8. You quickly notice the numbers increase by 2 each time. This is a simple example of pattern recognition.
-
-Why Is It Important?
-In AI, pattern recognition allows machines to:
-• Classify Data
-• Detect Anomalies
-• Make Predictions
-
-Activities:
-1. Spot the Pattern
-2. Pattern Matching Game
-3. Feature Recognition Exercise
-
-How AI Recognizes Patterns:
-• Feature Extraction
-• Data Comparison
-• Decision Making
-• Continuous Learning`,
+      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that both humans and machines rely on to make sense of the world.
+    
+    What Is Pattern Recognition?
+    Pattern recognition is about finding order in what appears to be random or chaotic. For example, when you look at these numbers: 2, 4, 6, 8, you quickly notice they increase by 2 each time. This is a simple pattern that both humans and AI can learn to identify.
+    
+    Key Concepts in Pattern Recognition:
+    
+    1. Sequential Patterns:
+    • Number sequences
+    • Time series data
+    • Repeating elements
+    • Progressive changes
+    
+    2. Visual Patterns:
+    • Shapes and geometries
+    • Color sequences
+    • Spatial arrangements
+    • Recurring motifs
+    
+    3. Logical Patterns:
+    • Rule-based sequences
+    • Cause and effect
+    • If-then relationships
+    • Decision trees
+    
+    Why Is Pattern Recognition Important in AI?
+    Pattern recognition enables AI systems to:
+    • Classify Data: Organizing information into categories
+    • Make Predictions: Forecasting future values or events
+    • Detect Anomalies: Identifying unusual patterns
+    • Learn from Examples: Improving performance through experience
+    
+    Real-World Applications:
+    1. Image Recognition
+    • Face detection in photos
+    • Object identification
+    • Medical image analysis
+    
+    2. Speech Recognition
+    • Voice commands
+    • Language translation
+    • Audio transcription
+    
+    3. Behavior Analysis
+    • Customer purchasing patterns
+    • Traffic flow prediction
+    • Financial market trends`,
       quiz: {
         questions: [
           {
             question: "What is the main purpose of pattern recognition in AI?",
             options: [
-              "To create new patterns",
               "To identify trends and structures in data",
+              "To create new patterns",
               "To store information",
-              "To increase processing speed"
+              "To process calculations"
             ],
-            correct: 1,
-            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to make sense of complex information."
+            correct: 0,
+            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to learn from examples."
           },
           {
-            question: "Which of these is NOT a common challenge in pattern recognition?",
+            question: "Which type of pattern involves progressive numerical changes?",
             options: [
-              "Handling ambiguous data",
-              "Processing complex patterns",
-              "Creating new patterns",
-              "Dealing with noise"
+              "Visual patterns",
+              "Sequential patterns",
+              "Random patterns",
+              "Static patterns"
+            ],
+            correct: 1,
+            explanation: "Sequential patterns involve progressive changes in a series, such as numerical sequences that follow a specific rule."
+          },
+          {
+            question: "How does pattern recognition help in AI predictions?",
+            options: [
+              "By storing more data",
+              "By running faster calculations",
+              "By identifying trends to forecast future values",
+              "By creating random patterns"
             ],
             correct: 2,
-            explanation: "Creating new patterns is not a challenge of pattern recognition. Pattern recognition focuses on identifying existing patterns rather than creating new ones."
+            explanation: "Pattern recognition helps AI make predictions by identifying trends in existing data, which can then be used to forecast future values or events."
           }
-        ],
-        interactiveQuiz: {
-          patternGames: {
-            enabled: true,
-            types: ["sequence", "visual", "audio"],
-            difficulty: "adaptive"
-          }
-        }
+        ]
       }
     },
     {

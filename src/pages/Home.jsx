@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { ArrowRight, Check, Brain, Users, Rocket } from 'lucide-react';
-import '../styles/animations.css'; // Import the animations
+import { Link } from 'react-router-dom';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction } from 'lucide-react';
+import '../styles/animations.css';
 
 export default function HomePage() {
   useEffect(() => {
@@ -37,20 +38,6 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Search Bar */}
-          <div className="max-w-3xl mx-auto mb-16 animate-on-scroll">
-            <div className="bg-white/80 backdrop-blur-md rounded-full shadow-lg flex items-center p-2 mb-8 transition-all duration-300 hover:shadow-xl">
-              <input 
-                type="text" 
-                placeholder="Find AI Learning Resources..." 
-                className="flex-1 px-4 py-2 text-gray-500 outline-none text-lg bg-transparent"
-              />
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-md">
-                Explore →
-              </button>
-            </div>
-          </div>
-
           <div className="text-center mb-16 animate-on-scroll from-bottom">
             <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
               AI Education
@@ -61,6 +48,13 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 mb-8">
               Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
             </p>
+            <Link 
+              to="/learn" 
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+            >
+              Start Learning Now
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
 
           {/* Stats */}
@@ -156,12 +150,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
+            <Link 
+              to="/learn"
+              className="animate-on-scroll bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Brain className="w-6 h-6 text-blue-600" />
+                </div>
+                <span className="text-sm text-gray-500">8 weeks</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                AI Fundamentals
+              </h3>
+              <ul className="space-y-2">
+                {['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications'].map((topic) => (
+                  <li key={topic} className="flex items-center gap-2 text-gray-600">
+                    <Check className="w-4 h-4 text-green-500"/>
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+            </Link>
+
             {[
-              {
-                duration: '8 weeks',
-                title: 'AI Fundamentals',
-                topics: ['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications']
-              },
               {
                 duration: '10 weeks',
                 title: 'Deep Learning',
@@ -172,76 +184,86 @@ export default function HomePage() {
                 title: 'AI Applications',
                 topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
               }
-            ].map((course, index) => (
+            ].map((course) => (
               <div 
                 key={course.title} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                className="relative bg-white rounded-xl p-6 opacity-75 group"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"/>
-                  <span className="text-sm text-gray-500">{course.duration}</span>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-yellow-100 px-4 py-2 rounded-full flex items-center gap-2">
+                    <Construction className="w-5 h-5 text-yellow-700" />
+                    <span className="text-yellow-700 font-medium">Coming Soon</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {course.title}
-                </h3>
-                <ul className="space-y-2">
-                  {course.topics.map((topic) => (
-                    <li key={topic} className="flex items-center gap-2 text-gray-600">
-                      <Check className="w-4 h-4 text-green-500"/>
-                      {topic}
-                    </li>
-                  ))}
-                </ul>
+                <div className="filter blur-[2px]">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"/>
+                    <span className="text-sm text-gray-500">{course.duration}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4">
+                    {course.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {course.topics.map((topic) => (
+                      <li key={topic} className="flex items-center gap-2 text-gray-600">
+                        <Check className="w-4 h-4 text-green-500"/>
+                        {topic}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Student Success Stories */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">What Our Students Say</h2>
-            <p className="text-xl text-gray-600">Hear from our successful students</p>
+            <h2 className="text-4xl font-bold mb-4">Student Success Stories</h2>
+            <p className="text-xl text-gray-600">See how our students are changing the world</p>
           </div>
 
-          <div className="flex gap-8">
-            {[
-              {
-                name: 'Jane Doe',
-                role: 'AI Engineer',
-                quote: 'Lumin AI has transformed my career. The hands-on projects and expert guidance were invaluable.'
-              },
-              {
-                name: 'John Smith',
-                role: 'Data Scientist',
-                quote: 'The community support and real-world applications made learning AI enjoyable and effective.'
-              },
-              {
-                name: 'Emily Johnson',
-                role: 'Machine Learning Specialist',
-                quote: 'The curriculum is well-structured and the instructors are top-notch. Highly recommend Lumin AI!'
-              }
-            ].map((testimonial, index) => (
-              <div 
-                key={testimonial.name} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex-1 flex items-start gap-6 bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
-              >
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-4 mb-6">
                 <img 
-                  src="/api/placeholder/48/48" 
-                  alt={testimonial.name} 
-                  className="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  src="/api/placeholder/64/64" 
+                  alt="Arjun" 
+                  className="w-16 h-16 rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold mb-1 group-hover:text-blue-600 transition-colors duration-300">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-blue-600 text-sm mb-3">{testimonial.role}</p>
-                  <p className="text-gray-600">{testimonial.quote}</p>
+                  <h3 className="text-xl font-semibold">Arjun Patel</h3>
+                  <p className="text-blue-600">AI Innovator, Age 14</p>
                 </div>
               </div>
-            ))}
+              <p className="text-gray-600 leading-relaxed">
+                "Through Lumin AI's program, I developed an AI model to predict water quality in local rivers. The project 
+                won first place at my regional science fair and is now being considered for implementation by local 
+                environmental agencies."
+              </p>
+            </div>
+
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-4 mb-6">
+                <img 
+                  src="/api/placeholder/64/64" 
+                  alt="Miguel" 
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">Miguel Santos</h3>
+                  <p className="text-blue-600">Student Developer, Age 14</p>
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                "Using Lumin AI's program, I built my first machine learning model to identify different types of 
+                local plants in my community in Brazil. It started as a small project but now I'm working with my 
+                science teacher to expand it into a learning tool for younger students."
+              </p>
+            </div>
           </div>
         </div>
       </section>

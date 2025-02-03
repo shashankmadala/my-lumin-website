@@ -144,6 +144,10 @@ export default {
 
 This is a binary file of the type: Image
 
+# public/images/lumin.png
+
+This is a binary file of the type: Image
+
 # public/images/shashank1.png
 
 This is a binary file of the type: Image
@@ -224,7 +228,6 @@ import SummerProgram from './pages/SummerProgram.jsx';
 import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
-import Team from './pages/Team.jsx';
 import Founders from './pages/Founders.jsx';
 
 function App() {
@@ -237,7 +240,6 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
             <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='/team' element={<Team />} />
             <Route path='/founders' element={<Founders />} />
             <Route path='/learn' element={<Learn />} />
           </Routes>
@@ -1086,6 +1088,141 @@ const ModuleList = ({
 };
 
 export default ModuleList;
+```
+
+# src/components/course/PathView.jsx
+
+```jsx
+import React from 'react';
+import { BookOpen, Check, Lock, Flag, Star, Trophy } from 'lucide-react';
+
+const PathView = ({ modules, progress, setActiveLesson }) => {
+  const isModuleUnlocked = (moduleIndex) => {
+    if (moduleIndex === 0) return true;
+    const prevModule = modules[moduleIndex - 1];
+    return prevModule.lessons.every(lesson => progress.completedLessons.includes(lesson.id));
+  };
+
+  const isLessonUnlocked = (moduleIndex, lessonIndex) => {
+    if (lessonIndex === 0) return isModuleUnlocked(moduleIndex);
+    const prevLesson = modules[moduleIndex].lessons[lessonIndex - 1];
+    return progress.completedLessons.includes(prevLesson.id);
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold text-center mb-16">Your AI Learning Adventure</h1>
+
+      {/* Start Point */}
+      <div className="bg-blue-600 text-white rounded-xl p-6 mb-8 relative">
+        <Flag className="w-8 h-8 mb-2" />
+        <h2 className="text-xl font-bold">Begin Your Journey</h2>
+        <p>Start your AI learning adventure!</p>
+        {/* Connector Line */}
+        <div className="absolute h-8 w-1 bg-blue-200 left-1/2 -bottom-8 transform -translate-x-1/2" />
+      </div>
+
+      {/* Modules */}
+      <div className="relative">
+        {/* Main Path Line */}
+        <div className="absolute left-8 top-0 w-1 h-full bg-blue-100" />
+        
+        <div className="space-y-6">
+          {modules.map((module, moduleIndex) => {
+            const isUnlocked = isModuleUnlocked(moduleIndex);
+            
+            return (
+              <div key={module.id} className="relative">
+                {/* Module Node */}
+                <div className="absolute left-8 top-8 transform -translate-x-1/2 z-10">
+                  <div className={`w-4 h-4 rounded-full ${
+                    isUnlocked ? 'bg-blue-500' : 'bg-gray-300'
+                  } ring-4 ring-white`} />
+                </div>
+
+                {/* Module Card */}
+                <div className={`ml-16 bg-white rounded-xl shadow-sm border-2 ${
+                  isUnlocked ? 'border-blue-200' : 'border-gray-200'
+                }`}>
+                  {/* Module Header */}
+                  <div className="p-4 border-b border-gray-100">
+                    <h3 className="font-bold text-lg">Module {moduleIndex + 1}: {module.title}</h3>
+                  </div>
+
+                  {/* Lessons */}
+                  <div className="p-4 space-y-3">
+                    {module.lessons.map((lesson, lessonIndex) => {
+                      const isCompleted = progress.completedLessons.includes(lesson.id);
+                      const isUnlocked = isLessonUnlocked(moduleIndex, lessonIndex);
+                      
+                      return (
+                        <button
+                          key={lesson.id}
+                          onClick={() => isUnlocked ? setActiveLesson(lesson) : null}
+                          disabled={!isUnlocked}
+                          className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
+                            isUnlocked 
+                              ? 'hover:bg-blue-50' 
+                              : 'opacity-50 cursor-not-allowed'
+                          } ${
+                            isCompleted 
+                              ? 'bg-green-50' 
+                              : 'bg-gray-50'
+                          }`}
+                        >
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                            isCompleted 
+                              ? 'bg-green-100' 
+                              : isUnlocked 
+                                ? 'bg-blue-100' 
+                                : 'bg-gray-200'
+                          }`}>
+                            {isCompleted ? (
+                              <Check className="w-4 h-4 text-green-600" />
+                            ) : !isUnlocked ? (
+                              <Lock className="w-4 h-4 text-gray-400" />
+                            ) : (
+                              <BookOpen className="w-4 h-4 text-blue-600" />
+                            )}
+                          </div>
+                          
+                          <div className="flex-1 text-left">
+                            <div className="font-medium text-sm">{lesson.title}</div>
+                            <div className="text-xs text-gray-500 flex items-center gap-2">
+                              <span>{lesson.duration}</span>
+                              {isCompleted && progress.quizScores[lesson.id] && (
+                                <div className="flex items-center gap-1 text-yellow-600">
+                                  <Star className="w-3 h-3" />
+                                  <span>{progress.quizScores[lesson.id]}%</span>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Final Achievement */}
+        <div className="mt-8 ml-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-6 text-white relative">
+          <div className="absolute left-[-3.5rem] top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-4 h-4 rounded-full bg-purple-500 ring-4 ring-white" />
+          </div>
+          <Trophy className="w-8 h-8 mb-2" />
+          <h3 className="text-xl font-bold">Final Achievement</h3>
+          <p>Complete all modules and pass the final exam to earn your certificate!</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PathView;
 ```
 
 # src/components/course/ProgressTracker.jsx
@@ -2229,59 +2366,178 @@ export default MLTrainingGame;
 # src/components/interactive/PatternGame.jsx
 
 ```jsx
+import React, { useState, useEffect } from 'react';
+import { Check, X, Brain, ArrowRight, AlertCircle } from 'lucide-react';
 
-import React, { useState } from 'react';
-import { Check, X } from 'lucide-react';
-
-const PatternGame = () => {
-  const [sequence, setSequence] = useState([2, 4, 6, 8]);
+const PatternGame = ({ onComplete }) => {
+  const [currentLevel, setCurrentLevel] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [score, setScore] = useState(0);
+  const [attempts, setAttempts] = useState(0);
+  const [showHint, setShowHint] = useState(false);
+
+  const patterns = [
+    {
+      sequence: [2, 4, 6, 8],
+      next: 10,
+      rule: "Add 2 to each number",
+      type: "numeric",
+      hint: "Look at how much each number increases by"
+    },
+    {
+      sequence: [1, 2, 4, 8],
+      next: 16,
+      rule: "Multiply by 2",
+      type: "numeric",
+      hint: "Think about multiplication"
+    },
+    {
+      sequence: [1, 3, 6, 10],
+      next: 15,
+      rule: "Add increasing numbers (+2, +3, +4...)",
+      type: "numeric",
+      hint: "The amount you add increases each time"
+    }
+  ];
 
   const checkAnswer = () => {
-    if (parseInt(userAnswer) === 10) { // Next number in sequence
-      setFeedback('Correct! The pattern adds 2 each time.');
+    const currentPattern = patterns[currentLevel];
+    const isCorrect = parseInt(userAnswer) === currentPattern.next;
+    setAttempts(prev => prev + 1);
+    
+    if (isCorrect) {
+      setFeedback("Correct! The pattern was: " + currentPattern.rule);
+      setScore(prev => prev + Math.max(10 - attempts, 1));
+      
+      // Delay before moving to next level
+      setTimeout(() => {
+        if (currentLevel < patterns.length - 1) {
+          setCurrentLevel(prev => prev + 1);
+          setUserAnswer('');
+          setFeedback('');
+          setAttempts(0);
+          setShowHint(false);
+        } else {
+          setFeedback("Congratulations! You've completed all levels!");
+        }
+      }, 2000);
     } else {
-      setFeedback('Try again! Look at how the numbers change.');
+      setFeedback("Not quite. Try again!");
     }
   };
 
+  const resetGame = () => {
+    setCurrentLevel(0);
+    setUserAnswer('');
+    setFeedback('');
+    setScore(0);
+    setAttempts(0);
+    setShowHint(false);
+  };
+
   return (
-    <div className="bg-white rounded-xl p-6 mb-8 shadow-sm">
-      <h3 className="text-xl font-semibold mb-4">Pattern Recognition Game</h3>
-      
-      <div className="flex gap-4 items-center mb-6">
-        {sequence.map((num, index) => (
-          <div key={index} className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center font-bold">
-            {num}
+    <div className="max-w-2xl mx-auto">
+      <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <Brain className="w-6 h-6" />
+              <h2 className="text-xl font-bold">Pattern Recognition Challenge</h2>
+            </div>
+            <div className="text-sm">
+              Score: {score}
+            </div>
           </div>
-        ))}
-        <div className="w-12 h-12 bg-blue-50 rounded-lg border-2 border-dashed border-blue-300 flex items-center justify-center">
-          ?
+          <div className="h-2 bg-white/20 rounded-full">
+            <div 
+              className="h-full bg-white rounded-full transition-all duration-500"
+              style={{ width: `${((currentLevel + 1) / patterns.length) * 100}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Game Content */}
+        <div className="p-6">
+          <div className="mb-8">
+            <div className="text-lg font-medium mb-4">Find the next number in the sequence:</div>
+            <div className="flex gap-4 items-center mb-6">
+              {patterns[currentLevel].sequence.map((num, index) => (
+                <div 
+                  key={index}
+                  className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center font-bold text-blue-600"
+                >
+                  {num}
+                </div>
+              ))}
+              <div className="w-12 h-12 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
+                ?
+              </div>
+            </div>
+
+            <div className="flex gap-4 mb-4">
+              <input
+                type="number"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Your answer"
+                className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              />
+              <button
+                onClick={checkAnswer}
+                disabled={!userAnswer}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+              >
+                Check
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <button
+              onClick={() => setShowHint(true)}
+              className="text-blue-600 text-sm hover:underline"
+            >
+              Need a hint?
+            </button>
+          </div>
+
+          {/* Feedback */}
+          {feedback && (
+            <div className={`p-4 rounded-lg mb-4 ${
+              feedback.includes('Correct') || feedback.includes('Congratulations')
+                ? 'bg-green-50 text-green-700'
+                : 'bg-red-50 text-red-700'
+            }`}>
+              {feedback}
+            </div>
+          )}
+
+          {/* Hint */}
+          {showHint && (
+            <div className="p-4 bg-yellow-50 rounded-lg flex items-start gap-2">
+              <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="font-medium text-yellow-800">Hint:</div>
+                <div className="text-yellow-700">{patterns[currentLevel].hint}</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-6 py-4 bg-gray-50 flex justify-between items-center">
+          <div className="text-sm text-gray-600">
+            Level {currentLevel + 1} of {patterns.length}
+          </div>
+          <button
+            onClick={resetGame}
+            className="text-gray-600 hover:text-gray-900"
+          >
+            Reset Game
+          </button>
         </div>
       </div>
-
-      <div className="flex gap-4 mb-4">
-        <input
-          type="number"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          className="w-24 px-3 py-2 border rounded-lg"
-          placeholder="Next?"
-        />
-        <button
-          onClick={checkAnswer}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          Check
-        </button>
-      </div>
-
-      {feedback && (
-        <div className={`p-4 rounded-lg ${feedback.includes('Correct') ? 'bg-green-50' : 'bg-yellow-50'}`}>
-          {feedback}
-        </div>
-      )}
     </div>
   );
 };
@@ -2303,7 +2559,6 @@ const links = [
     id: 'about',
     dropdown: [
       { to: '/founders', text: 'Founders', id: 'founders' },
-      { to: '/team', text: 'Our Team', id: 'team' }
     ]
   },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
@@ -2707,102 +2962,104 @@ Everyday Applications of AI:
         patternGame: {
           type: "interactive",
           title: "Pattern Detective",
-          levels: [
+          description: "Test your pattern recognition skills",
+          component: "PatternGame"
+        },
+        practicalExercises: {
+          type: "hands-on",
+          activities: [
             {
-              id: "numeric",
-              sequences: [
-                {
-                  pattern: [2, 4, 6, 8],
-                  type: "arithmetic",
-                  difficulty: "easy"
-                },
-                {
-                  pattern: [1, 3, 6, 10],
-                  type: "geometric",
-                  difficulty: "medium"
-                }
-              ]
-            },
-            {
-              id: "visual",
-              patterns: [
-                {
-                  sequence: ["🔴", "🔵", "🔴", "🔵"],
-                  type: "alternating",
-                  difficulty: "easy"
-                },
-                {
-                  sequence: ["🔺", "🔺", "🔸", "🔺", "🔺", "🔸"],
-                  type: "complex",
-                  difficulty: "hard"
-                }
-              ]
+              id: "pattern-analysis",
+              type: "exercise",
+              title: "Pattern Analysis",
+              task: "Identify and explain patterns"
             }
           ]
-        },
-        drawingRecognizer: {
-          type: "canvas",
-          title: "AI Vision Simulator",
-          features: {
-            realTimeRecognition: true,
-            confidenceDisplay: true,
-            explanationMode: true
-          }
         }
       },
-      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that humans and machines alike rely on to make sense of the world.
-
-What Is Pattern Recognition?
-Pattern recognition is about finding order in chaos. Imagine trying to guess the next number in this sequence: 2, 4, 6, 8. You quickly notice the numbers increase by 2 each time. This is a simple example of pattern recognition.
-
-Why Is It Important?
-In AI, pattern recognition allows machines to:
-• Classify Data
-• Detect Anomalies
-• Make Predictions
-
-Activities:
-1. Spot the Pattern
-2. Pattern Matching Game
-3. Feature Recognition Exercise
-
-How AI Recognizes Patterns:
-• Feature Extraction
-• Data Comparison
-• Decision Making
-• Continuous Learning`,
+      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that both humans and machines rely on to make sense of the world.
+    
+    What Is Pattern Recognition?
+    Pattern recognition is about finding order in what appears to be random or chaotic. For example, when you look at these numbers: 2, 4, 6, 8, you quickly notice they increase by 2 each time. This is a simple pattern that both humans and AI can learn to identify.
+    
+    Key Concepts in Pattern Recognition:
+    
+    1. Sequential Patterns:
+    • Number sequences
+    • Time series data
+    • Repeating elements
+    • Progressive changes
+    
+    2. Visual Patterns:
+    • Shapes and geometries
+    • Color sequences
+    • Spatial arrangements
+    • Recurring motifs
+    
+    3. Logical Patterns:
+    • Rule-based sequences
+    • Cause and effect
+    • If-then relationships
+    • Decision trees
+    
+    Why Is Pattern Recognition Important in AI?
+    Pattern recognition enables AI systems to:
+    • Classify Data: Organizing information into categories
+    • Make Predictions: Forecasting future values or events
+    • Detect Anomalies: Identifying unusual patterns
+    • Learn from Examples: Improving performance through experience
+    
+    Real-World Applications:
+    1. Image Recognition
+    • Face detection in photos
+    • Object identification
+    • Medical image analysis
+    
+    2. Speech Recognition
+    • Voice commands
+    • Language translation
+    • Audio transcription
+    
+    3. Behavior Analysis
+    • Customer purchasing patterns
+    • Traffic flow prediction
+    • Financial market trends`,
       quiz: {
         questions: [
           {
             question: "What is the main purpose of pattern recognition in AI?",
             options: [
-              "To create new patterns",
               "To identify trends and structures in data",
+              "To create new patterns",
               "To store information",
-              "To increase processing speed"
+              "To process calculations"
             ],
-            correct: 1,
-            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to make sense of complex information."
+            correct: 0,
+            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to learn from examples."
           },
           {
-            question: "Which of these is NOT a common challenge in pattern recognition?",
+            question: "Which type of pattern involves progressive numerical changes?",
             options: [
-              "Handling ambiguous data",
-              "Processing complex patterns",
-              "Creating new patterns",
-              "Dealing with noise"
+              "Visual patterns",
+              "Sequential patterns",
+              "Random patterns",
+              "Static patterns"
+            ],
+            correct: 1,
+            explanation: "Sequential patterns involve progressive changes in a series, such as numerical sequences that follow a specific rule."
+          },
+          {
+            question: "How does pattern recognition help in AI predictions?",
+            options: [
+              "By storing more data",
+              "By running faster calculations",
+              "By identifying trends to forecast future values",
+              "By creating random patterns"
             ],
             correct: 2,
-            explanation: "Creating new patterns is not a challenge of pattern recognition. Pattern recognition focuses on identifying existing patterns rather than creating new ones."
+            explanation: "Pattern recognition helps AI make predictions by identifying trends in existing data, which can then be used to forecast future values or events."
           }
-        ],
-        interactiveQuiz: {
-          patternGames: {
-            enabled: true,
-            types: ["sequence", "visual", "audio"],
-            difficulty: "adaptive"
-          }
-        }
+        ]
       }
     },
     {
@@ -5078,11 +5335,20 @@ const module6 = {
   opacity: 1;
   transform: translateX(0) translateY(0);
 }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
 .stagger-children > *:nth-child(1) { transition-delay: 0.1s; }
 .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
 .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
 .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+
+
 ```
 
 # src/main.jsx
@@ -5163,7 +5429,7 @@ const ContactUs = () => {
       title: "Schedule a Call",
       description: "Book a quick call with our team",
       action: "Schedule Now",
-      link: "#schedule",
+      link: "https://calendly.com/luminai321",
       color: "pink"
     }
   ];
@@ -5171,9 +5437,9 @@ const ContactUs = () => {
   const socialLinks = [
     {
       icon: <Twitter className="w-5 h-5" />,
-      name: "Twitter",
-      handle: "@LuminAI",
-      link: "https://twitter.com/LuminAI"
+      name: "X",
+      handle: "@LuminLearningAI",
+      link: "https://x.com/LuminLearningAI"
     },
     {
       icon: <Linkedin className="w-5 h-5" />,
@@ -5485,8 +5751,9 @@ export default function Founders() {
 
 ```jsx
 import React, { useEffect } from 'react';
-import { ArrowRight, Check, Brain, Users, Rocket } from 'lucide-react';
-import '../styles/animations.css'; // Import the animations
+import { Link } from 'react-router-dom';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction } from 'lucide-react';
+import '../styles/animations.css';
 
 export default function HomePage() {
   useEffect(() => {
@@ -5523,20 +5790,6 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Search Bar */}
-          <div className="max-w-3xl mx-auto mb-16 animate-on-scroll">
-            <div className="bg-white/80 backdrop-blur-md rounded-full shadow-lg flex items-center p-2 mb-8 transition-all duration-300 hover:shadow-xl">
-              <input 
-                type="text" 
-                placeholder="Find AI Learning Resources..." 
-                className="flex-1 px-4 py-2 text-gray-500 outline-none text-lg bg-transparent"
-              />
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-md">
-                Explore →
-              </button>
-            </div>
-          </div>
-
           <div className="text-center mb-16 animate-on-scroll from-bottom">
             <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
               AI Education
@@ -5547,6 +5800,13 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 mb-8">
               Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
             </p>
+            <Link 
+              to="/learn" 
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+            >
+              Start Learning Now
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
 
           {/* Stats */}
@@ -5642,12 +5902,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
+            <Link 
+              to="/learn"
+              className="animate-on-scroll bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Brain className="w-6 h-6 text-blue-600" />
+                </div>
+                <span className="text-sm text-gray-500">8 weeks</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                AI Fundamentals
+              </h3>
+              <ul className="space-y-2">
+                {['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications'].map((topic) => (
+                  <li key={topic} className="flex items-center gap-2 text-gray-600">
+                    <Check className="w-4 h-4 text-green-500"/>
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+            </Link>
+
             {[
-              {
-                duration: '8 weeks',
-                title: 'AI Fundamentals',
-                topics: ['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications']
-              },
               {
                 duration: '10 weeks',
                 title: 'Deep Learning',
@@ -5658,76 +5936,86 @@ export default function HomePage() {
                 title: 'AI Applications',
                 topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
               }
-            ].map((course, index) => (
+            ].map((course) => (
               <div 
                 key={course.title} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                className="relative bg-white rounded-xl p-6 opacity-75 group"
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"/>
-                  <span className="text-sm text-gray-500">{course.duration}</span>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-yellow-100 px-4 py-2 rounded-full flex items-center gap-2">
+                    <Construction className="w-5 h-5 text-yellow-700" />
+                    <span className="text-yellow-700 font-medium">Coming Soon</span>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {course.title}
-                </h3>
-                <ul className="space-y-2">
-                  {course.topics.map((topic) => (
-                    <li key={topic} className="flex items-center gap-2 text-gray-600">
-                      <Check className="w-4 h-4 text-green-500"/>
-                      {topic}
-                    </li>
-                  ))}
-                </ul>
+                <div className="filter blur-[2px]">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"/>
+                    <span className="text-sm text-gray-500">{course.duration}</span>
+                  </div>
+                  <h3 className="text-xl font-semibold mb-4">
+                    {course.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {course.topics.map((topic) => (
+                      <li key={topic} className="flex items-center gap-2 text-gray-600">
+                        <Check className="w-4 h-4 text-green-500"/>
+                        {topic}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Student Success Stories */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">What Our Students Say</h2>
-            <p className="text-xl text-gray-600">Hear from our successful students</p>
+            <h2 className="text-4xl font-bold mb-4">Student Success Stories</h2>
+            <p className="text-xl text-gray-600">See how our students are changing the world</p>
           </div>
 
-          <div className="flex gap-8">
-            {[
-              {
-                name: 'Jane Doe',
-                role: 'AI Engineer',
-                quote: 'Lumin AI has transformed my career. The hands-on projects and expert guidance were invaluable.'
-              },
-              {
-                name: 'John Smith',
-                role: 'Data Scientist',
-                quote: 'The community support and real-world applications made learning AI enjoyable and effective.'
-              },
-              {
-                name: 'Emily Johnson',
-                role: 'Machine Learning Specialist',
-                quote: 'The curriculum is well-structured and the instructors are top-notch. Highly recommend Lumin AI!'
-              }
-            ].map((testimonial, index) => (
-              <div 
-                key={testimonial.name} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex-1 flex items-start gap-6 bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
-              >
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-4 mb-6">
                 <img 
-                  src="/api/placeholder/48/48" 
-                  alt={testimonial.name} 
-                  className="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  src="/api/placeholder/64/64" 
+                  alt="Arjun" 
+                  className="w-16 h-16 rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold mb-1 group-hover:text-blue-600 transition-colors duration-300">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-blue-600 text-sm mb-3">{testimonial.role}</p>
-                  <p className="text-gray-600">{testimonial.quote}</p>
+                  <h3 className="text-xl font-semibold">Arjun Patel</h3>
+                  <p className="text-blue-600">AI Innovator, Age 14</p>
                 </div>
               </div>
-            ))}
+              <p className="text-gray-600 leading-relaxed">
+                "Through Lumin AI's program, I developed an AI model to predict water quality in local rivers. The project 
+                won first place at my regional science fair and is now being considered for implementation by local 
+                environmental agencies."
+              </p>
+            </div>
+
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-4 mb-6">
+                <img 
+                  src="/api/placeholder/64/64" 
+                  alt="Miguel" 
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">Miguel Santos</h3>
+                  <p className="text-blue-600">Student Developer, Age 14</p>
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed">
+                "Using Lumin AI's program, I built my first machine learning model to identify different types of 
+                local plants in my community in Brazil. It started as a small project but now I'm working with my 
+                science teacher to expand it into a learning tool for younger students."
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -5747,6 +6035,7 @@ import LessonView from '../components/course/LessonView';
 import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
+import PathView from '../components/course/PathView';  // Add this import
 import courseData from '../data/courseData';
 
 export default function Learn() {
@@ -5756,6 +6045,7 @@ export default function Learn() {
   const [showFinalExam, setShowFinalExam] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
+  const [showLearningPath, setShowLearningPath] = useState(false);  // Add this state
 
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('courseProgress');
@@ -5850,6 +6140,24 @@ export default function Learn() {
               progress={progress}
               onBack={() => setShowCertificate(false)}
             />
+          ) : showLearningPath ? (  // Add this condition
+            <>
+              <button
+                onClick={() => setShowLearningPath(false)}
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                Back to Course
+              </button>
+              <PathView 
+                modules={courseData.modules}
+                progress={progress}
+                setActiveLesson={(lesson) => {
+                  setActiveLesson(lesson);
+                  setShowLearningPath(false);
+                }}
+              />
+            </>
           ) : (
             <div className="grid grid-cols-12 gap-8">
               {/* Sidebar Toggle (Mobile) */}
@@ -5909,7 +6217,7 @@ export default function Learn() {
                       </button>
                       
                       <button 
-                        onClick={() => setShowCertificate(true)}
+                        onClick={() => progress.finalExamScore >= 60 ? setShowCertificate(true) : null}
                         disabled={!progress.finalExamScore || progress.finalExamScore < 60}
                         className={`p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3 ${
                           (!progress.finalExamScore || progress.finalExamScore < 60) ? 'opacity-50 cursor-not-allowed' : ''
@@ -5917,11 +6225,14 @@ export default function Learn() {
                       >
                         <Award className="w-5 h-5 text-green-500" />
                         <span>Certificate</span>
+                        {(!progress.finalExamScore || progress.finalExamScore < 60) && (
+                          <span className="text-sm text-red-500 ml-2">(Pass exam first)</span>
+                        )}
                       </button>
                       
                       <button 
                         className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
-                        onClick={() => setActiveModule(courseData.modules[0].id)}
+                        onClick={() => setShowLearningPath(true)}  // Update this onClick
                       >
                         <Brain className="w-5 h-5 text-blue-500" />
                         <span>Learning Path</span>
@@ -6081,7 +6392,7 @@ export default function SummerProgram() {
             <div className="animate-on-scroll from-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
                 <Star className="w-4 h-4" />
-                Applications Open for Summer 2024
+                Applications Open for Summer 2025
               </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
                 Transform Your Summer with
@@ -6094,7 +6405,7 @@ export default function SummerProgram() {
               </p>
               <div className="flex gap-4">
                 <a 
-                  href="https://forms.google.com/your-form-link" 
+                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -6273,9 +6584,6 @@ export default function SummerProgram() {
               Apply Now
               <ArrowRight className="w-5 h-5" />
             </a>
-            <button className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-white text-white hover:bg-white/10 transition-all duration-300">
-              Learn More
-            </button>
           </div>
         </div>
       </section>
@@ -6287,170 +6595,170 @@ export default function SummerProgram() {
 # src/pages/Team.jsx
 
 ```jsx
-import React, { useState } from 'react';
-import { MapPin, Users, Building, Sparkles } from 'lucide-react';
+// import React, { useState } from 'react';
+// import { MapPin, Users, Building, Sparkles } from 'lucide-react';
 
-const chapters = [
-  {
-    name: "Bay Area Chapter",
-    location: "San Francisco, CA",
-    description: "Leading innovation in AI education across Silicon Valley",
-    members: [
-      { name: "Alex Chen", role: "Chapter Lead", image: "/api/placeholder/64/64" },
-      { name: "Sarah Johnson", role: "Education Director", image: "/api/placeholder/64/64" },
-      { name: "James Wilson", role: "Technical Lead", image: "/api/placeholder/64/64" },
-      { name: "Maya Patel", role: "Outreach Coordinator", image: "/api/placeholder/64/64" }
-    ]
-  },
-  {
-    name: "New York Chapter",
-    location: "New York, NY",
-    description: "Bringing AI education to the heart of the East Coast",
-    members: [
-      { name: "David Kim", role: "Chapter Lead", image: "/api/placeholder/64/64" },
-      { name: "Emily Rodriguez", role: "Education Director", image: "/api/placeholder/64/64" },
-      { name: "Michael Chang", role: "Technical Lead", image: "/api/placeholder/64/64" },
-      { name: "Sofia Martinez", role: "Community Manager", image: "/api/placeholder/64/64" }
-    ]
-  },
-  {
-    name: "Texas Chapter",
-    location: "Austin, TX",
-    description: "Fostering AI innovation in the Lone Star State",
-    members: [
-      { name: "Robert Turner", role: "Chapter Lead", image: "/api/placeholder/64/64" },
-      { name: "Lisa Wang", role: "Education Director", image: "/api/placeholder/64/64" },
-      { name: "Chris Anderson", role: "Technical Lead", image: "/api/placeholder/64/64" },
-      { name: "Emma Davis", role: "Events Coordinator", image: "/api/placeholder/64/64" }
-    ]
-  }
-];
+// const chapters = [
+//   {
+//     name: "Bay Area Chapter",
+//     location: "San Francisco, CA",
+//     description: "Leading innovation in AI education across Silicon Valley",
+//     members: [
+//       { name: "Alex Chen", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+//       { name: "Sarah Johnson", role: "Education Director", image: "/api/placeholder/64/64" },
+//       { name: "James Wilson", role: "Technical Lead", image: "/api/placeholder/64/64" },
+//       { name: "Maya Patel", role: "Outreach Coordinator", image: "/api/placeholder/64/64" }
+//     ]
+//   },
+//   {
+//     name: "New York Chapter",
+//     location: "New York, NY",
+//     description: "Bringing AI education to the heart of the East Coast",
+//     members: [
+//       { name: "David Kim", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+//       { name: "Emily Rodriguez", role: "Education Director", image: "/api/placeholder/64/64" },
+//       { name: "Michael Chang", role: "Technical Lead", image: "/api/placeholder/64/64" },
+//       { name: "Sofia Martinez", role: "Community Manager", image: "/api/placeholder/64/64" }
+//     ]
+//   },
+//   {
+//     name: "Texas Chapter",
+//     location: "Austin, TX",
+//     description: "Fostering AI innovation in the Lone Star State",
+//     members: [
+//       { name: "Robert Turner", role: "Chapter Lead", image: "/api/placeholder/64/64" },
+//       { name: "Lisa Wang", role: "Education Director", image: "/api/placeholder/64/64" },
+//       { name: "Chris Anderson", role: "Technical Lead", image: "/api/placeholder/64/64" },
+//       { name: "Emma Davis", role: "Events Coordinator", image: "/api/placeholder/64/64" }
+//     ]
+//   }
+// ];
 
-export default function Team() {
-  const [activeChapter, setActiveChapter] = useState(chapters[0]);
-  const [hoveredMember, setHoveredMember] = useState(null);
+// export default function Team() {
+//   const [activeChapter, setActiveChapter] = useState(chapters[0]);
+//   const [hoveredMember, setHoveredMember] = useState(null);
 
-  return (
-    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
-      </div>
+//   return (
+//     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+//       {/* Background effects */}
+//       <div className="fixed inset-0 overflow-hidden pointer-events-none">
+//         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
+//         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
+//         <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
+//       </div>
 
-      <div className="pt-32 pb-24 relative">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold mb-4">Our Team</h1>
-            <p className="text-xl text-gray-600">
-              Meet the dedicated individuals bringing AI education to your community
-            </p>
-          </div>
+//       <div className="pt-32 pb-24 relative">
+//         <div className="max-w-7xl mx-auto px-4">
+//           {/* Header */}
+//           <div className="text-center mb-16">
+//             <h1 className="text-4xl font-bold mb-4">Our Team</h1>
+//             <p className="text-xl text-gray-600">
+//               Meet the dedicated individuals bringing AI education to your community
+//             </p>
+//           </div>
 
-          {/* Chapter Stats */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                <Building className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">{chapters.length}</h3>
-              <p className="text-gray-600">Active Chapters</p>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                <Users className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">
-                {chapters.reduce((acc, chapter) => acc + chapter.members.length, 0)}
-              </h3>
-              <p className="text-gray-600">Team Members</p>
-            </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-pink-600" />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">1000+</h3>
-              <p className="text-gray-600">Students Impacted</p>
-            </div>
-          </div>
+//           {/* Chapter Stats */}
+//           <div className="grid md:grid-cols-3 gap-8 mb-16">
+//             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+//               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+//                 <Building className="w-6 h-6 text-blue-600" />
+//               </div>
+//               <h3 className="text-2xl font-bold mb-2">{chapters.length}</h3>
+//               <p className="text-gray-600">Active Chapters</p>
+//             </div>
+//             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+//               <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+//                 <Users className="w-6 h-6 text-purple-600" />
+//               </div>
+//               <h3 className="text-2xl font-bold mb-2">
+//                 {chapters.reduce((acc, chapter) => acc + chapter.members.length, 0)}
+//               </h3>
+//               <p className="text-gray-600">Team Members</p>
+//             </div>
+//             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+//               <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+//                 <Sparkles className="w-6 h-6 text-pink-600" />
+//               </div>
+//               <h3 className="text-2xl font-bold mb-2">1000+</h3>
+//               <p className="text-gray-600">Students Impacted</p>
+//             </div>
+//           </div>
 
-          {/* Chapter Selection */}
-          <div className="flex justify-center mb-16">
-            <div className="inline-flex rounded-lg bg-white shadow-sm p-2">
-              {chapters.map((chapter) => (
-                <button
-                  key={chapter.name}
-                  onClick={() => setActiveChapter(chapter)}
-                  className={`px-6 py-3 rounded-lg transition-all duration-300 ${
-                    activeChapter.name === chapter.name
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 hover:text-blue-600'
-                  }`}
-                >
-                  {chapter.name}
-                </button>
-              ))}
-            </div>
-          </div>
+//           {/* Chapter Selection */}
+//           <div className="flex justify-center mb-16">
+//             <div className="inline-flex rounded-lg bg-white shadow-sm p-2">
+//               {chapters.map((chapter) => (
+//                 <button
+//                   key={chapter.name}
+//                   onClick={() => setActiveChapter(chapter)}
+//                   className={`px-6 py-3 rounded-lg transition-all duration-300 ${
+//                     activeChapter.name === chapter.name
+//                       ? 'bg-blue-600 text-white'
+//                       : 'text-gray-600 hover:text-blue-600'
+//                   }`}
+//                 >
+//                   {chapter.name}
+//                 </button>
+//               ))}
+//             </div>
+//           </div>
 
-          {/* Active Chapter Display */}
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Chapter Header */}
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  <MapPin className="w-5 h-5" />
-                  <span>{activeChapter.location}</span>
-                </div>
-                <h2 className="text-3xl font-bold mb-2">{activeChapter.name}</h2>
-                <p className="text-blue-100">{activeChapter.description}</p>
-              </div>
+//           {/* Active Chapter Display */}
+//           <div className="max-w-4xl mx-auto">
+//             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+//               {/* Chapter Header */}
+//               <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white">
+//                 <div className="flex items-center gap-2 mb-2">
+//                   <MapPin className="w-5 h-5" />
+//                   <span>{activeChapter.location}</span>
+//                 </div>
+//                 <h2 className="text-3xl font-bold mb-2">{activeChapter.name}</h2>
+//                 <p className="text-blue-100">{activeChapter.description}</p>
+//               </div>
 
-              {/* Team Members */}
-              <div className="p-8">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {activeChapter.members.map((member, index) => (
-                    <div 
-                      key={member.name}
-                      className="group bg-gray-50 rounded-xl p-6 hover:bg-blue-50 transition-all duration-300 hover:shadow-md"
-                      onMouseEnter={() => setHoveredMember(member.name)}
-                      onMouseLeave={() => setHoveredMember(null)}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden group-hover:scale-110 transition-transform duration-300">
-                          <img 
-                            src={member.image} 
-                            alt={member.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-semibold group-hover:text-blue-600 transition-colors duration-300">
-                            {member.name}
-                          </h3>
-                          <p className="text-gray-600">{member.role}</p>
-                        </div>
-                      </div>
-                      <div className={`mt-4 overflow-hidden transition-all duration-300 ${
-                        hoveredMember === member.name ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
-                      }`}>
-                        <p className="text-sm text-gray-600">
-                          Passionate about bringing AI education to students and building the next generation of innovators.
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+//               {/* Team Members */}
+//               <div className="p-8">
+//                 <div className="grid md:grid-cols-2 gap-6">
+//                   {activeChapter.members.map((member, index) => (
+//                     <div 
+//                       key={member.name}
+//                       className="group bg-gray-50 rounded-xl p-6 hover:bg-blue-50 transition-all duration-300 hover:shadow-md"
+//                       onMouseEnter={() => setHoveredMember(member.name)}
+//                       onMouseLeave={() => setHoveredMember(null)}
+//                     >
+//                       <div className="flex items-center gap-4">
+//                         <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+//                           <img 
+//                             src={member.image} 
+//                             alt={member.name}
+//                             className="w-full h-full object-cover"
+//                           />
+//                         </div>
+//                         <div>
+//                           <h3 className="text-lg font-semibold group-hover:text-blue-600 transition-colors duration-300">
+//                             {member.name}
+//                           </h3>
+//                           <p className="text-gray-600">{member.role}</p>
+//                         </div>
+//                       </div>
+//                       <div className={`mt-4 overflow-hidden transition-all duration-300 ${
+//                         hoveredMember === member.name ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
+//                       }`}>
+//                         <p className="text-sm text-gray-600">
+//                           Passionate about bringing AI education to students and building the next generation of innovators.
+//                         </p>
+//                       </div>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 ```
 
 # src/styles/animations.css
