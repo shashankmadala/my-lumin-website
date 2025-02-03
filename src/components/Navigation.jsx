@@ -46,14 +46,18 @@ export default function Navigation() {
           <div className="flex items-center gap-2 group">
             <Link to="/" className="flex items-center gap-2">
               <div className="w-8 h-8 relative overflow-hidden">
-                <div className="w-8 h-8 rounded-full bg-blue-600 group-hover:scale-110 transition-transform duration-300"/>
+                <img 
+                  src="/images/lumin.png" 
+                  alt="Lumin AI Logo" 
+                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
               <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                 Lumin AI
               </span>
             </Link>
           </div>
-//test
+
           {/* Navigation Links */}
           <div className="flex ml-8 gap-6">
             {links.map((link) => (
