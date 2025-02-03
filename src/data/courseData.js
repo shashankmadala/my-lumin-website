@@ -9,7 +9,7 @@ import module6 from './modules/module6.js';
 
 
 const courseData = {
-  title: "AI 101: Foundations of Artificial Intelligence",
+  title: "AI Fundamentals",
   description: "Master the fundamentals of artificial intelligence and machine learning",
   modules: [module1,module2,module3,module4,module5,module6]
 };

@@ -88,13 +88,13 @@ const Certificate = ({ progress, onBack }) => {
           
           <div className="text-center relative">
             <div className="text-4xl font-serif text-gray-900 mb-4">Certificate of Completion</div>
-            <div className="text-xl text-gray-600 mb-8">AI 101: Foundations of Artificial Intelligence</div>
+            <div className="text-xl text-gray-600 mb-8">AI Fundamentals</div>
 
             <div className="text-xl mb-2">This certifies that</div>
             <div className="text-3xl font-bold text-blue-600 mb-8">{studentName}</div>
 
             <div className="text-lg mb-8">
-              has successfully completed the AI 101 Course
+              has successfully completed the AI Fundamentals Course
             </div>
 
             <div className="text-gray-600 mb-12">{currentDate}</div>
