@@ -158,7 +158,7 @@ export default function HomePage() {
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Brain className="w-6 h-6 text-blue-600" />
                 </div>
-                <span className="text-sm text-gray-500">8 weeks</span>
+                <span className="text-sm text-gray-500">3 weeks</span>
               </div>
               <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
                 AI Fundamentals
@@ -175,12 +175,12 @@ export default function HomePage() {
 
             {[
               {
-                duration: '10 weeks',
+                duration: '3 weeks',
                 title: 'Deep Learning',
                 topics: ['Neural Architecture', 'Computer Vision', 'Natural Language Processing', 'Advanced Topics']
               },
               {
-                duration: '12 weeks',
+                duration: '4 weeks',
                 title: 'AI Applications',
                 topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
               }
