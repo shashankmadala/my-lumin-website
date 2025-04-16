@@ -36,7 +36,7 @@ const module4 = {
       {
         id: "4.1",
         title: "Computer Vision Fundamentals",
-        duration: "40 min",
+        duration: "15 min",
         article: `Computer vision is a field of Artificial Intelligence (AI) that enables machines to interpret and analyze visual information from the world, such as images or videos. This technology powers many applications, from facial recognition to self-driving cars. Understanding the basics of computer vision helps us see how machines can "see" and interact with their environments.
   
   Unlike humans, machines rely on algorithms and data to make sense of visual information. These algorithms process pixels in images to identify patterns and extract meaning.
@@ -124,7 +124,7 @@ const module4 = {
       {
         id: "4.2",
         title: "Natural Language Processing",
-        duration: "35 min",
+        duration: "10 min",
         article: `Natural Language Processing (NLP) is a branch of Artificial Intelligence (AI) that focuses on enabling machines to understand, interpret, and generate human language. From voice assistants to translation tools, NLP powers many of the technologies we use every day.
   
   What Is Natural Language Processing?
@@ -220,7 +220,7 @@ const module4 = {
       {
         id: "4.3",
         title: "Robotics Fundamentals",
-        duration: "45 min",
+        duration: "20 min",
         article: `Robotics is an interdisciplinary field combining mechanical engineering, electrical engineering, and computer science to create machines that can perform tasks autonomously or semi-autonomously. When integrated with Artificial Intelligence (AI), robotics becomes even more powerful, enabling robots to learn, adapt, and interact with their environments.
   
   What Are Robots?
@@ -319,7 +319,7 @@ const module4 = {
       {
         id: "4.4",
         title: "AI in Gaming",
-        duration: "40 min",
+        duration: "15 min",
         article: `Artificial Intelligence (AI) is revolutionizing the gaming industry, creating more immersive and challenging experiences for players. From designing intelligent opponents to generating entire game worlds, AI enhances both the development process and gameplay itself.
   
   What Is AI in Gaming?

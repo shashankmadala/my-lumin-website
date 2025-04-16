@@ -28,7 +28,7 @@ const module3 = {
       {
         id: "3.1",
         title: "Types of AI Systems",
-        duration: "35 min",
+        duration: "20 min",
         article: `Artificial Intelligence (AI) is not just one system or technology; it encompasses a wide range of systems with varying capabilities and functionalities. Understanding the different types of AI systems can help us see how they are designed, what they can do, and how they are applied in the real world.
   
   Reactive Machines
@@ -95,7 +95,7 @@ const module3 = {
       {
         id: "3.2",
         title: "Basic Algorithms in AI",
-        duration: "40 min",
+        duration: "20 min",
         article: `Algorithms are the foundation of Artificial Intelligence (AI) and Machine Learning (ML). They are sets of instructions that guide computers in solving problems and making decisions. Understanding basic algorithms helps us see how AI systems learn, adapt, and improve.
   
   What Is an Algorithm?
@@ -172,7 +172,7 @@ const module3 = {
       {
         id: "3.3",
         title: "Data Collection and Processing",
-        duration: "35 min",
+        duration: "15 min",
         article: `Data is the lifeblood of Artificial Intelligence (AI) systems. Before an AI can learn, predict, or make decisions, it needs data—lots of it. But raw data is rarely ready for immediate use. It must be collected, cleaned, and processed to ensure it's accurate and useful.
   
   Why Is Data Collection Important?
@@ -245,7 +245,7 @@ const module3 = {
       {
         id: "3.4",
         title: "Neural Networks Fundamentals",
-        duration: "45 min",
+        duration: "20 min",
         article: `Neural networks are a cornerstone of modern Artificial Intelligence (AI). Inspired by the structure of the human brain, neural networks enable machines to recognize patterns, process data, and make decisions.
   
   What Is a Neural Network?

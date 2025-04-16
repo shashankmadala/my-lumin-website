@@ -28,7 +28,7 @@ const module2 = {
       {
         id: "2.1",
         title: "Introduction to Training Data",
-        duration: "35 min",
+        duration: "15 min",
         interactive: {
           dataCollector: {
             type: "interactive",
@@ -147,7 +147,7 @@ const module2 = {
       {
         id: "2.2",
         title: "Pattern Matching Exercises",
-        duration: "40 min",
+        duration: "15 min",
         interactive: {
           patternMatcher: {
             type: "game",
@@ -268,7 +268,7 @@ const module2 = {
       {
         id: "2.3",
         title: "Simple Decision Trees",
-        duration: "35 min",
+        duration: "15 min",
         interactive: {
           treeBuilder: {
             type: "interactive",
@@ -369,7 +369,7 @@ const module2 = {
       {
         id: "2.4",
         title: "Supervised vs. Unsupervised Learning",
-        duration: "40 min",
+        duration: "15 min",
         interactive: {
           learningLab: {
             type: "comparative",

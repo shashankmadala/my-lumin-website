@@ -32,7 +32,7 @@ const module6 = {
       {
         id: "6.1",
         title: "Emerging AI Technologies",
-        duration: "45 min",
+        duration: "20 min",
         interactive: {
           quantumDemo: {
             type: "simulation",
@@ -139,7 +139,7 @@ const module6 = {
       {
         id: "6.2",
         title: "AI Ethics and Society",
-        duration: "40 min",
+        duration: "15 min",
         interactive: {
           ethicsSimulator: {
             type: "scenario-based",
@@ -229,7 +229,7 @@ const module6 = {
       {
         id: "6.3",
         title: "Future Applications",
-        duration: "35 min",
+        duration: "10 min",
         interactive: {
           applicationExplorer: {
             type: "interactive",

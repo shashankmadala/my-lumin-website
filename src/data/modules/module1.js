@@ -28,7 +28,7 @@ const module1 = {
     {
       id: "1.1",
       title: "What is Artificial Intelligence?",
-      duration: "30 min",
+      duration: "15 min",
       interactive: {
         primaryDemo: {
           type: "aiSimulation",
@@ -136,7 +136,7 @@ Core Subfields:
     {
       id: "1.2",
       title: "Finding AI in Everyday Life",
-      duration: "35 min",
+      duration: "15 min",
       interactive: {
         virtualEnvironment: {
           type: "3dExploration",
@@ -273,7 +273,7 @@ Everyday Applications of AI:
     {
       id: "1.3",
       title: "Simple Pattern Recognition Activities",
-      duration: "40 min",
+      duration: "20 min",
       interactive: {
         patternGame: {
           type: "interactive",
@@ -381,7 +381,7 @@ Everyday Applications of AI:
     {
       id: "1.4",
       title: "Basic Machine Learning Concepts Through Games",
-      duration: "45 min",
+      duration: "15 min",
       interactive: {
         mlPlayground: {
           type: "sandbox",

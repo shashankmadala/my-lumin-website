@@ -32,7 +32,7 @@ const module5 = {
       {
         id: "5.1",
         title: "Understanding Bias in AI",
-        duration: "40 min",
+        duration: "15 min",
         article: `Bias in Artificial Intelligence (AI) systems refers to instances where the decisions or predictions made by AI models are unfairly influenced by skewed or incomplete data. Understanding bias is critical for creating AI systems that are accurate, fair, and inclusive.
   
   What Causes Bias in AI?
@@ -111,7 +111,7 @@ const module5 = {
       {
         id: "5.2",
         title: "Privacy and Data Protection",
-        duration: "35 min",
+        duration: "15 min",
         article: `Privacy is a critical concern in the development and use of Artificial Intelligence (AI). As AI systems rely on large amounts of data to function effectively, protecting individuals' personal information and ensuring ethical data practices are essential for building trust and preventing harm.
   
   Why Is Privacy Important in AI?
@@ -198,7 +198,7 @@ const module5 = {
       {
         id: "5.3",
         title: "Digital Citizenship and AI",
-        duration: "35 min",
+        duration: "15 min",
         article: `Digital citizenship refers to the responsible and ethical use of technology in online interactions and activities. As Artificial Intelligence (AI) increasingly shapes the digital world, understanding digital citizenship is essential for fostering safe, respectful, and productive online behaviors.
   
   What Is Digital Citizenship?
@@ -283,7 +283,7 @@ const module5 = {
       {
         id: "5.4",
         title: "Career Opportunities in AI",
-        duration: "45 min",
+        duration: "20 min",
         article: `Artificial Intelligence (AI) is one of the most rapidly growing fields, offering diverse career opportunities across industries. From developing cutting-edge algorithms to applying AI in healthcare or entertainment, AI careers are dynamic, innovative, and impactful.
   
   Key Career Paths:
