@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, Book, Trophy, ArrowLeft, Award } from 'lucide-react';
+import { Brain, Book, Trophy, ArrowLeft, Award, BookOpen, Code, Check } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import ModuleList from '../components/course/ModuleList';
 import LessonView from '../components/course/LessonView';
 import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
-import PathView from '../components/course/PathView';  // Add this import
+import PathView from '../components/course/PathView';
+import ImageClassifier from '../components/projects/ImageClassifier';
 import courseData from '../data/courseData';
 
 export default function Learn() {
@@ -16,7 +17,8 @@ export default function Learn() {
   const [showFinalExam, setShowFinalExam] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [showLearningPath, setShowLearningPath] = useState(false);  // Add this state
+  const [showLearningPath, setShowLearningPath] = useState(false);
+  const [showImageClassifier, setShowImageClassifier] = useState(false);
 
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('courseProgress');
@@ -29,7 +31,8 @@ export default function Learn() {
       badges: [],
       finalExamScore: null,
       certificateIssued: false,
-      examAttempts: 0
+      examAttempts: 0,
+      completedProjects: []
     };
   });
 
@@ -87,6 +90,23 @@ export default function Learn() {
     setShowFinalExam(false);
   };
 
+  const handleProjectCompletion = (projectData) => {
+    setProgress(prev => ({
+      ...prev,
+      completedProjects: [...(prev.completedProjects || []), {
+        id: 'image-classifier',
+        completedDate: new Date().toISOString(),
+        data: projectData
+      }]
+    }));
+    setShowImageClassifier(false);
+  };
+
+  const isProjectCompleted = (projectId) => {
+    if (!progress.completedProjects) return false;
+    return progress.completedProjects.some(project => project.id === projectId);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -111,7 +131,7 @@ export default function Learn() {
               progress={progress}
               onBack={() => setShowCertificate(false)}
             />
-          ) : showLearningPath ? (  // Add this condition
+          ) : showLearningPath ? (
             <>
               <button
                 onClick={() => setShowLearningPath(false)}
@@ -129,6 +149,11 @@ export default function Learn() {
                 }}
               />
             </>
+          ) : showImageClassifier ? (
+            <ImageClassifier 
+              onComplete={handleProjectCompletion}
+              onBack={() => setShowImageClassifier(false)}
+            />
           ) : (
             <div className="grid grid-cols-12 gap-8">
               {/* Sidebar Toggle (Mobile) */}
@@ -203,20 +228,71 @@ export default function Learn() {
                       
                       <button 
                         className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
-                        onClick={() => setShowLearningPath(true)}  // Update this onClick
+                        onClick={() => setShowLearningPath(true)}
                       >
                         <Brain className="w-5 h-5 text-blue-500" />
                         <span>Learning Path</span>
                       </button>
                     </div>
 
+                    {/* Course Title - Only show once here */}
+                    <div className="text-center mb-12">
+                      <h1 className="text-4xl font-bold text-gray-900 mb-4">AI Fundamentals</h1>
+                      <p className="text-xl text-gray-600">Master the fundamentals of artificial intelligence and machine learning</p>
+                    </div>
+
                     {/* Module List */}
                     <ModuleList 
-                      modules={courseData.modules}
+                      modules={courseData.modules.slice(0, 2)}
                       progress={progress}
                       activeModule={activeModule}
                       setActiveModule={setActiveModule}
                       setActiveLesson={setActiveLesson}
+                      showTitle={false}
+                    />
+
+                    {/* Image Classification Project */}
+                    <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                      <button
+                        onClick={() => setShowImageClassifier(true)}
+                        className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="relative">
+                            <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl flex items-center justify-center">
+                              <Code className="w-6 h-6 text-blue-600" />
+                            </div>
+                            {isProjectCompleted('image-classifier') && (
+                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                                <Check className="w-4 h-4 text-green-500" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="text-left">
+                            <div className="flex items-center gap-2">
+                              <h3 className="text-lg font-semibold">
+                                Project: Image Classification
+                              </h3>
+                            </div>
+                            <div className="flex items-center gap-4">
+                              <p className="text-gray-600">Apply your knowledge with a hands-on project</p>
+                              <span className="text-sm text-gray-500">
+                                {isProjectCompleted('image-classifier') ? 'Completed' : 'Not started'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Remaining Modules */}
+                    <ModuleList 
+                      modules={courseData.modules.slice(2)}
+                      progress={progress}
+                      activeModule={activeModule}
+                      setActiveModule={setActiveModule}
+                      setActiveLesson={setActiveLesson}
+                      showTitle={false}
                     />
                   </div>
                 )}

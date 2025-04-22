@@ -29,351 +29,233 @@ const module1 = {
       id: "1.1",
       title: "What is Artificial Intelligence?",
       duration: "15 min",
-      interactive: {
-        primaryDemo: {
-          type: "aiSimulation",
-          title: "AI Decision Making",
-          interface: {
-            input: {
-              type: "imageUpload",
-              accept: "image/*",
-              placeholder: "Upload an image to see AI in action"
-            },
-            process: {
-              visualizer: {
-                type: "networkGraph",
-                animate: true,
-                showSteps: true
-              }
-            },
-            output: {
-              display: "results",
-              showConfidence: true
-            }
-          }
-        },
-        conceptExplorer: {
-          type: "interactiveMap",
-          title: "AI Concepts Explorer",
-          elements: [
-            {
-              id: "narrow-ai",
-              title: "Narrow AI",
-              examples: ["Siri", "Chess AI", "Image Recognition"],
-              interactive: true
-            },
-            {
-              id: "general-ai",
-              title: "General AI",
-              description: "Human-level intelligence",
-              status: "theoretical"
-            },
-            {
-              id: "super-ai",
-              title: "Superintelligent AI",
-              description: "Beyond human capabilities",
-              status: "future"
-            }
-          ]
-        }
-      },
-      article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations.
+      article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations. AI operates on algorithms—a set of instructions that tell machines how to perform tasks—and leverages vast amounts of data to improve its accuracy and efficiency over time.
 
 Breaking Down AI
 At its core, AI is built on a few key ideas:
 
-Algorithms: Step-by-step instructions that tell a computer how to solve a problem. In AI, these algorithms are designed to adapt and improve over time by learning from data.
+Categories of AI
+AI can be broadly categorized into three types based on its capabilities:
 
-Data: Data is the fuel for AI. Machines learn patterns and make predictions based on the data they are fed. The more data, the better AI systems can perform.
+Narrow AI (Weak AI): Designed for specific tasks, narrow AI systems are highly proficient within their domain but cannot perform beyond it. Examples include voice assistants like Siri and Alexa, facial recognition software, and recommendation systems such as those used by Netflix and Spotify.
 
-Learning: AI systems can "learn" from examples. For example, if you show an AI hundreds of pictures of cats and dogs, it can learn to tell the difference between them.
+General AI (Strong AI): A theoretical concept, general AI refers to machines with the ability to understand, learn, and perform any intellectual task that a human can. Such systems would exhibit self-awareness and the ability to transfer knowledge across different domains. Achieving general AI remains a significant challenge for researchers.
 
-Types of AI:
-1. Narrow AI (Weak AI): Designed for specific tasks
-2. General AI (Strong AI): Theoretical human-level intelligence
-3. Superintelligent AI: Beyond human capabilities
+Superintelligent AI: This theoretical stage of AI would surpass human intelligence in all respects, including creativity, problem-solving, and understanding emotions. While it could revolutionize fields like healthcare and space exploration, it also raises ethical concerns and potential risks.
 
-Core Subfields:
-• Machine Learning (ML)
-• Natural Language Processing (NLP)
-• Computer Vision
-• Robotics`,
+Core Subfields of AI
+AI encompasses several specialized subfields, including:
+
+Machine Learning (ML): Focuses on enabling machines to learn from data and improve over time without explicit programming.
+Natural Language Processing (NLP): Involves teaching machines to understand and generate human language, as seen in chatbots and translation software.
+Computer Vision: Enables machines to interpret and analyze visual data from the world.
+Robotics: Combines AI with engineering to create systems that can perform tasks in the physical world.
+
+Why Learn About AI?
+AI is everywhere in today's world. It powers your smartphone's predictive text, helps doctors diagnose diseases, and even enables self-driving cars. Learning about AI can help you understand the technology shaping the future and inspire you to create or work with AI systems yourself.
+
+How AI Works: A Simple Example
+Imagine you're teaching a computer to recognize whether a photo contains a dog or a cat. Here's how AI approaches the problem:
+1. Input Data: You collect hundreds or thousands of labeled photos. Some are labeled "cat," and others are labeled "dog."
+2. Training the Model: You feed these photos into an algorithm, which studies the differences in patterns (like fur texture, ear shape, etc.) between cats and dogs.
+3. Testing: Once trained, the model is tested with new photos to see if it can correctly identify cats and dogs it hasn't seen before.
+4. Improvement: If the model makes mistakes, you provide more data or adjust its algorithm to improve accuracy.`,
       quiz: {
         questions: [
           {
-            question: "What is the primary purpose of Artificial Intelligence?",
+            question: "What are the three main categories of AI?",
             options: [
-              "To perform tasks that typically require human intelligence",
-              "To replace all human jobs",
-              "To store large amounts of data",
-              "To make computers run faster"
+              "Narrow AI, General AI, and Superintelligent AI",
+              "Basic AI, Advanced AI, and Expert AI",
+              "Learning AI, Teaching AI, and Working AI",
+              "Simple AI, Complex AI, and Super AI"
             ],
             correct: 0,
-            explanation: "AI's primary purpose is to develop systems capable of performing tasks that traditionally require human intelligence, such as problem-solving, pattern recognition, and language understanding."
+            explanation: "AI is categorized into Narrow AI (specific tasks), General AI (human-level intelligence), and Superintelligent AI (beyond human capabilities)."
           },
           {
-            question: "Which of these is NOT one of the main types of AI discussed?",
+            question: "Which of these is NOT a core subfield of AI?",
             options: [
-              "Narrow AI",
-              "General AI",
-              "Quantum AI",
-              "Superintelligent AI"
+              "Machine Learning",
+              "Natural Language Processing",
+              "Digital Marketing",
+              "Computer Vision"
             ],
             correct: 2,
-            explanation: "The three main types of AI discussed are Narrow AI (Weak AI), General AI (Strong AI), and Superintelligent AI. Quantum AI was not mentioned as one of the main types."
+            explanation: "While AI can be applied to digital marketing, it is not a core subfield of AI. The main subfields include Machine Learning, NLP, Computer Vision, and Robotics."
+          },
+          {
+            question: "In the cat-dog recognition example, what is the first step in teaching AI to recognize images?",
+            options: [
+              "Testing the model",
+              "Collecting labeled photos",
+              "Improving accuracy",
+              "Adjusting algorithms"
+            ],
+            correct: 1,
+            explanation: "The first step is collecting labeled data (Input Data) - in this case, photos labeled as either 'cat' or 'dog' to train the AI model."
           }
-        ],
-        interactiveQuiz: {
-          enabled: true,
-          features: {
-            conceptMapping: true,
-            instantFeedback: true,
-            visualExplanations: true
-          }
-        }
+        ]
       }
     },
     {
       id: "1.2",
       title: "Finding AI in Everyday Life",
       duration: "15 min",
-      interactive: {
-        virtualEnvironment: {
-          type: "3dExploration",
-          title: "AI in Your World",
-          scenes: [
-            {
-              id: "smart-home",
-              type: "interactive",
-              devices: [
-                {
-                  id: "smart-speaker",
-                  type: "voice-assistant",
-                  interactions: ["command", "response"],
-                  demo: true
-                },
-                {
-                  id: "smart-thermostat",
-                  type: "learning-system",
-                  features: ["pattern-recognition", "automation"],
-                  demo: true
-                }
-              ]
-            },
-            {
-              id: "smartphone",
-              type: "interactive",
-              features: [
-                {
-                  id: "text-prediction",
-                  type: "nlp",
-                  demo: true
-                },
-                {
-                  id: "face-recognition",
-                  type: "computer-vision",
-                  demo: true
-                }
-              ]
-            }
-          ]
-        },
-        aiSpotter: {
-          type: "game",
-          title: "Spot the AI",
-          challenges: [
-            {
-              scene: "daily-life",
-              objective: "Find 5 AI applications",
-              hints: true
-            },
-            {
-              scene: "technology",
-              objective: "Identify AI features",
-              hints: true
-            }
-          ]
-        }
-      },
-      article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere.
+      article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere. Understanding where and how AI is used can help you appreciate its importance and see its potential to shape the future.
 
-Everyday Applications of AI:
+Everyday Applications of AI
 
-1. Smartphones:
-• AI helps predict the next word as you type
-• Virtual assistants understand voice commands
-• Facial recognition uses AI to unlock your phone securely
+Smartphones:
+- AI helps your phone predict the next word as you type, making texting faster.
+- Virtual assistants like Siri and Google Assistant understand your voice commands, answering questions or setting reminders.
+- Facial recognition uses AI to unlock your phone securely.
 
-2. Streaming Services:
-• Netflix, Spotify, and YouTube use AI for recommendations
-• AI analyzes viewing habits for content suggestions
-• Personalized playlists based on your preferences
+Streaming Services:
+- Platforms like Netflix, Spotify, and YouTube use AI to recommend shows, movies, or songs based on your past preferences.
+- AI analyzes your viewing or listening habits to suggest content you're likely to enjoy.
 
-3. Online Shopping:
-• Product recommendations based on browsing history
-• Chatbots for customer service
-• Price optimization and inventory management
+Online Shopping:
+- When you shop online, AI recommends products you might like based on your browsing history.
+- Chatbots on websites answer your questions, helping you find what you need quickly.
 
-4. Social Media:
-• Personalized content feeds
-• Automatic photo tagging
-• Content moderation
+Social Media:
+- Ever wondered why certain posts or ads show up in your feed? AI determines what content to show you by analyzing your likes, shares, and comments.
+- Facial recognition tags your friends in photos automatically.
 
-5. Transportation:
-• AI-powered navigation
-• Ride-sharing optimization
-• Self-driving vehicle systems
+Transportation:
+- Navigation apps like Google Maps use AI to find the fastest routes by analyzing real-time traffic data.
+- Ride-sharing apps like Uber and Lyft use AI to match riders with drivers efficiently.
+- Self-driving cars rely entirely on AI to make decisions on the road.
 
-6. Healthcare:
-• Medical image analysis
-• Health monitoring
-• Disease prediction
+Healthcare:
+- AI assists doctors by analyzing medical images to detect diseases like cancer.
+- It powers fitness trackers that monitor your heart rate, sleep, and activity levels, offering personalized health advice.
 
-7. Gaming:
-• Adaptive gameplay
-• NPC behavior
-• Procedural generation`,
+Gaming:
+- Video game opponents adapt to your playing style, providing a more challenging experience.
+- AI creates realistic environments and characters in games.
+
+How AI Works Behind the Scenes:
+- Data Collection: AI systems gather data about your activities, like what shows you watch or the places you visit.
+- Pattern Recognition: AI analyzes this data to find patterns. For example, if you often watch action movies, AI learns to recommend similar films.
+- Decision Making: Based on these patterns, AI predicts what you might like or need next.
+- Learning: The more you interact with AI systems, the better they get at understanding your preferences.
+
+The Bigger Picture:
+AI isn't just about convenience. It's solving big problems too:
+- Predicting natural disasters by analyzing weather patterns.
+- Helping farmers grow crops more efficiently by monitoring soil and weather conditions.
+- Assisting in space exploration by analyzing data from distant planets.`,
       quiz: {
         questions: [
           {
-            question: "Which of these is NOT a common application of AI in smartphones?",
+            question: "Which of these is NOT a common use of AI in smartphones?",
             options: [
-              "Predictive text",
-              "Voice assistants",
+              "Predictive text while typing",
+              "Voice assistant commands",
               "Battery manufacturing",
               "Facial recognition"
             ],
             correct: 2,
-            explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical production process, not an AI application."
+            explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical manufacturing process, not an AI application."
           },
           {
-            question: "How does AI improve streaming services?",
+            question: "How does AI improve streaming services like Netflix?",
             options: [
-              "By creating new content",
-              "By providing personalized recommendations",
-              "By increasing internet speed",
-              "By reducing subscription costs"
+              "By creating the movies and shows",
+              "By recommending content based on viewing habits",
+              "By controlling the streaming speed",
+              "By setting subscription prices"
             ],
             correct: 1,
-            explanation: "AI primarily improves streaming services by analyzing user behavior and providing personalized content recommendations, helping users discover content they might enjoy."
-          }
-        ],
-        interactiveElements: {
-          virtualAssistant: {
-            enabled: true,
-            features: ["voice-control", "real-time-response"]
+            explanation: "AI in streaming services primarily analyzes viewing habits to recommend personalized content to users, enhancing their experience by suggesting shows and movies they might enjoy."
           },
-          aiExplorer: {
-            type: "interactive-demo",
-            scenarios: ["smart-home", "mobile", "online"]
+          {
+            question: "What is the primary way AI works behind the scenes?",
+            options: [
+              "By manually programming every decision",
+              "By collecting and analyzing patterns in data",
+              "By asking users what they want",
+              "By copying other applications"
+            ],
+            correct: 1,
+            explanation: "AI works by collecting data, recognizing patterns in that data, and using those patterns to make decisions and predictions, continuously learning from new interactions."
           }
-        }
+        ]
       }
     },
     {
       id: "1.3",
       title: "Simple Pattern Recognition Activities",
-      duration: "20 min",
-      interactive: {
-        patternGame: {
-          type: "interactive",
-          title: "Pattern Detective",
-          description: "Test your pattern recognition skills",
-          component: "PatternGame"
-        },
-        practicalExercises: {
-          type: "hands-on",
-          activities: [
-            {
-              id: "pattern-analysis",
-              type: "exercise",
-              title: "Pattern Analysis",
-              task: "Identify and explain patterns"
-            }
-          ]
-        }
-      },
-      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that both humans and machines rely on to make sense of the world.
-    
-    What Is Pattern Recognition?
-    Pattern recognition is about finding order in what appears to be random or chaotic. For example, when you look at these numbers: 2, 4, 6, 8, you quickly notice they increase by 2 each time. This is a simple pattern that both humans and AI can learn to identify.
-    
-    Key Concepts in Pattern Recognition:
-    
-    1. Sequential Patterns:
-    • Number sequences
-    • Time series data
-    • Repeating elements
-    • Progressive changes
-    
-    2. Visual Patterns:
-    • Shapes and geometries
-    • Color sequences
-    • Spatial arrangements
-    • Recurring motifs
-    
-    3. Logical Patterns:
-    • Rule-based sequences
-    • Cause and effect
-    • If-then relationships
-    • Decision trees
-    
-    Why Is Pattern Recognition Important in AI?
-    Pattern recognition enables AI systems to:
-    • Classify Data: Organizing information into categories
-    • Make Predictions: Forecasting future values or events
-    • Detect Anomalies: Identifying unusual patterns
-    • Learn from Examples: Improving performance through experience
-    
-    Real-World Applications:
-    1. Image Recognition
-    • Face detection in photos
-    • Object identification
-    • Medical image analysis
-    
-    2. Speech Recognition
-    • Voice commands
-    • Language translation
-    • Audio transcription
-    
-    3. Behavior Analysis
-    • Customer purchasing patterns
-    • Traffic flow prediction
-    • Financial market trends`,
+      duration: "15 min",
+      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that humans and machines alike rely on to make sense of the world. In AI, this ability forms the foundation for more advanced systems, from identifying faces in photos to predicting stock market trends.
+
+What Is Pattern Recognition?
+Pattern recognition is about finding order in chaos. Imagine trying to guess the next number in this sequence: 2, 4, 6, 8. You quickly notice the numbers increase by 2 each time. This is a simple example of pattern recognition. AI systems do the same thing, but with much larger and more complex datasets, such as millions of images or lines of text.
+
+Why Is It Important?
+In AI, pattern recognition allows machines to:
+- Classify Data: For example, sorting images into categories like "cat" or "dog."
+- Detect Anomalies: Identifying unusual patterns, like a sudden spike in credit card activity that could indicate fraud.
+- Make Predictions: Forecasting weather, sales trends, or the outcome of a game.
+
+How AI Recognizes Patterns
+AI systems use algorithms to find patterns in data. One common method is feature extraction:
+- Identifying Features: For example, in handwriting analysis, features might include the slope of the letters or the spacing between words.
+- Comparing Data: AI compares these features across many examples to determine similarities and differences.
+- Making Decisions: Based on patterns, AI decides how to classify or respond to new data.
+
+Real-World Examples of Pattern Recognition:
+- Facial Recognition: Your smartphone's ability to unlock when it "sees" you.
+- Spam Filters: Email systems recognizing patterns in spam messages, like repeated phrases or suspicious links.
+- Search Engines: Google's algorithms identify patterns in your searches to show the most relevant results.
+
+Challenges in Pattern Recognition:
+While pattern recognition is powerful, it's not perfect. Machines can struggle with:
+- Ambiguity: If patterns aren't clear, the AI might make mistakes.
+- Bias in Data: If the training data has errors or is incomplete, the AI might learn incorrect patterns.
+- Complexity: Real-world patterns are often more intricate than simple sequences, requiring advanced techniques to analyze.
+
+The Future of Pattern Recognition in AI:
+Pattern recognition continues to evolve, enabling breakthroughs in:
+- Healthcare: AI systems identifying patterns in medical data to diagnose diseases earlier.
+- Climate Science: Recognizing weather patterns to predict and mitigate natural disasters.
+- Autonomous Vehicles: Detecting patterns in traffic to navigate safely.`,
       quiz: {
         questions: [
           {
-            question: "What is the main purpose of pattern recognition in AI?",
+            question: "What is the primary purpose of pattern recognition in AI?",
             options: [
-              "To identify trends and structures in data",
-              "To create new patterns",
-              "To store information",
-              "To process calculations"
-            ],
-            correct: 0,
-            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to learn from examples."
-          },
-          {
-            question: "Which type of pattern involves progressive numerical changes?",
-            options: [
-              "Visual patterns",
-              "Sequential patterns",
-              "Random patterns",
-              "Static patterns"
+              "To make computers faster",
+              "To find order and structure in data",
+              "To store more information",
+              "To create new patterns"
             ],
             correct: 1,
-            explanation: "Sequential patterns involve progressive changes in a series, such as numerical sequences that follow a specific rule."
+            explanation: "Pattern recognition in AI is fundamentally about finding order and structure in data, allowing machines to identify trends, similarities, and relationships."
           },
           {
-            question: "How does pattern recognition help in AI predictions?",
+            question: "Which of these is a real-world application of pattern recognition?",
             options: [
-              "By storing more data",
-              "By running faster calculations",
-              "By identifying trends to forecast future values",
-              "By creating random patterns"
+              "Manufacturing computer chips",
+              "Painting pictures",
+              "Spam email filtering",
+              "Installing software"
             ],
             correct: 2,
-            explanation: "Pattern recognition helps AI make predictions by identifying trends in existing data, which can then be used to forecast future values or events."
+            explanation: "Spam filtering is a classic example of pattern recognition, where AI systems identify common patterns in spam emails to filter them out."
+          },
+          {
+            question: "What is one of the main challenges in pattern recognition?",
+            options: [
+              "High cost of computers",
+              "Lack of data storage",
+              "Slow internet speeds",
+              "Ambiguity in patterns"
+            ],
+            correct: 3,
+            explanation: "Ambiguity in patterns is a significant challenge in pattern recognition, as unclear or complex patterns can lead to mistakes in AI interpretation."
           }
         ]
       }
@@ -382,104 +264,85 @@ Everyday Applications of AI:
       id: "1.4",
       title: "Basic Machine Learning Concepts Through Games",
       duration: "15 min",
-      interactive: {
-        mlPlayground: {
-          type: "sandbox",
-          title: "Machine Learning Lab",
-          experiments: [
-            {
-              id: "virtual-pet",
-              type: "reinforcement",
-              title: "Train Your AI Pet",
-              features: {
-                commands: ["sit", "stay", "fetch"],
-                feedback: true,
-                learning: true
-              }
-            },
-            {
-              id: "image-classifier",
-              type: "supervised",
-              title: "Image Detective",
-              features: {
-                upload: true,
-                train: true,
-                test: true
-              }
-            }
-          ]
-        },
-        teachableMachine: {
-          type: "hands-on",
-          features: [
-            {
-              id: "image-model",
-              input: "camera",
-              output: "classification"
-            },
-            {
-              id: "sound-model",
-              input: "microphone",
-              output: "recognition"
-            }
-          ]
-        }
-      },
-      article: `Machine Learning (ML) is one of the most exciting areas of Artificial Intelligence (AI). It enables computers to learn from data and improve their performance without being explicitly programmed.
+      article: `Machine Learning (ML) is one of the most exciting areas of Artificial Intelligence (AI). It enables computers to learn from data and improve their performance without being explicitly programmed. Think of it as teaching a computer to make decisions based on experience, much like how humans learn new skills over time.
 
 What Is Machine Learning?
 At its core, machine learning involves three key steps:
-1. Training
-2. Testing
-3. Improving
+1. Training: The computer is given data (called training data) and learns patterns or rules from it.
+2. Testing: After learning, the computer is tested on new data to see how well it can apply what it has learned.
+3. Improving: If the computer makes mistakes, it adjusts its approach to do better next time.
 
 Types of Machine Learning:
-1. Supervised Learning:
-   • Learning from labeled data
-   • Classification tasks
-   • Prediction tasks
 
-2. Unsupervised Learning:
-   • Finding patterns in unlabeled data
-   • Grouping similar items
-   • Discovering structures
+Supervised Learning:
+- The computer learns from labeled data
+- Example: Teaching a system to identify animals by showing it images labeled "cat" or "dog"
 
-3. Reinforcement Learning:
-   • Learning through trial and error
-   • Reward-based improvement
-   • Strategy development`,
+Unsupervised Learning:
+- The computer is given unlabeled data and asked to find patterns
+- Example: Grouping customers based on their shopping habits
+
+Reinforcement Learning:
+- The computer learns through trial and error
+- Example: A game-playing AI learning winning strategies
+
+Real-World Applications of Machine Learning:
+- Healthcare: Diagnosing diseases by analyzing medical images or patient data
+- Finance: Detecting fraudulent transactions by spotting unusual spending patterns
+- Entertainment: Creating personalized recommendations for movies, music, and games
+- Transportation: Enabling self-driving cars to recognize traffic signs and pedestrians
+- Retail: Predicting what products customers might want to buy
+
+Challenges in Machine Learning:
+While machine learning is powerful, it's not perfect. Here are some common challenges:
+- Bias in Data: If training data is incomplete or biased, the AI may make unfair decisions
+- Overfitting: Sometimes, models learn patterns that work for training data but don't apply well to new data
+- Complexity: Real-world problems often require vast amounts of data and computational power
+
+The Learning Process:
+1. Data Collection: Gathering relevant information for the task
+2. Data Preparation: Cleaning and organizing the data
+3. Model Selection: Choosing the right type of algorithm
+4. Training: Teaching the model using the prepared data
+5. Evaluation: Testing how well the model performs
+6. Deployment: Using the model in real-world applications
+7. Monitoring: Watching for changes in performance and updating as needed`,
       quiz: {
         questions: [
           {
             question: "What are the three main steps in machine learning?",
             options: [
               "Training, Testing, Improving",
-              "Writing, Reading, Running",
-              "Coding, Testing, Deploying",
-              "Planning, Building, Testing"
+              "Coding, Running, Debugging",
+              "Planning, Building, Deploying",
+              "Writing, Reading, Executing"
             ],
             correct: 0,
-            explanation: "The three main steps in machine learning are Training (learning from data), Testing (verifying accuracy), and Improving (refining the model based on results)."
+            explanation: "The three main steps in machine learning are Training (learning from data), Testing (verifying performance), and Improving (refining based on results)."
           },
           {
-            question: "Which type of machine learning uses labeled data?",
+            question: "Which type of machine learning uses labeled data for training?",
             options: [
               "Unsupervised Learning",
-              "Supervised Learning",
               "Reinforcement Learning",
-              "Transfer Learning"
+              "Supervised Learning",
+              "Automated Learning"
+            ],
+            correct: 2,
+            explanation: "Supervised learning uses labeled data, where the correct outputs are known during training, allowing the system to learn from examples with known answers."
+          },
+          {
+            question: "What is 'overfitting' in machine learning?",
+            options: [
+              "When the computer runs too slowly",
+              "When the model learns patterns too specific to training data",
+              "When there's too much data to process",
+              "When the program uses too much memory"
             ],
             correct: 1,
-            explanation: "Supervised learning uses labeled data where the correct outputs are known during training, allowing the system to learn from examples with known answers."
+            explanation: "Overfitting occurs when a model learns patterns that are too specific to the training data and doesn't generalize well to new, unseen data."
           }
-        ],
-        practicalExercises: {
-          virtualLab: {
-            enabled: true,
-            experiments: ["classification", "clustering", "reinforcement"],
-            difficulty: "beginner"
-          }
-        }
+        ]
       }
     }
   ],

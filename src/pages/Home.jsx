@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp } from 'lucide-react';
 import '../styles/animations.css';
 
 export default function HomePage() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,8 +26,41 @@ export default function HomePage() {
       observer.observe(element);
     });
 
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "High School Student",
+      image: "https://i.pravatar.cc/150?img=1",
+      quote: "Lumin AI transformed my understanding of artificial intelligence. The hands-on projects made complex concepts easy to grasp."
+    },
+    {
+      name: "David Park",
+      role: "Coding Club Leader",
+      image: "https://i.pravatar.cc/150?img=2",
+      quote: "The curriculum is incredibly well-structured. My students are now building their own AI projects with confidence!"
+    },
+    {
+      name: "Maya Patel",
+      role: "Science Fair Winner",
+      image: "https://i.pravatar.cc/150?img=3",
+      quote: "Thanks to Lumin AI, I developed an AI project that won first place at the national science fair. Amazing platform!"
+    }
+  ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
@@ -141,132 +177,120 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Courses */}
+      {/* Testimonials Section */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Featured Courses</h2>
-            <p className="text-gray-600">Start your AI journey today</p>
+            <h2 className="text-5xl font-bold mb-4">Student Stories</h2>
+            <p className="text-xl text-gray-600">
+              Hear from our amazing community of learners
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Link 
-              to="/learn"
-              className="animate-on-scroll bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Brain className="w-6 h-6 text-blue-600" />
-                </div>
-                <span className="text-sm text-gray-500">3 weeks</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                AI Fundamentals
-              </h3>
-              <ul className="space-y-2">
-                {['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications'].map((topic) => (
-                  <li key={topic} className="flex items-center gap-2 text-gray-600">
-                    <Check className="w-4 h-4 text-green-500"/>
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-            </Link>
-
-            {[
-              {
-                duration: '3 weeks',
-                title: 'Deep Learning',
-                topics: ['Neural Architecture', 'Computer Vision', 'Natural Language Processing', 'Advanced Topics']
-              },
-              {
-                duration: '4 weeks',
-                title: 'AI Applications',
-                topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
-              }
-            ].map((course) => (
-              <div 
-                key={course.title} 
-                className="relative bg-white rounded-xl p-6 opacity-75 group"
+          <div className="relative">
+            <div className="flex items-center justify-center">
+              <button 
+                onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                className="absolute left-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-yellow-100 px-4 py-2 rounded-full flex items-center gap-2">
-                    <Construction className="w-5 h-5 text-yellow-700" />
-                    <span className="text-yellow-700 font-medium">Coming Soon</span>
+                <ChevronLeft className="w-6 h-6 text-gray-600" />
+              </button>
+
+              <div className="w-full max-w-4xl">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className={`transform transition-all duration-500 ${
+                      index === currentTestimonial
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 absolute top-0 -translate-x-full'
+                    }`}
+                  >
+                    {index === currentTestimonial && (
+                      <div className="bg-white rounded-2xl p-8 shadow-lg">
+                        <div className="flex flex-col items-center text-center">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-20 h-20 rounded-full mb-4 border-4 border-blue-100"
+                          />
+                          <p className="text-xl text-gray-600 italic mb-6">"{testimonial.quote}"</p>
+                          <h3 className="text-lg font-semibold">{testimonial.name}</h3>
+                          <p className="text-blue-600">{testimonial.role}</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-                <div className="filter blur-[2px]">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"/>
-                    <span className="text-sm text-gray-500">{course.duration}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4">
-                    {course.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {course.topics.map((topic) => (
-                      <li key={topic} className="flex items-center gap-2 text-gray-600">
-                        <Check className="w-4 h-4 text-green-500"/>
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                ))}
               </div>
-            ))}
+
+              <button 
+                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                className="absolute right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
+
+            <div className="flex justify-center mt-6 gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentTestimonial ? 'bg-blue-600 scale-125' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Student Success Stories */}
-      <section className="bg-white py-24">
+      {/* Newsletter Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Student Success Stories</h2>
-            <p className="text-xl text-gray-600">See how our students are changing the world</p>
-          </div>
+          <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Arjun" 
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">Arjun Patel</h3>
-                  <p className="text-blue-600">AI Innovator, Age 14</p>
-                </div>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                "Through Lumin AI's program, I developed an AI model to predict water quality in local rivers. The project 
-                won first place at my regional science fair and is now being considered for implementation by local 
-                environmental agencies."
+            <div className="relative text-center max-w-2xl mx-auto">
+              <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Get the latest updates on new courses, features, and AI education resources.
               </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Miguel" 
-                  className="w-16 h-16 rounded-full object-cover"
+              <form className="flex gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-6 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
-                <div>
-                  <h3 className="text-xl font-semibold">Miguel Santos</h3>
-                  <p className="text-blue-600">Student Developer, Age 14</p>
-                </div>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                "Using Lumin AI's program, I built my first machine learning model to identify different types of 
-                local plants in my community in Brazil. It started as a small project but now I'm working with my 
-                science teacher to expand it into a learning tool for younger students."
-              </p>
+                <button className="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  Subscribe
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Floating CTA Button */}
+      <div className={`fixed bottom-8 right-8 z-50 flex flex-col gap-4 transition-all duration-300 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+        <button
+          onClick={scrollToTop}
+          className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+        >
+          <ArrowUp className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+        </button>
+        <Link
+          to="/learn"
+          className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"
+        >
+          Start Learning
+          <ArrowRight className="w-5 h-5" />
+        </Link>
+      </div>
     </div>
   );
 }

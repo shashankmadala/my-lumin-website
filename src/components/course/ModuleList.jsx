@@ -6,17 +6,20 @@ const ModuleList = ({
   progress, 
   activeModule, 
   setActiveModule, 
-  setActiveLesson 
+  setActiveLesson,
+  showTitle = true // Add default value for backward compatibility
 }) => {
   return (
     <div className="space-y-8">
-      {/* Course Overview */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="text-4xl font-bold mb-4">AI Fundamentals</h1>
-        <p className="text-xl text-gray-600">
-          Master the fundamentals of artificial intelligence and machine learning
-        </p>
-      </div>
+      {/* Course Overview - Only show if showTitle is true */}
+      {showTitle && (
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h1 className="text-4xl font-bold mb-4">AI Fundamentals</h1>
+          <p className="text-xl text-gray-600">
+            Master the fundamentals of artificial intelligence and machine learning
+          </p>
+        </div>
+      )}
 
       {/* Module Grid */}
       <div className="grid gap-6">
