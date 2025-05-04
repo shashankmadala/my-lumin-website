@@ -207,7 +207,15 @@ export default function SummerProgram() {
             <div className="animate-on-scroll from-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
                 <Star className="w-4 h-4" />
-                Starting June 28th, 2025
+                Choose from two sessions:
+              </div>
+              <div className="flex gap-4 mb-6">
+                <div className="px-4 py-2 bg-purple-100 rounded-full text-purple-700">
+                  Session 1: June 28 - July 27
+                </div>
+                <div className="px-4 py-2 bg-pink-100 rounded-full text-pink-700">
+                  Session 2: August 7 - September 5
+                </div>
               </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
                 Transform Your Summer with
@@ -240,7 +248,7 @@ export default function SummerProgram() {
                     </div>
                     <div>
                       <h3 className="font-semibold">5-Week Program</h3>
-                      <p className="text-gray-600">June 28th - July 28th, 2025</p>
+                      
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
@@ -505,8 +513,9 @@ export default function SummerProgram() {
                   <div className="flex items-start gap-4">
                     <Calendar className="w-6 h-6 text-blue-200 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">June 28 - July 28, 2025</p>
-                      <p className="text-blue-100">5 consecutive weekends</p>
+                      <p className="font-medium">Choose Your Session:</p>
+                      <p className="text-blue-100">Session 1: June 28 - July 27, 2025</p>
+                      <p className="text-blue-100">Session 2: August 7 - September 5, 2025</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
