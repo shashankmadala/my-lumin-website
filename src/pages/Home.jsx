@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen } from 'lucide-react';
 import '../styles/animations.css';
 
 export default function HomePage() {
@@ -40,21 +40,18 @@ export default function HomePage() {
   const testimonials = [
     {
       name: "Sarah Chen",
-      role: "High School Student",
-      image: "https://i.pravatar.cc/150?img=1",
-      quote: "Lumin AI transformed my understanding of artificial intelligence. The hands-on projects made complex concepts easy to grasp."
+      role: "Middle School Student",
+      quote: "I never thought I could understand AI, but Lumin AI made it so fun and easy! I loved building my own chatbot and showing it to my friends."
     },
     {
       name: "David Park",
-      role: "Coding Club Leader",
-      image: "https://i.pravatar.cc/150?img=2",
-      quote: "The curriculum is incredibly well-structured. My students are now building their own AI projects with confidence!"
+      role: "Parent",
+      quote: "My son was always interested in technology, and this program gave him the perfect introduction to AI. The weekend sessions fit perfectly with his schedule."
     },
     {
       name: "Maya Patel",
-      role: "Science Fair Winner",
-      image: "https://i.pravatar.cc/150?img=3",
-      quote: "Thanks to Lumin AI, I developed an AI project that won first place at the national science fair. Amazing platform!"
+      role: "Middle School Student",
+      quote: "The hands-on projects were my favorite part! I learned how to make a simple AI that can recognize different types of flowers in my garden."
     }
   ];
 
@@ -84,13 +81,27 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 mb-8">
               Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
             </p>
-            <Link 
-              to="/learn" 
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-            >
-              Start Learning Now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link 
+                to="/learn" 
+                className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+              >
+                Start Learning Now
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link 
+                to="/summer-program" 
+                className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
+                style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Join Summer Program
+                </span>
+                <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
+                  Limited Time!
+                </span>
+              </Link>
+            </div>
           </div>
 
           {/* Stats */}
@@ -196,32 +207,16 @@ export default function HomePage() {
                 <ChevronLeft className="w-6 h-6 text-gray-600" />
               </button>
 
-              <div className="w-full max-w-4xl">
-                {testimonials.map((testimonial, index) => (
-                  <div
-                    key={index}
-                    className={`transform transition-all duration-500 ${
-                      index === currentTestimonial
-                        ? 'opacity-100 translate-x-0'
-                        : 'opacity-0 absolute top-0 -translate-x-full'
-                    }`}
-                  >
-                    {index === currentTestimonial && (
-                      <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <div className="flex flex-col items-center text-center">
-                          <img
-                            src={testimonial.image}
-                            alt={testimonial.name}
-                            className="w-20 h-20 rounded-full mb-4 border-4 border-blue-100"
-                          />
-                          <p className="text-xl text-gray-600 italic mb-6">"{testimonial.quote}"</p>
-                          <h3 className="text-lg font-semibold">{testimonial.name}</h3>
-                          <p className="text-blue-600">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    )}
+              <div className="max-w-3xl mx-auto px-12">
+                <div className="bg-white rounded-xl p-8 shadow-lg">
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-semibold">{testimonials[currentTestimonial].name}</h3>
+                    <p className="text-blue-600">{testimonials[currentTestimonial].role}</p>
                   </div>
-                ))}
+                  <p className="text-gray-600 text-lg italic text-center">
+                    "{testimonials[currentTestimonial].quote}"
+                  </p>
+                </div>
               </div>
 
               <button 
@@ -231,23 +226,11 @@ export default function HomePage() {
                 <ChevronRight className="w-6 h-6 text-gray-600" />
               </button>
             </div>
-
-            <div className="flex justify-center mt-6 gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial ? 'bg-blue-600 scale-125' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Section */}
+      {/* Get Started Section */}
       <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
@@ -256,20 +239,28 @@ export default function HomePage() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
 
             <div className="relative text-center max-w-2xl mx-auto">
-              <h2 className="text-4xl font-bold mb-6">Stay Updated</h2>
+              <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
               <p className="text-xl text-gray-600 mb-8">
-                Get the latest updates on new courses, features, and AI education resources.
+                Choose your path and begin your adventure into the world of artificial intelligence.
               </p>
-              <form className="flex gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button className="px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                  Subscribe
-                </button>
-              </form>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Link
+                  to="/learn"
+                  className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                >
+                  <BookOpen className="w-8 h-8" />
+                  <span className="font-semibold">Start Learning</span>
+                  <span className="text-sm text-blue-100">Free online course</span>
+                </Link>
+                <Link
+                  to="/summer-program"
+                  className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                >
+                  <Users className="w-8 h-8" />
+                  <span className="font-semibold">Join Summer Program</span>
+                  <span className="text-sm text-purple-100">Live online sessions</span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

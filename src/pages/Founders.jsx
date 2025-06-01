@@ -10,7 +10,7 @@ const founders = [
     image: "/images/shashank1.png",
     links: {
       linkedin: "https://www.linkedin.com/in/shashank-madala-320989295/",
-      github: "https://github.com/your-profile",
+      github: "https://github.com/shashankmadala",
       email: "mailto:madala.shashank@gmail.com"
     }
   },

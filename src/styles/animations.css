@@ -40,3 +40,29 @@
   .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
   .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
   .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slower {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-slower {
+  animation: spin-slower 12s linear infinite;
+}
