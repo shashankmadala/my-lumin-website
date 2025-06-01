@@ -217,6 +217,16 @@ export default function SummerProgram() {
                   Session 2: August 7 - September 5
                 </div>
               </div>
+              <div className="mb-6">
+                <div className="inline-flex flex-wrap items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-3 shadow-sm">
+                  <Clock className="w-5 h-5 text-yellow-500 mr-2" />
+                  <span className="font-semibold text-gray-800">Available Times (EST):</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">10–11am</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">11–12pm</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">12–1pm</span>
+                  <span className="text-gray-600 text-sm ml-2">(Pick your preferred time!)</span>
+                </div>
+              </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
                 Transform Your Summer with
                 <span className="block text-5xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mt-2">
