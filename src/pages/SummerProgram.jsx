@@ -285,7 +285,7 @@ export default function SummerProgram() {
                     </div>
                     <div>
                       <h3 className="font-semibold">Program Fee</h3>
-                      <p className="text-gray-600">$300 for the full program</p>
+                      <p className="text-gray-600">$250 for the full program</p>
                     </div>
                   </div>
                 </div>
@@ -471,7 +471,7 @@ export default function SummerProgram() {
               <div className="p-8 md:p-12">
                 <h3 className="text-3xl font-bold mb-4">Summer AI Program</h3>
                 <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-4xl font-bold">$300</span>
+                  <span className="text-4xl font-bold">$250</span>
                   <span className="text-gray-600">/ full program</span>
                 </div>
                 
