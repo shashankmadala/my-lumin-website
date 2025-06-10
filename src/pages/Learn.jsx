@@ -251,40 +251,6 @@ export default function Learn() {
                       showTitle={false}
                     />
 
-                    {/* Image Classification Project */}
-                    <div className="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-                      <button
-                        onClick={() => setShowImageClassifier(true)}
-                        className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className="relative">
-                            <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-blue-100 rounded-xl flex items-center justify-center">
-                              <Code className="w-6 h-6 text-blue-600" />
-                            </div>
-                            {isProjectCompleted('image-classifier') && (
-                              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
-                                <Check className="w-4 h-4 text-green-500" />
-                              </div>
-                            )}
-                          </div>
-                          <div className="text-left">
-                            <div className="flex items-center gap-2">
-                              <h3 className="text-lg font-semibold">
-                                Project: Image Classification
-                              </h3>
-                            </div>
-                            <div className="flex items-center gap-4">
-                              <p className="text-gray-600">Apply your knowledge with a hands-on project</p>
-                              <span className="text-sm text-gray-500">
-                                {isProjectCompleted('image-classifier') ? 'Completed' : 'Not started'}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    </div>
-
                     {/* Remaining Modules */}
                     <ModuleList 
                       modules={courseData.modules.slice(2)}
