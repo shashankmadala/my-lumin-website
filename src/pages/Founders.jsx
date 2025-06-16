@@ -14,7 +14,6 @@ const founders = [
       email: "mailto:madala.shashank@gmail.com"
     }
   },
-  /* Commented out Ayur's information
   {
     name: "Ayur Munipalli",
     role: "Founder & Co-CEO",
@@ -27,7 +26,6 @@ const founders = [
       email: "mailto:26munipallia@gmail.com"
     }
   }
-  */
 ];
 
 export default function Founders() {
