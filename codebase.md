@@ -79,6 +79,7 @@ export default [
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/lumin.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumin AI</title>
   </head>
@@ -252,9 +253,37 @@ function App() {
 export default App;
 ```
 
-# src/assets/react.svg
+# src/assets/gallery/react.svg
 
 This is a file of the type: SVG Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.42.12 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.42.35 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.42.57 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.43.15 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.43.28 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.43.57 AM.png
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/Screenshot 2025-06-18 at 12.44.19 AM.png
+
+This is a binary file of the type: Image
 
 # src/components/course/ArticleView.jsx
 
@@ -1532,17 +1561,20 @@ const ModuleList = ({
   progress, 
   activeModule, 
   setActiveModule, 
-  setActiveLesson 
+  setActiveLesson,
+  showTitle = true // Add default value for backward compatibility
 }) => {
   return (
     <div className="space-y-8">
-      {/* Course Overview */}
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="text-4xl font-bold mb-4">AI Fundamentals</h1>
-        <p className="text-xl text-gray-600">
-          Master the fundamentals of artificial intelligence and machine learning
-        </p>
-      </div>
+      {/* Course Overview - Only show if showTitle is true */}
+      {showTitle && (
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h1 className="text-4xl font-bold mb-4">AI Fundamentals</h1>
+          <p className="text-xl text-gray-600">
+            Master the fundamentals of artificial intelligence and machine learning
+          </p>
+        </div>
+      )}
 
       {/* Module Grid */}
       <div className="grid gap-6">
@@ -2220,6 +2252,136 @@ export function QuizSection({ lesson, progress, setProgress, onComplete }) {
 }
 
 export default QuizSection;
+```
+
+# src/components/Footer.jsx
+
+```jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+
+export default function Footer() {
+  const footerLinks = {
+    company: [
+      { name: 'About Us', path: '/about' },
+      { name: 'Founders', path: '/founders' },
+      { name: 'Careers', path: '/careers' },
+      { name: 'Contact Us', path: '/contact-us' },
+    ],
+    programs: [
+      { name: 'Summer Program', path: '/summer-program' },
+      { name: 'Learn', path: '/learn' },
+      { name: 'Resources', path: '/resources' },
+      { name: 'Blog', path: '/blog' },
+    ],
+    legal: [
+      { name: 'Privacy Policy', path: '/privacy' },
+      { name: 'Terms of Service', path: '/terms' },
+      { name: 'Cookie Policy', path: '/cookies' },
+    ],
+  };
+
+  const socialLinks = [
+    { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
+    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+  ];
+
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <Link to="/" className="text-2xl font-bold text-white">
+              Lumin
+            </Link>
+            <p className="text-gray-400 text-sm">
+              Empowering the next generation through innovative education and technology.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+              Company
+            </h3>
+            <ul className="mt-4 space-y-4">
+              {footerLinks.company.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-base text-gray-300 hover:text-white"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+              Programs
+            </h3>
+            <ul className="mt-4 space-y-4">
+              {footerLinks.programs.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-base text-gray-300 hover:text-white"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+              Legal
+            </h3>
+            <ul className="mt-4 space-y-4">
+              {footerLinks.legal.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-base text-gray-300 hover:text-white"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-gray-800">
+          <div className="flex justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Lumin. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white"
+                >
+                  <span className="sr-only">{social.label}</span>
+                  <social.icon className="h-6 w-6" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+} 
 ```
 
 # src/components/interactive/AiConceptExplorer.jsx
@@ -3213,6 +3375,438 @@ export default function Navigation() {
 }
 ```
 
+# src/components/projects/ImageClassifier.jsx
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, Check, X, Image, Brain, FileText, Award, ArrowRight } from 'lucide-react';
+
+// Sample data - In a real implementation, you'd have actual images
+const sampleImages = [
+  { id: 1, src: '/api/placeholder/300/300', category: null },
+  { id: 2, src: '/api/placeholder/300/300', category: null },
+  { id: 3, src: '/api/placeholder/300/300', category: null },
+  { id: 4, src: '/api/placeholder/300/300', category: null },
+  { id: 5, src: '/api/placeholder/300/300', category: null },
+  { id: 6, src: '/api/placeholder/300/300', category: null },
+  { id: 7, src: '/api/placeholder/300/300', category: null },
+  { id: 8, src: '/api/placeholder/300/300', category: null },
+  { id: 9, src: '/api/placeholder/300/300', category: null },
+  { id: 10, src: '/api/placeholder/300/300', category: null },
+  { id: 11, src: '/api/placeholder/300/300', category: null },
+  { id: 12, src: '/api/placeholder/300/300', category: null },
+  { id: 13, src: '/api/placeholder/300/300', category: null },
+  { id: 14, src: '/api/placeholder/300/300', category: null },
+  { id: 15, src: '/api/placeholder/300/300', category: null }
+];
+
+// Test images for algorithm testing
+const testImages = [
+  { id: 101, src: '/api/placeholder/300/300', realCategory: 'food' },
+  { id: 102, src: '/api/placeholder/300/300', realCategory: 'not-food' },
+  { id: 103, src: '/api/placeholder/300/300', realCategory: 'food' },
+  { id: 104, src: '/api/placeholder/300/300', realCategory: 'not-food' },
+  { id: 105, src: '/api/placeholder/300/300', realCategory: 'food' }
+];
+
+const ImageClassifier = ({ onComplete, onBack }) => {
+  const [phase, setPhase] = useState(1); // 1: Classification, 2: Pattern Analysis, 3: Algorithm Design
+  const [images, setImages] = useState(sampleImages);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [patterns, setPatterns] = useState(['', '', '']);
+  const [algorithm, setAlgorithm] = useState([
+    { question: '', ifYes: 'food', ifNo: 'not-food' },
+    { question: '', ifYes: 'food', ifNo: 'not-food' }
+  ]);
+  const [testResults, setTestResults] = useState({});
+  const [completed, setCompleted] = useState(false);
+
+  const handleClassify = (category) => {
+    const updatedImages = [...images];
+    updatedImages[currentImageIndex].category = category;
+    setImages(updatedImages);
+    
+    // Move to next image or next phase
+    if (currentImageIndex < images.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+    } else {
+      setPhase(2);
+    }
+  };
+
+  const handlePatternChange = (index, value) => {
+    const newPatterns = [...patterns];
+    newPatterns[index] = value;
+    setPatterns(newPatterns);
+  };
+
+  const handleAlgorithmChange = (index, field, value) => {
+    const newAlgorithm = [...algorithm];
+    newAlgorithm[index][field] = value;
+    setAlgorithm(newAlgorithm);
+  };
+
+  const handleTestResult = (imageId, result) => {
+    setTestResults({
+      ...testResults,
+      [imageId]: result
+    });
+  };
+
+  const canAdvanceFromPhase2 = patterns.filter(p => p.trim() !== '').length >= 2;
+  
+  const canAdvanceFromPhase3 = () => {
+    const algorithmsComplete = algorithm.every(a => a.question.trim() !== '');
+    const allTested = Object.keys(testResults).length === testImages.length;
+    return algorithmsComplete && allTested;
+  };
+
+  const getCompletionPercentage = () => {
+    if (phase === 1) {
+      return (images.filter(img => img.category !== null).length / images.length) * 100;
+    }
+    return 100;
+  };
+
+  const calculateAccuracy = () => {
+    if (Object.keys(testResults).length === 0) return 0;
+    
+    const correct = Object.keys(testResults).filter(
+      id => testResults[id] === testImages.find(img => img.id.toString() === id).realCategory
+    ).length;
+    
+    return (correct / Object.keys(testResults).length) * 100;
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+        >
+          <ChevronLeft className="w-5 h-5" />
+          Back to course
+        </button>
+        
+        <div className="flex items-center gap-4">
+          <div className="text-sm text-gray-600">
+            {phase === 1 ? `${Math.round(getCompletionPercentage())}% Complete` : 
+             phase === 2 ? "Pattern Analysis" : 
+             phase === 3 ? "Algorithm Design" : "Complete!"}
+          </div>
+          
+          {/* Phase indicators */}
+          <div className="flex gap-2">
+            {[1, 2, 3].map((p) => (
+              <div 
+                key={p}
+                className={`w-3 h-3 rounded-full ${
+                  phase >= p ? 'bg-blue-600' : 'bg-gray-200'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        {/* Phase 1: Classification */}
+        {phase === 1 && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Image Classification</h2>
+            <p className="text-gray-600 mb-8">
+              Classify each image as either "Food" or "Not Food". This will create your training dataset.
+            </p>
+            
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-64 h-64 bg-gray-100 rounded-lg overflow-hidden mb-6">
+                <img 
+                  src={images[currentImageIndex].src} 
+                  alt={`Image ${currentImageIndex + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              <div className="flex gap-4">
+                <button
+                  onClick={() => handleClassify('food')}
+                  className="px-6 py-3 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg transition-colors duration-300 flex items-center gap-2"
+                >
+                  <Check className="w-5 h-5" />
+                  Food
+                </button>
+                <button
+                  onClick={() => handleClassify('not-food')}
+                  className="px-6 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg transition-colors duration-300 flex items-center gap-2"
+                >
+                  <X className="w-5 h-5" />
+                  Not Food
+                </button>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="mb-2 text-sm text-gray-600">Progress</div>
+              <div className="h-2 bg-gray-200 rounded-full">
+                <div 
+                  className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                  style={{ width: `${getCompletionPercentage()}%` }}
+                />
+              </div>
+              <div className="mt-2 text-sm text-gray-600">
+                Image {currentImageIndex + 1} of {images.length}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Phase 2: Pattern Analysis */}
+        {phase === 2 && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Pattern Analysis</h2>
+            <p className="text-gray-600 mb-8">
+              Review your classifications and identify patterns that helped you determine if an image was food or not.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-8 mb-8">
+              <div>
+                <h3 className="text-lg font-medium mb-4">Your "Food" Images</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {images
+                    .filter(img => img.category === 'food')
+                    .slice(0, 6)
+                    .map(img => (
+                      <div key={img.id} className="w-full aspect-square bg-gray-100 rounded overflow-hidden">
+                        <img src={img.src} alt="Food" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-medium mb-4">Your "Not Food" Images</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {images
+                    .filter(img => img.category === 'not-food')
+                    .slice(0, 6)
+                    .map(img => (
+                      <div key={img.id} className="w-full aspect-square bg-gray-100 rounded overflow-hidden">
+                        <img src={img.src} alt="Not Food" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 rounded-lg p-6 mb-8">
+              <h3 className="text-lg font-medium mb-4">Identify Patterns</h3>
+              <p className="text-gray-600 mb-4">
+                What visual patterns helped you determine if something was food or not? Identify at least 2 patterns.
+              </p>
+              
+              {patterns.map((pattern, index) => (
+                <div key={index} className="mb-4">
+                  <label className="block text-gray-700 mb-2">Pattern {index + 1}:</label>
+                  <input
+                    type="text"
+                    value={pattern}
+                    onChange={(e) => handlePatternChange(index, e.target.value)}
+                    placeholder={`E.g., "Foods usually have rounded shapes"`}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex justify-end">
+              <button
+                onClick={() => setPhase(3)}
+                disabled={!canAdvanceFromPhase2}
+                className={`px-6 py-3 rounded-lg flex items-center gap-2 ${
+                  canAdvanceFromPhase2 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                Next: Create Algorithm
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Phase 3: Algorithm Design */}
+        {phase === 3 && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Algorithm Design</h2>
+            <p className="text-gray-600 mb-8">
+              Create a simple decision tree algorithm for classifying images as "Food" or "Not Food".
+            </p>
+            
+            <div className="bg-gray-50 rounded-lg p-6 mb-8">
+              <h3 className="text-lg font-medium mb-4">Create Decision Rules</h3>
+              
+              {algorithm.map((rule, index) => (
+                <div key={index} className="mb-6 pb-6 border-b border-gray-200 last:border-none">
+                  <div className="mb-4">
+                    <label className="block text-gray-700 mb-2">Question {index + 1}:</label>
+                    <input
+                      type="text"
+                      value={rule.question}
+                      onChange={(e) => handleAlgorithmChange(index, 'question', e.target.value)}
+                      placeholder={`E.g., "Is the object rounded?"`}
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-700 mb-2">If YES:</label>
+                      <select
+                        value={rule.ifYes}
+                        onChange={(e) => handleAlgorithmChange(index, 'ifYes', e.target.value)}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      >
+                        <option value="food">Classify as Food</option>
+                        <option value="not-food">Classify as Not Food</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-gray-700 mb-2">If NO:</label>
+                      <select
+                        value={rule.ifNo}
+                        onChange={(e) => handleAlgorithmChange(index, 'ifNo', e.target.value)}
+                        className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      >
+                        <option value="food">Classify as Food</option>
+                        <option value="not-food">Classify as Not Food</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mb-8">
+              <h3 className="text-lg font-medium mb-4">Test Your Algorithm</h3>
+              <p className="text-gray-600 mb-4">
+                Apply your decision rules to these test images. Would your algorithm classify them as food or not food?
+              </p>
+              
+              <div className="space-y-6">
+                {testImages.map((img) => (
+                  <div key={img.id} className="flex items-center gap-6 p-4 bg-gray-50 rounded-lg">
+                    <div className="w-24 h-24 bg-gray-100 rounded overflow-hidden">
+                      <img src={img.src} alt="Test image" className="w-full h-full object-cover" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <p className="font-medium mb-2">Test Image {img.id - 100}</p>
+                      <div className="flex gap-4">
+                        <button
+                          onClick={() => handleTestResult(img.id, 'food')}
+                          className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
+                            testResults[img.id] === 'food'
+                              ? 'bg-green-600 text-white'
+                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          }`}
+                        >
+                          Food
+                        </button>
+                        <button
+                          onClick={() => handleTestResult(img.id, 'not-food')}
+                          className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
+                            testResults[img.id] === 'not-food'
+                              ? 'bg-red-600 text-white'
+                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          }`}
+                        >
+                          Not Food
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {Object.keys(testResults).length === testImages.length && (
+              <div className="bg-blue-50 rounded-lg p-6 mb-8">
+                <h3 className="text-lg font-medium mb-2">Algorithm Performance</h3>
+                <p className="text-xl font-bold text-blue-700">
+                  Accuracy: {calculateAccuracy().toFixed(0)}%
+                </p>
+                <p className="text-gray-600 mt-2">
+                  Your algorithm correctly classified {Object.keys(testResults).filter(
+                    id => testResults[id] === testImages.find(img => img.id.toString() === id).realCategory
+                  ).length} out of {testImages.length} test images.
+                </p>
+              </div>
+            )}
+            
+            <div className="flex justify-end">
+              <button
+                onClick={() => {
+                  setCompleted(true);
+                  if (onComplete) onComplete({
+                    patterns,
+                    algorithm,
+                    accuracy: calculateAccuracy()
+                  });
+                }}
+                disabled={!canAdvanceFromPhase3()}
+                className={`px-6 py-3 rounded-lg flex items-center gap-2 ${
+                  canAdvanceFromPhase3()
+                    ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                }`}
+              >
+                Complete Project
+                <Award className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Completion */}
+        {completed && (
+          <div className="text-center py-8">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check className="w-10 h-10 text-green-600" />
+            </div>
+            
+            <h2 className="text-2xl font-bold mb-4">Project Completed!</h2>
+            <p className="text-gray-600 mb-8">
+              Congratulations! You've successfully built a simple image classifier
+              and designed your own algorithm.
+            </p>
+            
+            <div className="max-w-md mx-auto bg-gray-50 rounded-lg p-6">
+              <h3 className="text-lg font-medium mb-4">Your Results</h3>
+              <div className="text-left">
+                <p className="mb-2"><span className="font-medium">Patterns Identified:</span> {patterns.filter(p => p.trim() !== '').length}</p>
+                <p className="mb-2"><span className="font-medium">Algorithm Rules:</span> {algorithm.length}</p>
+                <p><span className="font-medium">Algorithm Accuracy:</span> {calculateAccuracy().toFixed(0)}%</p>
+              </div>
+            </div>
+            
+            <button
+              onClick={onBack}
+              className="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            >
+              Return to Course
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ImageClassifier;
+```
+
 # src/data/courseData.js
 
 ```js
@@ -3268,352 +3862,234 @@ const module1 = {
     {
       id: "1.1",
       title: "What is Artificial Intelligence?",
-      duration: "30 min",
-      interactive: {
-        primaryDemo: {
-          type: "aiSimulation",
-          title: "AI Decision Making",
-          interface: {
-            input: {
-              type: "imageUpload",
-              accept: "image/*",
-              placeholder: "Upload an image to see AI in action"
-            },
-            process: {
-              visualizer: {
-                type: "networkGraph",
-                animate: true,
-                showSteps: true
-              }
-            },
-            output: {
-              display: "results",
-              showConfidence: true
-            }
-          }
-        },
-        conceptExplorer: {
-          type: "interactiveMap",
-          title: "AI Concepts Explorer",
-          elements: [
-            {
-              id: "narrow-ai",
-              title: "Narrow AI",
-              examples: ["Siri", "Chess AI", "Image Recognition"],
-              interactive: true
-            },
-            {
-              id: "general-ai",
-              title: "General AI",
-              description: "Human-level intelligence",
-              status: "theoretical"
-            },
-            {
-              id: "super-ai",
-              title: "Superintelligent AI",
-              description: "Beyond human capabilities",
-              status: "future"
-            }
-          ]
-        }
-      },
-      article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations.
+      duration: "15 min",
+      article: `Artificial Intelligence (AI) is the development of computer systems capable of performing tasks that typically require human intelligence. These tasks include reasoning, problem-solving, understanding natural language, recognizing patterns, and adapting to new situations. AI operates on algorithms—a set of instructions that tell machines how to perform tasks—and leverages vast amounts of data to improve its accuracy and efficiency over time.
 
 Breaking Down AI
 At its core, AI is built on a few key ideas:
 
-Algorithms: Step-by-step instructions that tell a computer how to solve a problem. In AI, these algorithms are designed to adapt and improve over time by learning from data.
+Categories of AI
+AI can be broadly categorized into three types based on its capabilities:
 
-Data: Data is the fuel for AI. Machines learn patterns and make predictions based on the data they are fed. The more data, the better AI systems can perform.
+Narrow AI (Weak AI): Designed for specific tasks, narrow AI systems are highly proficient within their domain but cannot perform beyond it. Examples include voice assistants like Siri and Alexa, facial recognition software, and recommendation systems such as those used by Netflix and Spotify.
 
-Learning: AI systems can "learn" from examples. For example, if you show an AI hundreds of pictures of cats and dogs, it can learn to tell the difference between them.
+General AI (Strong AI): A theoretical concept, general AI refers to machines with the ability to understand, learn, and perform any intellectual task that a human can. Such systems would exhibit self-awareness and the ability to transfer knowledge across different domains. Achieving general AI remains a significant challenge for researchers.
 
-Types of AI:
-1. Narrow AI (Weak AI): Designed for specific tasks
-2. General AI (Strong AI): Theoretical human-level intelligence
-3. Superintelligent AI: Beyond human capabilities
+Superintelligent AI: This theoretical stage of AI would surpass human intelligence in all respects, including creativity, problem-solving, and understanding emotions. While it could revolutionize fields like healthcare and space exploration, it also raises ethical concerns and potential risks.
 
-Core Subfields:
-• Machine Learning (ML)
-• Natural Language Processing (NLP)
-• Computer Vision
-• Robotics`,
+Core Subfields of AI
+AI encompasses several specialized subfields, including:
+
+Machine Learning (ML): Focuses on enabling machines to learn from data and improve over time without explicit programming.
+Natural Language Processing (NLP): Involves teaching machines to understand and generate human language, as seen in chatbots and translation software.
+Computer Vision: Enables machines to interpret and analyze visual data from the world.
+Robotics: Combines AI with engineering to create systems that can perform tasks in the physical world.
+
+Why Learn About AI?
+AI is everywhere in today's world. It powers your smartphone's predictive text, helps doctors diagnose diseases, and even enables self-driving cars. Learning about AI can help you understand the technology shaping the future and inspire you to create or work with AI systems yourself.
+
+How AI Works: A Simple Example
+Imagine you're teaching a computer to recognize whether a photo contains a dog or a cat. Here's how AI approaches the problem:
+1. Input Data: You collect hundreds or thousands of labeled photos. Some are labeled "cat," and others are labeled "dog."
+2. Training the Model: You feed these photos into an algorithm, which studies the differences in patterns (like fur texture, ear shape, etc.) between cats and dogs.
+3. Testing: Once trained, the model is tested with new photos to see if it can correctly identify cats and dogs it hasn't seen before.
+4. Improvement: If the model makes mistakes, you provide more data or adjust its algorithm to improve accuracy.`,
       quiz: {
         questions: [
           {
-            question: "What is the primary purpose of Artificial Intelligence?",
+            question: "What are the three main categories of AI?",
             options: [
-              "To perform tasks that typically require human intelligence",
-              "To replace all human jobs",
-              "To store large amounts of data",
-              "To make computers run faster"
+              "Narrow AI, General AI, and Superintelligent AI",
+              "Basic AI, Advanced AI, and Expert AI",
+              "Learning AI, Teaching AI, and Working AI",
+              "Simple AI, Complex AI, and Super AI"
             ],
             correct: 0,
-            explanation: "AI's primary purpose is to develop systems capable of performing tasks that traditionally require human intelligence, such as problem-solving, pattern recognition, and language understanding."
+            explanation: "AI is categorized into Narrow AI (specific tasks), General AI (human-level intelligence), and Superintelligent AI (beyond human capabilities)."
           },
           {
-            question: "Which of these is NOT one of the main types of AI discussed?",
+            question: "Which of these is NOT a core subfield of AI?",
             options: [
-              "Narrow AI",
-              "General AI",
-              "Quantum AI",
-              "Superintelligent AI"
+              "Machine Learning",
+              "Natural Language Processing",
+              "Digital Marketing",
+              "Computer Vision"
             ],
             correct: 2,
-            explanation: "The three main types of AI discussed are Narrow AI (Weak AI), General AI (Strong AI), and Superintelligent AI. Quantum AI was not mentioned as one of the main types."
+            explanation: "While AI can be applied to digital marketing, it is not a core subfield of AI. The main subfields include Machine Learning, NLP, Computer Vision, and Robotics."
+          },
+          {
+            question: "In the cat-dog recognition example, what is the first step in teaching AI to recognize images?",
+            options: [
+              "Testing the model",
+              "Collecting labeled photos",
+              "Improving accuracy",
+              "Adjusting algorithms"
+            ],
+            correct: 1,
+            explanation: "The first step is collecting labeled data (Input Data) - in this case, photos labeled as either 'cat' or 'dog' to train the AI model."
           }
-        ],
-        interactiveQuiz: {
-          enabled: true,
-          features: {
-            conceptMapping: true,
-            instantFeedback: true,
-            visualExplanations: true
-          }
-        }
+        ]
       }
     },
     {
       id: "1.2",
       title: "Finding AI in Everyday Life",
-      duration: "35 min",
-      interactive: {
-        virtualEnvironment: {
-          type: "3dExploration",
-          title: "AI in Your World",
-          scenes: [
-            {
-              id: "smart-home",
-              type: "interactive",
-              devices: [
-                {
-                  id: "smart-speaker",
-                  type: "voice-assistant",
-                  interactions: ["command", "response"],
-                  demo: true
-                },
-                {
-                  id: "smart-thermostat",
-                  type: "learning-system",
-                  features: ["pattern-recognition", "automation"],
-                  demo: true
-                }
-              ]
-            },
-            {
-              id: "smartphone",
-              type: "interactive",
-              features: [
-                {
-                  id: "text-prediction",
-                  type: "nlp",
-                  demo: true
-                },
-                {
-                  id: "face-recognition",
-                  type: "computer-vision",
-                  demo: true
-                }
-              ]
-            }
-          ]
-        },
-        aiSpotter: {
-          type: "game",
-          title: "Spot the AI",
-          challenges: [
-            {
-              scene: "daily-life",
-              objective: "Find 5 AI applications",
-              hints: true
-            },
-            {
-              scene: "technology",
-              objective: "Identify AI features",
-              hints: true
-            }
-          ]
-        }
-      },
-      article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere.
+      duration: "15 min",
+      article: `Artificial Intelligence (AI) is not just a futuristic concept; it's already a part of our daily lives, often in ways we don't even notice. From the apps on your phone to the way your favorite websites work, AI is everywhere. Understanding where and how AI is used can help you appreciate its importance and see its potential to shape the future.
 
-Everyday Applications of AI:
+Everyday Applications of AI
 
-1. Smartphones:
-• AI helps predict the next word as you type
-• Virtual assistants understand voice commands
-• Facial recognition uses AI to unlock your phone securely
+Smartphones:
+- AI helps your phone predict the next word as you type, making texting faster.
+- Virtual assistants like Siri and Google Assistant understand your voice commands, answering questions or setting reminders.
+- Facial recognition uses AI to unlock your phone securely.
 
-2. Streaming Services:
-• Netflix, Spotify, and YouTube use AI for recommendations
-• AI analyzes viewing habits for content suggestions
-• Personalized playlists based on your preferences
+Streaming Services:
+- Platforms like Netflix, Spotify, and YouTube use AI to recommend shows, movies, or songs based on your past preferences.
+- AI analyzes your viewing or listening habits to suggest content you're likely to enjoy.
 
-3. Online Shopping:
-• Product recommendations based on browsing history
-• Chatbots for customer service
-• Price optimization and inventory management
+Online Shopping:
+- When you shop online, AI recommends products you might like based on your browsing history.
+- Chatbots on websites answer your questions, helping you find what you need quickly.
 
-4. Social Media:
-• Personalized content feeds
-• Automatic photo tagging
-• Content moderation
+Social Media:
+- Ever wondered why certain posts or ads show up in your feed? AI determines what content to show you by analyzing your likes, shares, and comments.
+- Facial recognition tags your friends in photos automatically.
 
-5. Transportation:
-• AI-powered navigation
-• Ride-sharing optimization
-• Self-driving vehicle systems
+Transportation:
+- Navigation apps like Google Maps use AI to find the fastest routes by analyzing real-time traffic data.
+- Ride-sharing apps like Uber and Lyft use AI to match riders with drivers efficiently.
+- Self-driving cars rely entirely on AI to make decisions on the road.
 
-6. Healthcare:
-• Medical image analysis
-• Health monitoring
-• Disease prediction
+Healthcare:
+- AI assists doctors by analyzing medical images to detect diseases like cancer.
+- It powers fitness trackers that monitor your heart rate, sleep, and activity levels, offering personalized health advice.
 
-7. Gaming:
-• Adaptive gameplay
-• NPC behavior
-• Procedural generation`,
+Gaming:
+- Video game opponents adapt to your playing style, providing a more challenging experience.
+- AI creates realistic environments and characters in games.
+
+How AI Works Behind the Scenes:
+- Data Collection: AI systems gather data about your activities, like what shows you watch or the places you visit.
+- Pattern Recognition: AI analyzes this data to find patterns. For example, if you often watch action movies, AI learns to recommend similar films.
+- Decision Making: Based on these patterns, AI predicts what you might like or need next.
+- Learning: The more you interact with AI systems, the better they get at understanding your preferences.
+
+The Bigger Picture:
+AI isn't just about convenience. It's solving big problems too:
+- Predicting natural disasters by analyzing weather patterns.
+- Helping farmers grow crops more efficiently by monitoring soil and weather conditions.
+- Assisting in space exploration by analyzing data from distant planets.`,
       quiz: {
         questions: [
           {
-            question: "Which of these is NOT a common application of AI in smartphones?",
+            question: "Which of these is NOT a common use of AI in smartphones?",
             options: [
-              "Predictive text",
-              "Voice assistants",
+              "Predictive text while typing",
+              "Voice assistant commands",
               "Battery manufacturing",
               "Facial recognition"
             ],
             correct: 2,
-            explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical production process, not an AI application."
+            explanation: "While AI is used in many smartphone features like predictive text, voice assistants, and facial recognition, battery manufacturing is primarily a physical manufacturing process, not an AI application."
           },
           {
-            question: "How does AI improve streaming services?",
+            question: "How does AI improve streaming services like Netflix?",
             options: [
-              "By creating new content",
-              "By providing personalized recommendations",
-              "By increasing internet speed",
-              "By reducing subscription costs"
+              "By creating the movies and shows",
+              "By recommending content based on viewing habits",
+              "By controlling the streaming speed",
+              "By setting subscription prices"
             ],
             correct: 1,
-            explanation: "AI primarily improves streaming services by analyzing user behavior and providing personalized content recommendations, helping users discover content they might enjoy."
-          }
-        ],
-        interactiveElements: {
-          virtualAssistant: {
-            enabled: true,
-            features: ["voice-control", "real-time-response"]
+            explanation: "AI in streaming services primarily analyzes viewing habits to recommend personalized content to users, enhancing their experience by suggesting shows and movies they might enjoy."
           },
-          aiExplorer: {
-            type: "interactive-demo",
-            scenarios: ["smart-home", "mobile", "online"]
+          {
+            question: "What is the primary way AI works behind the scenes?",
+            options: [
+              "By manually programming every decision",
+              "By collecting and analyzing patterns in data",
+              "By asking users what they want",
+              "By copying other applications"
+            ],
+            correct: 1,
+            explanation: "AI works by collecting data, recognizing patterns in that data, and using those patterns to make decisions and predictions, continuously learning from new interactions."
           }
-        }
+        ]
       }
     },
     {
       id: "1.3",
       title: "Simple Pattern Recognition Activities",
-      duration: "40 min",
-      interactive: {
-        patternGame: {
-          type: "interactive",
-          title: "Pattern Detective",
-          description: "Test your pattern recognition skills",
-          component: "PatternGame"
-        },
-        practicalExercises: {
-          type: "hands-on",
-          activities: [
-            {
-              id: "pattern-analysis",
-              type: "exercise",
-              title: "Pattern Analysis",
-              task: "Identify and explain patterns"
-            }
-          ]
-        }
-      },
-      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that both humans and machines rely on to make sense of the world.
-    
-    What Is Pattern Recognition?
-    Pattern recognition is about finding order in what appears to be random or chaotic. For example, when you look at these numbers: 2, 4, 6, 8, you quickly notice they increase by 2 each time. This is a simple pattern that both humans and AI can learn to identify.
-    
-    Key Concepts in Pattern Recognition:
-    
-    1. Sequential Patterns:
-    • Number sequences
-    • Time series data
-    • Repeating elements
-    • Progressive changes
-    
-    2. Visual Patterns:
-    • Shapes and geometries
-    • Color sequences
-    • Spatial arrangements
-    • Recurring motifs
-    
-    3. Logical Patterns:
-    • Rule-based sequences
-    • Cause and effect
-    • If-then relationships
-    • Decision trees
-    
-    Why Is Pattern Recognition Important in AI?
-    Pattern recognition enables AI systems to:
-    • Classify Data: Organizing information into categories
-    • Make Predictions: Forecasting future values or events
-    • Detect Anomalies: Identifying unusual patterns
-    • Learn from Examples: Improving performance through experience
-    
-    Real-World Applications:
-    1. Image Recognition
-    • Face detection in photos
-    • Object identification
-    • Medical image analysis
-    
-    2. Speech Recognition
-    • Voice commands
-    • Language translation
-    • Audio transcription
-    
-    3. Behavior Analysis
-    • Customer purchasing patterns
-    • Traffic flow prediction
-    • Financial market trends`,
+      duration: "15 min",
+      article: `Pattern recognition is one of the simplest and most important concepts in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data—skills that humans and machines alike rely on to make sense of the world. In AI, this ability forms the foundation for more advanced systems, from identifying faces in photos to predicting stock market trends.
+
+What Is Pattern Recognition?
+Pattern recognition is about finding order in chaos. Imagine trying to guess the next number in this sequence: 2, 4, 6, 8. You quickly notice the numbers increase by 2 each time. This is a simple example of pattern recognition. AI systems do the same thing, but with much larger and more complex datasets, such as millions of images or lines of text.
+
+Why Is It Important?
+In AI, pattern recognition allows machines to:
+- Classify Data: For example, sorting images into categories like "cat" or "dog."
+- Detect Anomalies: Identifying unusual patterns, like a sudden spike in credit card activity that could indicate fraud.
+- Make Predictions: Forecasting weather, sales trends, or the outcome of a game.
+
+How AI Recognizes Patterns
+AI systems use algorithms to find patterns in data. One common method is feature extraction:
+- Identifying Features: For example, in handwriting analysis, features might include the slope of the letters or the spacing between words.
+- Comparing Data: AI compares these features across many examples to determine similarities and differences.
+- Making Decisions: Based on patterns, AI decides how to classify or respond to new data.
+
+Real-World Examples of Pattern Recognition:
+- Facial Recognition: Your smartphone's ability to unlock when it "sees" you.
+- Spam Filters: Email systems recognizing patterns in spam messages, like repeated phrases or suspicious links.
+- Search Engines: Google's algorithms identify patterns in your searches to show the most relevant results.
+
+Challenges in Pattern Recognition:
+While pattern recognition is powerful, it's not perfect. Machines can struggle with:
+- Ambiguity: If patterns aren't clear, the AI might make mistakes.
+- Bias in Data: If the training data has errors or is incomplete, the AI might learn incorrect patterns.
+- Complexity: Real-world patterns are often more intricate than simple sequences, requiring advanced techniques to analyze.
+
+The Future of Pattern Recognition in AI:
+Pattern recognition continues to evolve, enabling breakthroughs in:
+- Healthcare: AI systems identifying patterns in medical data to diagnose diseases earlier.
+- Climate Science: Recognizing weather patterns to predict and mitigate natural disasters.
+- Autonomous Vehicles: Detecting patterns in traffic to navigate safely.`,
       quiz: {
         questions: [
           {
-            question: "What is the main purpose of pattern recognition in AI?",
+            question: "What is the primary purpose of pattern recognition in AI?",
             options: [
-              "To identify trends and structures in data",
-              "To create new patterns",
-              "To store information",
-              "To process calculations"
-            ],
-            correct: 0,
-            explanation: "Pattern recognition in AI is primarily used to identify and understand trends, similarities, and structures within data, enabling machines to learn from examples."
-          },
-          {
-            question: "Which type of pattern involves progressive numerical changes?",
-            options: [
-              "Visual patterns",
-              "Sequential patterns",
-              "Random patterns",
-              "Static patterns"
+              "To make computers faster",
+              "To find order and structure in data",
+              "To store more information",
+              "To create new patterns"
             ],
             correct: 1,
-            explanation: "Sequential patterns involve progressive changes in a series, such as numerical sequences that follow a specific rule."
+            explanation: "Pattern recognition in AI is fundamentally about finding order and structure in data, allowing machines to identify trends, similarities, and relationships."
           },
           {
-            question: "How does pattern recognition help in AI predictions?",
+            question: "Which of these is a real-world application of pattern recognition?",
             options: [
-              "By storing more data",
-              "By running faster calculations",
-              "By identifying trends to forecast future values",
-              "By creating random patterns"
+              "Manufacturing computer chips",
+              "Painting pictures",
+              "Spam email filtering",
+              "Installing software"
             ],
             correct: 2,
-            explanation: "Pattern recognition helps AI make predictions by identifying trends in existing data, which can then be used to forecast future values or events."
+            explanation: "Spam filtering is a classic example of pattern recognition, where AI systems identify common patterns in spam emails to filter them out."
+          },
+          {
+            question: "What is one of the main challenges in pattern recognition?",
+            options: [
+              "High cost of computers",
+              "Lack of data storage",
+              "Slow internet speeds",
+              "Ambiguity in patterns"
+            ],
+            correct: 3,
+            explanation: "Ambiguity in patterns is a significant challenge in pattern recognition, as unclear or complex patterns can lead to mistakes in AI interpretation."
           }
         ]
       }
@@ -3621,105 +4097,86 @@ Everyday Applications of AI:
     {
       id: "1.4",
       title: "Basic Machine Learning Concepts Through Games",
-      duration: "45 min",
-      interactive: {
-        mlPlayground: {
-          type: "sandbox",
-          title: "Machine Learning Lab",
-          experiments: [
-            {
-              id: "virtual-pet",
-              type: "reinforcement",
-              title: "Train Your AI Pet",
-              features: {
-                commands: ["sit", "stay", "fetch"],
-                feedback: true,
-                learning: true
-              }
-            },
-            {
-              id: "image-classifier",
-              type: "supervised",
-              title: "Image Detective",
-              features: {
-                upload: true,
-                train: true,
-                test: true
-              }
-            }
-          ]
-        },
-        teachableMachine: {
-          type: "hands-on",
-          features: [
-            {
-              id: "image-model",
-              input: "camera",
-              output: "classification"
-            },
-            {
-              id: "sound-model",
-              input: "microphone",
-              output: "recognition"
-            }
-          ]
-        }
-      },
-      article: `Machine Learning (ML) is one of the most exciting areas of Artificial Intelligence (AI). It enables computers to learn from data and improve their performance without being explicitly programmed.
+      duration: "15 min",
+      article: `Machine Learning (ML) is one of the most exciting areas of Artificial Intelligence (AI). It enables computers to learn from data and improve their performance without being explicitly programmed. Think of it as teaching a computer to make decisions based on experience, much like how humans learn new skills over time.
 
 What Is Machine Learning?
 At its core, machine learning involves three key steps:
-1. Training
-2. Testing
-3. Improving
+1. Training: The computer is given data (called training data) and learns patterns or rules from it.
+2. Testing: After learning, the computer is tested on new data to see how well it can apply what it has learned.
+3. Improving: If the computer makes mistakes, it adjusts its approach to do better next time.
 
 Types of Machine Learning:
-1. Supervised Learning:
-   • Learning from labeled data
-   • Classification tasks
-   • Prediction tasks
 
-2. Unsupervised Learning:
-   • Finding patterns in unlabeled data
-   • Grouping similar items
-   • Discovering structures
+Supervised Learning:
+- The computer learns from labeled data
+- Example: Teaching a system to identify animals by showing it images labeled "cat" or "dog"
 
-3. Reinforcement Learning:
-   • Learning through trial and error
-   • Reward-based improvement
-   • Strategy development`,
+Unsupervised Learning:
+- The computer is given unlabeled data and asked to find patterns
+- Example: Grouping customers based on their shopping habits
+
+Reinforcement Learning:
+- The computer learns through trial and error
+- Example: A game-playing AI learning winning strategies
+
+Real-World Applications of Machine Learning:
+- Healthcare: Diagnosing diseases by analyzing medical images or patient data
+- Finance: Detecting fraudulent transactions by spotting unusual spending patterns
+- Entertainment: Creating personalized recommendations for movies, music, and games
+- Transportation: Enabling self-driving cars to recognize traffic signs and pedestrians
+- Retail: Predicting what products customers might want to buy
+
+Challenges in Machine Learning:
+While machine learning is powerful, it's not perfect. Here are some common challenges:
+- Bias in Data: If training data is incomplete or biased, the AI may make unfair decisions
+- Overfitting: Sometimes, models learn patterns that work for training data but don't apply well to new data
+- Complexity: Real-world problems often require vast amounts of data and computational power
+
+The Learning Process:
+1. Data Collection: Gathering relevant information for the task
+2. Data Preparation: Cleaning and organizing the data
+3. Model Selection: Choosing the right type of algorithm
+4. Training: Teaching the model using the prepared data
+5. Evaluation: Testing how well the model performs
+6. Deployment: Using the model in real-world applications
+7. Monitoring: Watching for changes in performance and updating as needed`,
       quiz: {
         questions: [
           {
             question: "What are the three main steps in machine learning?",
             options: [
               "Training, Testing, Improving",
-              "Writing, Reading, Running",
-              "Coding, Testing, Deploying",
-              "Planning, Building, Testing"
+              "Coding, Running, Debugging",
+              "Planning, Building, Deploying",
+              "Writing, Reading, Executing"
             ],
             correct: 0,
-            explanation: "The three main steps in machine learning are Training (learning from data), Testing (verifying accuracy), and Improving (refining the model based on results)."
+            explanation: "The three main steps in machine learning are Training (learning from data), Testing (verifying performance), and Improving (refining based on results)."
           },
           {
-            question: "Which type of machine learning uses labeled data?",
+            question: "Which type of machine learning uses labeled data for training?",
             options: [
               "Unsupervised Learning",
-              "Supervised Learning",
               "Reinforcement Learning",
-              "Transfer Learning"
+              "Supervised Learning",
+              "Automated Learning"
+            ],
+            correct: 2,
+            explanation: "Supervised learning uses labeled data, where the correct outputs are known during training, allowing the system to learn from examples with known answers."
+          },
+          {
+            question: "What is 'overfitting' in machine learning?",
+            options: [
+              "When the computer runs too slowly",
+              "When the model learns patterns too specific to training data",
+              "When there's too much data to process",
+              "When the program uses too much memory"
             ],
             correct: 1,
-            explanation: "Supervised learning uses labeled data where the correct outputs are known during training, allowing the system to learn from examples with known answers."
+            explanation: "Overfitting occurs when a model learns patterns that are too specific to the training data and doesn't generalize well to new, unseen data."
           }
-        ],
-        practicalExercises: {
-          virtualLab: {
-            enabled: true,
-            experiments: ["classification", "clustering", "reinforcement"],
-            difficulty: "beginner"
-          }
-        }
+        ]
       }
     }
   ],
@@ -3790,465 +4247,337 @@ const module2 = {
       {
         id: "2.1",
         title: "Introduction to Training Data",
-        duration: "35 min",
-        interactive: {
-          dataCollector: {
-            type: "interactive",
-            title: "Build Your Dataset",
-            features: {
-              collection: {
-                tools: ["image-upload", "text-input", "sensor-data"],
-                guidance: true
-              },
-              labeling: {
-                interface: "drag-drop",
-                categories: ["positive", "negative", "neutral"]
-              },
-              visualization: {
-                charts: ["distribution", "correlation", "timeline"],
-                realTime: true
-              }
-            }
-          },
-          dataQualityChecker: {
-            type: "tool",
-            features: [
-              {
-                id: "bias-detector",
-                name: "Bias Checker",
-                visualization: true
-              },
-              {
-                id: "quality-metrics",
-                name: "Data Quality Score",
-                realTime: true
-              }
-            ]
-          },
-          practicalExercises: {
-            type: "hands-on",
-            activities: [
-              {
-                id: "fruit-classifier",
-                title: "Fruit Classification Dataset",
-                steps: [
-                  "Collect fruit images",
-                  "Label dataset",
-                  "Test quality",
-                  "Improve data"
-                ]
-              },
-              {
-                id: "weather-predictor",
-                title: "Weather Prediction Data",
-                dataTypes: ["temperature", "humidity", "pressure"]
-              }
-            ]
-          }
-        },
-        article: `In the world of Artificial Intelligence (AI) and Machine Learning (ML), training data is like the teacher in a classroom. It provides the examples and information that AI systems need to learn and improve.
-  
-  What Is Training Data?
-  Training data is the information that we give to an AI system so it can learn how to perform a specific task. Think of it as a collection of examples that teach the system what to do. For example:
-  • If you're teaching an AI to recognize cats and dogs, the training data would include many images of cats and dogs, each labeled correctly.
-  • If you're building a system to predict the weather, the training data might include past weather conditions like temperature, humidity, and rainfall.
-  
-  Why Is Training Data Important?
-  AI systems learn by finding patterns in the training data. The quality and quantity of this data directly affect how well the AI performs. Here's why:
-  • Accuracy: High-quality, accurate data helps the AI make better predictions or decisions.
-  • Diversity: Diverse data ensures the AI can handle different situations.
-  • Volume: Large datasets provide more examples for the AI to learn from.
-  
-  How Training Data Works:
-  1. Collecting Data: Gather data that represents your problem
-  2. Labeling Data: Add correct answers to your data
-  3. Feeding Data: Let the AI analyze the patterns
-  4. Testing & Improving: Verify and enhance accuracy`,
+        duration: "15 min",
+        article: `In the world of Artificial Intelligence (AI) and Machine Learning (ML), training data is like the teacher in a classroom. It provides the examples and information that AI systems need to learn and improve. Without good training data, even the most advanced AI algorithms can fail to perform well. Let's dive into what training data is, why it's so important, and how it's used in AI systems.
+
+What Is Training Data?
+Training data is the information that we give to an AI system so it can learn how to perform a specific task. Think of it as a collection of examples that teach the system what to do. For example:
+If you're teaching an AI to recognize cats and dogs, the training data would include many images of cats and dogs, each labeled correctly.
+If you're building a system to predict the weather, the training data might include past weather conditions like temperature, humidity, and rainfall.
+
+Why Is Training Data Important?
+AI systems learn by finding patterns in the training data. The quality and quantity of this data directly affect how well the AI performs. Here's why:
+Accuracy: High-quality, accurate data helps the AI make better predictions or decisions.
+Diversity: Diverse data ensures the AI can handle different situations. For example, a facial recognition system trained only on certain demographics might not work well for others.
+Volume: Large datasets provide more examples for the AI to learn from, improving its performance. However, the data must be relevant to the task.
+
+How Training Data Works
+Training data is used in a process called model training. Here's how it works:
+Collecting Data: Gather data that represents the problem you're trying to solve. For example, if you're building an AI to detect spam emails, collect examples of both spam and non-spam emails.
+Labeling Data: For supervised learning, the data must be labeled. This means adding the correct answers, such as marking emails as "spam" or "not spam."
+Feeding Data to the AI: The AI system analyzes the training data to learn patterns and relationships. For example, it might notice that spam emails often contain certain phrases or links.
+Testing and Improving: After training, the AI is tested on new data. If it makes mistakes, adjustments are made to improve its accuracy.
+
+Real-World Examples of Training Data
+Training data is everywhere in AI applications:
+Healthcare: Medical images labeled with diagnoses help AI detect diseases like cancer.
+Transportation: Data from traffic cameras and sensors train AI to improve navigation systems and self-driving cars.
+Retail: Purchase histories teach AI to recommend products you might like.
+
+Challenges with Training Data
+While training data is essential, it comes with challenges:
+Bias: If the data is not representative, the AI may make unfair or incorrect decisions. For example, a hiring algorithm trained on biased data might favor certain candidates over others.
+Noise: Errors or irrelevant information in the data can confuse the AI, reducing its accuracy.
+Cost and Time: Collecting and labeling large datasets can be expensive and time-consuming.
+
+The Future of Training Data
+As AI systems become more advanced, the need for high-quality training data will continue to grow. Innovations like synthetic data—computer-generated examples—are helping to address some of the challenges. These methods can create large, diverse datasets without requiring manual collection and labeling.`,
         quiz: {
           questions: [
             {
               question: "Why is training data important for AI systems?",
               options: [
-                "To help AI systems learn patterns and improve accuracy",
-                "To make computers run faster",
-                "To store information permanently",
-                "To replace human workers"
+                "It helps AI systems learn patterns and make accurate decisions",
+                "It makes computers run faster",
+                "It reduces the cost of AI development",
+                "It simplifies programming tasks"
               ],
               correct: 0,
-              explanation: "Training data is essential because it provides examples that help AI systems learn patterns and improve their accuracy in making predictions or decisions."
+              explanation: "Training data is crucial because it provides examples that help AI systems learn patterns and improve their accuracy in making predictions or decisions."
             },
             {
-              question: "What is NOT a key aspect of training data quality?",
+              question: "What are the three key factors that affect AI performance through training data?",
               options: [
-                "Accuracy",
-                "Diversity",
-                "Speed of collection",
-                "Volume"
+                "Accuracy, Diversity, and Volume",
+                "Speed, Size, and Cost",
+                "Color, Shape, and Size",
+                "Programming, Testing, and Deployment"
               ],
-              correct: 2,
-              explanation: "While accuracy, diversity, and volume are crucial aspects of training data quality, the speed of collection is not a primary factor in determining data quality."
+              correct: 0,
+              explanation: "The three key factors are Accuracy (quality of data), Diversity (variety of examples), and Volume (amount of data), which together determine how well an AI system can learn and perform."
+            },
+            {
+              question: "What is a major challenge with training data?",
+              options: [
+                "It's too easy to collect",
+                "Bias in the data can lead to unfair decisions",
+                "It makes AI systems too accurate",
+                "It's always free to obtain"
+              ],
+              correct: 1,
+              explanation: "Bias in training data is a major challenge as it can lead to AI systems making unfair or incorrect decisions, such as discriminating against certain groups in hiring processes."
             }
-          ],
-          interactiveQuiz: {
-            type: "data-quality-assessment",
-            tasks: [
-              {
-                type: "evaluation",
-                data: "sample-dataset",
-                goal: "Identify quality issues"
-              },
-              {
-                type: "improvement",
-                task: "Suggest improvements",
-                options: ["clean", "augment", "balance"]
-              }
-            ]
-          }
+          ]
         }
       },
       {
         id: "2.2",
         title: "Pattern Matching Exercises",
-        duration: "40 min",
-        interactive: {
-          patternMatcher: {
-            type: "game",
-            title: "Pattern Detective",
-            activities: [
-              {
-                id: "sequence-finder",
-                type: "numeric",
-                patterns: [
-                  {
-                    sequence: [2, 4, 6, 8],
-                    difficulty: "easy",
-                    hints: true
-                  },
-                  {
-                    sequence: [1, 3, 6, 10, 15],
-                    difficulty: "medium",
-                    hints: true
-                  }
-                ]
-              },
-              {
-                id: "visual-patterns",
-                type: "image",
-                sets: [
-                  {
-                    theme: "shapes",
-                    elements: ["circle", "square", "triangle"],
-                    rules: ["color", "size", "rotation"]
-                  },
-                  {
-                    theme: "symbols",
-                    elements: ["emoji", "icons", "characters"],
-                    rules: ["sequence", "grouping"]
-                  }
-                ]
-              }
-            ]
-          },
-          visualizer: {
-            type: "interactive",
-            tools: [
-              {
-                id: "pattern-highlight",
-                type: "overlay",
-                features: ["highlight", "annotate", "explain"]
-              },
-              {
-                id: "pattern-analyzer",
-                type: "analysis",
-                metrics: ["frequency", "correlation", "similarity"]
-              }
-            ]
-          }
-        },
-        article: `Pattern matching is a foundational skill in Artificial Intelligence (AI). It involves identifying trends, similarities, or structures in data.
-  
-  What Is Pattern Matching?
-  Pattern matching is the process of finding similarities or consistent arrangements in data. For example:
-  • Text Patterns: Recognizing similar greetings or phrases
-  • Visual Patterns: Identifying common features in images
-  • Numerical Patterns: Detecting trends in data sequences
-  
-  Why Is Pattern Matching Important?
-  Pattern matching helps AI systems:
-  • Classify Data
-  • Predict Outcomes
-  • Detect Anomalies
-  • Enhance Decision-Making
-  
-  How AI Matches Patterns:
-  1. Feature Extraction
-  2. Similarity Metrics
-  3. Classification Models
-  4. Pattern Recognition`,
+        duration: "15 min",
+        article: `Pattern matching is a foundational skill in Artificial Intelligence (AI). It involves identifying similarities or recurring structures in data, enabling systems to make sense of complex information. Whether it's recognizing handwriting, classifying emails as spam, or predicting customer behavior, pattern matching plays a key role in many AI applications.
+
+What Is Pattern Matching?
+Pattern matching is the process of finding similarities or consistent arrangements in data. For example:
+Text Patterns: Recognizing that "Hi there!" and "Hello!" are both greetings.
+Visual Patterns: Identifying common features in a set of animal images to classify them as cats or dogs.
+Numerical Patterns: Detecting trends in stock prices or temperature changes over time.
+
+Why Is Pattern Matching Important in AI?
+Pattern matching helps AI systems:
+Classify Data: For example, categorizing customer reviews as positive or negative.
+Predict Outcomes: Anticipating future sales trends based on past data.
+Detect Anomalies: Spotting unusual activity, such as potential fraud in banking transactions.
+Enhance Decision-Making: Providing insights for tasks like recommending movies or diagnosing medical conditions.
+
+How AI Matches Patterns
+AI uses algorithms to match patterns in data. Some common techniques include:
+Feature Extraction: Identifying key characteristics in data. For example, an AI might recognize that circles have no corners and are round.
+Similarity Metrics: Measuring how closely two pieces of data match. For instance, comparing handwriting samples to identify a match.
+Classification Models: Assigning new data to categories based on learned patterns, such as classifying emails as spam or not spam.
+
+Real-World Applications of Pattern Matching
+Pattern matching is used in countless applications:
+Healthcare: Identifying patterns in medical images to diagnose diseases.
+Retail: Analyzing purchase patterns to recommend products.
+Finance: Detecting fraudulent transactions by spotting unusual spending behavior.
+Entertainment: Recommending movies or songs based on viewing and listening history.
+
+Challenges in Pattern Matching
+While pattern matching is powerful, it's not without challenges:
+Ambiguity: Some patterns can be unclear or overlap, leading to mistakes.
+Bias: If the training data is incomplete or skewed, the AI might make unfair decisions.
+Complexity: Real-world patterns, like those in human behavior or climate data, can be highly intricate and difficult to analyze.
+
+The Future of Pattern Matching
+Advances in AI are enabling more accurate and complex pattern matching. For example:
+Personalized Medicine: Analyzing genetic patterns to create tailored treatments.
+Smart Cities: Recognizing traffic and energy use patterns to optimize urban planning.
+Natural Language Processing: Understanding context and nuance in human language.`,
         quiz: {
           questions: [
             {
-              question: "What is the primary purpose of pattern matching in AI?",
+              question: "What are the three main types of patterns mentioned in the article?",
               options: [
-                "To find similarities and structures in data",
-                "To create new patterns",
-                "To store information",
-                "To speed up computers"
+                "Text, Visual, and Numerical patterns",
+                "Simple, Medium, and Complex patterns",
+                "Small, Medium, and Large patterns",
+                "Easy, Medium, and Hard patterns"
               ],
               correct: 0,
-              explanation: "Pattern matching in AI is primarily used to identify similarities and structures in data, enabling systems to recognize and learn from patterns."
+              explanation: "The article discusses three main types of patterns: Text patterns (like greetings), Visual patterns (like animal images), and Numerical patterns (like stock prices)."
             },
             {
-              question: "Which is NOT a common application of pattern matching?",
+              question: "Which of these is NOT mentioned as a challenge in pattern matching?",
               options: [
-                "Image recognition",
-                "Text analysis",
-                "Data storage",
-                "Fraud detection"
+                "Ambiguity",
+                "Bias",
+                "Storage capacity",
+                "Complexity"
               ],
               correct: 2,
-              explanation: "While pattern matching is used in image recognition, text analysis, and fraud detection, data storage is not a pattern matching application."
+              explanation: "While ambiguity, bias, and complexity are mentioned as challenges, storage capacity is not listed as one of the challenges in pattern matching."
+            },
+            {
+              question: "What is feature extraction in pattern matching?",
+              options: [
+                "Identifying key characteristics in data",
+                "Storing data in a database",
+                "Creating new patterns",
+                "Deleting unnecessary data"
+              ],
+              correct: 0,
+              explanation: "Feature extraction is the process of identifying key characteristics in data, such as recognizing that circles have no corners and are round."
             }
-          ],
-          practicalExercise: {
-            type: "interactive-patterns",
-            tasks: [
-              {
-                type: "sequence",
-                data: [1, 3, 5, "?"],
-                goal: "Complete the sequence"
-              },
-              {
-                type: "visual",
-                patterns: ["🔵", "🔴", "🔵", "?"],
-                goal: "Predict next symbol"
-              }
-            ]
-          }
+          ]
         }
       },
       {
         id: "2.3",
         title: "Simple Decision Trees",
-        duration: "35 min",
-        interactive: {
-          treeBuilder: {
-            type: "interactive",
-            title: "Decision Tree Constructor",
-            features: {
-              builder: {
-                type: "drag-drop",
-                elements: ["nodes", "branches", "leaves"],
-                validation: true
-              },
-              simulator: {
-                type: "live",
-                data: "sample-scenarios",
-                visualization: true
-              }
-            },
-            exercises: [
-              {
-                id: "weather-tree",
-                scenario: "Weather Activity Planner",
-                variables: ["temperature", "precipitation", "wind"],
-                outcomes: ["indoor", "outdoor", "reschedule"]
-              },
-              {
-                id: "pet-classifier",
-                scenario: "Pet Species Identifier",
-                features: ["size", "fur", "sound"],
-                outcomes: ["dog", "cat", "bird"]
-              }
-            ]
-          },
-          treeVisualizer: {
-            type: "animation",
-            features: [
-              "path-highlighting",
-              "decision-explanation",
-              "performance-metrics"
-            ]
-          }
-        },
-        article: `A decision tree is a type of algorithm used in AI and Machine Learning to make decisions based on a series of questions.
-  
-  What Is a Decision Tree?
-  Components:
-  • Root Node: Starting question
-  • Branches: Possible answers
-  • Leaves: Final decisions
-  
-  Why Are Decision Trees Important?
-  • Easy to Understand
-  • Work with Various Data Types
-  • Flexible Applications
-  
-  How Decision Trees Work:
-  1. Splitting Data
-  2. Creating Branches
-  3. Making Decisions
-  4. Evaluating Results
-  
-  Applications:
-  • Healthcare Diagnosis
-  • Financial Decisions
-  • Product Recommendations
-  • Game AI Behavior`,
+        duration: "15 min",
+        article: `A decision tree is a type of algorithm used in Artificial Intelligence (AI) and Machine Learning (ML) to make decisions based on a series of questions. It's like a flowchart that guides you step-by-step to an answer. Decision trees are simple yet powerful tools for classification and prediction tasks, making them a fundamental concept in AI.
+
+What Is a Decision Tree?
+A decision tree is a branching structure where each node represents a question or decision, and each branch represents the possible outcomes of that decision. At the end of the branches (called leaves), you'll find the final decision or classification. For example:
+Root Node: The starting point of the tree. For instance, "Is the weather sunny?"
+Branches: The answers to the question, such as "Yes" or "No."
+Leaves: The final outcomes, like "Go for a walk" or "Stay indoors."
+
+Why Are Decision Trees Important?
+Decision trees are widely used in AI because they:
+Are Easy to Understand: Their flowchart-like structure makes them intuitive for humans.
+Work with Many Types of Data: Decision trees can handle numerical, categorical, and textual data.
+Are Flexible: They can be used for classification (e.g., categorizing emails as spam or not) and regression (e.g., predicting house prices).
+
+How Do Decision Trees Work?
+Let's break down how a decision tree operates:
+Splitting: The tree starts by asking a question that divides the data into smaller groups. For example, "Is the pet furry?"
+Branching: For each answer (e.g., "Yes" or "No"), the tree asks another question, further refining the groups.
+Stopping: The tree continues splitting until it reaches a stopping point, such as when all data in a group belongs to the same category.
+Decision: The tree makes a final classification or prediction based on the path followed.
+
+Real-World Applications of Decision Trees
+Decision trees are used in many real-world scenarios:
+Healthcare: Diagnosing diseases by asking a series of medical questions.
+Finance: Approving loans by evaluating criteria like income and credit history.
+Retail: Recommending products based on customer preferences.
+Gaming: Programming characters to make decisions based on game conditions.
+
+Advanced Decision Tree Concepts
+Decision trees are the basis for more complex AI techniques, such as:
+Random Forests: Combining multiple decision trees to improve accuracy and reduce errors.
+Boosting Algorithms: Enhancing weak decision trees to create stronger models.
+These advanced methods build on the simplicity of decision trees to tackle complex problems.
+
+Challenges with Decision Trees
+While decision trees are powerful, they have limitations:
+Overfitting: Trees can become too complex, capturing noise in the data rather than meaningful patterns.
+Bias: Poorly chosen questions can lead to biased results.
+Scalability: Very large datasets can make decision trees unwieldy and slow.`,
         quiz: {
           questions: [
             {
-              question: "What is the main component at the top of a decision tree?",
+              question: "What are the main components of a decision tree?",
               options: [
-                "Root node",
-                "Leaf",
-                "Branch",
-                "Decision"
+                "Root node, branches, and leaves",
+                "Start, middle, and end",
+                "Questions, answers, and data",
+                "Input, process, and output"
               ],
               correct: 0,
-              explanation: "The root node is the main component at the top of a decision tree, representing the first question or decision point."
+              explanation: "A decision tree consists of a root node (starting point), branches (possible answers), and leaves (final outcomes)."
             },
             {
-              question: "Which is NOT a benefit of decision trees?",
+              question: "What is overfitting in decision trees?",
+              options: [
+                "When trees become too complex and capture noise instead of patterns",
+                "When trees are too simple",
+                "When trees process data too quickly",
+                "When trees have too few branches"
+              ],
+              correct: 0,
+              explanation: "Overfitting occurs when decision trees become too complex and start capturing noise in the data rather than meaningful patterns."
+            },
+            {
+              question: "Which of these is NOT mentioned as an advantage of decision trees?",
               options: [
                 "Easy to understand",
-                "Works with various data types",
-                "Always 100% accurate",
-                "Flexible applications"
+                "Works with many types of data",
+                "Processes data instantly",
+                "Flexible for different tasks"
               ],
               correct: 2,
-              explanation: "While decision trees have many benefits, being always 100% accurate is not one of them. They can make mistakes and may need refinement."
+              explanation: "While ease of understanding, ability to work with various data types, and flexibility are mentioned as advantages, instant data processing is not listed as an advantage of decision trees."
             }
-          ],
-          practicalExercise: {
-            type: "tree-building",
-            scenario: "Build a decision tree for choosing a mode of transportation",
-            steps: ["Add root", "Create branches", "Define outcomes"],
-            validation: true
-          }
+          ]
         }
       },
       {
         id: "2.4",
         title: "Supervised vs. Unsupervised Learning",
-        duration: "40 min",
-        interactive: {
-          learningLab: {
-            type: "comparative",
-            title: "Learning Methods Explorer",
-            experiments: [
-              {
-                id: "supervised-demo",
-                type: "interactive",
-                scenario: "Image Classification",
-                steps: [
-                  "Label training data",
-                  "Train model",
-                  "Test predictions"
-                ]
-              },
-              {
-                id: "unsupervised-demo",
-                type: "interactive",
-                scenario: "Customer Clustering",
-                steps: [
-                  "Input raw data",
-                  "Discover patterns",
-                  "Analyze groups"
-                ]
-              }
-            ],
-            comparison: {
-              type: "side-by-side",
-              features: [
-                "data-requirements",
-                "process-visualization",
-                "outcome-analysis"
-              ]
-            }
-          },
-          experimentStation: {
-            type: "hands-on",
-            activities: [
-              {
-                id: "fruit-sorter",
-                type: "supervised",
-                task: "Classify fruits by features"
-              },
-              {
-                id: "customer-groups",
-                type: "unsupervised",
-                task: "Discover customer segments"
-              }
-            ]
-          }
-        },
-        article: `In Machine Learning, there are two main approaches to teaching AI systems: supervised and unsupervised learning.
-  
-  Supervised Learning:
-  • Learning with labeled data
-  • System knows correct answers
-  • Examples: Spam detection, image classification
-  
-  Unsupervised Learning:
-  • Learning without labels
-  • Discovers patterns independently
-  • Examples: Customer segmentation, anomaly detection
-  
-  Key Differences:
-  1. Data Requirements:
-     • Supervised: Labeled data
-     • Unsupervised: Unlabeled data
-  
-  2. Applications:
-     • Supervised: Classification, prediction
-     • Unsupervised: Clustering, pattern discovery`,
+        duration: "15 min",
+        article: `In Machine Learning (ML), the way a system learns from data can be broadly categorized into two types: supervised learning and unsupervised learning. Understanding the differences between these methods is essential to grasp how AI systems are trained to solve various problems.
+
+What Is Supervised Learning?
+Supervised learning is like learning with a teacher. The system is provided with labeled data, meaning each input comes with the correct output. The goal is to train the system to make accurate predictions or classifications when it encounters new data.
+For example:
+In an email spam filter, the training data might include emails labeled as "spam" or "not spam."
+In image recognition, photos might be labeled "cat," "dog," or "bird."
+
+The process involves:
+Feeding the system a dataset with inputs and corresponding outputs.
+Allowing the system to learn patterns in the data.
+Testing the system on new, unlabeled data to see if it makes the right predictions.
+
+What Is Unsupervised Learning?
+Unsupervised learning is like learning without a teacher. The system is given data without any labels or predefined categories. The goal is to discover patterns, structures, or relationships within the data on its own.
+For example:
+In customer segmentation, an unsupervised system might group customers based on their purchasing habits.
+In social networks, it might identify clusters of users with similar interests.
+
+The process involves:
+Feeding the system unlabeled data.
+Allowing the system to analyze and group the data based on similarities or differences.
+
+Key Differences Between Supervised and Unsupervised Learning:
+Feature | Supervised Learning | Unsupervised Learning
+Data | Labeled | Unlabeled 
+Goal | Predict outcomes or classify data | Find hidden patterns or clusters 
+Example | Spam detection, image classification | Customer Segmentation, anomaly detection
+
+Real-World Applications:
+Supervised Learning:
+- Predicting house prices based on size, location, and other features.
+- Diagnosing diseases from labeled medical data.
+- Translating languages using labeled text pairs.
+
+Unsupervised Learning:
+- Detecting fraud by finding unusual patterns in transaction data.
+- Grouping news articles by topic without prior labels.
+- Recommending products by analyzing purchase history.
+
+Challenges:
+While both approaches are powerful, they have limitations:
+
+Supervised Learning:
+- Requires large amounts of labeled data, which can be time-consuming and expensive to collect.
+- May struggle with new, unseen data if it doesn't fit the training patterns.
+
+Unsupervised Learning:
+- Can produce results that are hard to interpret.
+- Might group data in ways that don't align with human understanding.`,
         quiz: {
           questions: [
             {
-              question: "What is the key difference between supervised and unsupervised learning?",
+              question: "What is the main difference between supervised and unsupervised learning?",
               options: [
-                "Use of labeled vs. unlabeled data",
-                "Processing speed",
-                "Cost of implementation",
-                "Number of algorithms"
+                "Supervised learning uses labeled data, while unsupervised learning uses unlabeled data",
+                "Supervised learning is faster than unsupervised learning",
+                "Supervised learning is more expensive than unsupervised learning",
+                "Supervised learning is newer than unsupervised learning"
               ],
               correct: 0,
               explanation: "The key difference is that supervised learning uses labeled data (with known correct answers), while unsupervised learning works with unlabeled data to discover patterns."
             },
             {
-              question: "Which type of learning is best suited for customer segmentation?",
+              question: "Which is an example of supervised learning?",
               options: [
-                "Supervised learning",
-                "Unsupervised learning",
-                "Both types equally",
-                "Neither type"
+                "Grouping customers by shopping habits",
+                "Spam email detection",
+                "Finding unusual patterns in data",
+                "Clustering similar news articles"
               ],
               correct: 1,
-              explanation: "Unsupervised learning is best suited for customer segmentation as it can discover natural groupings in data without predefined labels."
+              explanation: "Spam email detection is an example of supervised learning because it uses labeled data (emails marked as 'spam' or 'not spam') to train the system."
+            },
+            {
+              question: "What is a major challenge of supervised learning?",
+              options: [
+                "It requires large amounts of labeled data",
+                "It's too fast",
+                "It's too simple",
+                "It doesn't use patterns"
+              ],
+              correct: 0,
+              explanation: "A major challenge of supervised learning is that it requires large amounts of labeled data, which can be time-consuming and expensive to collect."
             }
-          ],
-          practicalExercise: {
-            type: "learning-comparison",
-            scenarios: [
-              {
-                type: "supervised",
-                task: "Email classification",
-                data: "labeled-emails"
-              },
-              {
-                type: "unsupervised",
-                task: "Customer grouping",
-                data: "customer-behaviors"
-              }
-            ]
-          }
+          ]
         }
       }
     ]
-  };
-  
-  export default module2;
+};
+
+export default module2;
 ```
 
 # src/data/modules/module3.js
@@ -4259,10 +4588,10 @@ const module2 = {
 const module3 = {
     id: 3,
     title: "Advanced AI Concepts",
-    description: "Explore advanced concepts in AI systems, algorithms, and neural networks",
+    description: "Explore advanced concepts in artificial intelligence and neural networks",
     prerequisites: [1, 2],
-    icon: "Network",
-    themeColor: "green",
+    icon: "Brain",
+    themeColor: "blue",
   
     interactiveFeatures: {
       aiLab: {
@@ -4270,11 +4599,11 @@ const module3 = {
         components: {
           systemVisualizer: {
             type: "interactive",
-            features: ["system-comparison", "architecture-exploration", "network-visualization"]
+            features: ["system-comparison", "network-visualization", "algorithm-simulation"]
           },
-          conceptMap: {
-            type: "dragAndDrop",
-            elements: ["systems", "algorithms", "neural-networks"]
+          experimentStation: {
+            type: "hands-on",
+            tools: ["neural-network-playground", "algorithm-tester", "data-processor"]
           }
         }
       }
@@ -4284,66 +4613,96 @@ const module3 = {
       {
         id: "3.1",
         title: "Types of AI Systems",
-        duration: "35 min",
+        duration: "20 min",
         article: `Artificial Intelligence (AI) is not just one system or technology; it encompasses a wide range of systems with varying capabilities and functionalities. Understanding the different types of AI systems can help us see how they are designed, what they can do, and how they are applied in the real world.
-  
-  Reactive Machines
-  Reactive machines are the simplest type of AI. They operate based solely on the current input and do not rely on memory or past experiences. They cannot learn from previous interactions and only perform specific tasks they are programmed for.
-  
-  Examples:
-  • Chess-playing AI: IBM's Deep Blue, which defeated chess champion Garry Kasparov, is a reactive machine. It evaluates possible moves in the moment without learning from past games.
-  • Basic Recommendation Systems: Simple systems that suggest products based on your most recent clicks or searches.
-  
-  Limited Memory
-  Limited memory AI systems can store and use past data for a short time. They analyze recent experiences or data points to make decisions, but they do not retain this information permanently.
-  
-  Examples:
-  • Self-Driving Cars: These vehicles analyze recent sensor data to identify pedestrians, traffic lights, and other vehicles, using it to make real-time driving decisions.
-  • Virtual Assistants: Systems like Siri or Alexa can temporarily remember context, such as a follow-up question about a previous command.
-  
-  Theory of Mind
-  Theory of mind AI is a concept that refers to systems capable of understanding emotions, intentions, and social interactions. While this type of AI is still theoretical, it represents a significant step toward creating machines that can interact with humans more naturally and empathetically.
-  
-  Potential Applications:
-  • Social Robotics: Robots designed to assist in caregiving or education, capable of understanding and responding to human emotions.
-  • Advanced Virtual Assistants: Systems that adapt their tone and suggestions based on the user's mood or context.
-  
-  Self-Aware AI
-  Self-aware AI represents the most advanced and hypothetical type of AI. These systems would possess self-awareness, consciousness, and the ability to understand their existence and goals.`,
+
+What Is a Reactive Machine?
+Reactive machines are the simplest type of AI. They operate based solely on the current input and do not rely on memory or past experiences. They cannot learn from previous interactions and only perform specific tasks they are programmed for.
+
+Examples:
+- Chess-playing AI: IBM's Deep Blue, which defeated chess champion Garry Kasparov, is a reactive machine. It evaluates possible moves in the moment without learning from past games.
+- Basic Recommendation Systems: Simple systems that suggest products based on your most recent clicks or searches.
+
+Limited Memory AI
+Limited memory AI systems can store and use past data for a short time. They analyze recent experiences or data points to make decisions, but they do not retain this information permanently.
+
+Examples:
+- Self-Driving Cars: These vehicles analyze recent sensor data to identify pedestrians, traffic lights, and other vehicles, using it to make real-time driving decisions.
+- Virtual Assistants: Systems like Siri or Alexa can temporarily remember context, such as a follow-up question about a previous command.
+
+Theory of Mind AI
+Theory of mind AI is a concept that refers to systems capable of understanding emotions, intentions, and social interactions. While this type of AI is still theoretical, it represents a significant step toward creating machines that can interact with humans more naturally and empathetically.
+
+Potential Applications:
+- Social Robotics: Robots designed to assist in caregiving or education, capable of understanding and responding to human emotions.
+- Advanced Virtual Assistants: Systems that adapt their tone and suggestions based on the user's mood or context.
+
+Self-Aware AI
+Self-aware AI represents the most advanced and hypothetical type of AI. These systems would possess self-awareness, consciousness, and the ability to understand their existence and goals.
+
+Ethical Considerations:
+- Developing self-aware AI raises ethical questions about its rights, responsibilities, and the impact on humanity.
+- It also poses challenges for safety and control, as such systems might act independently in unpredictable ways.
+
+Narrow AI vs. General AI vs. Superintelligent AI
+AI systems can also be categorized based on their scope and capabilities:
+
+Narrow AI (Weak AI):
+- Designed for specific tasks, such as image recognition or voice assistants.
+- Examples: Netflix recommendation system, Google Translate.
+
+General AI (Strong AI):
+- A theoretical concept of AI that can perform any intellectual task a human can.
+- Capable of reasoning, problem-solving, and transferring knowledge across domains.
+
+Superintelligent AI:
+- A future concept where AI surpasses human intelligence in all respects.
+- While this could revolutionize industries, it also raises significant safety and ethical concerns.
+
+Real-World Applications
+Different types of AI systems are used in various industries to solve real-world problems:
+- Healthcare: Limited memory systems analyze patient data for diagnostics and treatment recommendations.
+- Finance: Reactive systems detect and flag unusual transactions for fraud prevention.
+- Education: Theory of mind AI (once developed) could personalize learning experiences by understanding students' emotions and learning styles.
+
+Challenges and Future Directions
+- Scalability: As AI systems become more advanced, they require greater computational resources and data.
+- Ethics: Developing AI that understands emotions or becomes self-aware raises significant moral questions.
+- Control: Ensuring AI systems act safely and align with human values remains a key challenge.`,
         quiz: {
           questions: [
             {
               question: "What is the main characteristic of reactive machines?",
               options: [
-                "They operate based only on current input",
-                "They learn from past experiences",
-                "They can store memories",
-                "They have self-awareness"
+                "They operate solely on current input without using memory or past experiences",
+                "They can learn from past experiences",
+                "They have self-awareness",
+                "They understand human emotions"
               ],
               correct: 0,
-              explanation: "Reactive machines are the simplest type of AI that operate solely based on current input and cannot learn from past experiences."
+              explanation: "Reactive machines are the simplest type of AI that operate based only on current input, without using memory or learning from past experiences."
             },
             {
-              question: "Which type of AI system is used in self-driving cars?",
+              question: "Which type of AI system is currently used in self-driving cars?",
               options: [
-                "Reactive Machines",
-                "Limited Memory",
-                "Theory of Mind",
-                "Self-Aware AI"
+                "Limited Memory AI",
+                "Theory of Mind AI",
+                "Self-Aware AI",
+                "Reactive Machine AI"
               ],
-              correct: 1,
-              explanation: "Self-driving cars use Limited Memory AI systems to analyze recent sensor data and make real-time driving decisions."
+              correct: 0,
+              explanation: "Self-driving cars use Limited Memory AI systems, which can analyze recent sensor data to make real-time driving decisions."
             },
             {
-              question: "What is the most advanced and hypothetical type of AI discussed?",
+              question: "What is the key difference between Narrow AI and General AI?",
               options: [
-                "Reactive Machines",
-                "Limited Memory",
-                "Theory of Mind",
-                "Self-Aware AI"
+                "Narrow AI is designed for specific tasks while General AI can perform any intellectual task",
+                "Narrow AI is more advanced than General AI",
+                "General AI exists today while Narrow AI is theoretical",
+                "Narrow AI requires more computing power than General AI"
               ],
-              correct: 3,
-              explanation: "Self-Aware AI represents the most advanced and hypothetical type of AI, capable of possessing consciousness and understanding its own existence."
+              correct: 0,
+              explanation: "Narrow AI is designed for specific tasks (like image recognition), while General AI is a theoretical concept of AI that can perform any intellectual task a human can."
             }
           ]
         }
@@ -4351,76 +4710,98 @@ const module3 = {
       {
         id: "3.2",
         title: "Basic Algorithms in AI",
-        duration: "40 min",
+        duration: "20 min",
         article: `Algorithms are the foundation of Artificial Intelligence (AI) and Machine Learning (ML). They are sets of instructions that guide computers in solving problems and making decisions. Understanding basic algorithms helps us see how AI systems learn, adapt, and improve.
-  
-  What Is an Algorithm?
-  An algorithm is a step-by-step procedure for performing a task or solving a problem. It's like a recipe: you follow specific steps to achieve a desired outcome. In AI, algorithms help machines process data and make sense of it.
-  
-  For example:
-  • A sorting algorithm arranges numbers or words in order (e.g., smallest to largest).
-  • A search algorithm finds specific information, like a name in a list.
-  
-  Common Types of AI Algorithms
-  
-  1. Linear Regression:
-  • Used for predicting a continuous value (e.g., house prices based on size).
-  • Works by finding the best-fit line that minimizes errors between predicted and actual values.
-  
-  2. Logistic Regression:
-  • Used for classification tasks (e.g., determining whether an email is spam or not).
-  • Outputs probabilities to classify data into categories.
-  
-  3. Decision Trees:
-  • Use a flowchart-like structure to make decisions based on a series of questions.
-  • Example: Deciding whether to play outside based on weather conditions.
-  
-  4. K-Nearest Neighbors (KNN):
-  • A simple algorithm that classifies data points based on the closest examples.
-  • Example: Grouping similar fruits based on color and shape.
-  
-  5. Clustering Algorithms:
-  • Group similar data points together without predefined labels.
-  • Example: Grouping customers based on purchasing behavior.
-  
-  How Algorithms Process Data:
-  1. Input: Provide data for the algorithm to process (e.g., images, numbers, or text).
-  2. Processing: The algorithm performs calculations or applies rules to find patterns or make decisions.
-  3. Output: The result could be a prediction, classification, or decision.`,
+
+What Is an Algorithm?
+An algorithm is a step-by-step procedure for performing a task or solving a problem. It's like a recipe: you follow specific steps to achieve a desired outcome. In AI, algorithms help machines process data and make sense of it.
+
+For example:
+- A sorting algorithm arranges numbers or words in order (e.g., smallest to largest).
+- A search algorithm finds specific information, like a name in a list.
+
+In AI, algorithms are used to:
+- Classify data (e.g., recognizing whether an image contains a cat or a dog).
+- Make predictions (e.g., forecasting weather or stock prices).
+- Find patterns (e.g., detecting fraud in financial transactions).
+
+Common Types of AI Algorithms
+
+Linear Regression:
+- Used for predicting a continuous value (e.g., house prices based on size).
+- Works by finding the best-fit line that minimizes errors between predicted and actual values.
+
+Logistic Regression:
+- Used for classification tasks (e.g., determining whether an email is spam or not).
+- Outputs probabilities to classify data into categories.
+
+Decision Trees:
+- Use a flowchart-like structure to make decisions based on a series of questions.
+- Example: Deciding whether to play outside based on weather conditions (e.g., "Is it raining?").
+
+K-Nearest Neighbors (KNN):
+- A simple algorithm that classifies data points based on the closest examples in the training data.
+- Example: Grouping similar fruits based on color and shape.
+
+Clustering Algorithms:
+- Group similar data points together without predefined labels.
+- Example: Grouping customers based on purchasing behavior.
+
+How Algorithms Process Data
+Algorithms work by analyzing input data and following predefined steps to generate an output:
+1. Input: Provide data for the algorithm to process (e.g., images, numbers, or text).
+2. Processing: The algorithm performs calculations or applies rules to find patterns or make decisions.
+3. Output: The result could be a prediction, classification, or decision (e.g., "This email is spam").
+
+Real-World Applications
+Algorithms are the driving force behind many AI applications:
+- Healthcare: Predicting patient outcomes and diagnosing diseases using regression and classification.
+- Retail: Recommending products based on customer preferences.
+- Finance: Detecting fraudulent transactions with anomaly detection algorithms.
+- Transportation: Optimizing routes and schedules with search and optimization algorithms.
+
+Challenges with Algorithms
+While algorithms are powerful, they come with challenges:
+- Bias: If the input data is biased, the algorithm's decisions may also be biased.
+- Complexity: Some problems require very complex algorithms that demand significant computational resources.
+- Interpretability: Understanding why an algorithm made a specific decision can be difficult, especially with advanced techniques like neural networks.
+
+The Future of Algorithms
+As AI continues to evolve, algorithms are becoming more advanced and efficient. Innovations like quantum computing and neural architecture search are pushing the boundaries of what algorithms can achieve.`,
         quiz: {
           questions: [
             {
-              question: "What is the primary purpose of an algorithm in AI?",
+              question: "What is the primary purpose of a linear regression algorithm?",
               options: [
-                "To store data permanently",
-                "To provide step-by-step instructions for solving problems",
-                "To connect to the internet",
-                "To create user interfaces"
-              ],
-              correct: 1,
-              explanation: "An algorithm is a step-by-step procedure that guides computers in solving problems and making decisions."
-            },
-            {
-              question: "Which algorithm type is best suited for predicting continuous values?",
-              options: [
-                "Linear Regression",
-                "Logistic Regression",
-                "Decision Trees",
-                "Clustering Algorithms"
+                "Predicting continuous values",
+                "Classifying data into categories",
+                "Grouping similar data points",
+                "Finding specific information"
               ],
               correct: 0,
-              explanation: "Linear Regression is specifically used for predicting continuous values, such as house prices based on size."
+              explanation: "Linear regression is used for predicting continuous values, such as house prices based on features like size and location."
             },
             {
-              question: "What is the main purpose of clustering algorithms?",
+              question: "Which algorithm is best suited for grouping similar data points without predefined labels?",
               options: [
-                "To predict future values",
-                "To classify emails as spam",
-                "To group similar data points together",
-                "To make sequential decisions"
+                "Clustering algorithms",
+                "Linear regression",
+                "Decision trees",
+                "Logistic regression"
               ],
-              correct: 2,
-              explanation: "Clustering algorithms are designed to group similar data points together without predefined labels."
+              correct: 0,
+              explanation: "Clustering algorithms are designed to group similar data points together without predefined labels, making them ideal for discovering natural groupings in data."
+            },
+            {
+              question: "What is a major challenge with AI algorithms?",
+              options: [
+                "Bias in decision-making if input data is biased",
+                "They are too simple to solve complex problems",
+                "They require no computational resources",
+                "They are always easy to interpret"
+              ],
+              correct: 0,
+              explanation: "A major challenge with AI algorithms is that they can produce biased decisions if the input data itself contains biases."
             }
           ]
         }
@@ -4428,149 +4809,192 @@ const module3 = {
       {
         id: "3.3",
         title: "Data Collection and Processing",
-        duration: "35 min",
+        duration: "20 min",
         article: `Data is the lifeblood of Artificial Intelligence (AI) systems. Before an AI can learn, predict, or make decisions, it needs data—lots of it. But raw data is rarely ready for immediate use. It must be collected, cleaned, and processed to ensure it's accurate and useful.
-  
-  Why Is Data Collection Important?
-  Data collection is the first step in creating AI systems. The quality and quantity of data directly impact how well the AI performs. Here's why it's important:
-  
-  1. Accuracy: High-quality data ensures the AI makes reliable predictions.
-  2. Relevance: The data must align with the problem the AI is solving.
-  3. Diversity: Diverse datasets prevent bias and help AI systems generalize better.
-  
-  How Is Data Collected?
-  Data can come from many sources, depending on the AI's purpose:
-  
-  1. Sensors: Devices like cameras, microphones, and IoT sensors gather real-world information.
-  2. Databases: Existing datasets, such as customer records or medical histories.
-  3. Surveys and Forms: Direct input from users.
-  4. Web Scraping: Extracting information from websites.
-  
-  Data Cleaning: Preparing for Use
-  Raw data often contains errors, duplicates, or irrelevant information. Data cleaning steps include:
-  
-  1. Removing Errors: Identifying and correcting mistakes.
-  2. Eliminating Duplicates: Ensuring no data point is counted twice.
-  3. Handling Missing Data: Filling in gaps or deciding how to work around them.
-  4. Standardizing Formats: Making sure data is consistent.
-  
-  Data Processing: Making Data Usable
-  Once cleaned, the data is processed to extract meaningful insights:
-  
-  1. Feature Extraction: Identifying the most important characteristics.
-  2. Normalization: Scaling data to a consistent range.
-  3. Encoding: Converting non-numerical data into numerical formats.`,
+
+Why Is Data Collection Important?
+Data collection is the first step in creating AI systems. The quality and quantity of data directly impact how well the AI performs. Here's why it's important:
+- Accuracy: High-quality data ensures the AI makes reliable predictions.
+- Relevance: The data must align with the problem the AI is solving.
+- Diversity: Diverse datasets prevent bias and help AI systems generalize better.
+
+How Is Data Collected?
+Data can come from many sources, depending on the AI's purpose. Examples include:
+- Sensors: Devices like cameras, microphones, and IoT sensors gather real-world information.
+- Databases: Existing datasets, such as customer records or medical histories.
+- Surveys and Forms: Direct input from users.
+- Web Scraping: Extracting information from websites, such as product reviews or social media posts.
+
+Ethical considerations are vital during data collection, including ensuring user privacy and obtaining consent.
+
+Data Cleaning: Preparing for Use
+Raw data often contains errors, duplicates, or irrelevant information. Data cleaning is the process of fixing these issues to make the data usable. Steps include:
+- Removing Errors: Identifying and correcting mistakes, such as typos or out-of-range values.
+- Eliminating Duplicates: Ensuring no data point is counted twice.
+- Handling Missing Data: Filling in gaps or deciding how to work around them.
+- Standardizing Formats: Making sure data is consistent, such as dates being in the same format.
+
+Data Processing: Making Data Usable
+Once cleaned, the data is processed to extract meaningful insights. Key steps include:
+
+Feature Extraction:
+- Identifying the most important characteristics of the data.
+- Example: In image data, features might include shapes, colors, or edges.
+
+Normalization:
+- Scaling data to a consistent range to improve performance.
+- Example: Ensuring all numerical data falls between 0 and 1.
+
+Encoding:
+- Converting non-numerical data (like text) into numerical formats AI can understand.
+- Example: Turning "Yes" and "No" into 1 and 0.
+
+Real-World Examples
+- Healthcare: Collecting patient data from sensors and medical records, then processing it to predict health outcomes.
+- Retail: Gathering customer purchase histories and cleaning the data to recommend products.
+- Transportation: Using traffic sensors to optimize routes for delivery trucks or ride-sharing apps.
+
+Challenges in Data Collection and Processing
+While critical, this process comes with challenges:
+- Volume: Managing large amounts of data requires significant storage and computational resources.
+- Bias: Ensuring the data is representative of the problem to avoid skewed results.
+- Privacy: Balancing the need for data with protecting user information.
+
+The Future of Data Collection and Processing
+As AI becomes more advanced, so do the methods for collecting and processing data. Innovations include:
+- Synthetic Data: Generating realistic data artificially to supplement real-world datasets.
+- Automated Cleaning Tools: Using AI to identify and fix errors in data.
+- Edge Computing: Processing data closer to its source (like on a device) to reduce latency and improve efficiency.`,
         quiz: {
           questions: [
             {
-              question: "Why is data collection important for AI systems?",
+              question: "Why is data cleaning important in AI systems?",
               options: [
-                "To make the system run faster",
-                "To reduce storage costs",
-                "To ensure accurate and reliable predictions",
-                "To simplify programming"
+                "To remove errors, duplicates, and irrelevant information that could affect AI performance",
+                "To make the data smaller and easier to store",
+                "To make the data more complex",
+                "To slow down processing time"
               ],
-              correct: 2,
-              explanation: "Data collection is crucial because the quality and quantity of data directly impact how well the AI performs and makes predictions."
+              correct: 0,
+              explanation: "Data cleaning is crucial because it removes errors, duplicates, and irrelevant information that could negatively impact the AI system's performance."
             },
             {
-              question: "What is the purpose of data cleaning?",
+              question: "What is feature extraction in data processing?",
               options: [
-                "To make data smaller",
-                "To remove useful information",
-                "To make data look prettier",
-                "To fix errors and inconsistencies"
+                "Identifying the most important characteristics of the data",
+                "Removing all features from the data",
+                "Adding new features to the data",
+                "Copying data features"
               ],
-              correct: 3,
-              explanation: "Data cleaning is the process of fixing errors, removing duplicates, and handling missing values to make the data usable."
+              correct: 0,
+              explanation: "Feature extraction is the process of identifying and selecting the most important characteristics or patterns in the data that will be useful for the AI system."
             },
             {
-              question: "Which of these is NOT a common source of data collection?",
+              question: "What is a key challenge in data collection and processing?",
               options: [
-                "Sensors",
-                "Databases",
-                "Random generation",
-                "Web scraping"
+                "Managing large volumes of data while ensuring privacy",
+                "Making data more complex",
+                "Reducing data accuracy",
+                "Removing all personal information"
               ],
-              correct: 2,
-              explanation: "Random generation is not a common source of data collection. Data is typically collected from real sources like sensors, databases, surveys, and web scraping."
+              correct: 0,
+              explanation: "A key challenge is managing large volumes of data while ensuring privacy and security, as this requires significant resources and careful handling of sensitive information."
             }
           ]
         }
       },
       {
         id: "3.4",
-        title: "Neural Networks Fundamentals",
-        duration: "45 min",
+        title: "Neural Network Fundamentals",
+        duration: "20 min",
         article: `Neural networks are a cornerstone of modern Artificial Intelligence (AI). Inspired by the structure of the human brain, neural networks enable machines to recognize patterns, process data, and make decisions.
-  
-  What Is a Neural Network?
-  A neural network is a series of algorithms designed to recognize relationships in data. It consists of layers of interconnected nodes (or neurons) that process information.
-  
-  Key Components:
-  1. Input Layer: The first layer that receives data, such as images, text, or numerical values.
-  2. Hidden Layers: Layers between the input and output, where the network processes and transforms data.
-  3. Output Layer: Produces the final result, such as a classification or prediction.
-  
-  How Neural Networks Work
-  Neural networks learn by adjusting the connections (or weights) between neurons:
-  
-  1. Data Input: The network receives data (e.g., an image of a cat).
-  2. Forward Propagation: Data flows through the network, with each neuron applying transformations.
-  3. Error Calculation: The network compares its output with the correct answer.
-  4. Backward Propagation: The network adjusts weights to reduce errors.
-  
-  Types of Neural Networks:
-  
-  1. Feedforward Neural Networks:
-  • Data flows in one direction
-  • Used for basic prediction tasks
-  
-  2. Convolutional Neural Networks (CNNs):
-  • Specialized for image processing
-  • Used in computer vision applications
-  
-  3. Recurrent Neural Networks (RNNs):
-  • Designed for sequential data
-  • Used in language processing
-  
-  4. Deep Neural Networks:
-  • Multiple layers for complex patterns
-  • Used in advanced AI applications`,
+
+What Is a Neural Network?
+A neural network is a series of algorithms designed to recognize relationships in data. It consists of layers of interconnected nodes (or neurons) that process information.
+
+Key Components:
+- Input Layer: The first layer that receives data, such as images, text, or numerical values.
+- Hidden Layers: Layers between the input and output, where the network processes and transforms data.
+- Output Layer: Produces the final result, such as a classification (e.g., "cat" or "dog") or prediction.
+
+How Neural Networks Work
+Neural networks learn by adjusting the connections (or weights) between neurons. Here's how they operate:
+1. Data Input: The network receives data (e.g., an image of a cat).
+2. Forward Propagation: Data flows through the network. Each neuron applies a mathematical function to transform the input.
+3. Error Calculation: The network compares its output with the correct answer and calculates an error.
+4. Backward Propagation: The network adjusts the weights to reduce the error. This process repeats until the network performs well.
+
+Types of Neural Networks
+
+Feedforward Neural Networks:
+- Data flows in one direction, from input to output.
+- Example: Predicting house prices based on features like size and location.
+
+Convolutional Neural Networks (CNNs):
+- Specialized for image processing and recognition.
+- Example: Identifying objects in photos or videos.
+
+Recurrent Neural Networks (RNNs):
+- Designed for sequential data like time series or text.
+- Example: Predicting the next word in a sentence.
+
+Deep Neural Networks:
+- Consist of many layers, allowing them to learn complex patterns.
+- Example: Translating languages or generating realistic images.
+
+Real-World Applications
+Neural networks power many technologies we use today:
+- Healthcare: Diagnosing diseases from medical images.
+- Transportation: Enabling self-driving cars to recognize road signs and obstacles.
+- Finance: Detecting fraud by analyzing transaction patterns.
+- Entertainment: Recommending movies or generating realistic game graphics.
+
+Challenges with Neural Networks
+While powerful, neural networks face challenges:
+- Data Requirements: They need large amounts of high-quality data to perform well.
+- Computational Resources: Training deep networks requires significant processing power.
+- Interpretability: Understanding why a neural network made a specific decision can be difficult.
+- Overfitting: Networks can sometimes learn patterns too specific to the training data.
+
+The Future of Neural Networks
+Advances in neural network research are driving innovations in AI. Promising directions include:
+- Neural Architecture Search: Automatically designing optimized network structures.
+- Few-Shot Learning: Training networks to perform well with very limited data.
+- Neuromorphic Computing: Building hardware that mimics the brain's structure for more efficient processing.`,
         quiz: {
           questions: [
             {
-              question: "What inspired the design of neural networks?",
+              question: "What are the three main components of a neural network?",
               options: [
-                "Computer circuits",
-                "The human brain",
-                "Mathematical equations",
-                "Social networks"
+                "Input layer, hidden layers, and output layer",
+                "Start layer, middle layer, and end layer",
+                "Data layer, processing layer, and result layer",
+                "Beginning, middle, and end nodes"
               ],
-              correct: 1,
-              explanation: "Neural networks were inspired by the structure of the human brain, with interconnected nodes similar to neurons."
+              correct: 0,
+              explanation: "A neural network consists of three main components: the input layer (receives data), hidden layers (processes data), and output layer (produces results)."
             },
             {
-              question: "Which type of neural network is best suited for image processing?",
+              question: "Which type of neural network is specifically designed for image processing?",
               options: [
+                "Convolutional Neural Networks (CNNs)",
+                "Recurrent Neural Networks (RNNs)",
                 "Feedforward Neural Networks",
-                "Recurrent Neural Networks",
-                "Convolutional Neural Networks",
-                "Basic Neural Networks"
+                "Deep Neural Networks"
               ],
-              correct: 2,
-              explanation: "Convolutional Neural Networks (CNNs) are specifically designed for and excel at image processing tasks."
+              correct: 0,
+              explanation: "Convolutional Neural Networks (CNNs) are specifically designed for image processing and recognition tasks."
             },
             {
-              question: "What is the purpose of backward propagation?",
+              question: "What is overfitting in neural networks?",
               options: [
-                "To input data into the network",
-                "To generate random weights",
-                "To adjust weights and reduce errors",
-                "To delete unnecessary neurons"
+                "When networks learn patterns too specific to the training data",
+                "When networks are too large",
+                "When networks process data too quickly",
+                "When networks use too much memory"
               ],
-              correct: 2,
-              explanation: "Backward propagation is the process of adjusting the weights between neurons to reduce errors and improve the network's performance."
+              correct: 0,
+              explanation: "Overfitting occurs when neural networks learn patterns that are too specific to the training data, reducing their ability to generalize to new, unseen data."
             }
           ]
         }
@@ -4618,30 +5042,22 @@ const module3 = {
 const module4 = {
     id: 4,
     title: "AI Applications and Technologies",
-    description: "Explore how AI is applied in computer vision, natural language processing, robotics, and gaming",
+    description: "Explore practical applications of AI in computer vision, natural language processing, robotics, and gaming",
     prerequisites: [1, 2, 3],
     icon: "Robot",
-    themeColor: "indigo",
+    themeColor: "green",
   
     interactiveFeatures: {
-      aiLab: {
+      techLab: {
         enabled: true,
         components: {
-          visionDemo: {
+          applicationDemo: {
             type: "interactive",
-            features: ["image-recognition", "object-detection", "scene-analysis"]
+            features: ["vision-demo", "nlp-playground", "robot-simulator", "game-ai-test"]
           },
-          nlpWorkbench: {
-            type: "playground",
-            tools: ["text-analysis", "sentiment-detection", "language-translation"]
-          },
-          robotSimulator: {
-            type: "simulation",
-            features: ["path-planning", "sensor-integration", "control-systems"]
-          },
-          gameAIStudio: {
-            type: "development",
-            tools: ["npc-behavior", "procedural-generation", "difficulty-scaling"]
+          practiceStation: {
+            type: "hands-on",
+            tools: ["image-processor", "text-analyzer", "path-planner", "behavior-tree-builder"]
           }
         }
       }
@@ -4651,87 +5067,151 @@ const module4 = {
       {
         id: "4.1",
         title: "Computer Vision Fundamentals",
-        duration: "40 min",
-        article: `Computer vision is a field of Artificial Intelligence (AI) that enables machines to interpret and analyze visual information from the world, such as images or videos. This technology powers many applications, from facial recognition to self-driving cars. Understanding the basics of computer vision helps us see how machines can "see" and interact with their environments.
-  
-  Unlike humans, machines rely on algorithms and data to make sense of visual information. These algorithms process pixels in images to identify patterns and extract meaning.
-  
-  How Does Computer Vision Work?
-  Computer vision systems follow these steps:
-  
-  1. Image Acquisition:
-  • Capturing images or videos using cameras or sensors
-  • Converting visual data into digital format
-  
-  2. Preprocessing:
-  • Preparing the image by resizing, filtering, or enhancing it
-  • Removing noise and standardizing formats
-  
-  3. Feature Extraction:
-  • Identifying key characteristics like edges, shapes, or textures
-  • Creating numerical representations of visual elements
-  
-  4. Analysis:
-  • Applying algorithms to recognize objects, classify scenes, or detect movement
-  • Using machine learning models to interpret visual data
-  
-  5. Decision Making:
-  • Using extracted information to perform tasks
-  • Generating appropriate responses or actions
-  
-  Key Techniques in Computer Vision:
-  1. Object Detection:
-  • Locating and identifying specific objects in images
-  • Drawing bounding boxes around detected objects
-  
-  2. Image Segmentation:
-  • Dividing images into meaningful segments
-  • Analyzing different parts of an image separately
-  
-  3. Pattern Recognition:
-  • Identifying recurring patterns and features
-  • Classifying objects based on learned patterns
-  
-  Real-World Applications:
-  • Healthcare: Analyzing medical images for diagnosis
-  • Retail: Enabling automated checkout systems
-  • Transportation: Assisting self-driving cars
-  • Manufacturing: Inspecting products for defects
-  • Security: Implementing surveillance and access control`,
+        duration: "20 min",
+        article: `Computer vision is a powerful AI field that allows machines to "see" and interpret the visual world. It's used in everything from medical diagnosis to facial recognition on your phone. This technology has become increasingly important as we rely more on automated systems to interpret and understand visual information from our environment.
+
+What Is Computer Vision?
+Computer vision uses AI and machine learning to analyze and extract information from images, videos, and real-world scenes. The goal is to enable computers to perform visual tasks just like humans—or sometimes even better. It involves recognizing patterns, detecting objects, and understanding spatial relationships in visual data.
+
+How It Works
+The process of computer vision involves several key steps:
+
+Image Input:
+- The system captures an image using a camera or sensor
+- Raw visual data is converted into digital format
+- Multiple frames may be captured for video processing
+
+Preprocessing:
+- Images are normalized for size and color consistency
+- Noise reduction and image enhancement techniques are applied
+- Conversion to different color spaces (RGB, grayscale, etc.)
+- Contrast adjustment and edge enhancement
+
+Feature Detection:
+- Identification of key points, edges, and corners
+- Pattern recognition in textures and shapes
+- Segmentation of images into meaningful regions
+- Detection of motion in video sequences
+
+Classification & Interpretation:
+- Deep learning models, especially CNNs, analyze the processed images
+- Object recognition and classification
+- Scene understanding and context analysis
+- Action and behavior recognition in videos
+
+Advanced Techniques:
+- Instance segmentation for precise object boundaries
+- Semantic segmentation for scene understanding
+- 3D reconstruction from 2D images
+- Real-time object tracking and motion analysis
+
+Real-World Applications
+
+Healthcare:
+- Analysis of medical imaging (X-rays, MRIs, CT scans)
+- Early disease detection and diagnosis
+- Surgical assistance and planning
+- Patient monitoring systems
+
+Autonomous Vehicles:
+- Real-time object detection and tracking
+- Lane detection and navigation
+- Traffic sign recognition
+- Pedestrian and obstacle detection
+- Parking assistance systems
+
+Security and Surveillance:
+- Facial recognition systems
+- Anomaly detection in security footage
+- Access control systems
+- Crowd monitoring and analysis
+- License plate recognition
+
+Retail Analytics:
+- Customer behavior analysis
+- Inventory management
+- Queue monitoring
+- Heat mapping of store traffic
+- Self-checkout systems
+
+Manufacturing:
+- Quality control and inspection
+- Defect detection
+- Assembly line monitoring
+- Robot guidance systems
+
+Challenges in Computer Vision
+
+Technical Challenges:
+- Varying lighting conditions affect accuracy
+- Complex backgrounds can confuse systems
+- Occlusions and partial views of objects
+- Real-time processing requirements
+- Scale and perspective variations
+
+Data-Related Challenges:
+- Need for large, diverse training datasets
+- Bias in training data affecting results
+- Annotation and labeling requirements
+- Privacy concerns with image data
+
+Performance Challenges:
+- Computational resource requirements
+- Power consumption for mobile devices
+- Speed vs. accuracy trade-offs
+- Integration with existing systems
+
+Future Directions:
+- Advanced 3D vision systems
+- Improved low-light performance
+- More efficient neural network architectures
+- Better handling of edge cases
+- Integration with other AI technologies
+
+Practical Considerations:
+When implementing computer vision systems, consider:
+- Hardware requirements (cameras, processors)
+- Software infrastructure needs
+- Integration with existing systems
+- Privacy and security implications
+- Maintenance and updating procedures
+
+Think About It:
+Take a moment to analyze a complex scene, like a busy street. Notice how quickly you can identify objects, understand relationships, and predict movements. Now consider the challenges in teaching a computer to do the same. What aspects would be particularly difficult for an AI system to understand?`,
         quiz: {
           questions: [
             {
-              question: "What is the first step in computer vision processing?",
+              question: "What is the primary purpose of preprocessing in computer vision?",
               options: [
-                "Feature extraction",
-                "Image acquisition",
-                "Analysis",
-                "Decision making"
+                "To prepare images for analysis by normalizing and enhancing them",
+                "To store images in a database",
+                "To display images on a screen",
+                "To compress image files"
               ],
-              correct: 1,
-              explanation: "Image acquisition is the first step where visual data is captured through cameras or sensors and converted into digital format."
+              correct: 0,
+              explanation: "Preprocessing is crucial in computer vision as it prepares images for analysis by normalizing size, reducing noise, enhancing contrast, and performing other adjustments to make the subsequent analysis more accurate."
             },
             {
-              question: "Which technique involves dividing an image into meaningful segments?",
+              question: "Which application of computer vision is most commonly used in autonomous vehicles?",
               options: [
-                "Object detection",
-                "Pattern recognition",
-                "Image segmentation",
-                "Feature extraction"
+                "Real-time object detection and tracking",
+                "Medical image analysis",
+                "Facial recognition",
+                "Quality control inspection"
               ],
-              correct: 2,
-              explanation: "Image segmentation is the technique of dividing images into meaningful segments for separate analysis."
+              correct: 0,
+              explanation: "Real-time object detection and tracking is essential for autonomous vehicles as they need to constantly monitor their environment for obstacles, other vehicles, pedestrians, and road signs."
             },
             {
-              question: "How do machines process visual information differently from humans?",
+              question: "What is one of the main challenges in computer vision systems?",
               options: [
-                "They don't process visual information",
-                "They use algorithms and data to analyze pixels",
-                "They rely on intuition",
-                "They only see in black and white"
+                "Handling varying lighting conditions and complex backgrounds",
+                "Storing large amounts of text data",
+                "Processing audio signals",
+                "Managing network connections"
               ],
-              correct: 1,
-              explanation: "Unlike humans who process visual information intuitively, machines rely on algorithms and data to analyze pixels and extract meaning from images."
+              correct: 0,
+              explanation: "Varying lighting conditions and complex backgrounds present significant challenges for computer vision systems as they can affect the accuracy of object detection and recognition."
             }
           ]
         }
@@ -4739,95 +5219,138 @@ const module4 = {
       {
         id: "4.2",
         title: "Natural Language Processing",
-        duration: "35 min",
-        article: `Natural Language Processing (NLP) is a branch of Artificial Intelligence (AI) that focuses on enabling machines to understand, interpret, and generate human language. From voice assistants to translation tools, NLP powers many of the technologies we use every day.
-  
-  What Is Natural Language Processing?
-  NLP involves teaching computers to:
-  • Recognize speech and text
-  • Understand the meaning of words and sentences
-  • Generate responses or translate text into different languages
-  
-  For example, when you ask Siri for the weather, NLP allows the system to understand your question and provide an accurate response.
-  
-  How Does NLP Work?
-  NLP combines linguistics and computer science to process language. Here are the key steps:
-  
-  1. Text Preprocessing:
-  • Preparing text by removing irrelevant details
-  • Converting text into machine-readable format
-  • Examples: Tokenization, removing punctuation, converting to lowercase
-  
-  2. Parsing and Analysis:
-  • Understanding sentence structure using syntax and semantics
-  • Identifying parts of speech and grammatical relationships
-  • Example: Identifying subjects, verbs, and objects
-  
-  3. Feature Extraction:
-  • Converting words into numerical representations
-  • Using techniques like word embeddings (e.g., Word2Vec)
-  
-  4. Model Training:
-  • Teaching machines to analyze and respond to language
-  • Using machine learning algorithms to improve understanding
-  
-  Key Techniques in NLP:
-  
-  1. Sentiment Analysis:
-  • Determining emotions or opinions in text
-  • Example: Analyzing customer reviews
-  
-  2. Named Entity Recognition (NER):
-  • Identifying names, dates, or locations
-  • Example: Highlighting "New York" in text
-  
-  3. Language Translation:
-  • Converting text between languages
-  • Example: Google Translate
-  
-  4. Text Summarization:
-  • Condensing large texts into summaries
-  • Example: Creating news briefs
-  
-  Applications in Different Industries:
-  • Healthcare: Extracting information from medical records
-  • Education: Powering language learning applications
-  • Finance: Analyzing market sentiment
-  • Customer Service: Enabling chatbots and automated responses`,
+        duration: "20 min",
+        article: `Natural Language Processing (NLP) allows computers to interact with human language—whether spoken or written. From virtual assistants to machine translation, NLP is transforming how we communicate with machines and how they understand us.
+
+What Is Natural Language Processing?
+NLP combines linguistics, computer science, and artificial intelligence to enable machines to read, understand, interpret, and generate human language. It's a complex field that deals with the ambiguity, context, and nuances of natural language.
+
+Key NLP Components
+
+Text Processing:
+- Tokenization: Breaking text into words, phrases, or other meaningful elements
+- Lemmatization: Reducing words to their base form
+- Part-of-speech tagging: Identifying word types (nouns, verbs, etc.)
+- Dependency parsing: Understanding relationships between words
+
+Semantic Analysis:
+- Named Entity Recognition (NER): Identifying names, locations, dates
+- Word Sense Disambiguation: Understanding context-dependent meanings
+- Sentiment Analysis: Determining emotional tone
+- Topic Modeling: Identifying main themes in text
+
+Language Generation:
+- Text Summarization: Creating concise versions of longer texts
+- Machine Translation: Converting between languages
+- Dialogue Generation: Creating contextually appropriate responses
+- Content Generation: Creating human-like text
+
+Advanced NLP Technologies:
+- Transformer Models: State-of-the-art architecture for language tasks
+- BERT and GPT: Popular language models for various applications
+- Transfer Learning: Adapting pre-trained models to specific tasks
+- Attention Mechanisms: Focusing on relevant parts of input text
+
+Real-World Applications
+
+Business Applications:
+- Customer service chatbots
+- Email filtering and categorization
+- Resume parsing and job matching
+- Market sentiment analysis
+- Document classification
+
+Consumer Applications:
+- Virtual assistants (Siri, Alexa)
+- Language translation services
+- Grammar and spelling checkers
+- Voice-controlled devices
+- Social media monitoring
+
+Enterprise Solutions:
+- Contract analysis
+- Compliance monitoring
+- Customer feedback analysis
+- Automated reporting
+- Knowledge management systems
+
+Research and Development:
+- Academic paper analysis
+- Patent searching
+- Research trend identification
+- Literature review automation
+
+Challenges in NLP
+
+Language Complexity:
+- Ambiguity in meaning
+- Context dependency
+- Idiomatic expressions
+- Regional variations
+- Multiple languages
+
+Technical Challenges:
+- Large computing requirements
+- Need for extensive training data
+- Model bias and fairness
+- Real-time processing needs
+
+Implementation Challenges:
+- Integration with existing systems
+- Privacy concerns
+- Maintenance and updates
+- Cost considerations
+
+Future Directions:
+- More efficient language models
+- Better handling of context
+- Improved multilingual capabilities
+- Enhanced privacy protection
+- More natural interactions
+
+Best Practices:
+- Regular model updates
+- Careful data curation
+- Bias monitoring
+- User feedback integration
+- Performance monitoring
+
+Practical Exercise:
+Consider how language can be ambiguous. Take a sentence like "The bank is by the river" versus "I need to go to the bank." How would an NLP system determine the correct meaning of "bank" in each case? What context clues would it need to consider?`,
         quiz: {
           questions: [
             {
-              question: "What is the primary goal of Natural Language Processing?",
-              options: [
-                "To create visual content",
-                "To enable machines to understand and process human language",
-                "To store data efficiently",
-                "To improve computer hardware"
-              ],
-              correct: 1,
-              explanation: "NLP's primary goal is to enable machines to understand, interpret, and generate human language."
-            },
-            {
               question: "What is tokenization in NLP?",
               options: [
-                "Creating security tokens",
-                "Breaking text into individual words or units",
-                "Encrypting data",
-                "Converting text to images"
+                "Breaking text into words, phrases, or other meaningful elements",
+                "Converting text to numbers",
+                "Translating between languages",
+                "Checking grammar"
               ],
-              correct: 1,
-              explanation: "Tokenization is the process of breaking text into individual words or units during the preprocessing stage."
+              correct: 0,
+              explanation: "Tokenization is the fundamental NLP process of breaking down text into smaller, meaningful units (tokens) such as words, phrases, or subwords for further processing."
             },
             {
-              question: "Which NLP technique analyzes emotions in text?",
+              question: "Which is a key challenge in NLP?",
               options: [
-                "Named Entity Recognition",
-                "Tokenization",
-                "Sentiment Analysis",
-                "Language Translation"
+                "Understanding context and ambiguity in language",
+                "Storing large amounts of text",
+                "Displaying text on screens",
+                "Printing documents"
               ],
-              correct: 2,
-              explanation: "Sentiment Analysis is the NLP technique used to determine emotions or opinions expressed in text."
+              correct: 0,
+              explanation: "Understanding context and ambiguity is a major challenge in NLP because words can have different meanings depending on their context, and human language is inherently ambiguous."
+            },
+            {
+              question: "What is sentiment analysis used for?",
+              options: [
+                "Determining the emotional tone of text",
+                "Counting words in a document",
+                "Translating languages",
+                "Storing text data"
+              ],
+              correct: 0,
+              explanation: "Sentiment analysis is used to determine the emotional tone or attitude expressed in text, which is valuable for understanding customer feedback, social media monitoring, and market research."
             }
           ]
         }
@@ -4835,98 +5358,170 @@ const module4 = {
       {
         id: "4.3",
         title: "Robotics Fundamentals",
-        duration: "45 min",
-        article: `Robotics is an interdisciplinary field combining mechanical engineering, electrical engineering, and computer science to create machines that can perform tasks autonomously or semi-autonomously. When integrated with Artificial Intelligence (AI), robotics becomes even more powerful, enabling robots to learn, adapt, and interact with their environments.
-  
-  What Are Robots?
-  A robot is a programmable machine capable of carrying out a series of actions automatically. Robots come in various shapes and sizes, from robotic arms in factories to autonomous drones and humanoid robots.
-  
-  Core Components:
-  1. Mechanical Structure:
-  • Physical body (wheels, arms, legs)
-  • Designed for specific purposes and tasks
-  
-  2. Sensors and Actuators:
-  • Sensors gather environmental data
-  • Actuators execute physical actions
-  
-  3. Control System:
-  • Processes data and determines actions
-  • Often powered by AI algorithms
-  
-  How Robots Work:
-  Robots operate through a cycle of:
-  
-  1. Sensing:
-  • Using cameras, microphones, proximity sensors
-  • Gathering data about surroundings
-  
-  2. Processing:
-  • Analyzing sensor input
-  • Making decisions using AI or algorithms
-  
-  3. Acting:
-  • Executing chosen actions
-  • Moving, gripping, or communicating
-  
-  Types of Robots:
-  
-  1. Industrial Robots:
-  • Used in manufacturing
-  • Example: Assembly line robots
-  
-  2. Service Robots:
-  • Assist in daily tasks
-  • Example: Robot vacuums
-  
-  3. Humanoid Robots:
-  • Resemble human form
-  • Example: Social interaction robots
-  
-  4. Autonomous Vehicles:
-  • Self-driving transportation
-  • Example: Delivery drones
-  
-  Applications Across Industries:
-  • Manufacturing: Assembly and quality control
-  • Healthcare: Surgical assistance and patient care
-  • Agriculture: Automated farming
-  • Space Exploration: Planetary rovers
-  • Education: Teaching tools and demonstrations`,
+        duration: "25 min",
+        article: `Robotics represents the intersection of artificial intelligence and physical machines, creating systems that can sense, process, and interact with the real world. Modern robotics combines mechanical engineering, electronics, computer science, and AI to create increasingly sophisticated and capable machines.
+
+What Are Robots?
+Robots are programmable machines that can carry out complex actions automatically. They range from simple automated systems to highly sophisticated humanoid robots with advanced AI capabilities. Modern robots can learn from experience and adapt to new situations, making them valuable in various applications.
+
+Core Components of Robotics
+
+Physical Components:
+- Sensors: Vision, touch, proximity, force
+- Actuators: Motors, pneumatics, hydraulics
+- End effectors: Grippers, tools, manipulators
+- Power systems: Batteries, power management
+- Structural elements: Frame, joints, links
+
+Control Systems:
+- Microcontrollers and processors
+- Motion planning algorithms
+- Feedback control systems
+- Safety systems
+- Communication interfaces
+
+AI and Software:
+- Computer vision systems
+- Machine learning algorithms
+- Path planning
+- Object recognition
+- Task scheduling
+- Human-robot interaction
+
+Types of Robots
+
+Industrial Robots:
+- Manufacturing assembly
+- Welding and painting
+- Material handling
+- Quality control
+- Packaging and palletizing
+
+Service Robots:
+- Cleaning robots
+- Delivery robots
+- Healthcare assistance
+- Customer service
+- Agricultural robots
+
+Mobile Robots:
+- Autonomous vehicles
+- Warehouse robots
+- Exploration robots
+- Security patrols
+- Delivery drones
+
+Collaborative Robots (Cobots):
+- Human-robot collaboration
+- Flexible manufacturing
+- Training and education
+- Research applications
+- Healthcare assistance
+
+Applications and Use Cases
+
+Manufacturing:
+- Assembly line automation
+- Quality inspection
+- Material handling
+- Process automation
+- Workplace safety
+
+Healthcare:
+- Surgical assistance
+- Patient care
+- Laboratory automation
+- Rehabilitation
+- Medical training
+
+Exploration:
+- Space exploration
+- Deep-sea research
+- Hazardous environments
+- Archaeological sites
+- Mining operations
+
+Service Industry:
+- Hospitality
+- Retail assistance
+- Building maintenance
+- Security patrols
+- Food service
+
+Challenges in Robotics
+
+Technical Challenges:
+- Complex environment navigation
+- Human-robot interaction
+- Power management
+- Real-time processing
+- System integration
+
+Safety Considerations:
+- Collision avoidance
+- Emergency stops
+- Risk assessment
+- Safety protocols
+- Regulatory compliance
+
+Implementation Challenges:
+- Cost considerations
+- Training requirements
+- Maintenance needs
+- Integration with existing systems
+- User acceptance
+
+Future Directions:
+- Advanced AI integration
+- Improved human-robot collaboration
+- Better energy efficiency
+- Enhanced sensing capabilities
+- More autonomous operation
+
+Design Considerations:
+When developing robotic systems, consider:
+- Task requirements
+- Environmental conditions
+- Safety needs
+- User interface design
+- Maintenance accessibility
+
+Practical Exercise:
+Think about designing a robot for a specific task, like organizing a room. What sensors would it need? How would it navigate? What safety features would be essential? How would it handle unexpected situations?`,
         quiz: {
           questions: [
             {
-              question: "What are the three main components of a robot?",
+              question: "What are the main components of a robotic system?",
               options: [
-                "Software, Hardware, Network",
-                "Mechanical Structure, Sensors/Actuators, Control System",
-                "CPU, Memory, Storage",
-                "Input, Output, Processing"
+                "Sensors, actuators, control systems, and power systems",
+                "Only motors and batteries",
+                "Just computer programs",
+                "Only mechanical parts"
               ],
-              correct: 1,
-              explanation: "The three main components of a robot are its mechanical structure (physical body), sensors and actuators (for gathering data and executing actions), and control system (for processing and decision-making)."
+              correct: 0,
+              explanation: "A robotic system requires multiple integrated components: sensors to perceive the environment, actuators for movement, control systems for decision-making, and power systems for operation."
             },
             {
-              question: "Which type of robot is primarily used in manufacturing?",
+              question: "What is the primary purpose of sensors in robotics?",
               options: [
-                "Service Robots",
-                "Humanoid Robots",
-                "Industrial Robots",
-                "Autonomous Vehicles"
+                "To gather information about the environment and robot's state",
+                "To provide power to the robot",
+                "To move the robot's parts",
+                "To store data"
               ],
-              correct: 2,
-              explanation: "Industrial robots are primarily used in manufacturing for tasks like assembly, welding, and quality control."
+              correct: 0,
+              explanation: "Sensors are crucial in robotics as they gather information about the environment and the robot's state, enabling the robot to make informed decisions and interact appropriately with its surroundings."
             },
             {
-              question: "What is the first step in a robot's operational cycle?",
+              question: "What is a collaborative robot (cobot)?",
               options: [
-                "Acting",
-                "Processing",
-                "Sensing",
-                "Decision making"
+                "A robot designed to work safely alongside humans",
+                "A robot that only works independently",
+                "A robot used only in manufacturing",
+                "A robot for entertainment"
               ],
-              correct: 2,
-              explanation: "Sensing is the first step in a robot's operational cycle, where it gathers information about its environment through various sensors."
+              correct: 0,
+              explanation: "Collaborative robots (cobots) are specifically designed to work safely alongside humans, sharing workspaces and tasks while maintaining safety standards and enhancing productivity."
             }
           ]
         }
@@ -4934,100 +5529,168 @@ const module4 = {
       {
         id: "4.4",
         title: "AI in Gaming",
-        duration: "40 min",
-        article: `Artificial Intelligence (AI) is revolutionizing the gaming industry, creating more immersive and challenging experiences for players. From designing intelligent opponents to generating entire game worlds, AI enhances both the development process and gameplay itself.
-  
-  What Is AI in Gaming?
-  AI in gaming involves using algorithms to simulate human-like behavior or automate processes within a game. These algorithms allow non-player characters (NPCs) to:
-  • Make decisions and adapt to players' actions
-  • React dynamically to different scenarios
-  • Provide challenges that keep players engaged
-  
-  Key Roles of AI in Gaming:
-  
-  1. Game Design and Development:
-  • Automating content creation
-  • Generating terrain and environments
-  • Example: Procedural generation in Minecraft
-  
-  2. NPC Behavior:
-  • Creating intelligent characters
-  • Adapting to player strategies
-  • Example: Enemy AI in strategy games
-  
-  3. Difficulty Balancing:
-  • Adjusting challenge levels
-  • Maintaining player engagement
-  • Example: Dynamic difficulty adjustment
-  
-  4. Procedural Content Generation:
-  • Creating unique levels and maps
-  • Ensuring replayability
-  • Example: Randomly generated dungeons
-  
-  How AI Works in Gaming:
-  
-  1. Finite State Machines (FSM):
-  • Basic AI decision-making
-  • Switching between predefined states
-  • Example: NPC behavior patterns
-  
-  2. Pathfinding Algorithms:
-  • Navigation through game worlds
-  • Obstacle avoidance
-  • Example: A* algorithm for movement
-  
-  3. Machine Learning:
-  • Adapting to player behavior
-  • Improving AI strategies
-  • Example: Learning from gameplay data
-  
-  Applications and Features:
-  • Immersive Storytelling
-  • Enhanced Realism
-  • Multiplayer Matchmaking
-  • Cheat Detection
-  • Personalized Experiences
-  
-  Future Developments:
-  • Dynamic Game Worlds
-  • Hyper-Realistic NPCs
-  • Advanced VR Integration
-  • Player-Centric Experiences`,
+        duration: "20 min",
+        article: `Artificial Intelligence has revolutionized the gaming industry, creating more immersive, dynamic, and challenging experiences for players. From simple game AI to sophisticated learning systems, AI technologies are fundamental to modern game development and player engagement.
+
+What Is Game AI?
+Game AI refers to the techniques used to create intelligent behaviors in video games, particularly for non-player characters (NPCs), environmental responses, and adaptive gameplay. It encompasses everything from basic decision trees to complex machine learning systems.
+
+Core AI Technologies in Games
+
+Behavior Systems:
+- Finite State Machines (FSM)
+- Behavior Trees
+- Goal-Oriented Action Planning
+- Utility-based AI
+- Neural Networks
+
+Game World Systems:
+- Procedural Content Generation
+- Dynamic Difficulty Adjustment
+- Environmental Response Systems
+- Physics Simulation
+- Pathfinding Algorithms
+
+Player Interaction:
+- Natural Language Processing
+- Pattern Recognition
+- Learning Systems
+- Adaptive AI
+- Emotion Recognition
+
+Advanced Technologies:
+- Machine Learning Integration
+- Deep Learning Applications
+- Reinforcement Learning
+- Neural Evolution
+- Genetic Algorithms
+
+Applications in Different Game Types
+
+Strategy Games:
+- Resource management AI
+- Combat tactics
+- Diplomatic behavior
+- City building
+- Unit coordination
+
+Action Games:
+- Enemy behavior
+- Combat systems
+- Environmental interaction
+- Stealth AI
+- Squad coordination
+
+RPGs and Adventure Games:
+- NPC behavior and dialogue
+- Quest generation
+- World adaptation
+- Character development
+- Story progression
+
+Sports and Racing Games:
+- Player positioning
+- Team coordination
+- Race line optimization
+- Strategy adaptation
+- Realistic physics
+
+Key Features and Implementations
+
+NPC Intelligence:
+- Pathfinding
+- Decision making
+- Learning from player actions
+- Emotional responses
+- Social interaction
+
+World Generation:
+- Terrain creation
+- Building placement
+- Quest generation
+- Weather systems
+- Population distribution
+
+Game Balance:
+- Difficulty scaling
+- Resource distribution
+- Challenge adaptation
+- Reward systems
+- Player progression
+
+Player Experience:
+- Personalized content
+- Dynamic storytelling
+- Adaptive challenges
+- Social interaction
+- Achievement systems
+
+Challenges in Game AI
+
+Technical Challenges:
+- Performance optimization
+- Resource management
+- Real-time processing
+- Scale and complexity
+- Integration with game engines
+
+Design Challenges:
+- Balancing difficulty
+- Creating believable behavior
+- Avoiding predictability
+- Managing computation costs
+- Maintaining fun factor
+
+Future Directions:
+- More sophisticated learning systems
+- Better character interaction
+- Improved procedural generation
+- Enhanced personalization
+- More realistic behaviors
+
+Best Practices:
+- Performance optimization
+- Scalable design
+- Maintainable code
+- Clear documentation
+- Extensive testing
+
+Practical Exercise:
+Consider designing an AI opponent for a simple game like tic-tac-toe or chess. What different levels of difficulty would you implement? How would the AI decide its moves? How would it learn from the player's strategies?`,
         quiz: {
           questions: [
             {
-              question: "What is procedural content generation in gaming?",
+              question: "What is the purpose of behavior trees in game AI?",
               options: [
-                "Manual creation of game levels",
-                "Automatic generation of game content",
-                "Player-created content",
-                "Downloadable content"
-              ],
-              correct: 1,
-              explanation: "Procedural content generation is the automatic creation of game content like levels, maps, or terrain using algorithms."
-            },
-            {
-              question: "Which AI technique is used for NPC navigation?",
-              options: [
-                "Pathfinding algorithms",
-                "Content generation",
-                "Difficulty balancing",
-                "State machines"
+                "To create complex, hierarchical decision-making systems for game characters",
+                "To store game data",
+                "To render graphics",
+                "To process player input"
               ],
               correct: 0,
-              explanation: "Pathfinding algorithms, such as A*, are used to help NPCs navigate through game worlds and avoid obstacles."
+              explanation: "Behavior trees are used to create structured, hierarchical decision-making systems that allow game characters to execute complex behaviors and respond to various situations in a organized way."
             },
             {
-              question: "What is the purpose of dynamic difficulty adjustment?",
+              question: "What is procedural content generation in games?",
               options: [
-                "To make games harder",
-                "To maintain player engagement by adjusting challenge levels",
-                "To create new levels",
-                "To improve graphics"
+                "Automatically creating game content like levels, items, or quests",
+                "Loading pre-made content",
+                "Downloading content from the internet",
+                "Creating character models"
               ],
-              correct: 1,
-              explanation: "Dynamic difficulty adjustment helps maintain player engagement by automatically adjusting the game's challenge level based on player performance."
+              correct: 0,
+              explanation: "Procedural content generation is the automatic creation of game content using algorithms, allowing for unique and varied experiences without manually creating every piece of content."
+            },
+            {
+              question: "How does dynamic difficulty adjustment work in games?",
+              options: [
+                "By automatically adjusting game challenges based on player performance",
+                "By letting players choose difficulty levels",
+                "By making games progressively harder",
+                "By using cheat codes"
+              ],
+              correct: 0,
+              explanation: "Dynamic difficulty adjustment automatically modifies game challenges based on player performance, ensuring an engaging experience for players of different skill levels."
             }
           ]
         }
@@ -5075,26 +5738,22 @@ const module4 = {
 const module5 = {
     id: 5,
     title: "Ethics and Society in AI",
-    description: "Explore ethical considerations, responsible use, and societal impacts of artificial intelligence",
+    description: "Explore ethical considerations, societal impacts, and career opportunities in artificial intelligence",
     prerequisites: [1, 2, 3, 4],
     icon: "Shield",
-    themeColor: "orange",
+    themeColor: "purple",
   
     interactiveFeatures: {
       ethicsLab: {
         enabled: true,
         components: {
-          biasDetector: {
+          biasAnalyzer: {
             type: "interactive",
-            features: ["data-analysis", "bias-identification", "mitigation-strategies"]
+            features: ["dataset-analysis", "bias-detection", "fairness-metrics"]
           },
-          privacySimulator: {
-            type: "simulation",
-            features: ["data-protection", "privacy-risks", "safeguards"]
-          },
-          ethicsWorkshop: {
-            type: "scenario-based",
-            elements: ["case-studies", "decision-making", "impact-analysis"]
+          ethicsWorkbench: {
+            type: "hands-on",
+            tools: ["case-studies", "policy-simulator", "impact-assessment"]
           }
         }
       }
@@ -5104,19 +5763,19 @@ const module5 = {
       {
         id: "5.1",
         title: "Understanding Bias in AI",
-        duration: "40 min",
+        duration: "25 min",
         article: `Bias in Artificial Intelligence (AI) systems refers to instances where the decisions or predictions made by AI models are unfairly influenced by skewed or incomplete data. Understanding bias is critical for creating AI systems that are accurate, fair, and inclusive.
   
   What Causes Bias in AI?
   Bias in AI usually stems from problems in the data or the way the model is developed. Common causes include:
   
   1. Biased Training Data:
-  • If the dataset reflects societal biases or lacks diversity, the AI will likely replicate those biases
+  • If the dataset used to train the AI reflects societal biases or lacks diversity, the AI will likely replicate those biases
   • Example: A hiring algorithm trained on data from a predominantly male workforce might favor male candidates
   
   2. Incomplete Data:
   • Missing or underrepresented groups in the dataset can lead to unfair outcomes
-  • Example: Facial recognition systems performing poorly on certain skin tones due to lack of diverse training images
+  • Example: Facial recognition systems that perform poorly on certain skin tones due to a lack of diverse training images
   
   3. Human Bias:
   • Developers' assumptions and decisions can inadvertently introduce bias
@@ -5126,56 +5785,151 @@ const module5 = {
   • The model itself may emphasize certain patterns in ways that amplify bias
   • Example: Recommender systems favoring popular products over niche options
   
-  Types of Bias:
-  1. Selection Bias: When data doesn't represent the target population accurately
-  2. Confirmation Bias: When AI prioritizes data that confirms preexisting assumptions
-  3. Implicit Bias: When bias arises from subtle and unintended influences
+  Types of Bias in AI
   
-  Real-World Examples:
-  • Hiring algorithms favoring certain demographics
-  • Healthcare AI systems underdiagnosing specific groups
-  • Facial recognition accuracy varying by ethnicity
-  • Loan approval systems showing demographic disparities
+  1. Selection Bias:
+  • When the data collected for training does not represent the target population accurately
+  • Can lead to models that perform well only for certain groups
   
-  How to Mitigate Bias:
-  1. Diversify Data: Ensure training datasets are representative
-  2. Regular Auditing: Test systems for biased outcomes
-  3. Diverse Teams: Include varied perspectives in development
-  4. Ethical Guidelines: Establish clear standards for fairness`,
+  2. Confirmation Bias:
+  • When the AI prioritizes data that confirms preexisting assumptions
+  • Can reinforce existing prejudices and stereotypes
+  
+  3. Implicit Bias:
+  • When bias arises from subtle and unintended influences in the data or model
+  • Often harder to detect and address than explicit bias
+  
+  Real-World Examples of Bias in AI
+  
+  • Healthcare:
+  • AI systems underdiagnosing certain diseases in underrepresented groups
+  • Biased treatment recommendations based on historical data
+  
+  • Hiring:
+  • AI systems favoring certain demographics due to historical hiring patterns
+  • Resume screening tools showing gender or racial bias
+  
+  • Financial Services:
+  • Loan approval systems discriminating against certain neighborhoods
+  • Credit scoring models reflecting historical economic inequalities
+  
+  • Law Enforcement:
+  • Facial recognition systems with higher error rates for certain demographics
+  • Predictive policing tools showing racial or socioeconomic bias
+  
+  How to Mitigate Bias in AI
+  
+  1. Data Collection and Preparation:
+  • Ensure diverse and representative training data
+  • Regularly audit datasets for potential biases
+  • Include data from underrepresented groups
+  
+  2. Algorithm Design:
+  • Implement fairness metrics in model evaluation
+  • Use bias detection tools during development
+  • Test models across different demographic groups
+  
+  3. Development Process:
+  • Include diverse teams in AI development
+  • Conduct regular bias audits
+  • Implement feedback mechanisms for users
+  
+  4. Organizational Practices:
+  • Establish clear ethical guidelines
+  • Provide bias awareness training
+  • Create accountability mechanisms
+  
+  Best Practices for Bias Prevention
+  
+  1. Data Collection:
+  • Gather data from diverse sources
+  • Ensure balanced representation
+  • Document data collection methods
+  
+  2. Model Development:
+  • Use fairness metrics during training
+  • Implement bias detection tools
+  • Regular testing across different groups
+  
+  3. Deployment:
+  • Monitor system performance
+  • Collect user feedback
+  • Update models as needed
+  
+  4. Governance:
+  • Establish clear policies
+  • Regular audits
+  • Transparent reporting
+  
+  Activity: Identifying and Addressing Bias
+  
+  Step 1: Dataset Analysis
+  • Examine a sample dataset for potential biases
+  • Identify underrepresented groups
+  • Note any missing or skewed data
+  
+  Step 2: Impact Assessment
+  • Evaluate how bias might affect different users
+  • Consider both direct and indirect effects
+  • Document potential risks
+  
+  Step 3: Mitigation Strategy
+  • Develop plans to address identified biases
+  • Propose data collection improvements
+  • Suggest algorithm modifications
+  
+  Future Considerations
+  
+  Emerging Challenges:
+  • New forms of bias as AI systems evolve
+  • Increasing complexity of AI models
+  • Global variations in fairness standards
+  
+  Opportunities:
+  • Advanced bias detection tools
+  • Improved fairness metrics
+  • Greater awareness and regulation
+  
+  Reflect and Discuss:
+  • How might bias in AI systems affect your daily life?
+  • What role can individuals play in promoting AI fairness?
+  • How can organizations better address bias in their AI systems?
+  
+  By understanding and actively addressing bias in AI, we can work toward creating more equitable and effective AI systems that benefit all members of society.`,
         quiz: {
           questions: [
             {
-              question: "What is the main cause of bias in AI systems?",
+              question: "What is a common cause of bias in AI systems?",
               options: [
-                "Hardware limitations",
-                "Problems in training data and model development",
-                "User errors",
-                "Network connectivity"
+                "Training data that lacks diversity or reflects societal biases",
+                "Using too much computing power",
+                "Having too many developers",
+                "Using the latest algorithms"
               ],
-              correct: 1,
-              explanation: "Bias in AI primarily stems from problems in the training data and how models are developed, including biased or incomplete data and human assumptions in the development process."
+              correct: 0,
+              explanation: "Bias often stems from training data that lacks diversity or reflects existing societal biases, leading to AI systems that perpetuate or amplify these biases."
             },
             {
               question: "Which is an example of selection bias in AI?",
               options: [
-                "An AI system running slowly",
-                "Data not representing all population groups equally",
-                "Users misusing the system",
-                "Software bugs"
+                "When training data doesn't accurately represent the target population",
+                "When the AI system runs too slowly",
+                "When the system uses too much memory",
+                "When the code is too complex"
               ],
-              correct: 1,
-              explanation: "Selection bias occurs when the data collected for training does not accurately represent all groups in the target population."
+              correct: 0,
+              explanation: "Selection bias occurs when the training data collected does not accurately represent the target population, leading to models that may perform poorly for underrepresented groups."
             },
             {
-              question: "What is one effective way to mitigate bias in AI?",
+              question: "What is a recommended practice for mitigating bias in AI?",
               options: [
-                "Using faster computers",
-                "Ensuring diverse and representative training data",
-                "Reducing system costs",
-                "Simplifying the algorithms"
+                "Regular audits of AI systems for fairness and bias",
+                "Using only one type of data",
+                "Avoiding user feedback",
+                "Limiting system testing"
               ],
-              correct: 1,
-              explanation: "Using diverse and representative training data is one of the most effective ways to mitigate bias in AI systems."
+              correct: 0,
+              explanation: "Regular audits of AI systems for fairness and bias are essential for identifying and addressing potential biases, ensuring the system remains fair and effective for all users."
             }
           ]
         }
@@ -5183,275 +5937,510 @@ const module5 = {
       {
         id: "5.2",
         title: "Privacy and Data Protection",
-        duration: "35 min",
+        duration: "25 min",
         article: `Privacy is a critical concern in the development and use of Artificial Intelligence (AI). As AI systems rely on large amounts of data to function effectively, protecting individuals' personal information and ensuring ethical data practices are essential for building trust and preventing harm.
   
   Why Is Privacy Important in AI?
   AI systems often process sensitive information such as:
   • Personal details (name, address, age)
-  • Financial data (credit card transactions)
-  • Health records (medical diagnoses)
+  • Financial data (credit cards, transactions)
+  • Health records (medical diagnoses, treatments)
+  • Behavioral data (online activities, preferences)
   
-  Without proper safeguards, this data could be misused, leading to:
+  Privacy Risks:
   • Identity theft
+  • Financial fraud
   • Discrimination
-  • Loss of trust
-  • Privacy violations
+  • Surveillance concerns
+  • Loss of personal autonomy
   
-  Common Privacy Risks in AI:
+  Common Privacy Risks in AI
   
   1. Data Breaches:
   • Unauthorized access to sensitive information
   • Example: Healthcare AI systems exposing patient records
+  • Impact on individual privacy and trust
   
   2. Data Misuse:
-  • Using data beyond original intent without consent
-  • Example: Social media analyzing behavior for targeted ads
+  • Using data beyond original consent
+  • Example: Social media data used for unexpected purposes
+  • Violation of user trust and rights
   
   3. Reidentification:
-  • Identifying individuals from anonymized data
-  • Example: Combining datasets to deduce someone's identity
+  • Connecting anonymized data to individuals
+  • Example: Combining datasets to reveal identities
+  • Compromising privacy protections
   
-  Best Practices for Privacy:
+  Best Practices for Privacy in AI
   
-  1. Data Minimization:
-  • Collect only necessary data
-  • Example: Chatbots not storing personal information
+  1. Data Collection:
+  • Minimize data collection to essential information
+  • Obtain clear consent from users
+  • Implement strong data security measures
   
-  2. Anonymization:
-  • Remove personally identifiable information
-  • Example: Masking names in health records
+  2. Data Protection:
+  • Use encryption for sensitive data
+  • Implement access controls
+  • Regular security audits
   
-  3. Secure Storage:
-  • Use encryption and access controls
-  • Example: Secure cloud storage with restricted access
+  3. Transparency:
+  • Clear privacy policies
+  • User control over data
+  • Regular updates on data usage
   
-  4. Transparency:
-  • Inform users about data collection and use
-  • Example: Clear privacy policies and consent forms`,
+  4. Compliance:
+  • Follow privacy regulations (GDPR, CCPA)
+  • Regular compliance audits
+  • Documentation of practices
+  
+  Real-World Privacy Protection Examples
+  
+  • Healthcare:
+  • Secure storage of patient records
+  • Anonymization of research data
+  • Controlled access to sensitive information
+  
+  • Finance:
+  • Encrypted transaction data
+  • Secure authentication systems
+  • Privacy-preserving analytics
+  
+  • Social Media:
+  • User privacy controls
+  • Data access restrictions
+  • Transparent data practices
+  
+  Activity: Privacy Impact Assessment
+  
+  Step 1: Data Inventory
+  • List types of data collected
+  • Identify sensitive information
+  • Map data flows
+  
+  Step 2: Risk Analysis
+  • Identify potential privacy risks
+  • Assess impact severity
+  • Evaluate likelihood
+  
+  Step 3: Protection Measures
+  • Propose security controls
+  • Define access policies
+  • Plan incident response
+  
+  Challenges in Privacy Protection
+  
+  • Technical Challenges:
+  • Balancing utility and privacy
+  • Evolving security threats
+  • Complex systems integration
+  
+  • Regulatory Challenges:
+  • Different privacy laws globally
+  • Rapid technological change
+  • Enforcement difficulties
+  
+  Future of Privacy in AI
+  
+  • Emerging Technologies:
+  • Privacy-preserving AI
+  • Federated learning
+  • Homomorphic encryption
+  
+  • Trends:
+  • Stronger regulations
+  • Privacy by design
+  • User empowerment
+  
+  Reflect and Discuss:
+  • How do you protect your privacy online?
+  • What privacy risks concern you most?
+  • How can organizations better protect user privacy?
+  
+  By prioritizing privacy in AI development and deployment, we can create systems that respect individual rights while delivering valuable services and innovations.`,
         quiz: {
           questions: [
             {
-              question: "Why is privacy protection important in AI systems?",
+              question: "What is a key principle of privacy protection in AI systems?",
               options: [
-                "To make systems run faster",
-                "To protect sensitive personal information",
-                "To reduce costs",
-                "To improve graphics"
-              ],
-              correct: 1,
-              explanation: "Privacy protection is crucial in AI to prevent misuse of sensitive personal information and maintain user trust."
-            },
-            {
-              question: "What is data minimization?",
-              options: [
-                "Making data smaller in size",
-                "Collecting only necessary data",
-                "Deleting all data",
-                "Compressing data files"
-              ],
-              correct: 1,
-              explanation: "Data minimization means collecting only the data that is necessary for the specific task or purpose."
-            },
-            {
-              question: "Which is an example of good privacy practice in AI?",
-              options: [
-                "Collecting all available data",
-                "Using encryption for sensitive data",
-                "Sharing data freely",
+                "Collecting only essential data and implementing strong security measures",
+                "Collecting as much data as possible",
+                "Sharing all data publicly",
                 "Ignoring user consent"
               ],
-              correct: 1,
-              explanation: "Using encryption for sensitive data is a good privacy practice as it helps protect information from unauthorized access."
+              correct: 0,
+              explanation: "Privacy protection in AI systems should follow the principle of data minimization, collecting only essential data and implementing strong security measures to protect it."
+            },
+            {
+              question: "What is reidentification in the context of AI privacy?",
+              options: [
+                "Connecting anonymized data back to specific individuals",
+                "Creating new user accounts",
+                "Deleting user data",
+                "Encrypting files"
+              ],
+              correct: 0,
+              explanation: "Reidentification occurs when supposedly anonymized data can be connected back to specific individuals, often by combining multiple datasets or using advanced analysis techniques."
+            },
+            {
+              question: "Which is an example of a privacy-preserving technology in AI?",
+              options: [
+                "Federated learning that keeps data on user devices",
+                "Collecting all possible user data",
+                "Sharing data without encryption",
+                "Ignoring privacy regulations"
+              ],
+              correct: 0,
+              explanation: "Federated learning is a privacy-preserving technology that allows AI models to learn from data while keeping it on users' devices, protecting privacy by not centralizing sensitive information."
             }
           ]
         }
       },
       {
         id: "5.3",
-        title: "Digital Citizenship and AI",
-        duration: "35 min",
-        article: `Digital citizenship refers to the responsible and ethical use of technology in online interactions and activities. As Artificial Intelligence (AI) increasingly shapes the digital world, understanding digital citizenship is essential for fostering safe, respectful, and productive online behaviors.
+        title: "Responsible AI Development",
+        duration: "25 min",
+        article: `Responsible AI refers to the ethical development, deployment, and use of Artificial Intelligence (AI) systems. As AI becomes increasingly integrated into daily life, ensuring that it is used responsibly is essential for minimizing harm and maximizing benefits for society.
   
-  What Is Digital Citizenship?
-  Digital citizenship involves:
-  • Protecting personal information
-  • Communicating respectfully
-  • Evaluating digital content
-  • Promoting ethical practices
+  Principles of Responsible AI
   
-  Key Principles:
+  1. Fairness:
+  • Equal treatment across demographics
+  • Avoiding discrimination
+  • Regular fairness audits
   
-  1. Respect:
-  • Treating others kindly in digital interactions
-  • Example: Reporting rather than engaging in cyberbullying
+  2. Transparency:
+  • Explainable decisions
+  • Clear documentation
+  • Open communication
   
-  2. Responsibility:
-  • Using technology ethically and productively
-  • Example: Fact-checking before sharing information
+  3. Accountability:
+  • Clear responsibility chains
+  • Impact assessment
+  • Regular auditing
   
-  3. Safety:
-  • Protecting digital identity and privacy
-  • Example: Using strong passwords and privacy settings
+  4. Safety:
+  • Robust testing
+  • Security measures
+  • Risk management
   
-  4. Critical Thinking:
-  • Understanding how AI influences online content
-  • Example: Recognizing AI-generated content
+  5. Privacy:
+  • Data protection
+  • User consent
+  • Secure handling
   
-  Applications in AI Context:
+  Why Responsible AI Matters
   
-  1. Social Media:
-  • Understanding algorithm-driven content
-  • Practicing responsible sharing
-  • Identifying misinformation
+  • Critical Applications:
+  • Healthcare decisions
+  • Financial services
+  • Law enforcement
+  • Education
   
-  2. Online Learning:
-  • Using AI tools responsibly
-  • Citing sources appropriately
-  • Maintaining academic integrity
+  • Potential Risks:
+  • Discrimination
+  • Privacy violations
+  • Safety issues
+  • Loss of trust
   
-  3. Digital Privacy:
-  • Managing personal data
-  • Understanding AI data collection
-  • Protecting sensitive information`,
+  Key Components of Responsible AI
+  
+  1. Development Process:
+  • Ethical guidelines
+  • Diverse teams
+  • Regular testing
+  • User feedback
+  
+  2. Deployment:
+  • Impact assessment
+  • Monitoring systems
+  • Update protocols
+  • Support systems
+  
+  3. Governance:
+  • Clear policies
+  • Oversight committees
+  • Regular audits
+  • Compliance checks
+  
+  Real-World Applications
+  
+  • Healthcare:
+  • Patient privacy protection
+  • Fair treatment recommendations
+  • Transparent decision-making
+  
+  • Finance:
+  • Unbiased lending
+  • Secure transactions
+  • Clear explanations
+  
+  • Education:
+  • Personalized learning
+  • Fair assessment
+  • Privacy protection
+  
+  Activity: Responsible AI Assessment
+  
+  Step 1: System Analysis
+  • Identify AI components
+  • Map decision points
+  • List stakeholders
+  
+  Step 2: Risk Assessment
+  • Evaluate potential impacts
+  • Identify vulnerabilities
+  • Consider consequences
+  
+  Step 3: Mitigation Planning
+  • Develop safeguards
+  • Create monitoring plans
+  • Define response procedures
+  
+  Challenges in Responsible AI
+  
+  • Technical Challenges:
+  • Complex systems
+  • Rapid evolution
+  • Integration issues
+  
+  • Organizational Challenges:
+  • Resource constraints
+  • Competing priorities
+  • Implementation difficulties
+  
+  Future of Responsible AI
+  
+  • Emerging Trends:
+  • Automated ethics checking
+  • Enhanced transparency tools
+  • Improved accountability systems
+  
+  • Best Practices:
+  • Regular training
+  • Continuous monitoring
+  • Stakeholder engagement
+  
+  Reflect and Discuss:
+  • How can AI be made more responsible?
+  • What role should regulation play?
+  • How can users promote responsible AI?
+  
+  By implementing responsible AI practices, organizations can build trust, reduce risks, and create sustainable value for society.`,
         quiz: {
           questions: [
             {
-              question: "What is a key principle of digital citizenship?",
+              question: "What is a key principle of responsible AI development?",
               options: [
-                "Sharing all information freely",
-                "Treating others with respect online",
-                "Using as much technology as possible",
-                "Ignoring privacy settings"
+                "Ensuring fairness and transparency in AI systems",
+                "Maximizing profit at any cost",
+                "Collecting unlimited data",
+                "Avoiding user feedback"
               ],
-              correct: 1,
-              explanation: "Treating others with respect in online interactions is a fundamental principle of digital citizenship."
+              correct: 0,
+              explanation: "Responsible AI development prioritizes fairness and transparency to ensure AI systems are ethical and trustworthy, benefiting all users equally."
             },
             {
-              question: "How does AI influence digital citizenship?",
+              question: "Why is accountability important in responsible AI?",
               options: [
-                "It has no influence",
-                "It shapes online content and interactions",
-                "It only affects games",
-                "It only impacts businesses"
+                "To ensure clear responsibility for AI decisions and impacts",
+                "To avoid user involvement",
+                "To reduce system testing",
+                "To minimize documentation"
               ],
-              correct: 1,
-              explanation: "AI significantly influences digital citizenship by shaping online content, recommendations, and interactions."
+              correct: 0,
+              explanation: "Accountability in AI ensures there are clear lines of responsibility for AI decisions and impacts, helping to maintain trust and address issues when they arise."
             },
             {
-              question: "What is an important digital safety practice?",
+              question: "What is a best practice for responsible AI deployment?",
               options: [
-                "Sharing passwords",
-                "Using strong passwords and privacy settings",
-                "Ignoring security updates",
-                "Posting personal information publicly"
+                "Regular monitoring and impact assessment",
+                "Avoiding system updates",
+                "Ignoring user feedback",
+                "Minimizing documentation"
               ],
-              correct: 1,
-              explanation: "Using strong passwords and privacy settings is crucial for maintaining digital safety."
+              correct: 0,
+              explanation: "Regular monitoring and impact assessment are crucial best practices for responsible AI deployment, helping to identify and address potential issues early."
             }
           ]
         }
       },
       {
         id: "5.4",
-        title: "Career Opportunities in AI",
-        duration: "45 min",
-        article: `Artificial Intelligence (AI) is one of the most rapidly growing fields, offering diverse career opportunities across industries. From developing cutting-edge algorithms to applying AI in healthcare or entertainment, AI careers are dynamic, innovative, and impactful.
+        title: "AI Careers and Future Trends",
+        duration: "25 min",
+        article: `The field of Artificial Intelligence (AI) offers diverse career opportunities and continues to evolve rapidly. Understanding career paths and future trends is essential for anyone interested in working with AI technologies.
   
-  Key Career Paths:
+  Career Opportunities in AI
   
-  1. Machine Learning Engineer:
-  • Develop and optimize ML models
-  • Skills: Python, TensorFlow, mathematics
-  • Applications: Recommendation systems, fraud detection
+  • Technical Roles:
+  • Machine Learning Engineer
+  • Data Scientist
+  • AI Research Scientist
+  • Computer Vision Engineer
+  • NLP Engineer
   
-  2. Data Scientist:
-  • Analyze data and create predictive models
-  • Skills: Statistics, programming, data visualization
-  • Applications: Pattern recognition, decision support
+  • Non-Technical Roles:
+  • AI Product Manager
+  • AI Ethicist
+  • AI Policy Analyst
+  • AI Trainer
+  • AI Project Manager
   
-  3. AI Research Scientist:
-  • Advance AI technologies through research
-  • Skills: Deep learning, academic research
-  • Applications: New algorithms, theoretical advances
+  Required Skills
   
-  4. Computer Vision Engineer:
-  • Work on image recognition systems
-  • Skills: CNN architectures, image processing
-  • Applications: Medical imaging, autonomous vehicles
+  • Technical Skills:
+  • Programming (Python, R)
+  • Mathematics and Statistics
+  • Machine Learning
+  • Deep Learning
+  • Data Analysis
   
-  Industries Using AI:
+  • Soft Skills:
+  • Problem Solving
+  • Communication
+  • Teamwork
+  • Ethical Judgment
+  • Adaptability
   
-  1. Healthcare:
-  • Disease diagnosis
-  • Treatment planning
-  • Drug discovery
+  Industry Applications
   
-  2. Finance:
-  • Fraud detection
-  • Risk assessment
-  • Algorithmic trading
+  • Healthcare:
+  • Disease Diagnosis
+  • Treatment Planning
+  • Drug Discovery
+  • Patient Care
   
-  3. Education:
-  • Personalized learning
-  • Assessment systems
-  • Educational tools
+  • Finance:
+  • Risk Assessment
+  • Fraud Detection
+  • Trading Systems
+  • Personal Banking
   
-  4. Entertainment:
-  • Game AI
-  • Content recommendation
-  • Virtual reality
+  • Technology:
+  • Product Development
+  • Research
+  • Infrastructure
+  • Security
   
-  Preparing for an AI Career:
+  Future Trends in AI
   
-  1. Education:
-  • Degrees in computer science, mathematics
-  • Specialized AI/ML certifications
-  • Continuous learning
+  • Emerging Technologies:
+  • Quantum AI
+  • Neuromorphic Computing
+  • Edge AI
+  • Explainable AI
   
-  2. Skills Development:
-  • Programming languages
-  • Machine learning frameworks
-  • Problem-solving abilities
+  • Application Areas:
+  • Sustainable Development
+  • Space Exploration
+  • Climate Change
+  • Healthcare Innovation
   
-  3. Practical Experience:
-  • Personal projects
+  Preparing for an AI Career
+  
+  • Education:
+  • Formal Degrees
+  • Online Courses
+  • Certifications
+  • Workshops
+  
+  • Practical Experience:
+  • Projects
   • Internships
-  • Open source contributions`,
+  • Competitions
+  • Open Source
+  
+  Professional Development:
+  • Networking
+  • Conferences
+  • Publications
+  • Mentorship
+  
+  Activity: Career Planning
+  
+  • Step 1: Skills Assessment
+  • Evaluate current skills
+  • Identify gaps
+  • Plan learning path
+  
+  • Step 2: Industry Research
+  • Explore job roles
+  • Research companies
+  • Understand requirements
+  
+  • Step 3: Development Plan
+  • Set career goals
+  • Choose learning resources
+  • Create timeline
+  
+  Challenges and Opportunities
+  
+  • Challenges:
+  • Rapid technology change
+  • Competitive field
+  • Complex problems
+  • Ethical considerations
+  
+  • Opportunities:
+  • High demand
+  • Innovation potential
+  • Global impact
+  • Career growth
+  
+  Success Strategies
+  
+  • Continuous Learning:
+  • Stay updated
+  • Learn new tools
+  • Follow trends
+  • Practice regularly
+  
+  • Professional Growth:
+  • Build portfolio
+  • Network actively
+  • Seek mentorship
+  • Share knowledge
+  
+  Reflect and Discuss:
+  • Which AI career interests you?
+  • What skills do you need to develop?
+  • How can you prepare for future trends?
+  
+  The field of AI offers exciting opportunities for those willing to learn and adapt to rapid technological change.`,
         quiz: {
           questions: [
             {
-              question: "What skills are essential for a machine learning engineer?",
+              question: "What is an important skill for an AI career?",
               options: [
-                "Artistic ability",
-                "Programming and mathematics",
-                "Sales experience",
-                "Physical fitness"
+                "Problem solving and adaptability",
+                "Musical talent",
+                "Athletic ability",
+                "Artistic drawing"
               ],
-              correct: 1,
-              explanation: "Machine learning engineers need strong programming skills and mathematical understanding to develop and optimize AI models."
+              correct: 0,
+              explanation: "Problem solving and adaptability are crucial skills for AI careers, as the field requires creative solutions to complex problems and constant adaptation to new technologies."
             },
             {
-              question: "Which industry is NOT a major employer of AI professionals?",
+              question: "Which is an emerging trend in AI technology?",
               options: [
-                "Healthcare",
-                "Finance",
-                "Agriculture",
-                "Professional sports"
+                "Quantum AI and neuromorphic computing",
+                "Traditional computing only",
+                "Avoiding automation",
+                "Reducing technology use"
               ],
-              correct: 3,
-              explanation: "While AI is used in many industries, professional sports is not currently a major employer of AI professionals compared to healthcare, finance, or technology sectors."
+              correct: 0,
+              explanation: "Quantum AI and neuromorphic computing are emerging trends that promise to revolutionize AI capabilities and applications."
             },
             {
-              question: "What is the best way to prepare for an AI career?",
+              question: "What is a recommended strategy for AI career development?",
               options: [
-                "Wait for job opportunities",
-                "Study and gain practical experience",
-                "Focus only on theory",
-                "Avoid technology"
+                "Continuous learning and building a project portfolio",
+                "Avoiding new technologies",
+                "Working alone only",
+                "Ignoring industry trends"
               ],
-              correct: 1,
-              explanation: "The best preparation for an AI career involves both studying relevant subjects and gaining practical experience through projects and internships."
+              correct: 0,
+              explanation: "Continuous learning and building a project portfolio are essential strategies for developing a successful career in AI, as the field evolves rapidly."
             }
           ]
         }
@@ -5472,14 +6461,14 @@ const module5 = {
       elements: {
         badges: [
           {
-            id: "ethics-champion",
-            title: "Ethics Champion",
+            id: "ethics-master",
+            title: "Ethics Master",
             condition: "Complete all lessons in module 5"
           },
           {
-            id: "privacy-expert",
-            title: "Privacy Expert",
-            condition: "Score 90%+ on privacy quiz"
+            id: "future-visionary",
+            title: "Future Visionary",
+            condition: "Score 90%+ on all module 5 quizzes"
           }
         ],
         achievements: true,
@@ -5498,27 +6487,23 @@ const module5 = {
 
 const module6 = {
     id: 6,
-    title: "Future of AI and Advanced Applications",
-    description: "Discover cutting-edge AI developments and future possibilities",
+    title: "Emerging Technologies and Future of AI",
+    description: "Explore cutting-edge AI technologies, future applications, and transformative innovations shaping the future",
     prerequisites: [1, 2, 3, 4, 5],
-    icon: "Zap",
-    themeColor: "purple",
+    icon: "Sparkles",
+    themeColor: "blue",
   
     interactiveFeatures: {
-      futureLab: {
+      techLab: {
         enabled: true,
         components: {
-          quantumSimulator: {
+          futureTech: {
             type: "interactive",
-            features: ["quantum-basics", "algorithm-visualization", "performance-comparison"]
+            features: ["tech-demos", "innovation-explorer", "trend-analyzer"]
           },
-          neuromorphicDemo: {
-            type: "simulation",
-            features: ["brain-inspired-computing", "spike-timing", "learning-mechanisms"]
-          },
-          edgeAIWorkbench: {
-            type: "development",
-            tools: ["device-optimization", "model-compression", "latency-testing"]
+          applicationHub: {
+            type: "hands-on",
+            tools: ["use-case-simulator", "impact-calculator", "future-scenarios"]
           }
         }
       }
@@ -5528,286 +6513,596 @@ const module6 = {
       {
         id: "6.1",
         title: "Emerging AI Technologies",
-        duration: "45 min",
-        interactive: {
-          quantumDemo: {
-            type: "simulation",
-            title: "Quantum Computing Basics",
-            features: {
-              visualization: {
-                type: "interactive",
-                elements: ["qubits", "quantum-gates", "superposition"]
-              },
-              comparison: {
-                classical: ["bits", "logic-gates"],
-                quantum: ["qubits", "quantum-operations"]
-              }
-            }
-          },
-          edgeComputing: {
-            type: "device-simulation",
-            scenarios: [
-              {
-                id: "smart-camera",
-                type: "inference",
-                metrics: ["latency", "power", "accuracy"]
-              },
-              {
-                id: "sensor-network",
-                type: "distributed",
-                features: ["data-fusion", "local-processing"]
-              }
-            ]
-          }
-        },
-        article: `The future of AI holds incredible potential for transforming various aspects of society. Understanding emerging technologies and trends is crucial for staying ahead in the field.
-  
-  Key Areas:
-  • Quantum AI: Leveraging quantum computing for enhanced AI capabilities
-  • Neuromorphic Computing: Brain-inspired computing architectures
-  • Edge AI: Running AI models on local devices
-  • Explainable AI: Making AI decisions more transparent and interpretable
-  
-  Emerging Applications:
-  1. Environmental Protection
-     • Climate modeling and prediction
-     • Resource optimization
-     • Wildlife conservation
-  
-  2. Space Exploration
-     • Autonomous spacecraft navigation
-     • Planetary data analysis
-     • Mission planning optimization
-  
-  3. Personalized Medicine
-     • Drug discovery
-     • Treatment planning
-     • Disease prediction
-  
-  4. Advanced Robotics
-     • Human-robot collaboration
-     • Adaptive learning systems
-     • Social interaction
-  
-  Future Challenges:
-  • Computational Limits
-  • Energy Efficiency
-  • Ethical Considerations
-  • Human-AI Collaboration`,
+        duration: "30 min",
+        article: `The landscape of Artificial Intelligence is rapidly evolving with groundbreaking technologies that are pushing the boundaries of what's possible. Understanding these emerging technologies is crucial for anyone interested in the future of AI.
+
+Quantum AI and Computing
+
+What is Quantum AI?
+• Integration of quantum computing principles with AI algorithms
+• Leverages quantum mechanics for complex computations
+• Enables processing of vast amounts of data simultaneously
+
+Key Features:
+• Quantum Bits (Qubits): Can exist in multiple states simultaneously
+• Quantum Entanglement: Allows for instant correlation between qubits
+• Quantum Superposition: Enables parallel processing capabilities
+
+Applications:
+• Optimization Problems
+• Drug Discovery
+• Climate Modeling
+• Cryptography
+• Financial Modeling
+
+Neuromorphic Computing
+
+Overview:
+• Computing architecture inspired by the human brain
+• Mimics neural structures and operations
+• Enables more efficient AI processing
+
+Key Components:
+• Artificial Synapses
+• Neural Networks
+• Spike-Based Processing
+• Adaptive Learning
+
+Advantages:
+• Lower power consumption
+• Real-time processing
+• Improved learning capabilities
+• Better pattern recognition
+
+Edge AI and Computing
+
+Definition:
+• AI processing at or near the data source
+• Reduced dependency on cloud computing
+• Real-time decision making
+
+Benefits:
+• Reduced latency
+• Enhanced privacy
+• Lower bandwidth usage
+• Improved reliability
+
+Applications:
+• Smart devices
+• Autonomous vehicles
+• Industrial IoT
+• Healthcare monitoring
+
+Advanced Natural Language Processing
+
+Latest Developments:
+• Large Language Models (LLMs)
+• Zero-shot learning
+• Few-shot learning
+• Multilingual processing
+
+Capabilities:
+• Context understanding
+• Natural conversation
+• Content generation
+• Language translation
+
+Artificial General Intelligence (AGI) Research
+
+Current State:
+• Progress towards human-like reasoning
+• Multi-domain problem solving
+• Adaptive learning systems
+• Consciousness research
+
+Challenges:
+• Computational requirements
+• Ethical considerations
+• Safety protocols
+• Development timeline
+
+Extended Reality (XR) and AI
+
+Components:
+• Virtual Reality (VR)
+• Augmented Reality (AR)
+• Mixed Reality (MR)
+• AI-powered environments
+
+Applications:
+• Immersive training
+• Virtual collaboration
+• Educational experiences
+• Entertainment systems
+
+Emerging Hardware Technologies
+
+Neural Processing Units (NPUs):
+• Specialized AI processors
+• Optimized for neural networks
+• Enhanced performance
+• Energy efficiency
+
+Photonic Computing:
+• Light-based processing
+• Ultra-fast calculations
+• Lower power consumption
+• Reduced heat generation
+
+Future Implications
+
+Technical Impact:
+• Increased processing power
+• Enhanced AI capabilities
+• New application domains
+• Improved efficiency
+
+Societal Impact:
+• Transformed industries
+• New job opportunities
+• Changed daily life
+• Enhanced human capabilities
+
+Activity: Technology Assessment
+
+Step 1: Choose a Technology
+• Select an emerging technology
+• Research its current state
+• Identify key features
+• Understand limitations
+
+Step 2: Impact Analysis
+• Evaluate potential applications
+• Consider technical requirements
+• Assess market potential
+• Identify challenges
+
+Step 3: Future Projection
+• Predict development timeline
+• Anticipate breakthroughs
+• Consider implications
+• Plan adaptation strategies
+
+Reflect and Discuss:
+• Which emerging technology has the most potential?
+• How might these technologies change society?
+• What challenges need to be overcome?
+
+The rapid advancement of these technologies is reshaping the AI landscape and opening new possibilities for innovation and development.`,
         quiz: {
           questions: [
             {
-              question: "What is Edge AI?",
+              question: "What is a key advantage of neuromorphic computing?",
               options: [
-                "AI processing on local devices",
-                "AI for graphics processing",
-                "AI in cloud computing",
-                "AI for social media"
+                "Lower power consumption and improved learning capabilities",
+                "Higher cost of implementation",
+                "Increased data center requirements",
+                "Slower processing speed"
               ],
               correct: 0,
-              explanation: "Edge AI refers to AI processing that occurs on local devices (at the 'edge' of the network) rather than in the cloud, enabling faster responses and better privacy."
+              explanation: "Neuromorphic computing, inspired by the human brain, offers lower power consumption and improved learning capabilities compared to traditional computing architectures."
             },
             {
-              question: "Which is NOT a key challenge in future AI development?",
+              question: "What is a primary benefit of Edge AI?",
               options: [
-                "Computational limits",
-                "Energy efficiency",
-                "Storage capacity",
-                "Ethical considerations"
+                "Reduced latency and enhanced privacy",
+                "Increased cloud dependency",
+                "Higher bandwidth usage",
+                "Slower processing speed"
               ],
-              correct: 2,
-              explanation: "While storage capacity is important, it is not one of the primary challenges highlighted for future AI development compared to computational limits, energy efficiency, and ethical considerations."
+              correct: 0,
+              explanation: "Edge AI processes data at or near the source, resulting in reduced latency and enhanced privacy by minimizing data transmission to the cloud."
             },
             {
-              question: "What is the main advantage of neuromorphic computing?",
+              question: "Which is a key feature of Quantum AI?",
               options: [
-                "Lower cost",
-                "Brain-inspired architecture",
-                "Faster processing",
-                "Larger storage"
+                "The ability to process multiple states simultaneously using qubits",
+                "Slower processing speed",
+                "Limited data handling",
+                "Single-state processing"
               ],
-              correct: 1,
-              explanation: "Neuromorphic computing uses brain-inspired architectures to potentially achieve more efficient and adaptive computing systems."
+              correct: 0,
+              explanation: "Quantum AI uses qubits that can exist in multiple states simultaneously, enabling parallel processing of vast amounts of data."
             }
           ]
         }
       },
       {
         id: "6.2",
-        title: "AI Ethics and Society",
-        duration: "40 min",
-        interactive: {
-          ethicsSimulator: {
-            type: "scenario-based",
-            title: "AI Ethics Explorer",
-            scenarios: [
-              {
-                id: "bias-detection",
-                type: "interactive",
-                focus: "identifying and mitigating bias"
-              },
-              {
-                id: "privacy-protection",
-                type: "simulation",
-                features: ["data-anonymization", "security-measures"]
-              }
-            ]
-          },
-          impactAnalyzer: {
-            type: "assessment",
-            tools: [
-              {
-                id: "societal-impact",
-                metrics: ["job-displacement", "skill-requirements", "economic-effects"]
-              },
-              {
-                id: "environmental-impact",
-                metrics: ["energy-consumption", "carbon-footprint", "resource-usage"]
-              }
-            ]
-          }
-        },
-        article: `As AI becomes more integrated into society, understanding and addressing ethical considerations becomes increasingly important.
-  
-  Key Ethical Considerations:
-  1. Bias and Fairness
-     • Identifying sources of bias
-     • Ensuring equitable outcomes
-     • Promoting inclusive AI development
-  
-  2. Privacy and Security
-     • Data protection
-     • Consent management
-     • Secure AI systems
-  
-  3. Transparency and Accountability
-     • Explainable AI decisions
-     • Clear responsibility frameworks
-     • Audit mechanisms
-  
-  4. Societal Impact
-     • Job market effects
-     • Economic implications
-     • Social interactions
-  
-  Future Guidelines:
-  • Ethical AI development frameworks
-  • Regulatory compliance
-  • Stakeholder engagement
-  • Regular impact assessments`,
+        title: "Future Applications of AI",
+        duration: "30 min",
+        article: `As Artificial Intelligence continues to advance, its applications are expanding into new and transformative areas. Understanding these future applications helps us prepare for and shape the upcoming technological revolution.
+
+Healthcare and Medicine
+
+Personalized Medicine:
+• AI-driven treatment plans
+• Genetic analysis and therapy
+• Drug development optimization
+• Patient outcome prediction
+
+Medical Imaging:
+• Advanced diagnostic tools
+• Real-time analysis
+• 3D visualization
+• Preventive screening
+
+Patient Care:
+• Automated monitoring
+• Virtual health assistants
+• Remote diagnostics
+• Treatment optimization
+
+Environmental Protection
+
+Climate Change:
+• Weather prediction
+• Carbon footprint tracking
+• Environmental monitoring
+• Resource optimization
+
+Conservation:
+• Wildlife protection
+• Ecosystem management
+• Species preservation
+• Habitat monitoring
+
+Sustainable Energy:
+• Smart grid management
+• Energy optimization
+• Renewable integration
+• Consumption prediction
+
+Space Exploration
+
+Mission Planning:
+• Trajectory optimization
+• Resource management
+• Risk assessment
+• Decision support
+
+Planetary Exploration:
+• Autonomous rovers
+• Data analysis
+• Surface mapping
+• Sample collection
+
+Space Research:
+• Astronomical data analysis
+• Signal processing
+• Object detection
+• Mission control support
+
+Transportation and Mobility
+
+Autonomous Vehicles:
+• Self-driving cars
+• Smart navigation
+• Safety systems
+• Traffic optimization
+
+Urban Mobility:
+• Public transport optimization
+• Traffic management
+• Infrastructure planning
+• Emergency response
+
+Aviation:
+• Flight optimization
+• Maintenance prediction
+• Safety enhancement
+• Air traffic control
+
+Education and Learning
+
+Personalized Learning:
+• Adaptive curricula
+• Progress tracking
+• Learning style optimization
+• Real-time feedback
+
+Virtual Education:
+• Immersive experiences
+• Interactive simulations
+• Global collaboration
+• Remote learning
+
+Assessment:
+• Automated evaluation
+• Skill tracking
+• Performance prediction
+• Learning analytics
+
+Agriculture and Food Production
+
+Smart Farming:
+• Crop optimization
+• Resource management
+• Yield prediction
+• Pest control
+
+Precision Agriculture:
+• Automated systems
+• Soil analysis
+• Weather adaptation
+• Irrigation control
+
+Food Security:
+• Supply chain optimization
+• Quality control
+• Waste reduction
+• Distribution planning
+
+Entertainment and Media
+
+Content Creation:
+• Automated generation
+• Personalized content
+• Interactive experiences
+• Virtual production
+
+Gaming:
+• Adaptive gameplay
+• NPC intelligence
+• Procedural generation
+• Real-time adaptation
+
+Media Distribution:
+• Content recommendation
+• Audience analysis
+• Platform optimization
+• Quality enhancement
+
+Activity: Future Applications Workshop
+
+Step 1: Application Identification
+• Choose an industry
+• Identify AI opportunities
+• Analyze current limitations
+• Project future needs
+
+Step 2: Impact Assessment
+• Evaluate benefits
+• Consider challenges
+• Assess feasibility
+• Plan implementation
+
+Step 3: Development Roadmap
+• Define milestones
+• Identify requirements
+• Plan resources
+• Set timelines
+
+Reflect and Discuss:
+• Which application area excites you most?
+• What challenges need to be overcome?
+• How might these applications change society?
+
+The future applications of AI promise to transform every aspect of our lives, creating new opportunities and solutions to global challenges.`,
         quiz: {
           questions: [
             {
-              question: "What is a key aspect of AI ethics?",
+              question: "What is a key application of AI in healthcare?",
               options: [
-                "Maximizing profit",
-                "Ensuring fairness and transparency",
-                "Increasing processing speed",
-                "Reducing development time"
+                "Personalized medicine and treatment optimization",
+                "Reduced medical research",
+                "Limited patient care",
+                "Manual diagnostics only"
               ],
-              correct: 1,
-              explanation: "Ensuring fairness and transparency is a fundamental aspect of AI ethics, focusing on equitable outcomes and clear decision-making processes."
+              correct: 0,
+              explanation: "AI in healthcare enables personalized medicine through treatment optimization and individualized care plans based on patient data and genetic analysis."
             },
             {
-              question: "Which is NOT a primary consideration in AI privacy?",
+              question: "How is AI transforming space exploration?",
               options: [
-                "Data protection",
-                "User consent",
-                "Processing speed",
-                "Security measures"
+                "Through autonomous rovers and mission optimization",
+                "By reducing space research",
+                "Limiting data analysis",
+                "Avoiding planetary exploration"
               ],
-              correct: 2,
-              explanation: "While processing speed is important for AI systems, it is not a primary consideration in AI privacy compared to data protection, user consent, and security measures."
+              correct: 0,
+              explanation: "AI is revolutionizing space exploration through autonomous rovers, mission optimization, and advanced data analysis capabilities."
+            },
+            {
+              question: "What is a future application of AI in agriculture?",
+              options: [
+                "Precision farming and crop optimization",
+                "Manual crop monitoring",
+                "Reduced automation",
+                "Limited resource management"
+              ],
+              correct: 0,
+              explanation: "AI in agriculture enables precision farming through crop optimization, resource management, and automated systems for improved yields."
             }
           ]
         }
       },
       {
         id: "6.3",
-        title: "Future Applications",
-        duration: "35 min",
-        interactive: {
-          applicationExplorer: {
-            type: "interactive",
-            title: "Future AI Applications",
-            domains: [
-              {
-                id: "healthcare",
-                applications: ["personalized-medicine", "drug-discovery", "diagnostic-assistance"],
-                demo: true
-              },
-              {
-                id: "environment",
-                applications: ["climate-modeling", "resource-optimization", "conservation"],
-                demo: true
-              }
-            ]
-          },
-          impactSimulator: {
-            type: "simulation",
-            scenarios: [
-              {
-                domain: "transportation",
-                features: ["autonomous-systems", "traffic-optimization", "safety-enhancement"]
-              },
-              {
-                domain: "education",
-                features: ["personalized-learning", "automated-assessment", "adaptive-content"]
-              }
-            ]
-          }
-        },
-        article: `AI continues to expand into new domains, creating innovative solutions for complex challenges.
-  
-  Key Application Areas:
-  1. Healthcare
-     • Personalized treatment plans
-     • Drug discovery acceleration
-     • Preventive care optimization
-  
-  2. Environmental Protection
-     • Climate change modeling
-     • Resource management
-     • Ecosystem monitoring
-  
-  3. Education
-     • Adaptive learning systems
-     • Automated assessment
-     • Personalized curriculum
-  
-  4. Smart Cities
-     • Traffic optimization
-     • Energy management
-     • Public safety enhancement
-  
-  Emerging Opportunities:
-  • Cross-domain integration
-  • Hybrid AI systems
-  • Human-AI collaboration
-  • Sustainable solutions`,
+        title: "AI Systems Architecture",
+        duration: "30 min",
+        article: `Understanding the architecture of modern AI systems is crucial for developing efficient and scalable solutions. This lesson explores the key components and design principles of AI system architecture.
+
+Core Components
+
+Processing Units:
+• Central Processing Units (CPUs)
+• Graphics Processing Units (GPUs)
+• Tensor Processing Units (TPUs)
+• Neural Processing Units (NPUs)
+
+Memory Systems:
+• RAM configurations
+• Cache hierarchies
+• Storage optimization
+• Memory management
+
+Network Infrastructure:
+• Data transmission
+• Load balancing
+• Scalability
+• Redundancy
+
+Architectural Patterns
+
+Distributed Systems:
+• Parallel processing
+• Resource sharing
+• Fault tolerance
+• Load distribution
+
+Microservices:
+• Modular design
+• Service isolation
+• Easy scaling
+• Flexible deployment
+
+Pipeline Architecture:
+• Data flow management
+• Process optimization
+• Error handling
+• Performance monitoring
+
+System Integration
+
+Data Integration:
+• Source connectivity
+• Format handling
+• Quality assurance
+• Real-time processing
+
+API Management:
+• Interface design
+• Version control
+• Security protocols
+• Documentation
+
+Service Orchestration:
+• Workflow management
+• Service coordination
+• Resource allocation
+• Performance optimization
+
+Performance Optimization
+
+Scaling Strategies:
+• Horizontal scaling
+• Vertical scaling
+• Auto-scaling
+• Load balancing
+
+Resource Management:
+• Allocation optimization
+• Usage monitoring
+• Cost optimization
+• Efficiency metrics
+
+Cache Optimization:
+• Strategy design
+• Hit rate improvement
+• Memory utilization
+• Access patterns
+
+Security Architecture
+
+Access Control:
+• Authentication
+• Authorization
+• Role management
+• Policy enforcement
+
+Data Protection:
+• Encryption
+• Privacy measures
+• Compliance
+• Audit trails
+
+Threat Prevention:
+• Vulnerability scanning
+• Attack detection
+• Response protocols
+• Recovery procedures
+
+Monitoring and Maintenance
+
+System Monitoring:
+• Performance metrics
+• Resource usage
+• Error detection
+• Health checks
+
+Maintenance Procedures:
+• Update management
+• Backup procedures
+• Recovery plans
+• Documentation
+
+Quality Assurance:
+• Testing protocols
+• Validation procedures
+• Performance benchmarks
+• Compliance checks
+
+Activity: Architecture Design
+
+Step 1: System Analysis
+• Define requirements
+• Identify components
+• Map dependencies
+• Plan integration
+
+Step 2: Performance Planning
+• Set metrics
+• Design monitoring
+• Plan scaling
+• Optimize resources
+
+Step 3: Implementation Strategy
+• Create roadmap
+• Define phases
+• Allocate resources
+• Set milestones
+
+Reflect and Discuss:
+• What are the critical components in AI system architecture?
+• How can performance be optimized?
+• What security measures are essential?
+
+Understanding AI system architecture is fundamental for building robust and efficient AI solutions that can scale and adapt to changing needs.`,
         quiz: {
           questions: [
             {
-              question: "Which sector is expected to see significant AI impact?",
+              question: "What is a key component of AI system architecture?",
               options: [
-                "Healthcare",
-                "Manual labor",
-                "Basic arithmetic",
-                "Simple data entry"
+                "Specialized processing units like GPUs and TPUs",
+                "Basic calculators",
+                "Single-thread processing",
+                "Limited memory systems"
               ],
               correct: 0,
-              explanation: "Healthcare is expected to see significant AI impact through personalized medicine, drug discovery, and improved diagnostics."
+              explanation: "Specialized processing units like GPUs and TPUs are essential components of AI system architecture, enabling efficient processing of AI workloads."
             },
             {
-              question: "What is a key feature of future AI in education?",
+              question: "Which architectural pattern is important for AI systems?",
               options: [
-                "Replacing teachers",
-                "Standardized teaching",
-                "Personalized learning",
-                "Eliminating assessments"
+                "Distributed systems with parallel processing",
+                "Single-server systems",
+                "Manual processing",
+                "Limited scaling"
               ],
-              correct: 2,
-              explanation: "Personalized learning is a key feature of future AI in education, allowing content and pace to be adapted to individual student needs."
+              correct: 0,
+              explanation: "Distributed systems with parallel processing capabilities are crucial for AI systems to handle large-scale computations and ensure fault tolerance."
+            },
+            {
+              question: "What is a critical aspect of AI system security?",
+              options: [
+                "Comprehensive access control and data protection",
+                "Open access to all",
+                "No encryption",
+                "Limited monitoring"
+              ],
+              correct: 0,
+              explanation: "Comprehensive access control and data protection are critical for securing AI systems and protecting sensitive information."
             }
           ]
         }
@@ -5830,12 +7125,12 @@ const module6 = {
           {
             id: "future-explorer",
             title: "Future Explorer",
-            condition: "Complete emerging technologies lesson"
+            condition: "Complete all lessons in module 6"
           },
           {
-            id: "ethics-champion",
-            title: "Ethics Champion",
-            condition: "Perfect score on ethics quiz"
+            id: "innovation-master",
+            title: "Innovation Master",
+            condition: "Score 90%+ on all module 6 quizzes"
           }
         ],
         achievements: true,
@@ -6205,7 +7500,7 @@ const founders = [
     image: "/images/shashank1.png",
     links: {
       linkedin: "https://www.linkedin.com/in/shashank-madala-320989295/",
-      github: "https://github.com/your-profile",
+      github: "https://github.com/shashankmadala",
       email: "mailto:madala.shashank@gmail.com"
     }
   },
@@ -6306,12 +7601,15 @@ export default function Founders() {
 # src/pages/Home.jsx
 
 ```jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen } from 'lucide-react';
 import '../styles/animations.css';
 
 export default function HomePage() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -6331,8 +7629,38 @@ export default function HomePage() {
       observer.observe(element);
     });
 
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "Middle School Student",
+      quote: "I never thought I could understand AI, but Lumin AI made it so fun and easy! I loved building my own chatbot and showing it to my friends."
+    },
+    {
+      name: "David Park",
+      role: "Parent",
+      quote: "My son was always interested in technology, and this program gave him the perfect introduction to AI. The weekend sessions fit perfectly with his schedule."
+    },
+    {
+      name: "Maya Patel",
+      role: "Middle School Student",
+      quote: "The hands-on projects were my favorite part! I learned how to make a simple AI that can recognize different types of flowers in my garden."
+    }
+  ];
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
@@ -6356,13 +7684,27 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 mb-8">
               Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
             </p>
-            <Link 
-              to="/learn" 
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-            >
-              Start Learning Now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link 
+                to="/learn" 
+                className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+              >
+                Start Learning Now
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link 
+                to="/summer-program" 
+                className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
+                style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Join Summer Program
+                </span>
+                <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
+                  Limited Time!
+                </span>
+              </Link>
+            </div>
           </div>
 
           {/* Stats */}
@@ -6449,132 +7791,100 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Courses */}
+      {/* Testimonials Section */}
       <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Featured Courses</h2>
-            <p className="text-gray-600">Start your AI journey today</p>
+            <h2 className="text-5xl font-bold mb-4">Student Stories</h2>
+            <p className="text-xl text-gray-600">
+              Hear from our amazing community of learners
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Link 
-              to="/learn"
-              className="animate-on-scroll bg-white rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 group cursor-pointer"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Brain className="w-6 h-6 text-blue-600" />
-                </div>
-                <span className="text-sm text-gray-500">3 weeks</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                AI Fundamentals
-              </h3>
-              <ul className="space-y-2">
-                {['Introduction to AI', 'Machine Learning Basics', 'Neural Networks', 'Practical Applications'].map((topic) => (
-                  <li key={topic} className="flex items-center gap-2 text-gray-600">
-                    <Check className="w-4 h-4 text-green-500"/>
-                    {topic}
-                  </li>
-                ))}
-              </ul>
-            </Link>
-
-            {[
-              {
-                duration: '3 weeks',
-                title: 'Deep Learning',
-                topics: ['Neural Architecture', 'Computer Vision', 'Natural Language Processing', 'Advanced Topics']
-              },
-              {
-                duration: '4 weeks',
-                title: 'AI Applications',
-                topics: ['Real-world Projects', 'Model Deployment', 'Best Practices', 'Industry Standards']
-              }
-            ].map((course) => (
-              <div 
-                key={course.title} 
-                className="relative bg-white rounded-xl p-6 opacity-75 group"
+          <div className="relative">
+            <div className="flex items-center justify-center">
+              <button 
+                onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                className="absolute left-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-yellow-100 px-4 py-2 rounded-full flex items-center gap-2">
-                    <Construction className="w-5 h-5 text-yellow-700" />
-                    <span className="text-yellow-700 font-medium">Coming Soon</span>
+                <ChevronLeft className="w-6 h-6 text-gray-600" />
+              </button>
+
+              <div className="max-w-3xl mx-auto px-12">
+                <div className="bg-white rounded-xl p-8 shadow-lg">
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-semibold">{testimonials[currentTestimonial].name}</h3>
+                    <p className="text-blue-600">{testimonials[currentTestimonial].role}</p>
                   </div>
-                </div>
-                <div className="filter blur-[2px]">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"/>
-                    <span className="text-sm text-gray-500">{course.duration}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4">
-                    {course.title}
-                  </h3>
-                  <ul className="space-y-2">
-                    {course.topics.map((topic) => (
-                      <li key={topic} className="flex items-center gap-2 text-gray-600">
-                        <Check className="w-4 h-4 text-green-500"/>
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-gray-600 text-lg italic text-center">
+                    "{testimonials[currentTestimonial].quote}"
+                  </p>
                 </div>
               </div>
-            ))}
+
+              <button 
+                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
+                className="absolute right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Student Success Stories */}
-      <section className="bg-white py-24">
+      {/* Get Started Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-4xl font-bold mb-4">Student Success Stories</h2>
-            <p className="text-xl text-gray-600">See how our students are changing the world</p>
-          </div>
+          <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Arjun" 
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">Arjun Patel</h3>
-                  <p className="text-blue-600">AI Innovator, Age 14</p>
-                </div>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                "Through Lumin AI's program, I developed an AI model to predict water quality in local rivers. The project 
-                won first place at my regional science fair and is now being considered for implementation by local 
-                environmental agencies."
+            <div className="relative text-center max-w-2xl mx-auto">
+              <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Choose your path and begin your adventure into the world of artificial intelligence.
               </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
-              <div className="flex items-center gap-4 mb-6">
-                <img 
-                  src="/api/placeholder/64/64" 
-                  alt="Miguel" 
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">Miguel Santos</h3>
-                  <p className="text-blue-600">Student Developer, Age 14</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Link
+                  to="/learn"
+                  className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                >
+                  <BookOpen className="w-8 h-8" />
+                  <span className="font-semibold">Start Learning</span>
+                  <span className="text-sm text-blue-100">Free online course</span>
+                </Link>
+                <Link
+                  to="/summer-program"
+                  className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                >
+                  <Users className="w-8 h-8" />
+                  <span className="font-semibold">Join Summer Program</span>
+                  <span className="text-sm text-purple-100">Live online sessions</span>
+                </Link>
               </div>
-              <p className="text-gray-600 leading-relaxed">
-                "Using Lumin AI's program, I built my first machine learning model to identify different types of 
-                local plants in my community in Brazil. It started as a small project but now I'm working with my 
-                science teacher to expand it into a learning tool for younger students."
-              </p>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Floating CTA Button */}
+      <div className={`fixed bottom-8 right-8 z-50 flex flex-col gap-4 transition-all duration-300 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
+        <button
+          onClick={scrollToTop}
+          className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+        >
+          <ArrowUp className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+        </button>
+        <Link
+          to="/learn"
+          className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"
+        >
+          Start Learning
+          <ArrowRight className="w-5 h-5" />
+        </Link>
+      </div>
     </div>
   );
 }
@@ -6584,14 +7894,15 @@ export default function HomePage() {
 
 ```jsx
 import React, { useState, useEffect } from 'react';
-import { Brain, Book, Trophy, ArrowLeft, Award } from 'lucide-react';
+import { Brain, Book, Trophy, ArrowLeft, Award, BookOpen, Code, Check } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import ModuleList from '../components/course/ModuleList';
 import LessonView from '../components/course/LessonView';
 import FinalExam from '../components/course/FinalExam';
 import Certificate from '../components/course/Certificate';
 import ProgressTracker from '../components/course/ProgressTracker';
-import PathView from '../components/course/PathView';  // Add this import
+import PathView from '../components/course/PathView';
+import ImageClassifier from '../components/projects/ImageClassifier';
 import courseData from '../data/courseData';
 
 export default function Learn() {
@@ -6601,7 +7912,8 @@ export default function Learn() {
   const [showFinalExam, setShowFinalExam] = useState(false);
   const [showCertificate, setShowCertificate] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
-  const [showLearningPath, setShowLearningPath] = useState(false);  // Add this state
+  const [showLearningPath, setShowLearningPath] = useState(false);
+  const [showImageClassifier, setShowImageClassifier] = useState(false);
 
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('courseProgress');
@@ -6614,7 +7926,8 @@ export default function Learn() {
       badges: [],
       finalExamScore: null,
       certificateIssued: false,
-      examAttempts: 0
+      examAttempts: 0,
+      completedProjects: []
     };
   });
 
@@ -6672,6 +7985,23 @@ export default function Learn() {
     setShowFinalExam(false);
   };
 
+  const handleProjectCompletion = (projectData) => {
+    setProgress(prev => ({
+      ...prev,
+      completedProjects: [...(prev.completedProjects || []), {
+        id: 'image-classifier',
+        completedDate: new Date().toISOString(),
+        data: projectData
+      }]
+    }));
+    setShowImageClassifier(false);
+  };
+
+  const isProjectCompleted = (projectId) => {
+    if (!progress.completedProjects) return false;
+    return progress.completedProjects.some(project => project.id === projectId);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -6696,7 +8026,7 @@ export default function Learn() {
               progress={progress}
               onBack={() => setShowCertificate(false)}
             />
-          ) : showLearningPath ? (  // Add this condition
+          ) : showLearningPath ? (
             <>
               <button
                 onClick={() => setShowLearningPath(false)}
@@ -6714,6 +8044,11 @@ export default function Learn() {
                 }}
               />
             </>
+          ) : showImageClassifier ? (
+            <ImageClassifier 
+              onComplete={handleProjectCompletion}
+              onBack={() => setShowImageClassifier(false)}
+            />
           ) : (
             <div className="grid grid-cols-12 gap-8">
               {/* Sidebar Toggle (Mobile) */}
@@ -6788,20 +8123,37 @@ export default function Learn() {
                       
                       <button 
                         className="p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-3"
-                        onClick={() => setShowLearningPath(true)}  // Update this onClick
+                        onClick={() => setShowLearningPath(true)}
                       >
                         <Brain className="w-5 h-5 text-blue-500" />
                         <span>Learning Path</span>
                       </button>
                     </div>
 
+                    {/* Course Title - Only show once here */}
+                    <div className="text-center mb-12">
+                      <h1 className="text-4xl font-bold text-gray-900 mb-4">AI Fundamentals</h1>
+                      <p className="text-xl text-gray-600">Master the fundamentals of artificial intelligence and machine learning</p>
+                    </div>
+
                     {/* Module List */}
                     <ModuleList 
-                      modules={courseData.modules}
+                      modules={courseData.modules.slice(0, 2)}
                       progress={progress}
                       activeModule={activeModule}
                       setActiveModule={setActiveModule}
                       setActiveLesson={setActiveLesson}
+                      showTitle={false}
+                    />
+
+                    {/* Remaining Modules */}
+                    <ModuleList 
+                      modules={courseData.modules.slice(2)}
+                      progress={progress}
+                      activeModule={activeModule}
+                      setActiveModule={setActiveModule}
+                      setActiveLesson={setActiveLesson}
+                      showTitle={false}
                     />
                   </div>
                 )}
@@ -6866,7 +8218,12 @@ import {
   Sparkles,
   Target,
   Check,
-  PlayCircle
+  PlayCircle,
+  CreditCard,
+  Building,
+  GraduationCap,
+  Heart,
+  Mic
 } from 'lucide-react';
 
 export default function SummerProgram() {
@@ -6875,6 +8232,16 @@ export default function SummerProgram() {
   const [showBadge, setShowBadge] = useState(false);
   const [isTimelineAnimated, setIsTimelineAnimated] = useState(false);
   const [hoveredBadgeIndex, setHoveredBadgeIndex] = useState(null);
+  const [currentImpactIndex, setCurrentImpactIndex] = useState(0);
+
+  // Function to handle manual carousel navigation
+  const handleImpactCardChange = (direction) => {
+    if (direction === 'next') {
+      setCurrentImpactIndex(prev => (prev + 1) % fundAllocation.length);
+    } else {
+      setCurrentImpactIndex(prev => (prev - 1 + fundAllocation.length) % fundAllocation.length);
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -6898,39 +8265,136 @@ export default function SummerProgram() {
       observer.observe(element);
     });
 
-    return () => observer.disconnect();
+    // Auto-rotate impact cards
+    const impactInterval = setInterval(() => {
+      setCurrentImpactIndex(prev => (prev + 1) % fundAllocation.length);
+    }, 4000);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(impactInterval);
+    };
   }, []);
 
-  const sessions = {
-    1: [
-      {
-        title: "Introduction to AI",
-        description: "Basic concepts and Python setup",
-        outcomes: ["Understanding AI fundamentals", "Python environment setup", "First program"],
-        icon: <Brain className="w-6 h-6" />
-      },
-      {
-        title: "Machine Learning Basics",
-        description: "Core ML concepts and applications",
-        outcomes: ["Data analysis basics", "Simple ML models", "Practice exercises"],
-        icon: <Code className="w-6 h-6" />
-      }
-    ],
-    2: [
-      {
-        title: "Advanced Concepts",
-        description: "Deep learning and neural networks",
-        outcomes: ["Neural network basics", "Model training", "AI ethics"],
-        icon: <Sparkles className="w-6 h-6" />
-      },
-      {
-        title: "Project Work",
-        description: "Build your own AI application",
-        outcomes: ["Project planning", "Implementation", "Presentation"],
-        icon: <Target className="w-6 h-6" />
-      }
-    ]
+  const weeks = {
+    1: {
+      title: "Introduction to AI & Machine Learning",
+      description: "Understanding AI fundamentals and how machines learn",
+      sessions: [
+        {
+          title: "What is AI?",
+          description: "AI Scavenger Hunt & Real-World Applications",
+          outcomes: ["Identify real-world AI applications", "Categorize AI types", "Discuss AI impacts"],
+          icon: <Brain className="w-6 h-6" />
+        },
+        {
+          title: "How AI Learns",
+          description: "AI Detective: Spot the Pattern",
+          outcomes: ["Recognize patterns in data", "Understand supervised vs. unsupervised learning", "Make AI predictions"],
+          icon: <Sparkles className="w-6 h-6" />
+        }
+      ]
+    },
+    2: {
+      title: "Natural Language Processing & Ethics",
+      description: "Exploring how AI understands language and ethical considerations",
+      sessions: [
+        {
+          title: "NLP & Language Understanding",
+          description: "AI Chatbot Simulation",
+          outcomes: ["Simulate chatbot conversations", "Understand intent and context", "Compare with real AI systems"],
+          icon: <Code className="w-6 h-6" />
+        },
+        {
+          title: "Ethics & Bias in AI",
+          description: "AI Fairness Debate & Experiment",
+          outcomes: ["Debate AI fairness issues", "Identify bias in datasets", "Create strategies for fair AI"],
+          icon: <Target className="w-6 h-6" />
+        }
+      ]
+    },
+    3: {
+      title: "Building Blocks of Chatbots",
+      description: "Learning the fundamentals of chatbot development",
+      sessions: [
+        {
+          title: "How Chatbots Work",
+          description: "Chatbot Script & Flowchart Challenge",
+          outcomes: ["Design conversation flowcharts", "Create chatbot interactions", "Identify limitations"],
+          icon: <Brain className="w-6 h-6" />
+        },
+        {
+          title: "Intro to Python for AI",
+          description: "Coding a Simple Chatbot",
+          outcomes: ["Write basic Python code", "Create if-else responses", "Test chatbot functionality"],
+          icon: <Code className="w-6 h-6" />
+        }
+      ]
+    },
+    4: {
+      title: "Project Phase – Building the Chatbot",
+      description: "Designing and implementing personal AI chatbots",
+      sessions: [
+        {
+          title: "Planning the Chatbot",
+          description: "AI Mind Mapping & Wireframing",
+          outcomes: ["Define chatbot purpose", "Create user experience design", "Plan chatbot responses"],
+          icon: <Sparkles className="w-6 h-6" />
+        },
+        {
+          title: "Developing the Chatbot",
+          description: "AI Model & Implementation",
+          outcomes: ["Implement pre-trained models", "Customize responses", "Test functionality"],
+          icon: <Target className="w-6 h-6" />
+        }
+      ]
+    },
+    5: {
+      title: "Testing, Improving, and Showcasing",
+      description: "Finalizing and presenting AI chatbot projects",
+      sessions: [
+        {
+          title: "Debugging & Improving Chatbots",
+          description: "AI User Testing & Optimization",
+          outcomes: ["Conduct peer testing", "Debug and fix issues", "Optimize responses"],
+          icon: <Code className="w-6 h-6" />
+        },
+        {
+          title: "Final Showcase & Keynote Speaker",
+          description: "Chatbot Presentations & Industry Insights",
+          outcomes: ["Present finished projects", "Receive peer feedback", "Learn from AI industry leader"],
+          icon: <Award className="w-6 h-6" />
+        }
+      ]
+    }
   };
+
+  const paymentMethods = [
+    { name: "Venmo", icon: <CreditCard className="w-6 h-6" /> },
+    { name: "Zelle", icon: <CreditCard className="w-6 h-6" /> },
+    { name: "PayPal", icon: <CreditCard className="w-6 h-6" /> }
+  ];
+
+  const fundAllocation = [
+    { 
+      title: "Student Scholarships", 
+      description: "Providing AI education opportunities to underserved students",
+      icon: <GraduationCap className="w-6 h-6 text-green-600" />,
+      percentage: "40%"
+    },
+    { 
+      title: "AI Education Advocacy", 
+      description: "Lobbying for AI curriculum in K-12 education",
+      icon: <Building className="w-6 h-6 text-blue-600" />,
+      percentage: "30%"
+    },
+    { 
+      title: "Hackathons & Events", 
+      description: "Supporting youth AI innovation events",
+      icon: <Code className="w-6 h-6 text-purple-600" />,
+      percentage: "30%"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
@@ -6948,16 +8412,34 @@ export default function SummerProgram() {
             <div className="animate-on-scroll from-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
                 <Star className="w-4 h-4" />
-                Applications Open for Summer 2025
+                Choose from two sessions:
+              </div>
+              <div className="flex gap-4 mb-6">
+                <div className="px-4 py-2 bg-purple-100 rounded-full text-purple-700">
+                  Session 1: June 28 - July 27
+                </div>
+                <div className="px-4 py-2 bg-pink-100 rounded-full text-pink-700">
+                  Session 2: August 7 - September 5
+                </div>
+              </div>
+              <div className="mb-6">
+                <div className="inline-flex flex-wrap items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-3 shadow-sm">
+                  <Clock className="w-5 h-5 text-yellow-500 mr-2" />
+                  <span className="font-semibold text-gray-800">Available Times (EST):</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">10–11am</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">11–12pm</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">12–1pm</span>
+                  <span className="text-gray-600 text-sm ml-2">(Pick your preferred time!)</span>
+                </div>
               </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
                 Transform Your Summer with
                 <span className="block text-5xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent mt-2">
-                  AI Learning
+                LuminAI Summer Seminar
                 </span>
               </h1>
               <p className="text-xl text-gray-600 mb-8">
-                Join our 2-week intensive program designed specifically for middle school students
+                Join our 5-week AI program designed specifically for middle school students ages 11-14 (grades 6-8)
               </p>
               <div className="flex gap-4">
                 <a 
@@ -6977,148 +8459,418 @@ export default function SummerProgram() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                      <Brain className="w-6 h-6 text-blue-600" />
+                      <Calendar className="w-6 h-6 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Learn AI Fundamentals</h3>
-                      <p className="text-gray-600">From basics to practical applications</p>
+                      <h3 className="font-semibold">5-Week Program</h3>
+                      
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                      <Code className="w-6 h-6 text-purple-600" />
+                      <Clock className="w-6 h-6 text-purple-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Build Projects</h3>
-                      <p className="text-gray-600">Hands-on coding experience</p>
+                      <h3 className="font-semibold">Weekend Sessions</h3>
+                      <p className="text-gray-600">1 hour Saturday + 1 hour Sunday</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
-                      <Award className="w-6 h-6 text-pink-600" />
+                      <Users className="w-6 h-6 text-pink-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Earn Certificate</h3>
-                      <p className="text-gray-600">Recognition of achievement</p>
+                      <h3 className="font-semibold">Ages 11-14</h3>
+                      <p className="text-gray-600">Perfect for grades 6-8</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+                      <CreditCard className="w-6 h-6 text-yellow-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Program Fee</h3>
+                      <p className="text-gray-600">$250 for the full program</p>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Program Overview Section */}
+      <section className="py-16 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Program Overview</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our comprehensive 5-week AI education program takes students from basic concepts to building their own AI chatbots
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                <Brain className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Hands-On Learning</h3>
+              <p className="text-gray-600">
+                Students learn through interactive activities, challenges, and real-world applications, not just lectures.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                <Code className="w-6 h-6 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Build Real AI Projects</h3>
+              <p className="text-gray-600">
+                Students will build their own AI chatbots from scratch and showcase them to peers.
+              </p>
+            </div>
+            
+            <div className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                <Mic className="w-6 h-6 text-pink-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Special Keynote Speaker</h3>
+              <p className="text-gray-600">
+                Hear from an industry leader at the forefront of AI innovation in our final session.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Interactive Timeline Section */}
-      <section className="bg-white py-24 relative">
+      <section className="py-24 relative bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Program Timeline</h2>
-            <p className="text-xl text-gray-600">Your journey to AI mastery</p>
+            <p className="text-xl text-gray-600">Your 5-week journey to AI mastery</p>
           </div>
 
-          <div className="flex justify-center mb-12">
-            <div className="inline-flex rounded-full bg-gray-100 p-1">
-              {[1, 2].map((week) => (
+          <div className="flex justify-center mb-12 overflow-x-auto py-2">
+            <div className="inline-flex rounded-full bg-white shadow-md p-1">
+              {Object.keys(weeks).map((weekNum) => (
                 <button
-                  key={week}
-                  onClick={() => setActiveWeek(week)}
-                  className={`px-8 py-3 rounded-full transition-all duration-300 ${
-                    activeWeek === week 
+                  key={weekNum}
+                  onClick={() => setActiveWeek(parseInt(weekNum))}
+                  className={`px-4 py-3 rounded-full transition-all duration-300 whitespace-nowrap ${
+                    activeWeek === parseInt(weekNum) 
                       ? 'bg-blue-600 text-white shadow-lg' 
                       : 'text-gray-600 hover:text-blue-600'
                   }`}
                 >
-                  Week {week}
+                  Week {weekNum}
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="grid gap-8 relative">
-            <div className="absolute inset-y-0 left-[50%] w-0.5 bg-gray-200"/>
-            {sessions[activeWeek].map((session, index) => (
-              <div
-                key={session.title}
-                className={`relative grid md:grid-cols-2 gap-8 ${
-                  index % 2 === 0 ? 'md:pr-12' : 'md:pl-12 md:transform md:translate-x-1/2'
-                }`}
-              >
-                <div 
-                  className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 timeline-trigger ${
-                    index % 2 === 0 ? 'md:text-right' : ''
-                  } ${isTimelineAnimated ? 'animate-in from-left' : ''}`}
+          <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h3 className="text-2xl font-bold mb-2">Week {activeWeek}: {weeks[activeWeek].title}</h3>
+            <p className="text-gray-600 mb-8">{weeks[activeWeek].description}</p>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {weeks[activeWeek].sessions.map((session, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-all duration-300"
                 >
-                  <div className={`flex items-center gap-4 mb-4 ${
-                    index % 2 === 0 ? 'justify-end' : ''
-                  }`}>
+                  <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
                       {session.icon}
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">{session.title}</h3>
-                      <p className="text-gray-600">{session.description}</p>
+                      <h4 className="font-semibold">{session.title}</h4>
+                      <p className="text-sm text-gray-600">{session.description}</p>
                     </div>
                   </div>
-                  <ul className="space-y-2">
-                    {session.outcomes.map((outcome) => (
-                      <li key={outcome} className="flex items-center gap-2 text-gray-600">
-                        <Check className="w-4 h-4 text-green-500 flex-shrink-0"/>
-                        {outcome}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Students will:</p>
+                    <ul className="space-y-1">
+                      {session.outcomes.map((outcome, i) => (
+                        <li key={i} className="flex items-start gap-2 text-gray-600 text-sm">
+                          <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          <span>{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Achievement Badges Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Program Achievements</h2>
-            <p className="text-xl text-gray-600">Earn badges as you progress</p>
+      {/* Special Keynote Speaker Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-800 to-purple-900 text-white relative">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4">
+              <Mic className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-4xl font-bold mb-4">Special Keynote Speaker</h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              Wrap up your AI learning journey with inspiration from a leader in the AI industry
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Brain className="w-8 h-8 text-blue-600" />,
-                title: "AI Explorer",
-                description: "Complete introduction to AI"
-              },
-              {
-                icon: <Code className="w-8 h-8 text-purple-600" />,
-                title: "Code Master",
-                description: "Build your first AI model"
-              },
-              {
-                icon: <Target className="w-8 h-8 text-pink-600" />,
-                title: "Project Pro",
-                description: "Complete project implementation"
-              },
-              {
-                icon: <Award className="w-8 h-8 text-yellow-600" />,
-                title: "AI Graduate",
-                description: "Program completion"
-              }
-            ].map((badge, index) => (
-              <div 
-                key={badge.title}
-                className="relative bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-2xl transition-shadow duration-300"
-                onMouseEnter={() => setHoveredBadgeIndex(index)}
-                onMouseLeave={() => setHoveredBadgeIndex(null)}
-              >
-                <div className={`w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center transition-transform duration-300 ${hoveredBadgeIndex === index ? 'scale-110' : ''}`}>
-                  {badge.icon}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Star className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{badge.title}</h3>
-                <p className="text-gray-600">{badge.description}</p>
+                <div>
+                  <h3 className="text-xl font-semibold">Industry Expert Insights</h3>
+                  <p className="text-blue-100">Hear from someone working at the cutting edge of AI technology about real-world applications and future developments.</p>
+                </div>
               </div>
-            ))}
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-purple-700 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Users className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Interactive Q&A Session</h3>
+                  <p className="text-blue-100">Students will have the opportunity to ask questions and engage directly with our guest speaker.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-pink-700 rounded-full flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold">Career Pathways</h3>
+                  <p className="text-blue-100">Learn about different career paths in AI and what skills students should develop for future opportunities.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-8 text-center">
+              <p className="text-lg italic text-white/80">
+                "We're excited to feature a special guest speaker from the AI industry who will share their experience and inspire our young AI enthusiasts."
+              </p>
+              <p className="mt-2 text-blue-300">Speaker details will be announced closer to the program date</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing & Payment Section */}
+      <section className="py-24 bg-white relative">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Program Details & Enrollment</h2>
+            <p className="text-xl text-gray-600">Invest in your child's AI education journey</p>
+          </div>
+
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl overflow-hidden shadow-lg mb-16">
+            <div className="grid md:grid-cols-2">
+              <div className="p-8 md:p-12">
+                <h3 className="text-3xl font-bold mb-4">Summer AI Program</h3>
+                <div className="flex items-baseline gap-2 mb-6">
+                  <span className="text-4xl font-bold">$250</span>
+                  <span className="text-gray-600">/ full program</span>
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">10 Interactive Sessions</p>
+                      <p className="text-sm text-gray-600">Weekend classes for 5 weeks</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Hands-on Project</p>
+                      <p className="text-sm text-gray-600">Build a functional AI chatbot</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Special Keynote Speaker</p>
+                      <p className="text-sm text-gray-600">Industry leader presentation</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                    <div>
+                      <p className="font-medium">Completion Certificate</p>
+                      <p className="text-sm text-gray-600">Formal recognition of achievement</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <a 
+                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300"
+                >
+                  Enroll Now
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+              </div>
+              
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 md:p-12">
+                <h3 className="text-2xl font-bold mb-6">Program Highlights</h3>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <Calendar className="w-6 h-6 text-blue-200 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Choose Your Session:</p>
+                      <p className="text-blue-100">Session 1: June 28 - July 27, 2025</p>
+                      <p className="text-blue-100">Session 2: August 7 - September 5, 2025</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Clock className="w-6 h-6 text-blue-200 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Weekend Sessions</p>
+                      <p className="text-blue-100">1 hour Saturday + 1 hour Sunday</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Users className="w-6 h-6 text-blue-200 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">Small Class Size</p>
+                      <p className="text-blue-100">Limited spots available</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <Brain className="w-6 h-6 text-blue-200 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium">No Prior Experience Needed</p>
+                      <p className="text-blue-100">Designed for beginners</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Payment Methods */}
+          <div className="text-center mb-12">
+            <h3 className="text-2xl font-bold mb-4">Accepted Payment Methods</h3>
+            <div className="flex justify-center gap-8 flex-wrap">
+              {paymentMethods.map((method) => (
+                <div key={method.name} className="flex flex-col items-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-2">
+                    {method.icon}
+                  </div>
+                  <span className="font-medium">{method.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Impact Section */}
+      <section className="py-24 bg-gray-50 relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Our Impact</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              As a nonprofit organization, 100% of program fees directly support our mission to make AI education accessible to all students
+            </p>
+          </div>
+
+          {/* Interactive Impact Carousel */}
+          <div className="relative mb-16">
+            <div className="max-w-4xl mx-auto">
+              {/* Navigation Arrows */}
+              <button 
+                onClick={() => handleImpactCardChange('prev')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors duration-300"
+                aria-label="Previous impact"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              
+              <button 
+                onClick={() => handleImpactCardChange('next')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors duration-300"
+                aria-label="Next impact"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              
+              {/* Carousel Content */}
+              <div className="relative h-[350px] overflow-hidden rounded-2xl">
+                {fundAllocation.map((fund, index) => (
+                  <div 
+                    key={fund.title}
+                    className={`absolute inset-0 transition-all duration-700 transform ${
+                      index === currentImpactIndex 
+                        ? 'translate-x-0 opacity-100 z-10' 
+                        : index < currentImpactIndex 
+                          ? '-translate-x-full opacity-0 z-0' 
+                          : 'translate-x-full opacity-0 z-0'
+                    }`}
+                    aria-hidden={index !== currentImpactIndex}
+                  >
+                    <div className="bg-white h-full rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center text-center">
+                      <div className="w-24 h-24 bg-gradient-to-br from-white to-gray-50 rounded-full flex items-center justify-center mb-6 shadow-md">
+                        <div className="w-20 h-20 rounded-full flex items-center justify-center">
+                          {fund.icon}
+                        </div>
+                      </div>
+                      <div className="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{fund.percentage}</div>
+                      <h3 className="text-2xl font-semibold mb-3">{fund.title}</h3>
+                      <p className="text-gray-600 max-w-lg">{fund.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Dots Navigation */}
+              <div className="flex justify-center mt-6 space-x-2">
+                {fundAllocation.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImpactIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentImpactIndex ? 'bg-blue-600 w-6' : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to impact slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl p-8 shadow-lg transform hover:scale-[1.02] transition-all duration-500">
+            <div className="flex flex-col md:flex-row items-center gap-6 mb-6">
+              <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center shrink-0">
+                <Heart className="w-10 h-10 text-red-500" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Making AI Education Accessible</h3>
+                <p className="text-gray-600">
+                  We believe that every student should have access to quality AI education regardless of their background. Our nonprofit is committed to creating an inclusive environment where the innovators of tomorrow can thrive.
+                </p>
+              </div>
+            </div>
+            <div className="pl-0 md:pl-24">
+              <p className="text-gray-600 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                By enrolling in our summer program, you're not only investing in your child's future but also supporting our mission to expand AI education opportunities for underserved communities.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -7132,7 +8884,7 @@ export default function SummerProgram() {
           </p>
           <div className="flex justify-center gap-4">
             <a 
-              href="https://forms.gle/PLSuUZvRf2tArXCM6" 
+              href="https://forms.gle/YzAwMRgzQq8saqrPA" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -7362,6 +9114,32 @@ export default function Team() {
   .stagger-children > *:nth-child(2) { transition-delay: 0.2s; }
   .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
   .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slower {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-slower {
+  animation: spin-slower 12s linear infinite;
+}
 ```
 
 # src/styles/learn.css
