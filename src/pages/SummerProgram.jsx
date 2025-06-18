@@ -406,13 +406,16 @@ export default function SummerProgram() {
       <section className="py-16 bg-gradient-to-br from-blue-800 to-purple-900 text-white relative">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4 mx-auto">
               <Mic className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-4xl font-bold mb-4">Special Keynote Speaker</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Wrap up your AI learning journey with inspiration from a leader in the AI industry
+              Wrap up your AI learning journey with inspiration from a leader at <span className="font-bold text-white">CoreWeave</span>, a pioneering company powering the next generation of AI innovation.
             </p>
+            {/* CoreWeave Logo Banner */}
+            <div className="flex justify-center mt-6 mb-2">
+            <img src="/images/coreweave-logo.png" alt="CoreWeave Logo" className="h-16 md:h-24 w-auto rounded bg-white p-2 shadow-md object-contain" />            </div>
           </div>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20">
@@ -422,8 +425,8 @@ export default function SummerProgram() {
                   <Star className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold">Industry Expert Insights</h3>
-                  <p className="text-blue-100">Hear from someone working at the cutting edge of AI technology about real-world applications and future developments.</p>
+                  <h3 className="text-xl font-semibold">Insights from a Leading AI Infrastructure Company</h3>
+                  <p className="text-blue-100">Our guest speaker from <span className='font-bold text-white'>CoreWeave</span>—a company at the forefront of powering large-scale AI and machine learning—will share real-world applications, industry trends, and the future of AI technology.</p>
                 </div>
               </div>
               
@@ -433,7 +436,7 @@ export default function SummerProgram() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Interactive Q&A Session</h3>
-                  <p className="text-blue-100">Students will have the opportunity to ask questions and engage directly with our guest speaker.</p>
+                  <p className="text-blue-100">Students will have the opportunity to ask questions and engage directly with our guest speaker from CoreWeave.</p>
                 </div>
               </div>
               
@@ -443,14 +446,14 @@ export default function SummerProgram() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Career Pathways</h3>
-                  <p className="text-blue-100">Learn about different career paths in AI and what skills students should develop for future opportunities.</p>
+                  <p className="text-blue-100">Learn about different career paths in AI and what skills students should develop for future opportunities, directly from a CoreWeave industry expert.</p>
                 </div>
               </div>
             </div>
             
             <div className="mt-8 text-center">
               <p className="text-lg italic text-white/80">
-                "We're excited to feature a special guest speaker from the AI industry who will share their experience and inspire our young AI enthusiasts."
+                "We're thrilled to feature a special guest speaker from <span className='font-bold text-white'>CoreWeave</span>, a leader in AI infrastructure, who will share their experience and inspire our young AI enthusiasts."
               </p>
               <p className="mt-2 text-blue-300">Speaker details will be announced closer to the program date</p>
             </div>
