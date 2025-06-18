@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen } from 'lucide-react';
 import '../styles/animations.css';
+import ImageCarousel from '../components/ImageCarousel';
 
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -55,6 +56,50 @@ export default function HomePage() {
     }
   ];
 
+  // Define gallery images - these will be loaded from the public folder
+  const galleryImages = [
+    {
+      src: '/src/assets/gallery/IMG_8319.jpg',
+      alt: 'Students working on laptops'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8314 2.jpg',
+      alt: 'Students collaborating on AI project'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8315.jpg',
+      alt: 'Focused student during AI workshop'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8316.jpg',
+      alt: 'Hands-on coding session'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8317.jpg',
+      alt: 'Group learning activity'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8319.jpg',
+      alt: 'Classroom AI demonstration'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8320 2.jpg',
+      alt: 'Student presenting AI project'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8321 2.jpg',
+      alt: 'Interactive AI lesson'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8324 2.jpg',
+      alt: 'AI summer program group photo'
+    },
+    {
+      src: '/src/assets/gallery/IMG_8325 2.jpg',
+      alt: 'Engaged students in AI class'
+    }
+  ];
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -71,46 +116,59 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
-              AI Education
-              <span className="block text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                Made Easy
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                to="/learn" 
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-              >
-                Start Learning Now
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link 
-                to="/summer-program" 
-                className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
-                style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Join Summer Program
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left animate-on-scroll from-bottom">
+              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6">
+                AI Education
+                <span className="block text-4xl lg:text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                  Made Easy
                 </span>
-                <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
-                  Limited Time!
-                </span>
-              </Link>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link 
+                  to="/learn" 
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+                >
+                  Start Learning Now
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link 
+                  to="/summer-program" 
+                  className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
+                  style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Join Summer Program
+                  </span>
+                  <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
+                    Limited Time!
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end animate-on-scroll from-right">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl transform rotate-3 blur-sm"></div>
+                <img 
+                  src={galleryImages[0].src}
+                  alt={galleryImages[0].alt}
+                  className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform -rotate-3 hover:rotate-0 transition-transform duration-500" 
+                />
+              </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-8 stagger-children">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 stagger-children">
             {[
               ['5,000+', 'Students'],
+              ['2,000+', 'Raised'],
               ['20+', 'Modules'],
               ['95%', 'Success Rate'],
-              ['4.9/5', 'Rating']
+              
             ].map(([number, label], index) => (
               <div 
                 key={label} 
@@ -167,7 +225,7 @@ export default function HomePage() {
             ].map((feature, index) => (
               <div 
                 key={feature.title}
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex items-start gap-16 group hover:bg-gray-50 rounded-2xl p-8 transition-all duration-500 hover:shadow-lg`}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex flex-col lg:flex-row items-start gap-8 lg:gap-16 group hover:bg-gray-50 rounded-2xl p-8 transition-all duration-500 hover:shadow-lg`}
               >
                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-100 group-hover:shadow-md">
                   <div className="transform transition-transform duration-500 group-hover:rotate-12">
@@ -188,8 +246,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Image Carousel Section */}
       <section className="py-24 bg-gray-50">
+        <ImageCarousel images={galleryImages.slice(1)} />
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
             <h2 className="text-5xl font-bold mb-4">Student Stories</h2>
@@ -233,33 +296,45 @@ export default function HomePage() {
       {/* Get Started Section */}
       <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
 
-            <div className="relative text-center max-w-2xl mx-auto">
-              <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Choose your path and begin your adventure into the world of artificial intelligence.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link
-                  to="/learn"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
-                >
-                  <BookOpen className="w-8 h-8" />
-                  <span className="font-semibold">Start Learning</span>
-                  <span className="text-sm text-blue-100">Free online course</span>
-                </Link>
-                <Link
-                  to="/summer-program"
-                  className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
-                >
-                  <Users className="w-8 h-8" />
-                  <span className="font-semibold">Join Summer Program</span>
-                  <span className="text-sm text-purple-100">Live online sessions</span>
-                </Link>
+              <div className="relative text-center">
+                <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Choose your path and begin your adventure into the world of artificial intelligence.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Link
+                    to="/learn"
+                    className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <BookOpen className="w-8 h-8" />
+                    <span className="font-semibold">Start Learning</span>
+                    <span className="text-sm text-blue-100">Free online course</span>
+                  </Link>
+                  <Link
+                    to="/summer-program"
+                    className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <Users className="w-8 h-8" />
+                    <span className="font-semibold">Join Summer Program</span>
+                    <span className="text-sm text-purple-100">Live online sessions</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center animate-on-scroll from-right">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl transform -rotate-3 blur-sm"></div>
+                <img 
+                  src={galleryImages[4].src} 
+                  alt={galleryImages[4].alt}
+                  className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform rotate-3 hover:rotate-0 transition-transform duration-500" 
+                />
               </div>
             </div>
           </div>
