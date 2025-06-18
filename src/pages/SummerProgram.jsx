@@ -413,9 +413,6 @@ export default function SummerProgram() {
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
               Wrap up your AI learning journey with inspiration from a leader at <span className="font-bold text-white">CoreWeave</span>, a pioneering company powering the next generation of AI innovation.
             </p>
-            {/* CoreWeave Logo Banner */}
-            <div className="flex justify-center mt-6 mb-2">
-            <img src="/images/coreweave-logo.png" alt="CoreWeave Logo" className="h-16 md:h-24 w-auto rounded bg-white p-2 shadow-md object-contain" />            </div>
           </div>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20">
