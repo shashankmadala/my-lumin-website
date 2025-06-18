@@ -59,43 +59,39 @@ export default function HomePage() {
   // Define gallery images - these will be loaded from the public folder
   const galleryImages = [
     {
-      src: '/src/assets/gallery/IMG_8319.jpg',
+      src: '/gallery/IMG_8319.jpg',
       alt: 'Students working on laptops'
     },
     {
-      src: '/src/assets/gallery/IMG_8314 2.jpg',
+      src: '/gallery/IMG_8314-2.jpg',
       alt: 'Students collaborating on AI project'
     },
     {
-      src: '/src/assets/gallery/IMG_8315.jpg',
+      src: '/gallery/IMG_8315.jpg',
       alt: 'Focused student during AI workshop'
     },
     {
-      src: '/src/assets/gallery/IMG_8316.jpg',
+      src: '/gallery/IMG_8316.jpg',
       alt: 'Hands-on coding session'
     },
     {
-      src: '/src/assets/gallery/IMG_8317.jpg',
+      src: '/gallery/IMG_8317.jpg',
       alt: 'Group learning activity'
     },
     {
-      src: '/src/assets/gallery/IMG_8319.jpg',
-      alt: 'Classroom AI demonstration'
-    },
-    {
-      src: '/src/assets/gallery/IMG_8320 2.jpg',
+      src: '/gallery/IMG_8320-2.jpg',
       alt: 'Student presenting AI project'
     },
     {
-      src: '/src/assets/gallery/IMG_8321 2.jpg',
+      src: '/gallery/IMG_8321-2.jpg',
       alt: 'Interactive AI lesson'
     },
     {
-      src: '/src/assets/gallery/IMG_8324 2.jpg',
+      src: '/gallery/IMG_8324-2.jpg',
       alt: 'AI summer program group photo'
     },
     {
-      src: '/src/assets/gallery/IMG_8325 2.jpg',
+      src: '/gallery/IMG_8325-2.jpg',
       alt: 'Engaged students in AI class'
     }
   ];
@@ -156,6 +152,10 @@ export default function HomePage() {
                   src={galleryImages[0].src}
                   alt={galleryImages[0].alt}
                   className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform -rotate-3 hover:rotate-0 transition-transform duration-500" 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    console.log('Image failed to load:', e.target.src);
+                  }}
                 />
               </div>
             </div>
@@ -168,7 +168,6 @@ export default function HomePage() {
               ['$2,000+', 'Raised'],
               ['20+', 'Modules'],
               ['95%', 'Success Rate'],
-              
             ].map(([number, label], index) => (
               <div 
                 key={label} 
@@ -334,6 +333,10 @@ export default function HomePage() {
                   src={galleryImages[4].src} 
                   alt={galleryImages[4].alt}
                   className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform rotate-3 hover:rotate-0 transition-transform duration-500" 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    console.log('Image failed to load:', e.target.src);
+                  }}
                 />
               </div>
             </div>
