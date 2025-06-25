@@ -6,6 +6,7 @@ import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
 import Founders from './pages/Founders.jsx';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
+        <Analytics />
       </div>
     </Router>
   );
