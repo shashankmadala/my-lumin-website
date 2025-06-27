@@ -73,91 +73,131 @@ export default function SummerProgram() {
 
   const weeks = {
     1: {
-      title: "Introduction to AI & Machine Learning",
-      description: "Understanding AI fundamentals and how machines learn",
+      title: "Introduction to AI & Machine Learning Basics",
+      description: "Explore what AI is, real-world applications, and how machines learn from data.",
       sessions: [
         {
           title: "What is AI?",
-          description: "AI Scavenger Hunt & Real-World Applications",
-          outcomes: ["Identify real-world AI applications", "Categorize AI types", "Discuss AI impacts"],
+          description: "Icebreakers, AI Scavenger Hunt, and Group Presentations",
+          outcomes: [
+            "Identify and categorize real-world AI applications",
+            "Discuss benefits, risks, and ethical considerations",
+            "Present findings and ask questions about AI's impact"
+          ],
           icon: <Brain className="w-6 h-6" />
         },
         {
           title: "How AI Learns",
-          description: "AI Detective: Spot the Pattern",
-          outcomes: ["Recognize patterns in data", "Understand supervised vs. unsupervised learning", "Make AI predictions"],
+          description: "Supervised vs. Unsupervised Learning Activities",
+          outcomes: [
+            "Recognize patterns in labeled and unlabeled data",
+            "Understand supervised vs. unsupervised learning",
+            "Explain how AI uses data to make predictions"
+          ],
           icon: <Sparkles className="w-6 h-6" />
         }
       ]
     },
     2: {
-      title: "Natural Language Processing & Ethics",
-      description: "Exploring how AI understands language and ethical considerations",
+      title: "Natural Language Processing (NLP) & AI Ethics",
+      description: "Learn how AI understands language and discuss fairness and bias in AI systems.",
       sessions: [
         {
-          title: "NLP & Language Understanding",
-          description: "AI Chatbot Simulation",
-          outcomes: ["Simulate chatbot conversations", "Understand intent and context", "Compare with real AI systems"],
+          title: "NLP & How AI Understands Language",
+          description: "Chatbot Simulation, Sentence Dissection, and Code Demo",
+          outcomes: [
+            "Break down chatbot conversations into intent, keywords, and context",
+            "Tokenize and analyze sentences (offline or with code)",
+            "Compare rule-based vs. ML-based chatbots"
+          ],
           icon: <Code className="w-6 h-6" />
         },
         {
           title: "Ethics & Bias in AI",
-          description: "AI Fairness Debate & Experiment",
-          outcomes: ["Debate AI fairness issues", "Identify bias in datasets", "Create strategies for fair AI"],
+          description: "AI Fairness Debate & Bias Experiment",
+          outcomes: [
+            "Debate fairness in AI (roles: business, government, citizen)",
+            "Identify and test bias in AI models using hands-on experiments",
+            "Discuss real-world impact of AI bias"
+          ],
           icon: <Target className="w-6 h-6" />
         }
       ]
     },
     3: {
       title: "Building Blocks of Chatbots",
-      description: "Learning the fundamentals of chatbot development",
+      description: "Design chatbot flowcharts and code simple chatbots in Python.",
       sessions: [
         {
           title: "How Chatbots Work",
-          description: "Chatbot Script & Flowchart Challenge",
-          outcomes: ["Design conversation flowcharts", "Create chatbot interactions", "Identify limitations"],
+          description: "Flowchart Challenge and Roleplay",
+          outcomes: [
+            "Create a conversation flowchart for a chatbot topic",
+            "Roleplay chatbot interactions and identify breakdowns",
+            "Discuss differences between scripted and AI chatbots"
+          ],
           icon: <Brain className="w-6 h-6" />
         },
         {
           title: "Intro to Python for AI",
-          description: "Coding a Simple Chatbot",
-          outcomes: ["Write basic Python code", "Create if-else responses", "Test chatbot functionality"],
+          description: "Hands-on Coding: Build a Simple Chatbot",
+          outcomes: [
+            "Modify a Python chatbot script with if-else logic",
+            "Test and customize chatbot responses",
+            "Explore advanced AI-powered chatbot models"
+          ],
           icon: <Code className="w-6 h-6" />
         }
       ]
     },
     4: {
       title: "Project Phase – Building the Chatbot",
-      description: "Designing and implementing personal AI chatbots",
+      description: "Plan, wireframe, and start building your own AI chatbot.",
       sessions: [
         {
           title: "Planning the Chatbot",
-          description: "AI Mind Mapping & Wireframing",
-          outcomes: ["Define chatbot purpose", "Create user experience design", "Plan chatbot responses"],
+          description: "Mind Mapping, Wireframing, and Peer Feedback",
+          outcomes: [
+            "Map out chatbot goals, users, and key functions",
+            "Create a wireframe for chatbot interactions",
+            "Refine ideas through peer discussion and feedback"
+          ],
           icon: <Sparkles className="w-6 h-6" />
         },
         {
           title: "Developing the Chatbot",
-          description: "AI Model & Implementation",
-          outcomes: ["Implement pre-trained models", "Customize responses", "Test functionality"],
+          description: "Build with Pre-Trained AI Models & Peer Testing",
+          outcomes: [
+            "Integrate a pre-trained AI model into your chatbot",
+            "Customize responses and test with peers",
+            "Discuss how models improve with more data"
+          ],
           icon: <Target className="w-6 h-6" />
         }
       ]
     },
     5: {
       title: "Testing, Improving, and Showcasing",
-      description: "Finalizing and presenting AI chatbot projects",
+      description: "Debug, optimize, and present your chatbot project.",
       sessions: [
         {
           title: "Debugging & Improving Chatbots",
-          description: "AI User Testing & Optimization",
-          outcomes: ["Conduct peer testing", "Debug and fix issues", "Optimize responses"],
+          description: "User Testing, Bug Fixing, and Optimization",
+          outcomes: [
+            "Test and debug chatbot projects with peers",
+            "Fix errors and improve responses based on feedback",
+            "Understand the importance of iterative testing"
+          ],
           icon: <Code className="w-6 h-6" />
         },
         {
-          title: "Final Showcase & Keynote Speaker",
-          description: "Chatbot Presentations & Industry Insights",
-          outcomes: ["Present finished projects", "Receive peer feedback", "Learn from AI industry leader"],
+          title: "Final Showcase & Future of AI",
+          description: "Chatbot Presentations, Peer Feedback, and Career Paths",
+          outcomes: [
+            "Present chatbot projects and receive peer feedback",
+            "Vote on creative and best AI implementations",
+            "Discuss real-world AI applications and career paths"
+          ],
           icon: <Award className="w-6 h-6" />
         }
       ]
