@@ -7,6 +7,13 @@ import ImageCarousel from '../components/ImageCarousel';
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [animatedNumbers, setAnimatedNumbers] = useState({
+    students: 0,
+    raised: 0,
+    modules: 0,
+    countries: 0
+  });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -14,6 +21,12 @@ export default function HomePage() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+            
+            // Trigger number animation when stats section comes into view
+            if (entry.target.classList.contains('stats-section') && !hasAnimated) {
+              setHasAnimated(true);
+              animateNumbers();
+            }
           }
         });
       },
@@ -23,7 +36,7 @@ export default function HomePage() {
       }
     );
 
-    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+    document.querySelectorAll('.animate-on-scroll, .stats-section').forEach((element) => {
       observer.observe(element);
     });
 
@@ -36,7 +49,40 @@ export default function HomePage() {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [hasAnimated]);
+
+  const animateNumbers = () => {
+    const duration = 3000; // 3 seconds
+    const steps = 60; // 60 steps for smooth animation
+    const stepDuration = duration / steps;
+    
+    const targets = {
+      students: 5000,
+      raised: 3000,
+      modules: 20,
+      countries: 5
+    };
+
+    let currentStep = 0;
+    
+    const interval = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      
+      setAnimatedNumbers({
+        students: Math.floor(targets.students * progress),
+        raised: Math.floor(targets.raised * progress),
+        modules: Math.floor(targets.modules * progress),
+        countries: Math.floor(targets.countries * progress)
+      });
+      
+      if (currentStep >= steps) {
+        clearInterval(interval);
+        // Ensure final numbers are exact
+        setAnimatedNumbers(targets);
+      }
+    }, stepDuration);
+  };
 
   const testimonials = [
     {
@@ -162,19 +208,22 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 stagger-children">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 stagger-children stats-section">
             {[
-              ['5,000+', 'Students'],
-              ['$3,000+', 'Raised'],
-              ['20+', 'Modules'],
-              ['5+', 'Countries'],
-            ].map(([number, label], index) => (
+              ['students', 'Students'],
+              ['raised', 'Raised'],
+              ['modules', 'Modules'],
+              ['countries', 'Countries'],
+            ].map(([key, label], index) => (
               <div 
                 key={label} 
                 className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
               >
                 <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {number}
+                  {key === 'students' && `${animatedNumbers.students.toLocaleString()}+`}
+                  {key === 'raised' && `$${animatedNumbers.raised.toLocaleString()}+`}
+                  {key === 'modules' && `${animatedNumbers.modules}+`}
+                  {key === 'countries' && `${animatedNumbers.countries}+`}
                 </div>
                 <div className="text-gray-600">{label}</div>
               </div>
