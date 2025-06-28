@@ -165,9 +165,9 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 stagger-children">
             {[
               ['5,000+', 'Students'],
-              ['$2,000+', 'Raised'],
+              ['$3,000+', 'Raised'],
               ['20+', 'Modules'],
-              ['95%', 'Success Rate'],
+              ['5+', 'Countries'],
             ].map(([number, label], index) => (
               <div 
                 key={label} 
