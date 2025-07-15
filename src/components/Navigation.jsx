@@ -41,6 +41,11 @@ export default function Navigation() {
     setOpenDropdown(openDropdown === linkId ? null : linkId);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setOpenDropdown(null);
+  };
+
   return (
     <nav className="fixed w-full z-50 bg-white/60 backdrop-blur-xl border-b border-gray-100/50">
       <div className="max-w-7xl mx-auto px-4">
@@ -120,15 +125,15 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-            <div className="px-4 py-2 space-y-1">
+          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="px-4 py-2 space-y-0">
               {links.map((link) => (
-                <div key={link.id}>
+                <div key={link.id} className="border-b border-gray-100 last:border-b-0">
                   {link.dropdown ? (
                     <div>
                       <button 
                         onClick={() => handleDropdownClick(link.id)}
-                        className="w-full flex items-center justify-between text-left px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                        className="w-full flex items-center justify-between text-left px-4 py-4 text-gray-600 hover:text-blue-600 transition-colors duration-300"
                       >
                         {link.text}
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
@@ -136,16 +141,13 @@ export default function Navigation() {
                         }`} />
                       </button>
                       {openDropdown === link.id && (
-                        <div className="pl-4 space-y-1">
+                        <div className="bg-gray-50 border-t border-gray-100">
                           {link.dropdown.map((item) => (
                             <Link
                               key={item.id}
                               to={item.to}
-                              className="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors duration-300"
-                              onClick={() => {
-                                setOpenDropdown(null);
-                                setMobileMenuOpen(false);
-                              }}
+                              className="block px-8 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 border-b border-gray-100 last:border-b-0"
+                              onClick={closeMobileMenu}
                             >
                               {item.text}
                             </Link>
@@ -156,8 +158,8 @@ export default function Navigation() {
                   ) : (
                     <Link 
                       to={link.to}
-                      className="block px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300"
-                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-4 py-4 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                      onClick={closeMobileMenu}
                     >
                       {link.text}
                     </Link>
