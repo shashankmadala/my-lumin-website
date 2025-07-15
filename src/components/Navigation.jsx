@@ -9,13 +9,12 @@ const links = [
     id: 'about',
     dropdown: [
       { to: '/founders', text: 'Founders', id: 'founders' },
-      { to: '/policy-team', text: 'Policy Team', id: 'policy' },
       { to: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
+  { to: '/join-us', text: 'Join Us', id: 'join' },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
   { to: '/learn', text: 'Learn', id: 'learn' },
-  { to: '/join-us', text: 'Join Us', id: 'join' },
   { to: '/contact-us', text: 'Contact', id: 'contact' }
 ];
 

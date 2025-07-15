@@ -276,9 +276,9 @@ export default function HomePage() {
                 description: "Compete for $1000 scholarships by starting and growing Lumin AI chapters"
               },
               {
-                icon: <Building className="w-6 h-6 text-blue-600"/>,
-                title: "Policy Impact",
-                description: "Contribute to AI literacy legislation and educational policy advocacy"
+                icon: <Rocket className="w-6 h-6 text-blue-600"/>,
+                title: "Hands-on Projects",
+                description: "Apply your knowledge with real-world AI projects and practical exercises"
               }
             ].map((feature, index) => (
               <div 
@@ -312,7 +312,7 @@ export default function HomePage() {
           <div className="text-center mb-16 animate-on-scroll from-bottom">
             <h2 className="text-5xl font-bold mb-4">Global Impact</h2>
             <p className="text-xl text-gray-600">
-              Expanding AI education worldwide through chapters and policy advocacy
+              Expanding AI education worldwide through our international chapter network
             </p>
           </div>
 
@@ -347,36 +347,36 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Policy Work Section */}
+            {/* Educational Impact Section */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                  <Building className="w-6 h-6 text-purple-600" />
+                  <Users className="w-6 h-6 text-purple-600" />
                 </div>
-                <h3 className="text-2xl font-bold">Policy Advocacy</h3>
+                <h3 className="text-2xl font-bold">Educational Impact</h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Working to pass AI literacy legislation in New Jersey and advocating for equitable AI education access nationwide.
+                Making AI education accessible and engaging for students worldwide through innovative learning experiences.
               </p>
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
-                  <span className="text-sm text-gray-600">AI literacy curriculum development</span>
+                  <span className="text-sm text-gray-600">Interactive AI curriculum</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
-                  <span className="text-sm text-gray-600">State legislative advocacy</span>
+                  <span className="text-sm text-gray-600">Hands-on learning experiences</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
-                  <span className="text-sm text-gray-600">Educational partnerships</span>
+                  <span className="text-sm text-gray-600">Global student community</span>
                 </div>
               </div>
               <Link 
-                to="/policy-team" 
+                to="/learn" 
                 className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium"
               >
-                Learn About Our Policy Work
+                Start Learning Today
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

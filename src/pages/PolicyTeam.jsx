@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 
 export default function PolicyTeam() {
+
   const teamMembers = [
     {
       name: "Aayush Chebolu",
@@ -48,7 +49,19 @@ export default function PolicyTeam() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+      {/* Policy Team Page - Temporarily Commented Out */}
+      <div className="pt-32 pb-24">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-4xl font-bold mb-4">Policy Team</h1>
+          <p className="text-xl text-gray-600">
+            This page is temporarily unavailable.
+          </p>
+        </div>
+      </div>
+      
+      {/* 
+      Original Policy Team Page Content - Commented Out
+      
       <section className="pt-32 pb-8 bg-gradient-to-br from-blue-600 to-purple-700 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white mb-4">
@@ -62,7 +75,6 @@ export default function PolicyTeam() {
         </div>
       </section>
 
-      {/* Team Section - moved up */}
       <section className="py-10 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-6">Meet the Policy Team</h2>
@@ -75,7 +87,6 @@ export default function PolicyTeam() {
                     alt={member.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      // Fallback to icon if image fails to load
                       e.target.style.display = 'none';
                       e.target.nextSibling.style.display = 'flex';
                     }}
@@ -92,7 +103,6 @@ export default function PolicyTeam() {
         </div>
       </section>
 
-      {/* Goals & Impact Section (modern card layout) */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">Our Mission & Goals</h2>
@@ -100,7 +110,6 @@ export default function PolicyTeam() {
             We are dedicated to making AI education accessible and equitable for all students in New Jersey by advocating for legislative change and building strong partnerships.
           </p>
           <div className="flex flex-col md:flex-row md:items-stretch md:gap-8 gap-6">
-            {/* Policy Goals Card */}
             <div className="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center">
               <div className="mb-4">
                 <CheckCircle className="w-12 h-12 text-green-500 mx-auto" />
@@ -110,11 +119,9 @@ export default function PolicyTeam() {
                 {policyGoals.map((goal, i) => <li key={i}>{goal}</li>)}
               </ul>
             </div>
-            {/* Vertical Divider for desktop */}
             <div className="hidden md:flex items-center">
               <div className="w-px h-40 bg-gray-200" />
             </div>
-            {/* Impact Card */}
             <div className="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center">
               <div className="mb-4">
                 <Award className="w-12 h-12 text-yellow-500 mx-auto" />
@@ -130,7 +137,6 @@ export default function PolicyTeam() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-10 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-2xl mx-auto px-4 text-center text-white">
           <h2 className="text-2xl font-bold mb-4">Support Our Mission</h2>
@@ -146,6 +152,7 @@ export default function PolicyTeam() {
           </a>
         </div>
       </section>
+      */}
     </div>
   );
 } 
