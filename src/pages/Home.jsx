@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin } from 'lucide-react';
 import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
 
@@ -57,8 +57,8 @@ export default function HomePage() {
     const stepDuration = duration / steps;
     
     const targets = {
-      students: 5000,
-      raised: 3000,
+      students: 5200,
+      raised: 4000,
       modules: 20,
       countries: 5
     };
@@ -171,13 +171,6 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link 
-                  to="/learn" 
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-                >
-                  Start Learning Now
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-                <Link 
                   to="/summer-program" 
                   className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
                   style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
@@ -188,6 +181,13 @@ export default function HomePage() {
                   <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
                     Limited Time!
                   </span>
+                </Link>
+                <Link 
+                  to="/join-us" 
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+                >
+                  Start a Chapter
+                  <Globe className="w-5 h-5" />
                 </Link>
               </div>
             </div>
@@ -208,24 +208,22 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 stagger-children stats-section">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-16 stagger-children stats-section">
             {[
-              ['students', 'Students'],
-              ['raised', 'Raised'],
-              ['modules', 'Modules'],
-              ['countries', 'Countries'],
-            ].map(([key, label], index) => (
+              ['students', 'Students', '5200+'],
+              ['raised', 'Raised', '$4000+'],
+              ['modules', 'Modules', '20+'],
+              ['countries', 'Countries', '6+'],
+              ['chapters', 'Chapters', '15+'],
+            ].map(([key, label, value], index) => (
               <div 
                 key={label} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
               >
-                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {key === 'students' && `${animatedNumbers.students.toLocaleString()}+`}
-                  {key === 'raised' && `$${animatedNumbers.raised.toLocaleString()}+`}
-                  {key === 'modules' && `${animatedNumbers.modules}+`}
-                  {key === 'countries' && `${animatedNumbers.countries}+`}
+                <div className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
+                  {value}
                 </div>
-                <div className="text-gray-600">{label}</div>
+                <div className="text-gray-600 text-sm">{label}</div>
               </div>
             ))}
           </div>
@@ -244,53 +242,167 @@ export default function HomePage() {
       </div>
 
       {/* Why Choose Section */}
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-5xl font-bold mb-4">Why Choose Lumin AI?</h2>
-            <p className="text-xl text-gray-600">
+      <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">Why Choose Lumin AI?</h2>
+            <p className="text-lg text-gray-600 mb-6">
               Comprehensive AI education designed for the next generation
             </p>
+            <Link 
+              to="/learn" 
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium"
+            >
+              Start Learning Now
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="flex flex-col gap-16">
+          <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                icon: <Brain className="w-8 h-8 text-blue-600"/>,
+                icon: <Brain className="w-6 h-6 text-blue-600"/>,
                 title: "Expert-Led Learning",
                 description: "Learn from industry professionals and AI experts through carefully crafted curriculum"
               },
               {
-                icon: <Users className="w-8 h-8 text-blue-600"/>,
-                title: "Community Driven",
-                description: "Join a vibrant community of learners and get support when you need it"
+                icon: <Globe className="w-6 h-6 text-blue-600"/>,
+                title: "Global Community",
+                description: "Join our international network of 15+ chapters across 6 countries"
               },
               {
-                icon: <Rocket className="w-8 h-8 text-blue-600"/>,
-                title: "Hands-on Practice",
-                description: "Apply your knowledge with real-world projects and practical exercises"
+                icon: <Award className="w-6 h-6 text-blue-600"/>,
+                title: "Scholarship Opportunities",
+                description: "Compete for $1000 scholarships by starting and growing Lumin AI chapters"
+              },
+              {
+                icon: <Building className="w-6 h-6 text-blue-600"/>,
+                title: "Policy Impact",
+                description: "Contribute to AI literacy legislation and educational policy advocacy"
               }
             ].map((feature, index) => (
               <div 
                 key={feature.title}
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex flex-col lg:flex-row items-start gap-8 lg:gap-16 group hover:bg-gray-50 rounded-2xl p-8 transition-all duration-500 hover:shadow-lg`}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-gray-50 rounded-xl p-6 hover:bg-white hover:shadow-lg transition-all duration-300 group border border-gray-100`}
               >
-                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-100 group-hover:shadow-md">
-                  <div className="transform transition-transform duration-500 group-hover:rotate-12">
-                    {feature.icon}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
+                    <div className="transform transition-transform duration-300 group-hover:rotate-6">
+                      {feature.icon}
+                    </div>
                   </div>
-                </div>
-                <div className="transform transition-all duration-500 group-hover:translate-x-2">
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                    {feature.description}
-                  </p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Global Impact Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16 animate-on-scroll from-bottom">
+            <h2 className="text-5xl font-bold mb-4">Global Impact</h2>
+            <p className="text-xl text-gray-600">
+              Expanding AI education worldwide through chapters and policy advocacy
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Chapters Section */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold">Global Chapters</h3>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Our international network spans 6 countries with 15+ active chapters, bringing AI education to students worldwide.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">6</div>
+                  <div className="text-sm text-gray-600">Countries</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600">400+</div>
+                  <div className="text-sm text-gray-600">Students</div>
+                </div>
+              </div>
+              <Link 
+                to="/chapters" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Explore Our Chapters
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Policy Work Section */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Building className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-bold">Policy Advocacy</h3>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Working to pass AI literacy legislation in New Jersey and advocating for equitable AI education access nationwide.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">AI literacy curriculum development</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">State legislative advocacy</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Educational partnerships</span>
+                </div>
+              </div>
+              <Link 
+                to="/policy-team" 
+                className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium"
+              >
+                Learn About Our Policy Work
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scholarship Opportunity Section */}
+      <section className="py-24 bg-gradient-to-r from-yellow-50 to-orange-50">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="mb-8">
+            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Award className="w-8 h-8 text-yellow-600" />
+            </div>
+            <h2 className="text-4xl font-bold mb-4">$3000 Scholarship Opportunity</h2>
+            <p className="text-xl text-gray-600 mb-6">
+              High school students can compete for one of THREE $1000 scholarships by starting and growing Lumin AI chapters!
+            </p>
+          </div>
+          <Link 
+            to="/join-us" 
+            className="inline-flex items-center gap-2 bg-yellow-600 text-white px-8 py-4 rounded-full hover:bg-yellow-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+          >
+            Apply for Chapter Lead
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
 
@@ -300,42 +412,81 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-5xl font-bold mb-4">Student Stories</h2>
-            <p className="text-xl text-gray-600">
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-24 h-24 bg-purple-200 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-200 rounded-full opacity-20 animate-pulse animation-delay-2000"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-12 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">Student Stories</h2>
+            <p className="text-lg text-gray-600">
               Hear from our amazing community of learners
             </p>
           </div>
 
           <div className="relative">
+            {/* Testimonial Cards Stack */}
             <div className="flex items-center justify-center">
               <button 
                 onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                className="absolute left-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+                className="absolute left-4 z-20 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-100"
               >
-                <ChevronLeft className="w-6 h-6 text-gray-600" />
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
               </button>
 
-              <div className="max-w-3xl mx-auto px-12">
-                <div className="bg-white rounded-xl p-8 shadow-lg">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-semibold">{testimonials[currentTestimonial].name}</h3>
-                    <p className="text-blue-600">{testimonials[currentTestimonial].role}</p>
+              <div className="relative max-w-4xl mx-auto px-16">
+                {/* Background cards for depth effect */}
+                <div className="absolute inset-0 transform rotate-2 bg-gray-100 rounded-2xl opacity-30"></div>
+                <div className="absolute inset-0 transform -rotate-1 bg-gray-200 rounded-2xl opacity-20"></div>
+                
+                {/* Main testimonial card */}
+                <div className="relative bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-start gap-6">
+                    {/* Avatar/Icon */}
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shrink-0">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-900 mb-1">{testimonials[currentTestimonial].name}</h3>
+                        <p className="text-blue-600 font-medium">{testimonials[currentTestimonial].role}</p>
+                      </div>
+                      <blockquote className="text-gray-700 text-lg leading-relaxed relative">
+                        <span className="absolute -top-2 -left-2 text-4xl text-blue-200 font-serif">"</span>
+                        {testimonials[currentTestimonial].quote}
+                        <span className="absolute -bottom-2 -right-2 text-4xl text-purple-200 font-serif">"</span>
+                      </blockquote>
+                    </div>
                   </div>
-                  <p className="text-gray-600 text-lg italic text-center">
-                    "{testimonials[currentTestimonial].quote}"
-                  </p>
                 </div>
               </div>
 
               <button 
                 onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                className="absolute right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+                className="absolute right-4 z-20 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-100"
               >
-                <ChevronRight className="w-6 h-6 text-gray-600" />
+                <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
+            </div>
+
+            {/* Testimonial indicators */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentTestimonial 
+                      ? 'bg-blue-600 scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -355,7 +506,7 @@ export default function HomePage() {
                 <p className="text-xl text-gray-600 mb-8">
                   Choose your path and begin your adventure into the world of artificial intelligence.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Link
                     to="/learn"
                     className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
@@ -371,6 +522,14 @@ export default function HomePage() {
                     <Users className="w-8 h-8" />
                     <span className="font-semibold">Join Summer Program</span>
                     <span className="text-sm text-purple-100">Live online sessions</span>
+                  </Link>
+                  <Link
+                    to="/join-us"
+                    className="bg-green-600 text-white px-8 py-4 rounded-xl hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <Globe className="w-8 h-8" />
+                    <span className="font-semibold">Start a Chapter</span>
+                    <span className="text-sm text-green-100">$1000 scholarship opportunity</span>
                   </Link>
                 </div>
               </div>

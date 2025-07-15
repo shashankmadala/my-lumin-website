@@ -86,28 +86,36 @@ const ContactUs = () => {
 
   const faqItems = [
     {
-      question: "What age groups are your AI programs designed for?",
-      answer: "Our programs are specifically designed for middle school students (ages 11-14). We've carefully crafted our curriculum to be engaging and age-appropriate while teaching real AI concepts."
+      question: "How do I start a Lumin AI chapter?",
+      answer: "Apply through our Google Form to become a Chapter Lead. We'll email you and schedule a call to discuss next steps and how to recruit members for your chapter."
     },
     {
-      question: "Do students need prior coding experience?",
-      answer: "No prior coding experience is required! We start from the basics and gradually build up to more complex concepts. Our program is designed to be accessible to complete beginners while still being challenging for those with some coding experience."
+      question: "What's the scholarship opportunity?",
+      answer: "Three chapter leads will each win $1000 scholarships. The chapters with the most members will be eligible to apply in the middle of next year."
     },
     {
-      question: "What technology requirements are needed for the program?",
-      answer: "Students need a computer (Windows, Mac, or Chromebook) with a stable internet connection. All other software and tools will be provided through our online learning platform."
+      question: "When is the Summer Program available?",
+      answer: "Session 2 runs August 7 - September 5, 2025. Classes are 1 hour each on weekends (Saturday + Sunday)."
     },
     {
-      question: "How long are the summer programs?",
-      answer: "Our standard program runs for 2 weeks with 4 sessions per week. Each session is 60-90 minutes long."
+      question: "What age groups can join?",
+      answer: "Our programs are designed for middle school students ages 11-14 (grades 6-8)."
     },
     {
-      question: "Is there any homework or outside practice required?",
-      answer: "While we encourage practice between sessions, it's not mandatory. We provide optional exercises and projects for students who want to further develop their skills."
+      question: "How much does the Summer Program cost?",
+      answer: "The full 5-week program costs $250, including 10 interactive sessions, hands-on projects, and a completion certificate."
     },
     {
-      question: "What makes Lumin AI's teaching approach unique?",
-      answer: "We combine project-based learning with real-world applications, making AI concepts accessible and engaging. Our programs focus on hands-on experience, creative problem-solving, and ethical AI development."
+      question: "What countries have Lumin AI chapters?",
+      answer: "We have chapters in 6 countries: United States, Canada, United Kingdom, India, Australia, and Germany with 15+ active chapters worldwide."
+    },
+    {
+      question: "What is Lumin AI's mission?",
+      answer: "We're a nonprofit dedicated to making AI education accessible to all students, with a focus on equitable access and hands-on learning experiences."
+    },
+    {
+      question: "Do I need coding experience?",
+      answer: "No prior experience required! Our programs are designed for beginners and include all necessary training and support."
     }
   ];
 

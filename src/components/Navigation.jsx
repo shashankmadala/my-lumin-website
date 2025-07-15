@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
 const links = [
   { to: '/', text: 'Home', id: 'home' },
@@ -9,16 +9,20 @@ const links = [
     id: 'about',
     dropdown: [
       { to: '/founders', text: 'Founders', id: 'founders' },
+      { to: '/policy-team', text: 'Policy Team', id: 'policy' },
+      { to: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
   { to: '/learn', text: 'Learn', id: 'learn' },
+  { to: '/join-us', text: 'Join Us', id: 'join' },
   { to: '/contact-us', text: 'Contact', id: 'contact' }
 ];
 
 export default function Navigation() {
   const location = useLocation();
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -58,8 +62,8 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex ml-8 gap-6">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex ml-8 gap-6 flex-1">
             {links.map((link) => (
               <div
                 key={link.id}
@@ -104,7 +108,66 @@ export default function Navigation() {
               </div>
             ))}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 ml-auto"
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div className="px-4 py-2 space-y-1">
+              {links.map((link) => (
+                <div key={link.id}>
+                  {link.dropdown ? (
+                    <div>
+                      <button 
+                        onClick={() => handleDropdownClick(link.id)}
+                        className="w-full flex items-center justify-between text-left px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                      >
+                        {link.text}
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                          openDropdown === link.id ? 'rotate-180' : ''
+                        }`} />
+                      </button>
+                      {openDropdown === link.id && (
+                        <div className="pl-4 space-y-1">
+                          {link.dropdown.map((item) => (
+                            <Link
+                              key={item.id}
+                              to={item.to}
+                              className="block px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                              onClick={() => {
+                                setOpenDropdown(null);
+                                setMobileMenuOpen(false);
+                              }}
+                            >
+                              {item.text}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link 
+                      to={link.to}
+                      className="block px-4 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {link.text}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
