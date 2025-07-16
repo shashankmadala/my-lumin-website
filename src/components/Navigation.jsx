@@ -147,7 +147,10 @@ export default function Navigation() {
                               key={item.id}
                               to={item.to}
                               className="block px-8 py-3 text-gray-600 hover:text-blue-600 transition-colors duration-300 border-b border-gray-100 last:border-b-0 touch-manipulation"
-                              onClick={closeMobileMenu}
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                                setOpenDropdown(null);
+                              }}
                               style={{ touchAction: 'manipulation' }}
                             >
                               {item.text}
