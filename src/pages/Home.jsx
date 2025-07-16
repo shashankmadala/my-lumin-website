@@ -11,7 +11,8 @@ export default function HomePage() {
     students: 0,
     raised: 0,
     modules: 0,
-    countries: 0
+    countries: 0,
+    chapters: 0
   });
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -52,28 +53,33 @@ export default function HomePage() {
   }, [hasAnimated]);
 
   const animateNumbers = () => {
-    const duration = 3000; // 3 seconds
-    const steps = 60; // 60 steps for smooth animation
-    const stepDuration = duration / steps;
-    
     const targets = {
       students: 5200,
       raised: 4000,
       modules: 20,
-      countries: 5
+      countries: 6,
+      chapters: 15
     };
 
+    const duration = 2000; // 2 seconds for faster animation
+    const steps = 80; // More steps for smoother animation
+    const stepDuration = duration / steps;
+    
     let currentStep = 0;
     
     const interval = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
       
+      // Use easing function for more natural animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      
       setAnimatedNumbers({
-        students: Math.floor(targets.students * progress),
-        raised: Math.floor(targets.raised * progress),
-        modules: Math.floor(targets.modules * progress),
-        countries: Math.floor(targets.countries * progress)
+        students: Math.floor(targets.students * easeOutQuart),
+        raised: Math.floor(targets.raised * easeOutQuart),
+        modules: Math.floor(targets.modules * easeOutQuart),
+        countries: Math.floor(targets.countries * easeOutQuart),
+        chapters: Math.floor(targets.chapters * easeOutQuart)
       });
       
       if (currentStep >= steps) {
@@ -104,46 +110,22 @@ export default function HomePage() {
 
   // Define gallery images - these will be loaded from the public folder
   const galleryImages = [
-    {
-      src: '/gallery/IMG_8319.jpg',
-      alt: 'Students working on laptops'
-    },
-    {
-      src: '/gallery/IMG_8314-2.jpg',
-      alt: 'Students collaborating on AI project'
-    },
-    {
-      src: '/gallery/IMG_8315.jpg',
-      alt: 'Focused student during AI workshop'
-    },
-    {
-      src: '/gallery/IMG_8316.jpg',
-      alt: 'Hands-on coding session'
-    },
-    {
-      src: '/gallery/IMG_8317.jpg',
-      alt: 'Group learning activity'
-    },
-    {
-      src: '/gallery/IMG_8320-2.jpg',
-      alt: 'Student presenting AI project'
-    },
-    {
-      src: '/gallery/IMG_8321-2.jpg',
-      alt: 'Interactive AI lesson'
-    },
-    {
-      src: '/gallery/IMG_8324-2.jpg',
-      alt: 'AI summer program group photo'
-    },
-    {
-      src: '/gallery/IMG_8325-2.jpg',
-      alt: 'Engaged students in AI class'
-    }
+    { src: "/gallery/IMG_8314-2.jpg", alt: "Students learning AI concepts" },
+    { src: "/gallery/IMG_8315.jpg", alt: "Interactive AI workshop" },
+    { src: "/gallery/IMG_8316.jpg", alt: "Students collaborating on projects" },
+    { src: "/gallery/IMG_8317.jpg", alt: "AI education in action" },
+    { src: "/gallery/IMG_8319.jpg", alt: "Hands-on learning experience" },
+    { src: "/gallery/IMG_8320-2.jpg", alt: "Students presenting their work" },
+    { src: "/gallery/IMG_8321-2.jpg", alt: "AI workshop activities" },
+    { src: "/gallery/IMG_8324-2.jpg", alt: "Learning AI fundamentals" },
+    { src: "/gallery/IMG_8325-2.jpg", alt: "Student AI projects showcase" }
   ];
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -156,8 +138,15 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 relative">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-100/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left animate-on-scroll from-bottom">
               <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6">
@@ -210,20 +199,52 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-16 stagger-children stats-section">
             {[
-              ['students', 'Students', '5200+'],
-              ['raised', 'Raised', '$4000+'],
-              ['modules', 'Modules', '20+'],
-              ['countries', 'Countries', '6+'],
-              ['chapters', 'Chapters', '15+'],
-            ].map(([key, label, value], index) => (
+              { key: 'students', label: 'Students', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
+              { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰', color: 'green' },
+              { key: 'modules', label: 'Modules', value: animatedNumbers.modules, suffix: '+', icon: '📚', color: 'purple' },
+              { key: 'countries', label: 'Countries', value: animatedNumbers.countries, suffix: '+', icon: '🌍', color: 'indigo' },
+              { key: 'chapters', label: 'Chapters', value: animatedNumbers.chapters, suffix: '+', icon: '🏢', color: 'pink' },
+            ].map((stat, index) => (
               <div 
-                key={label} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-4 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                key={stat.key} 
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-110 group border border-gray-200/50 relative overflow-hidden`}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
+                  boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                }}
               >
-                <div className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {value}
+                {/* Animated background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.color}-50/30 to-${stat.color}-100/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl`}></div>
+                
+                {/* Floating particles effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                  <div className="absolute top-4 left-4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
+                  <div className="absolute bottom-6 left-6 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
                 </div>
-                <div className="text-gray-600 text-sm">{label}</div>
+                
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">
+                    {stat.icon}
+                  </div>
+                  
+                  {/* Number */}
+                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-all duration-500 group-hover:scale-110">
+                    {stat.prefix || ''}{stat.value.toLocaleString()}{stat.suffix}
+                  </div>
+                  
+                  {/* Label */}
+                  <div className="text-gray-600 text-sm font-semibold group-hover:text-blue-500 transition-colors duration-500 uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                </div>
+                
+                {/* Elegant shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
+                
+                {/* Subtle border glow */}
+                <div className={`absolute inset-0 rounded-2xl border-2 border-${stat.color}-200/0 group-hover:border-${stat.color}-200/50 transition-all duration-500`}></div>
               </div>
             ))}
           </div>
