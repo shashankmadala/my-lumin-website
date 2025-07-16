@@ -197,7 +197,7 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-16 stagger-children stats-section">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-16 stagger-children stats-section">
             {[
               { key: 'students', label: 'Students', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
               { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰', color: 'green' },
@@ -207,35 +207,35 @@ export default function HomePage() {
             ].map((stat, index) => (
               <div 
                 key={stat.key} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-110 group border border-gray-200/50 relative overflow-hidden`}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-4 bg-white/95 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 group border border-gray-200/50 relative overflow-hidden`}
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
-                  boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                  boxShadow: '0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04)'
                 }}
               >
                 {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.color}-50/30 to-${stat.color}-100/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-2xl`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.color}-50/30 to-${stat.color}-100/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-xl`}></div>
                 
                 {/* Floating particles effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                  <div className="absolute top-4 left-4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
-                  <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
-                  <div className="absolute bottom-6 left-6 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
+                  <div className="absolute top-2 left-2 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-4 right-4 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
+                  <div className="absolute bottom-4 left-4 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
                 </div>
                 
                 <div className="relative z-10">
                   {/* Icon */}
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-500">
+                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-500">
                     {stat.icon}
                   </div>
                   
                   {/* Number */}
-                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-all duration-500 group-hover:scale-110">
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-all duration-500 group-hover:scale-110">
                     {stat.prefix || ''}{stat.value.toLocaleString()}{stat.suffix}
                   </div>
                   
                   {/* Label */}
-                  <div className="text-gray-600 text-sm font-semibold group-hover:text-blue-500 transition-colors duration-500 uppercase tracking-wide">
+                  <div className="text-gray-600 text-xs font-semibold group-hover:text-blue-500 transition-colors duration-500 uppercase tracking-wide">
                     {stat.label}
                   </div>
                 </div>
@@ -244,7 +244,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
                 
                 {/* Subtle border glow */}
-                <div className={`absolute inset-0 rounded-2xl border-2 border-${stat.color}-200/0 group-hover:border-${stat.color}-200/50 transition-all duration-500`}></div>
+                <div className={`absolute inset-0 rounded-xl border-2 border-${stat.color}-200/0 group-hover:border-${stat.color}-200/50 transition-all duration-500`}></div>
               </div>
             ))}
           </div>
