@@ -55,30 +55,7 @@ export default function Founders() {
             </p>
           </div>
 
-          {/* Stats Section */}
-          <div className="grid grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
-            <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="text-2xl font-bold text-gray-900">2</div>
-              <div className="text-gray-600 text-sm">Co-Founders</div>
-            </div>
-            <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Globe className="w-6 h-6 text-purple-600" />
-              </div>
-              <div className="text-2xl font-bold text-gray-900">15+</div>
-              <div className="text-gray-600 text-sm">Chapters</div>
-            </div>
-            <div className="text-center p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-gray-100/50">
-              <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Award className="w-6 h-6 text-green-600" />
-              </div>
-              <div className="text-2xl font-bold text-gray-900">5200+</div>
-              <div className="text-gray-600 text-sm">Students</div>
-            </div>
-          </div>
+
         </div>
       </section>
 
