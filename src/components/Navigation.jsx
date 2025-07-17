@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 const links = [
@@ -20,6 +20,7 @@ const links = [
 
 export default function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -41,9 +42,10 @@ export default function Navigation() {
     setOpenDropdown(openDropdown === linkId ? null : linkId);
   };
 
-  const handleMobileLinkClick = (to) => {
+  const handleMobileNavigation = (path) => {
     setMobileMenuOpen(false);
     setOpenDropdown(null);
+    navigate(path);
   };
 
   return (
@@ -123,7 +125,7 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* New Mobile Menu */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
             <div className="py-2">
@@ -143,26 +145,24 @@ export default function Navigation() {
                       {openDropdown === link.id && (
                         <div className="bg-gray-50">
                           {link.dropdown.map((item) => (
-                            <Link
+                            <button
                               key={item.id}
-                              to={item.to}
-                              className="block px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
-                              onClick={handleMobileLinkClick}
+                              onClick={() => handleMobileNavigation(item.to)}
+                              className="w-full text-left px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
                             >
                               {item.text}
-                            </Link>
+                            </button>
                           ))}
                         </div>
                       )}
                     </div>
                   ) : (
-                    <Link 
-                      to={link.to}
+                    <button 
+                      onClick={() => handleMobileNavigation(link.to)}
                       className="block px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                      onClick={handleMobileLinkClick}
                     >
                       {link.text}
-                    </Link>
+                    </button>
                   )}
                 </div>
               ))}
