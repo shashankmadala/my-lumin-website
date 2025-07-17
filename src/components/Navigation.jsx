@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 
 const links = [
   { to: '/', text: 'Home', id: 'home' },
@@ -8,8 +8,8 @@ const links = [
     text: 'About',
     id: 'about',
     dropdown: [
-      { path: '/founders', text: 'Founders', id: 'founders' },
-      { path: '/chapters', text: 'Chapters', id: 'chapters' },
+      { to: '/founders', text: 'Founders', id: 'founders' },
+      { to: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
   { to: '/join-us', text: 'Join Us', id: 'join' },
@@ -92,11 +92,12 @@ export default function Navigation() {
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.id}
-                            to={item.path}
-                            className="block px-4 py-2 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300"
+                            to={item.to}
+                            className="flex items-center justify-between px-4 py-2 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300 group"
                             onClick={() => setOpenDropdown(null)}
                           >
-                            {item.text}
+                            <span>{item.text}</span>
+                            <ArrowRight className="w-4 h-4 opacity-60 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-200" />
                           </Link>
                         ))}
                       </div>
@@ -145,24 +146,39 @@ export default function Navigation() {
                       {openDropdown === link.id && (
                         <div className="bg-gray-50">
                           {link.dropdown.map((item) => (
-                            <button
-                              key={item.id}
-                              onClick={() => handleMobileNavigation(item.path)}
-                              className="w-full text-left px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
-                            >
-                              {item.text}
-                            </button>
+                            <div key={item.id} className="relative">
+                              <Link
+                                to={item.to}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setMobileMenuOpen(false);
+                                  setOpenDropdown(null);
+                                  // Use a small delay to ensure state updates, then navigate
+                                  setTimeout(() => {
+                                    window.location.href = item.to;
+                                  }, 100);
+                                }}
+                                className="flex items-center justify-between w-full text-left px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200 group"
+                              >
+                                <span>{item.text}</span>
+                                <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-200" />
+                              </Link>
+                            </div>
                           ))}
                         </div>
                       )}
                     </div>
                   ) : (
-                    <button 
-                      onClick={() => handleMobileNavigation(link.to)}
+                    <Link 
+                      to={link.to}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setOpenDropdown(null);
+                      }}
                       className="block w-full text-left px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {link.text}
-                    </button>
+                    </Link>
                   )}
                 </div>
               ))}
