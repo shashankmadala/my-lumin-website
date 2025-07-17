@@ -8,8 +8,8 @@ const links = [
     text: 'About',
     id: 'about',
     dropdown: [
-      { to: '/founders', text: 'Founders', id: 'founders' },
-      { to: '/chapters', text: 'Chapters', id: 'chapters' },
+      { path: '/founders', text: 'Founders', id: 'founders' },
+      { path: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
   { to: '/join-us', text: 'Join Us', id: 'join' },
@@ -92,7 +92,7 @@ export default function Navigation() {
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.id}
-                            to={item.to}
+                            to={item.path}
                             className="block px-4 py-2 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-300"
                             onClick={() => setOpenDropdown(null)}
                           >
@@ -147,7 +147,7 @@ export default function Navigation() {
                           {link.dropdown.map((item) => (
                             <button
                               key={item.id}
-                              onClick={() => handleMobileNavigation(item.to)}
+                              onClick={() => handleMobileNavigation(item.path)}
                               className="w-full text-left px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
                             >
                               {item.text}
@@ -159,7 +159,7 @@ export default function Navigation() {
                   ) : (
                     <button 
                       onClick={() => handleMobileNavigation(link.to)}
-                      className="block px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                      className="block w-full text-left px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {link.text}
                     </button>
