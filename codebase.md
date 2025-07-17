@@ -1,3 +1,33 @@
+# .claude/settings.local.json
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(git clone:*)",
+      "Bash(cp:*)",
+      "Bash(python:*)",
+      "Bash(PYTHONPATH=. python -c \"\nfrom app.services.english_to_asl import EnglishToASLTranslator\ntranslator = EnglishToASLTranslator(gifs_directory=''static/gifs'')\nprint(''Available words:'', len(translator.get_available_words()))\nprint(''First 10 words:'', translator.get_available_words()[:10])\nprint(''Test translation for \"\"hello good day\"\":'', translator.translate_text_to_asl(''hello good day''))\n\")",
+      "Bash(PYTHONPATH=. python:*)",
+      "Bash(npm run build:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}
+```
+
 # .gitignore
 
 ```
@@ -105,6 +135,7 @@ export default [
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "lucide-react": "^0.294.0",
@@ -141,7 +172,57 @@ export default {
 }
 ```
 
+# public/_redirects
+
+```
+/*    /index.html   200 
+```
+
+# public/gallery/IMG_8314-2.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8315.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8316.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8317.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8319.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8320-2.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8321-2.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8324-2.jpg
+
+This is a binary file of the type: Image
+
+# public/gallery/IMG_8325-2.jpg
+
+This is a binary file of the type: Image
+
+# public/images/aayush.png
+
+This is a binary file of the type: Image
+
 # public/images/ayur.png
+
+This is a binary file of the type: Image
+
+# public/images/corweave-logo.png
 
 This is a binary file of the type: Image
 
@@ -230,6 +311,10 @@ import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
 import Founders from './pages/Founders.jsx';
+import PolicyTeam from './pages/PolicyTeam.jsx';
+import Chapters from './pages/Chapters.jsx';
+import JoinUs from './pages/JoinUs.jsx';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
@@ -242,9 +327,13 @@ function App() {
             <Route path='/summer-program' element={<SummerProgram />} />
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/founders' element={<Founders />} />
+            <Route path='/policy-team' element={<PolicyTeam />} />
+            <Route path='/chapters' element={<Chapters />} />
+            <Route path='/join-us' element={<JoinUs />} />
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
+        <Analytics />
       </div>
     </Router>
   );
@@ -253,37 +342,49 @@ function App() {
 export default App;
 ```
 
+# src/assets/gallery/IMG_8314 2.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8315.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8316.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8317.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8319.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8320 2.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8321 2.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8322.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8324 2.jpg
+
+This is a binary file of the type: Image
+
+# src/assets/gallery/IMG_8325 2.jpg
+
+This is a binary file of the type: Image
+
 # src/assets/gallery/react.svg
 
 This is a file of the type: SVG Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.42.12 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.42.35 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.42.57 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.43.15 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.43.28 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.43.57 AM.png
-
-This is a binary file of the type: Image
-
-# src/assets/gallery/Screenshot 2025-06-18 at 12.44.19 AM.png
-
-This is a binary file of the type: Image
 
 # src/components/course/ArticleView.jsx
 
@@ -2384,6 +2485,121 @@ export default function Footer() {
 } 
 ```
 
+# src/components/ImageCarousel.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const ImageCarousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % Math.ceil(images.length / 3));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? Math.ceil(images.length / 3) - 1 : prevIndex - 1
+    );
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  // Group images into sets of 3
+  const imageGroups = [];
+  for (let i = 0; i < images.length; i += 3) {
+    imageGroups.push(images.slice(i, i + 3));
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-4xl font-bold mb-4 text-gray-900">Our Program in Action</h2>
+        <p className="text-xl text-gray-600">
+          See our students learning and growing in our AI education programs
+        </p>
+      </div>
+
+      <div className="relative">
+        {/* Main carousel container */}
+        <div className="overflow-hidden rounded-2xl">
+          <div 
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {imageGroups.map((group, groupIndex) => (
+              <div key={groupIndex} className="w-full flex-shrink-0">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+                  {group.map((image, imageIndex) => (
+                    <div 
+                      key={imageIndex}
+                      className="relative group overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                    >
+                      <div className="aspect-[4/3] overflow-hidden">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-end">
+                        <div className="p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                          <p className="text-sm font-medium">{image.alt}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation arrows */}
+        {imageGroups.length > 1 && (
+          <>
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-10"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-10"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </>
+        )}
+
+        {/* Dot indicators */}
+        {imageGroups.length > 1 && (
+          <div className="flex justify-center mt-8 space-x-2">
+            {imageGroups.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentIndex 
+                    ? 'bg-blue-600 w-8' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ImageCarousel;
+```
+
 # src/components/interactive/AiConceptExplorer.jsx
 
 ```jsx
@@ -3263,8 +3479,8 @@ export default MLTrainingGame;
 
 ```jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ChevronDown, Menu, X } from 'lucide-react';
 
 const links = [
   { to: '/', text: 'Home', id: 'home' },
@@ -3273,8 +3489,10 @@ const links = [
     id: 'about',
     dropdown: [
       { to: '/founders', text: 'Founders', id: 'founders' },
+      { to: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
+  { to: '/join-us', text: 'Join Us', id: 'join' },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
   { to: '/learn', text: 'Learn', id: 'learn' },
   { to: '/contact-us', text: 'Contact', id: 'contact' }
@@ -3282,7 +3500,9 @@ const links = [
 
 export default function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -3300,6 +3520,12 @@ export default function Navigation() {
 
   const handleDropdownClick = (linkId) => {
     setOpenDropdown(openDropdown === linkId ? null : linkId);
+  };
+
+  const handleMobileNavigation = (path) => {
+    setMobileMenuOpen(false);
+    setOpenDropdown(null);
+    navigate(path);
   };
 
   return (
@@ -3322,8 +3548,8 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* Navigation Links */}
-          <div className="flex ml-8 gap-6">
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex ml-8 gap-6 flex-1">
             {links.map((link) => (
               <div
                 key={link.id}
@@ -3368,7 +3594,61 @@ export default function Navigation() {
               </div>
             ))}
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 ml-auto"
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+            <div className="py-2">
+              {links.map((link) => (
+                <div key={link.id}>
+                  {link.dropdown ? (
+                    <div>
+                      <button 
+                        onClick={() => handleDropdownClick(link.id)}
+                        className="w-full flex items-center justify-between text-left px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        <span className="font-medium">{link.text}</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                          openDropdown === link.id ? 'rotate-180' : ''
+                        }`} />
+                      </button>
+                      {openDropdown === link.id && (
+                        <div className="bg-gray-50">
+                          {link.dropdown.map((item) => (
+                            <button
+                              key={item.id}
+                              onClick={() => handleMobileNavigation(item.to)}
+                              className="w-full text-left px-8 py-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-200"
+                            >
+                              {item.text}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <button 
+                      onClick={() => handleMobileNavigation(link.to)}
+                      className="block px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                    >
+                      {link.text}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
@@ -7217,6 +7497,274 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
+# src/pages/Chapters.jsx
+
+```jsx
+import React, { useState } from 'react';
+import { 
+  Globe, 
+  Users, 
+  MapPin, 
+  Star, 
+  ArrowRight,
+  Building,
+  Heart,
+  Target,
+  Award
+} from 'lucide-react';
+
+export default function Chapters() {
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+  const chapters = [
+    {
+      country: "United States",
+      flag: "🇺🇸",
+      chapters: [
+        { name: "New Jersey Chapter", location: "Newark, NJ", status: "Active", members: "50+ students" },
+        { name: "California Chapter", location: "San Francisco, CA", status: "Active", members: "75+ students" },
+        { name: "Texas Chapter", location: "Austin, TX", status: "Coming Soon", members: "30+ students" }
+      ],
+      description: "Our largest chapter network with multiple active locations across the country."
+    },
+    {
+      country: "Canada",
+      flag: "🇨🇦",
+      chapters: [
+        { name: "Toronto Chapter", location: "Toronto, ON", status: "Active", members: "40+ students" },
+        { name: "Vancouver Chapter", location: "Vancouver, BC", status: "Active", members: "35+ students" }
+      ],
+      description: "Expanding AI education across Canadian provinces with growing student engagement."
+    },
+    {
+      country: "United Kingdom",
+      flag: "🇬🇧",
+      chapters: [
+        { name: "London Chapter", location: "London, UK", status: "Active", members: "45+ students" },
+        { name: "Manchester Chapter", location: "Manchester, UK", status: "Coming Soon", members: "25+ students" }
+      ],
+      description: "Bringing AI literacy to British students through innovative educational programs."
+    },
+    {
+      country: "India",
+      flag: "🇮🇳",
+      chapters: [
+        { name: "Mumbai Chapter", location: "Mumbai, MH", status: "Active", members: "60+ students" },
+        { name: "Bangalore Chapter", location: "Bangalore, KA", status: "Active", members: "55+ students" },
+        { name: "Delhi Chapter", location: "New Delhi, DL", status: "Coming Soon", members: "40+ students" }
+      ],
+      description: "Rapidly growing presence in India's tech hubs with strong student communities."
+    },
+    {
+      country: "Australia",
+      flag: "🇦🇺",
+      chapters: [
+        { name: "Sydney Chapter", location: "Sydney, NSW", status: "Active", members: "30+ students" },
+        { name: "Melbourne Chapter", location: "Melbourne, VIC", status: "Coming Soon", members: "20+ students" }
+      ],
+      description: "Expanding AI education across Australian cities with local partnerships."
+    },
+    {
+      country: "Germany",
+      flag: "🇩🇪",
+      chapters: [
+        { name: "Berlin Chapter", location: "Berlin, DE", status: "Active", members: "35+ students" },
+        { name: "Munich Chapter", location: "Munich, DE", status: "Coming Soon", members: "25+ students" }
+      ],
+      description: "Building AI literacy in German schools through innovative programs."
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 relative overflow-hidden text-white">
+        {/* Animated background with floating elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700">
+          {/* Floating geometric shapes */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-indigo-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-300/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+          <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-500"></div>
+          
+          {/* Animated grid pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                               radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }}></div>
+          </div>
+          
+          {/* Floating particles */}
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-bounce delay-300"></div>
+          <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-purple-300 rounded-full animate-bounce delay-700"></div>
+          <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce delay-500"></div>
+          <div className="absolute top-3/4 right-1/6 w-1 h-1 bg-green-300 rounded-full animate-bounce delay-1200"></div>
+          
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/15 backdrop-blur-sm rounded-full text-white mb-8 border border-white/20">
+            <Globe className="w-5 h-5" />
+            <span className="font-semibold">Global Network</span>
+          </div>
+          
+          <h1 className="text-6xl font-bold mb-6 drop-shadow-lg">
+            Lumin AI Chapters
+            <span className="block text-4xl text-blue-200 mt-3 font-medium">
+              Worldwide
+            </span>
+          </h1>
+          
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-10 leading-relaxed">
+            Our international chapter network brings AI education to students across the globe, 
+            creating a community of <span className="font-semibold text-yellow-300">young innovators and learners</span>.
+          </p>
+          
+          <div className="mt-10">
+            <a 
+              href="https://forms.gle/g5MLJphJCwd3otyN8" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-blue-600 px-10 py-5 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg font-bold shadow-lg"
+            >
+              Start a Chapter
+              <ArrowRight className="w-6 h-6" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Chapters Grid */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Our Global Chapters</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover our international network of Lumin AI chapters, each bringing AI education 
+              to students in their local communities.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {chapters.map((chapter, index) => (
+              <div 
+                key={index}
+                className="bg-gray-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                onClick={() => setSelectedCountry(selectedCountry === index ? null : index)}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="text-4xl">{chapter.flag}</div>
+                  <div>
+                    <h3 className="text-xl font-bold">{chapter.country}</h3>
+                    <p className="text-gray-600 text-sm">{chapter.chapters.length} chapters</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-700 mb-4">{chapter.description}</p>
+                
+                <div className="space-y-3">
+                  {chapter.chapters.map((location, locIndex) => (
+                    <div key={locIndex} className="bg-white rounded-lg p-3 border border-gray-200">
+                      <div className="flex items-center justify-between mb-1">
+                        <h4 className="font-semibold text-sm">{location.name}</h4>
+                        <span className={`text-xs px-2 py-1 rounded-full ${
+                          location.status === 'Active' 
+                            ? 'bg-green-100 text-green-700' 
+                            : 'bg-yellow-100 text-yellow-700'
+                        }`}>
+                          {location.status}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-gray-600">
+                        <MapPin className="w-3 h-3" />
+                        <span>{location.location}</span>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {location.members}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Chapter Approach */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Our Chapter Approach</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Each Lumin AI chapter operates as a local community, bringing our proven AI education 
+              programs to students in their own cities and regions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Building className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Local Leadership</h3>
+              <p className="text-gray-600">
+                Each chapter is led by local students and educators who understand their community's needs.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Target className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Adapted Programs</h3>
+              <p className="text-gray-600">
+                Our AI education programs are adapted to meet local educational standards and cultural contexts.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Global Network</h3>
+              <p className="text-gray-600">
+                Students connect with peers worldwide, sharing ideas and collaborating on AI projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+          <h2 className="text-4xl font-bold mb-6">Start a Chapter</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Interested in bringing Lumin AI to your city? Learn how to start a chapter in your community.
+          </p>
+          <div className="flex justify-center gap-4">
+            <a 
+              href="/contact-us" 
+              className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            >
+              Contact Us
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+} 
+```
+
 # src/pages/ContactUs.jsx
 
 ```jsx
@@ -7308,28 +7856,36 @@ const ContactUs = () => {
 
   const faqItems = [
     {
-      question: "What age groups are your AI programs designed for?",
-      answer: "Our programs are specifically designed for middle school students (ages 11-14). We've carefully crafted our curriculum to be engaging and age-appropriate while teaching real AI concepts."
+      question: "How do I start a Lumin AI chapter?",
+      answer: "Apply through our Google Form to become a Chapter Lead. We'll email you and schedule a call to discuss next steps and how to recruit members for your chapter."
     },
     {
-      question: "Do students need prior coding experience?",
-      answer: "No prior coding experience is required! We start from the basics and gradually build up to more complex concepts. Our program is designed to be accessible to complete beginners while still being challenging for those with some coding experience."
+      question: "What's the scholarship opportunity?",
+      answer: "Three chapter leads will each win $1000 scholarships. The chapters with the most members will be eligible to apply in the middle of next year."
     },
     {
-      question: "What technology requirements are needed for the program?",
-      answer: "Students need a computer (Windows, Mac, or Chromebook) with a stable internet connection. All other software and tools will be provided through our online learning platform."
+      question: "When is the Summer Program available?",
+      answer: "Session 2 runs August 7 - September 5, 2025. Classes are 1 hour each on weekends (Saturday + Sunday)."
     },
     {
-      question: "How long are the summer programs?",
-      answer: "Our standard program runs for 2 weeks with 4 sessions per week. Each session is 60-90 minutes long."
+      question: "What age groups can join?",
+      answer: "Our programs are designed for middle school students ages 11-14 (grades 6-8)."
     },
     {
-      question: "Is there any homework or outside practice required?",
-      answer: "While we encourage practice between sessions, it's not mandatory. We provide optional exercises and projects for students who want to further develop their skills."
+      question: "How much does the Summer Program cost?",
+      answer: "The full 5-week program costs $250, including 10 interactive sessions, hands-on projects, and a completion certificate."
     },
     {
-      question: "What makes Lumin AI's teaching approach unique?",
-      answer: "We combine project-based learning with real-world applications, making AI concepts accessible and engaging. Our programs focus on hands-on experience, creative problem-solving, and ethical AI development."
+      question: "What countries have Lumin AI chapters?",
+      answer: "We have chapters in 6 countries: United States, Canada, United Kingdom, India, Australia, and Germany with 15+ active chapters worldwide."
+    },
+    {
+      question: "What is Lumin AI's mission?",
+      answer: "We're a nonprofit dedicated to making AI education accessible to all students, with a focus on equitable access and hands-on learning experiences."
+    },
+    {
+      question: "Do I need coding experience?",
+      answer: "No prior experience required! Our programs are designed for beginners and include all necessary training and support."
     }
   ];
 
@@ -7489,7 +8045,7 @@ export default ContactUs;
 
 ```jsx
 import React from 'react';
-import { GithubIcon, LinkedinIcon, Mail } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, Mail, Sparkles, Award, Users, Globe } from 'lucide-react';
 
 const founders = [
   {
@@ -7520,79 +8076,124 @@ const founders = [
 
 export default function Founders() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      <div className="pt-32 pb-24">
-        <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-100/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           {/* Header */}
-          <div className="text-center mb-20">
-            <h1 className="text-5xl font-bold mb-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
+              <Sparkles className="w-4 h-4" />
+              Leadership Team
+            </div>
+            <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Our Founders
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Passionate leaders dedicated to transforming AI education
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Passionate leaders dedicated to transforming AI education and empowering the next generation of innovators
             </p>
           </div>
 
-          {/* Founders Cards */}
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            {founders.map((founder) => (
+
+        </div>
+      </section>
+
+      {/* Founders Cards */}
+      <section className="pb-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {founders.map((founder, index) => (
               <div 
                 key={founder.name}
-                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 relative overflow-hidden"
               >
-                <div className="flex flex-col items-center">
-                  {/* Profile Image */}
-                  <div className="relative mb-8">
-                    <div className="w-48 h-48 rounded-full overflow-hidden shadow-lg mb-4">
-                      <img 
-                        src={founder.image} 
-                        alt={founder.name}
-                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
+                {/* Animated background gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
+                
+                {/* Floating particles */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                  <div className="absolute top-4 left-4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
+                  <div className="absolute bottom-6 left-6 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
+                </div>
 
-                  {/* Content */}
-                  <div className="text-center">
-                    <h2 className="text-2xl font-bold mb-2">{founder.name}</h2>
-                    <div className="text-blue-600 font-medium mb-6 inline-block bg-blue-50 px-4 py-1 rounded-full">
-                      {founder.role}
+                <div className="relative z-10">
+                  <div className="flex flex-col items-center">
+                    {/* Profile Image */}
+                    <div className="relative mb-8">
+                      <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl mb-4 relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full"></div>
+                        <img 
+                          src={founder.image} 
+                          alt={founder.name}
+                          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 relative z-10"
+                        />
+                      </div>
+                      {/* Status indicator */}
+                      <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
                     </div>
-                    <p className="text-gray-600 mb-6">{founder.bio}</p>
-                    <p className="text-gray-800 italic mb-8 text-sm">"{founder.vision}"</p>
 
-                    {/* Social Links */}
-                    <div className="flex justify-center gap-6">
-                      <a 
-                        href={founder.links.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
-                      >
-                        <LinkedinIcon className="w-6 h-6 text-gray-600 hover:text-blue-600" />
-                      </a>
-                      <a 
-                        href={founder.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
-                      >
-                        <GithubIcon className="w-6 h-6 text-gray-600 hover:text-blue-600" />
-                      </a>
-                      <a 
-                        href={founder.links.email}
-                        className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1"
-                      >
-                        <Mail className="w-6 h-6 text-gray-600 hover:text-blue-600" />
-                      </a>
+                    {/* Content */}
+                    <div className="text-center">
+                      <h2 className="text-3xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-500">
+                        {founder.name}
+                      </h2>
+                      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-semibold mb-6 shadow-lg">
+                        <Sparkles className="w-4 h-4" />
+                        {founder.role}
+                      </div>
+                      <p className="text-gray-600 mb-6 leading-relaxed text-lg">
+                        {founder.bio}
+                      </p>
+                      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 mb-8 border border-blue-100">
+                        <p className="text-gray-800 italic text-lg font-medium">
+                          "{founder.vision}"
+                        </p>
+                      </div>
+
+                      {/* Social Links */}
+                      <div className="flex justify-center gap-4">
+                        <a 
+                          href={founder.links.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 rounded-full bg-blue-50 hover:bg-blue-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                        >
+                          <LinkedinIcon className="w-6 h-6 text-blue-600" />
+                        </a>
+                        <a 
+                          href={founder.links.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 rounded-full bg-gray-50 hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                        >
+                          <GithubIcon className="w-6 h-6 text-gray-600" />
+                        </a>
+                        <a 
+                          href={founder.links.email}
+                          className="p-3 rounded-full bg-purple-50 hover:bg-purple-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
+                        >
+                          <Mail className="w-6 h-6 text-purple-600" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
+                {/* Elegant shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
@@ -7603,12 +8204,21 @@ export default function Founders() {
 ```jsx
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin } from 'lucide-react';
 import '../styles/animations.css';
+import ImageCarousel from '../components/ImageCarousel';
 
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [animatedNumbers, setAnimatedNumbers] = useState({
+    students: 0,
+    raised: 0,
+    modules: 0,
+    countries: 0,
+    chapters: 0
+  });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -7616,6 +8226,12 @@ export default function HomePage() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+            
+            // Trigger number animation when stats section comes into view
+            if (entry.target.classList.contains('stats-section') && !hasAnimated) {
+              setHasAnimated(true);
+              animateNumbers();
+            }
           }
         });
       },
@@ -7625,7 +8241,7 @@ export default function HomePage() {
       }
     );
 
-    document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+    document.querySelectorAll('.animate-on-scroll, .stats-section').forEach((element) => {
       observer.observe(element);
     });
 
@@ -7638,7 +8254,45 @@ export default function HomePage() {
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [hasAnimated]);
+
+  const animateNumbers = () => {
+    const targets = {
+      students: 5200,
+      raised: 4000,
+      modules: 20,
+      countries: 6,
+      chapters: 15
+    };
+
+    const duration = 2000; // 2 seconds for faster animation
+    const steps = 80; // More steps for smoother animation
+    const stepDuration = duration / steps;
+    
+    let currentStep = 0;
+    
+    const interval = setInterval(() => {
+      currentStep++;
+      const progress = currentStep / steps;
+      
+      // Use easing function for more natural animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      
+      setAnimatedNumbers({
+        students: Math.floor(targets.students * easeOutQuart),
+        raised: Math.floor(targets.raised * easeOutQuart),
+        modules: Math.floor(targets.modules * easeOutQuart),
+        countries: Math.floor(targets.countries * easeOutQuart),
+        chapters: Math.floor(targets.chapters * easeOutQuart)
+      });
+      
+      if (currentStep >= steps) {
+        clearInterval(interval);
+        // Ensure final numbers are exact
+        setAnimatedNumbers(targets);
+      }
+    }, stepDuration);
+  };
 
   const testimonials = [
     {
@@ -7658,8 +8312,24 @@ export default function HomePage() {
     }
   ];
 
+  // Define gallery images - these will be loaded from the public folder
+  const galleryImages = [
+    { src: "/gallery/IMG_8314-2.jpg", alt: "Students learning AI concepts" },
+    { src: "/gallery/IMG_8315.jpg", alt: "Interactive AI workshop" },
+    { src: "/gallery/IMG_8316.jpg", alt: "Students collaborating on projects" },
+    { src: "/gallery/IMG_8317.jpg", alt: "AI education in action" },
+    { src: "/gallery/IMG_8319.jpg", alt: "Hands-on learning experience" },
+    { src: "/gallery/IMG_8320-2.jpg", alt: "Students presenting their work" },
+    { src: "/gallery/IMG_8321-2.jpg", alt: "AI workshop activities" },
+    { src: "/gallery/IMG_8324-2.jpg", alt: "Learning AI fundamentals" },
+    { src: "/gallery/IMG_8325-2.jpg", alt: "Student AI projects showcase" }
+  ];
+
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -7672,57 +8342,113 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-24 relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h1 className="text-7xl font-bold text-gray-900 tracking-tight mb-6">
-              AI Education
-              <span className="block text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                Made Easy
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
-              Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link 
-                to="/learn" 
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-              >
-                Start Learning Now
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link 
-                to="/summer-program" 
-                className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
-                style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Join Summer Program
+      <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-100/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left animate-on-scroll from-bottom">
+              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6">
+                AI Education
+                <span className="block text-4xl lg:text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                  Made Easy
                 </span>
-                <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
-                  Limited Time!
-                </span>
-              </Link>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <Link 
+                  to="/summer-program" 
+                  className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
+                  style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    Join Summer Program
+                  </span>
+                  <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
+                    Limited Time!
+                  </span>
+                </Link>
+                <Link 
+                  to="/join-us" 
+                  className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+                >
+                  Start a Chapter
+                  <Globe className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end animate-on-scroll from-right">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl transform rotate-3 blur-sm"></div>
+                <img 
+                  src={galleryImages[0].src}
+                  alt={galleryImages[0].alt}
+                  className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform -rotate-3 hover:rotate-0 transition-transform duration-500" 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    console.log('Image failed to load:', e.target.src);
+                  }}
+                />
+              </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-4 gap-8 stagger-children">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-16 stagger-children stats-section">
             {[
-              ['5,000+', 'Students'],
-              ['20+', 'Modules'],
-              ['95%', 'Success Rate'],
-              ['4.9/5', 'Rating']
-            ].map(([number, label], index) => (
+              { key: 'students', label: 'Students', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
+              { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰', color: 'green' },
+              { key: 'modules', label: 'Modules', value: animatedNumbers.modules, suffix: '+', icon: '📚', color: 'purple' },
+              { key: 'countries', label: 'Countries', value: animatedNumbers.countries, suffix: '+', icon: '🌍', color: 'indigo' },
+              { key: 'chapters', label: 'Chapters', value: animatedNumbers.chapters, suffix: '+', icon: '🏢', color: 'pink' },
+            ].map((stat, index) => (
               <div 
-                key={label} 
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                key={stat.key} 
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-4 bg-white/95 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 group border border-gray-200/50 relative overflow-hidden`}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
+                  boxShadow: '0 8px 20px -5px rgba(0, 0, 0, 0.1), 0 8px 8px -5px rgba(0, 0, 0, 0.04)'
+                }}
               >
-                <div className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {number}
+                {/* Animated background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.color}-50/30 to-${stat.color}-100/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-xl`}></div>
+                
+                {/* Floating particles effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                  <div className="absolute top-2 left-2 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-4 right-4 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
+                  <div className="absolute bottom-4 left-4 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
                 </div>
-                <div className="text-gray-600">{label}</div>
+                
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-500">
+                    {stat.icon}
+                  </div>
+                  
+                  {/* Number */}
+                  <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-all duration-500 group-hover:scale-110">
+                    {stat.prefix || ''}{stat.value.toLocaleString()}{stat.suffix}
+                  </div>
+                  
+                  {/* Label */}
+                  <div className="text-gray-600 text-xs font-semibold group-hover:text-blue-500 transition-colors duration-500 uppercase tracking-wide">
+                    {stat.label}
+                  </div>
+                </div>
+                
+                {/* Elegant shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
+                
+                {/* Subtle border glow */}
+                <div className={`absolute inset-0 rounded-xl border-2 border-${stat.color}-200/0 group-hover:border-${stat.color}-200/50 transition-all duration-500`}></div>
               </div>
             ))}
           </div>
@@ -7741,49 +8467,63 @@ export default function HomePage() {
       </div>
 
       {/* Why Choose Section */}
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-5xl font-bold mb-4">Why Choose Lumin AI?</h2>
-            <p className="text-xl text-gray-600">
+      <section className="bg-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-12 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">Why Choose Lumin AI?</h2>
+            <p className="text-lg text-gray-600 mb-6">
               Comprehensive AI education designed for the next generation
             </p>
+            <Link 
+              to="/learn" 
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium"
+            >
+              Start Learning Now
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="flex flex-col gap-16">
+          <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                icon: <Brain className="w-8 h-8 text-blue-600"/>,
+                icon: <Brain className="w-6 h-6 text-blue-600"/>,
                 title: "Expert-Led Learning",
                 description: "Learn from industry professionals and AI experts through carefully crafted curriculum"
               },
               {
-                icon: <Users className="w-8 h-8 text-blue-600"/>,
-                title: "Community Driven",
-                description: "Join a vibrant community of learners and get support when you need it"
+                icon: <Globe className="w-6 h-6 text-blue-600"/>,
+                title: "Global Community",
+                description: "Join our international network of 15+ chapters across 6 countries"
               },
               {
-                icon: <Rocket className="w-8 h-8 text-blue-600"/>,
-                title: "Hands-on Practice",
-                description: "Apply your knowledge with real-world projects and practical exercises"
+                icon: <Award className="w-6 h-6 text-blue-600"/>,
+                title: "Scholarship Opportunities",
+                description: "Compete for $1000 scholarships by starting and growing Lumin AI chapters"
+              },
+              {
+                icon: <Rocket className="w-6 h-6 text-blue-600"/>,
+                title: "Hands-on Projects",
+                description: "Apply your knowledge with real-world AI projects and practical exercises"
               }
             ].map((feature, index) => (
               <div 
                 key={feature.title}
-                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} flex items-start gap-16 group hover:bg-gray-50 rounded-2xl p-8 transition-all duration-500 hover:shadow-lg`}
+                className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} bg-gray-50 rounded-xl p-6 hover:bg-white hover:shadow-lg transition-all duration-300 group border border-gray-100`}
               >
-                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:bg-blue-100 group-hover:shadow-md">
-                  <div className="transform transition-transform duration-500 group-hover:rotate-12">
-                    {feature.icon}
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-200">
+                    <div className="transform transition-transform duration-300 group-hover:rotate-6">
+                      {feature.icon}
+                    </div>
                   </div>
-                </div>
-                <div className="transform transition-all duration-500 group-hover:translate-x-2">
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                    {feature.description}
-                  </p>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -7791,43 +8531,187 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-gray-50">
+      {/* Global Impact Section */}
+      <section className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll from-bottom">
-            <h2 className="text-5xl font-bold mb-4">Student Stories</h2>
+            <h2 className="text-5xl font-bold mb-4">Global Impact</h2>
             <p className="text-xl text-gray-600">
+              Expanding AI education worldwide through our international chapter network
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Chapters Section */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold">Global Chapters</h3>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Our international network spans 6 countries with 15+ active chapters, bringing AI education to students worldwide.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">6</div>
+                  <div className="text-sm text-gray-600">Countries</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600">400+</div>
+                  <div className="text-sm text-gray-600">Students</div>
+                </div>
+              </div>
+              <Link 
+                to="/chapters" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
+              >
+                Explore Our Chapters
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Educational Impact Section */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                  <Users className="w-6 h-6 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-bold">Educational Impact</h3>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Making AI education accessible and engaging for students worldwide through innovative learning experiences.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Interactive AI curriculum</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Hands-on learning experiences</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Global student community</span>
+                </div>
+              </div>
+              <Link 
+                to="/learn" 
+                className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium"
+              >
+                Start Learning Today
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scholarship Opportunity Section */}
+      <section className="py-24 bg-gradient-to-r from-yellow-50 to-orange-50">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="mb-8">
+            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Award className="w-8 h-8 text-yellow-600" />
+            </div>
+            <h2 className="text-4xl font-bold mb-4">$3000 Scholarship Opportunity</h2>
+            <p className="text-xl text-gray-600 mb-6">
+              High school students can compete for one of THREE $1000 scholarships by starting and growing Lumin AI chapters!
+            </p>
+          </div>
+          <Link 
+            to="/join-us" 
+            className="inline-flex items-center gap-2 bg-yellow-600 text-white px-8 py-4 rounded-full hover:bg-yellow-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+          >
+            Apply for Chapter Lead
+            <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+      </section>
+
+      {/* Image Carousel Section */}
+      <section className="py-24 bg-gray-50">
+        <ImageCarousel images={galleryImages.slice(1)} />
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-24 h-24 bg-purple-200 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-200 rounded-full opacity-20 animate-pulse animation-delay-2000"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-12 animate-on-scroll from-bottom">
+            <h2 className="text-4xl font-bold mb-4">Student Stories</h2>
+            <p className="text-lg text-gray-600">
               Hear from our amazing community of learners
             </p>
           </div>
 
           <div className="relative">
+            {/* Testimonial Cards Stack */}
             <div className="flex items-center justify-center">
               <button 
                 onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                className="absolute left-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+                className="absolute left-4 z-20 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-100"
               >
-                <ChevronLeft className="w-6 h-6 text-gray-600" />
+                <ChevronLeft className="w-5 h-5 text-gray-600" />
               </button>
 
-              <div className="max-w-3xl mx-auto px-12">
-                <div className="bg-white rounded-xl p-8 shadow-lg">
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-semibold">{testimonials[currentTestimonial].name}</h3>
-                    <p className="text-blue-600">{testimonials[currentTestimonial].role}</p>
+              <div className="relative max-w-4xl mx-auto px-16">
+                {/* Background cards for depth effect */}
+                <div className="absolute inset-0 transform rotate-2 bg-gray-100 rounded-2xl opacity-30"></div>
+                <div className="absolute inset-0 transform -rotate-1 bg-gray-200 rounded-2xl opacity-20"></div>
+                
+                {/* Main testimonial card */}
+                <div className="relative bg-white rounded-2xl p-8 shadow-xl border border-gray-100 transform hover:scale-105 transition-all duration-300">
+                  <div className="flex items-start gap-6">
+                    {/* Avatar/Icon */}
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shrink-0">
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-900 mb-1">{testimonials[currentTestimonial].name}</h3>
+                        <p className="text-blue-600 font-medium">{testimonials[currentTestimonial].role}</p>
+                      </div>
+                      <blockquote className="text-gray-700 text-lg leading-relaxed relative">
+                        <span className="absolute -top-2 -left-2 text-4xl text-blue-200 font-serif">"</span>
+                        {testimonials[currentTestimonial].quote}
+                        <span className="absolute -bottom-2 -right-2 text-4xl text-purple-200 font-serif">"</span>
+                      </blockquote>
+                    </div>
                   </div>
-                  <p className="text-gray-600 text-lg italic text-center">
-                    "{testimonials[currentTestimonial].quote}"
-                  </p>
                 </div>
               </div>
 
               <button 
                 onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                className="absolute right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+                className="absolute right-4 z-20 p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-gray-100"
               >
-                <ChevronRight className="w-6 h-6 text-gray-600" />
+                <ChevronRight className="w-5 h-5 text-gray-600" />
               </button>
+            </div>
+
+            {/* Testimonial indicators */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentTestimonial 
+                      ? 'bg-blue-600 scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -7836,33 +8720,57 @@ export default function HomePage() {
       {/* Get Started Section */}
       <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="bg-white rounded-2xl p-12 shadow-xl relative overflow-hidden">
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-purple-100 to-transparent rounded-tr-full" />
 
-            <div className="relative text-center max-w-2xl mx-auto">
-              <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Choose your path and begin your adventure into the world of artificial intelligence.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link
-                  to="/learn"
-                  className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
-                >
-                  <BookOpen className="w-8 h-8" />
-                  <span className="font-semibold">Start Learning</span>
-                  <span className="text-sm text-blue-100">Free online course</span>
-                </Link>
-                <Link
-                  to="/summer-program"
-                  className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
-                >
-                  <Users className="w-8 h-8" />
-                  <span className="font-semibold">Join Summer Program</span>
-                  <span className="text-sm text-purple-100">Live online sessions</span>
-                </Link>
+              <div className="relative text-center">
+                <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Choose your path and begin your adventure into the world of artificial intelligence.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Link
+                    to="/learn"
+                    className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <BookOpen className="w-8 h-8" />
+                    <span className="font-semibold">Start Learning</span>
+                    <span className="text-sm text-blue-100">Free online course</span>
+                  </Link>
+                  <Link
+                    to="/summer-program"
+                    className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <Users className="w-8 h-8" />
+                    <span className="font-semibold">Join Summer Program</span>
+                    <span className="text-sm text-purple-100">Live online sessions</span>
+                  </Link>
+                  <Link
+                    to="/join-us"
+                    className="bg-green-600 text-white px-8 py-4 rounded-xl hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                  >
+                    <Globe className="w-8 h-8" />
+                    <span className="font-semibold">Start a Chapter</span>
+                    <span className="text-sm text-green-100">$1000 scholarship opportunity</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-center animate-on-scroll from-right">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl transform -rotate-3 blur-sm"></div>
+                <img 
+                  src={galleryImages[4].src} 
+                  alt={galleryImages[4].alt}
+                  className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform rotate-3 hover:rotate-0 transition-transform duration-500" 
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    console.log('Image failed to load:', e.target.src);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -7888,6 +8796,278 @@ export default function HomePage() {
     </div>
   );
 }
+```
+
+# src/pages/JoinUs.jsx
+
+```jsx
+import React from 'react';
+import { 
+  Users, 
+  Award, 
+  Globe, 
+  MapPin, 
+  Star, 
+  ArrowRight,
+  Trophy,
+  Target,
+  Heart,
+  Building
+} from 'lucide-react';
+
+export default function JoinUs() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="pt-32 pb-12 relative overflow-hidden text-white">
+        {/* Animated background with floating elements */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
+          {/* Floating geometric shapes */}
+          <div className="absolute top-16 left-10 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-32 right-16 w-20 h-20 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-16 left-1/4 w-32 h-32 bg-blue-300/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-indigo-300/20 rounded-full blur-xl animate-pulse delay-500"></div>
+          
+          {/* Animated grid pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
+                               radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
+            }}></div>
+          </div>
+          
+          {/* Floating particles */}
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-bounce delay-300"></div>
+          <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-purple-300 rounded-full animate-bounce delay-700"></div>
+          <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce delay-500"></div>
+          <div className="absolute top-3/4 right-1/6 w-1 h-1 bg-green-300 rounded-full animate-bounce delay-1200"></div>
+          
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/15 backdrop-blur-sm rounded-full text-white mb-6 border border-white/20">
+            <Award className="w-5 h-5" />
+            <span className="font-semibold">$3000 Total Scholarship Opportunity</span>
+          </div>
+          
+          <h1 className="text-5xl font-bold mb-4 drop-shadow-lg">
+            Join Lumin AI
+            <span className="block text-3xl text-blue-200 mt-2 font-medium">
+              Become a Chapter Lead
+            </span>
+          </h1>
+          
+          <p className="text-lg text-blue-100 max-w-3xl mx-auto mb-8 leading-relaxed">
+            An amazing opportunity for <span className="font-semibold text-yellow-300">ALL HIGH SCHOOL STUDENTS</span> to be part of an incredible nonprofit organization 
+            and compete for one of <span className="font-bold text-yellow-300">THREE $1000 INTERNATIONAL SCHOLARSHIPS</span>!
+          </p>
+          
+          <div className="mt-8">
+            <a 
+              href="https://forms.gle/g5MLJphJCwd3otyN8" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg font-bold shadow-lg"
+            >
+              Apply Now
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Opportunity Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">The Opportunity</h2>
+            <p className="text-xl text-gray-600">
+              We are expanding our organization and want to start chapters across the USA and internationally!
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold">Chapter Lead Role</h3>
+              </div>
+              <p className="text-gray-700 mb-4">
+                Once you start a chapter, you will be given the title of <strong>Chapter Lead</strong> for your local city.
+              </p>
+              <p className="text-gray-700">
+                Your job is to spread the mission of Lumin AI to students in your area by gathering the most amount of volunteers as part of your chapter.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center">
+                  <Trophy className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold">$3000 Total Scholarships</h3>
+              </div>
+              <p className="text-gray-700 mb-4">
+                <strong>THREE chapter leads will each win a $1000 INTERNATIONAL SCHOLARSHIP!</strong>
+              </p>
+              <p className="text-gray-700">
+                The chapters with the most members will be eligible for the scholarship competition in the middle of next year.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-xl text-gray-600">
+              Chapter leads will form a state team and do stuff in the chapter. They will then start to encourage Lumin chapters in cities/towns in that state.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-8 h-8 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">1. Start Your Chapter</h3>
+              <p className="text-gray-600">
+                Apply to become a Chapter Lead for your local city and get started with Lumin AI.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">2. Build Your Team</h3>
+              <p className="text-gray-600">
+                Recruit volunteers and members for your chapter. The more members, the better your chances!
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trophy className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">3. Win the Scholarship</h3>
+              <p className="text-gray-600">
+                Apply for one of THREE $1000 scholarships in the middle of next year!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-3 text-gray-900">
+              Why Join Lumin AI?
+            </h2>
+            <p className="text-gray-600">
+              Be part of something bigger and make a real impact in your community.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Star className="w-5 h-5 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Leadership Experience</h3>
+                <p className="text-sm text-gray-600">Develop leadership skills by managing your own chapter and team.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Globe className="w-5 h-5 text-purple-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Global Network</h3>
+                <p className="text-sm text-gray-600">Connect with students worldwide and be part of an international community.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Heart className="w-5 h-5 text-green-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Make a Difference</h3>
+                <p className="text-sm text-gray-600">Help bring AI education to students in your community.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Award className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Scholarship Opportunity</h3>
+                <p className="text-sm text-gray-600">Compete for one of THREE $1000 scholarships!</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Building className="w-5 h-5 text-red-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Nonprofit Experience</h3>
+                <p className="text-sm text-gray-600">Gain valuable experience working with a nonprofit organization.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+              <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Target className="w-5 h-5 text-indigo-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1 text-gray-900">Expand Your Network</h3>
+                <p className="text-sm text-gray-600">Build connections with students, educators, and industry professionals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+          <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join Lumin AI today and compete for one of THREE $1000 INTERNATIONAL SCHOLARSHIPS!
+          </p>
+          <div className="flex justify-center gap-4">
+            <a 
+              href="https://forms.gle/g5MLJphJCwd3otyN8" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
+            >
+              Apply Now
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+} 
 ```
 
 # src/pages/Learn.jsx
@@ -8200,6 +9380,169 @@ export default function Learn() {
 }
 ```
 
+# src/pages/PolicyTeam.jsx
+
+```jsx
+import React from 'react';
+import { 
+  Building, 
+  FileText, 
+  Users, 
+  Target, 
+  Award,
+  MapPin,
+  TrendingUp,
+  ArrowRight,
+  CheckCircle
+} from 'lucide-react';
+
+export default function PolicyTeam() {
+
+  const teamMembers = [
+    {
+      name: "Aayush Chebolu",
+      role: "",
+      image: "/images/aayush.png",
+      description: "Legislative strategy and stakeholder engagement."
+    },
+    {
+      name: "Ayur Munipalli", 
+      role: "",
+      image: "/images/ayur.png",
+      description: "Policy coordination with legislators and schools."
+    },
+    {
+      name: "Wilson Stavros",
+      role: "",
+      image: "/images/wilson-placeholder.png", 
+      description: "AI literacy standards research."
+    },
+    {
+      name: "Shashank Madala",
+      role: "",
+      image: "/images/shashank1.png",
+      description: "Founder supporting statewide AI literacy."
+    }
+  ];
+
+  const policyGoals = [
+    "Make AI literacy part of K-12 curriculum",
+    "Support teacher training on AI concepts",
+    "Ensure equitable access to AI education",
+    "Build partnerships with schools and industry"
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Policy Team Page - Temporarily Commented Out */}
+      <div className="pt-32 pb-24">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-4xl font-bold mb-4">Policy Team</h1>
+          <p className="text-xl text-gray-600">
+            This page is temporarily unavailable.
+          </p>
+        </div>
+      </div>
+      
+      {/* 
+      Original Policy Team Page Content - Commented Out
+      
+      <section className="pt-32 pb-8 bg-gradient-to-br from-blue-600 to-purple-700 text-white">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white mb-4">
+            <Building className="w-4 h-4" />
+            Policy & Advocacy
+          </div>
+          <h1 className="text-4xl font-bold mb-2">AI Literacy for New Jersey</h1>
+          <p className="text-lg text-blue-100 mb-2">
+            Lumin AI's policy team is working to pass a bill for AI literacy in New Jersey schools.
+          </p>
+        </div>
+      </section>
+
+      <section className="py-10 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-6">Meet the Policy Team</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {teamMembers.map((member, index) => (
+              <div key={index} className="bg-gray-50 rounded-xl shadow p-5 flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
+                    <Users className="w-10 h-10 text-blue-600" />
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold mb-2">{member.name}</h3>
+                <p className="text-gray-600 text-sm text-center">{member.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-6 text-center">Our Mission & Goals</h2>
+          <p className="text-gray-700 text-center mb-10">
+            We are dedicated to making AI education accessible and equitable for all students in New Jersey by advocating for legislative change and building strong partnerships.
+          </p>
+          <div className="flex flex-col md:flex-row md:items-stretch md:gap-8 gap-6">
+            <div className="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center">
+              <div className="mb-4">
+                <CheckCircle className="w-12 h-12 text-green-500 mx-auto" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Policy Goals</h3>
+              <ul className="list-disc list-inside text-gray-700 text-left space-y-2">
+                {policyGoals.map((goal, i) => <li key={i}>{goal}</li>)}
+              </ul>
+            </div>
+            <div className="hidden md:flex items-center">
+              <div className="w-px h-40 bg-gray-200" />
+            </div>
+            <div className="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center">
+              <div className="mb-4">
+                <Award className="w-12 h-12 text-yellow-500 mx-auto" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Impact</h3>
+              <ul className="list-disc list-inside text-gray-700 text-left space-y-2">
+                <li>Drafting and advocating for AI literacy legislation</li>
+                <li>Engaging with educators, administrators, and policymakers</li>
+                <li>Building a foundation for future-ready education</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-10 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-2xl mx-auto px-4 text-center text-white">
+          <h2 className="text-2xl font-bold mb-4">Support Our Mission</h2>
+          <p className="mb-6 opacity-90">
+            Join us in making AI literacy a reality for every student in New Jersey.
+          </p>
+          <a 
+            href="/contact-us" 
+            className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          >
+            Get Involved
+            <ArrowRight className="w-5 h-5" />
+          </a>
+        </div>
+      </section>
+      */}
+    </div>
+  );
+} 
+```
+
 # src/pages/SummerProgram.jsx
 
 ```jsx
@@ -8278,91 +9621,131 @@ export default function SummerProgram() {
 
   const weeks = {
     1: {
-      title: "Introduction to AI & Machine Learning",
-      description: "Understanding AI fundamentals and how machines learn",
+      title: "Introduction to AI & Machine Learning Basics",
+      description: "Explore what AI is, real-world applications, and how machines learn from data.",
       sessions: [
         {
           title: "What is AI?",
-          description: "AI Scavenger Hunt & Real-World Applications",
-          outcomes: ["Identify real-world AI applications", "Categorize AI types", "Discuss AI impacts"],
+          description: "Icebreakers, AI Scavenger Hunt, and Group Presentations",
+          outcomes: [
+            "Identify and categorize real-world AI applications",
+            "Discuss benefits, risks, and ethical considerations",
+            "Present findings and ask questions about AI's impact"
+          ],
           icon: <Brain className="w-6 h-6" />
         },
         {
           title: "How AI Learns",
-          description: "AI Detective: Spot the Pattern",
-          outcomes: ["Recognize patterns in data", "Understand supervised vs. unsupervised learning", "Make AI predictions"],
+          description: "Supervised vs. Unsupervised Learning Activities",
+          outcomes: [
+            "Recognize patterns in labeled and unlabeled data",
+            "Understand supervised vs. unsupervised learning",
+            "Explain how AI uses data to make predictions"
+          ],
           icon: <Sparkles className="w-6 h-6" />
         }
       ]
     },
     2: {
-      title: "Natural Language Processing & Ethics",
-      description: "Exploring how AI understands language and ethical considerations",
+      title: "Natural Language Processing (NLP) & AI Ethics",
+      description: "Learn how AI understands language and discuss fairness and bias in AI systems.",
       sessions: [
         {
-          title: "NLP & Language Understanding",
-          description: "AI Chatbot Simulation",
-          outcomes: ["Simulate chatbot conversations", "Understand intent and context", "Compare with real AI systems"],
+          title: "NLP & How AI Understands Language",
+          description: "Chatbot Simulation, Sentence Dissection, and Code Demo",
+          outcomes: [
+            "Break down chatbot conversations into intent, keywords, and context",
+            "Tokenize and analyze sentences (offline or with code)",
+            "Compare rule-based vs. ML-based chatbots"
+          ],
           icon: <Code className="w-6 h-6" />
         },
         {
           title: "Ethics & Bias in AI",
-          description: "AI Fairness Debate & Experiment",
-          outcomes: ["Debate AI fairness issues", "Identify bias in datasets", "Create strategies for fair AI"],
+          description: "AI Fairness Debate & Bias Experiment",
+          outcomes: [
+            "Debate fairness in AI (roles: business, government, citizen)",
+            "Identify and test bias in AI models using hands-on experiments",
+            "Discuss real-world impact of AI bias"
+          ],
           icon: <Target className="w-6 h-6" />
         }
       ]
     },
     3: {
       title: "Building Blocks of Chatbots",
-      description: "Learning the fundamentals of chatbot development",
+      description: "Design chatbot flowcharts and code simple chatbots in Python.",
       sessions: [
         {
           title: "How Chatbots Work",
-          description: "Chatbot Script & Flowchart Challenge",
-          outcomes: ["Design conversation flowcharts", "Create chatbot interactions", "Identify limitations"],
+          description: "Flowchart Challenge and Roleplay",
+          outcomes: [
+            "Create a conversation flowchart for a chatbot topic",
+            "Roleplay chatbot interactions and identify breakdowns",
+            "Discuss differences between scripted and AI chatbots"
+          ],
           icon: <Brain className="w-6 h-6" />
         },
         {
           title: "Intro to Python for AI",
-          description: "Coding a Simple Chatbot",
-          outcomes: ["Write basic Python code", "Create if-else responses", "Test chatbot functionality"],
+          description: "Hands-on Coding: Build a Simple Chatbot",
+          outcomes: [
+            "Modify a Python chatbot script with if-else logic",
+            "Test and customize chatbot responses",
+            "Explore advanced AI-powered chatbot models"
+          ],
           icon: <Code className="w-6 h-6" />
         }
       ]
     },
     4: {
       title: "Project Phase – Building the Chatbot",
-      description: "Designing and implementing personal AI chatbots",
+      description: "Plan, wireframe, and start building your own AI chatbot.",
       sessions: [
         {
           title: "Planning the Chatbot",
-          description: "AI Mind Mapping & Wireframing",
-          outcomes: ["Define chatbot purpose", "Create user experience design", "Plan chatbot responses"],
+          description: "Mind Mapping, Wireframing, and Peer Feedback",
+          outcomes: [
+            "Map out chatbot goals, users, and key functions",
+            "Create a wireframe for chatbot interactions",
+            "Refine ideas through peer discussion and feedback"
+          ],
           icon: <Sparkles className="w-6 h-6" />
         },
         {
           title: "Developing the Chatbot",
-          description: "AI Model & Implementation",
-          outcomes: ["Implement pre-trained models", "Customize responses", "Test functionality"],
+          description: "Build with Pre-Trained AI Models & Peer Testing",
+          outcomes: [
+            "Integrate a pre-trained AI model into your chatbot",
+            "Customize responses and test with peers",
+            "Discuss how models improve with more data"
+          ],
           icon: <Target className="w-6 h-6" />
         }
       ]
     },
     5: {
       title: "Testing, Improving, and Showcasing",
-      description: "Finalizing and presenting AI chatbot projects",
+      description: "Debug, optimize, and present your chatbot project.",
       sessions: [
         {
           title: "Debugging & Improving Chatbots",
-          description: "AI User Testing & Optimization",
-          outcomes: ["Conduct peer testing", "Debug and fix issues", "Optimize responses"],
+          description: "User Testing, Bug Fixing, and Optimization",
+          outcomes: [
+            "Test and debug chatbot projects with peers",
+            "Fix errors and improve responses based on feedback",
+            "Understand the importance of iterative testing"
+          ],
           icon: <Code className="w-6 h-6" />
         },
         {
-          title: "Final Showcase & Keynote Speaker",
-          description: "Chatbot Presentations & Industry Insights",
-          outcomes: ["Present finished projects", "Receive peer feedback", "Learn from AI industry leader"],
+          title: "Final Showcase & Future of AI",
+          description: "Chatbot Presentations, Peer Feedback, and Career Paths",
+          outcomes: [
+            "Present chatbot projects and receive peer feedback",
+            "Vote on creative and best AI implementations",
+            "Discuss real-world AI applications and career paths"
+          ],
           icon: <Award className="w-6 h-6" />
         }
       ]
@@ -8412,12 +9795,9 @@ export default function SummerProgram() {
             <div className="animate-on-scroll from-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
                 <Star className="w-4 h-4" />
-                Choose from two sessions:
+                Summer Session Available:
               </div>
               <div className="flex gap-4 mb-6">
-                <div className="px-4 py-2 bg-purple-100 rounded-full text-purple-700">
-                  Session 1: June 28 - July 27
-                </div>
                 <div className="px-4 py-2 bg-pink-100 rounded-full text-pink-700">
                   Session 2: August 7 - September 5
                 </div>
@@ -8611,12 +9991,12 @@ export default function SummerProgram() {
       <section className="py-16 bg-gradient-to-br from-blue-800 to-purple-900 text-white relative">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4 mx-auto">
               <Mic className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-4xl font-bold mb-4">Special Keynote Speaker</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Wrap up your AI learning journey with inspiration from a leader in the AI industry
+              Wrap up your AI learning journey with inspiration from a leader at <span className="font-bold text-white">CoreWeave</span>, a pioneering company powering the next generation of AI innovation.
             </p>
           </div>
 
@@ -8627,8 +10007,8 @@ export default function SummerProgram() {
                   <Star className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold">Industry Expert Insights</h3>
-                  <p className="text-blue-100">Hear from someone working at the cutting edge of AI technology about real-world applications and future developments.</p>
+                  <h3 className="text-xl font-semibold">Insights from a Leading AI Infrastructure Company</h3>
+                  <p className="text-blue-100">Our guest speaker from <span className='font-bold text-white'>CoreWeave</span>—a company at the forefront of powering large-scale AI and machine learning—will share real-world applications, industry trends, and the future of AI technology.</p>
                 </div>
               </div>
               
@@ -8638,7 +10018,7 @@ export default function SummerProgram() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Interactive Q&A Session</h3>
-                  <p className="text-blue-100">Students will have the opportunity to ask questions and engage directly with our guest speaker.</p>
+                  <p className="text-blue-100">Students will have the opportunity to ask questions and engage directly with our guest speaker from CoreWeave.</p>
                 </div>
               </div>
               
@@ -8648,14 +10028,14 @@ export default function SummerProgram() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold">Career Pathways</h3>
-                  <p className="text-blue-100">Learn about different career paths in AI and what skills students should develop for future opportunities.</p>
+                  <p className="text-blue-100">Learn about different career paths in AI and what skills students should develop for future opportunities, directly from a CoreWeave industry expert.</p>
                 </div>
               </div>
             </div>
             
             <div className="mt-8 text-center">
               <p className="text-lg italic text-white/80">
-                "We're excited to feature a special guest speaker from the AI industry who will share their experience and inspire our young AI enthusiasts."
+                "We're thrilled to feature a special guest speaker from <span className='font-bold text-white'>CoreWeave</span>, a leader in AI infrastructure, who will share their experience and inspire our young AI enthusiasts."
               </p>
               <p className="mt-2 text-blue-300">Speaker details will be announced closer to the program date</p>
             </div>
@@ -8728,8 +10108,7 @@ export default function SummerProgram() {
                   <div className="flex items-start gap-4">
                     <Calendar className="w-6 h-6 text-blue-200 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Choose Your Session:</p>
-                      <p className="text-blue-100">Session 1: June 28 - July 27, 2025</p>
+                      <p className="font-medium">Available Session:</p>
                       <p className="text-blue-100">Session 2: August 7 - September 5, 2025</p>
                     </div>
                   </div>
@@ -9205,6 +10584,19 @@ export default {
     require('@tailwindcss/typography'), // Add this if you want to use prose classes
   ],
 }
+```
+
+# vercel.json
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+} 
 ```
 
 # vite.config.js
