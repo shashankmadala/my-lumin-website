@@ -14,18 +14,18 @@ const founders = [
       email: "mailto:madala.shashank@gmail.com"
     }
   },
-  {
-    name: "Ayur Munipalli",
-    role: "Founder & Co-CEO",
-    bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
-    vision: "Making complex AI concepts approachable and exciting for every student.",
-    image: "images/ayur.png",
-    links: {
-      linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
-      github: "https://github.com/ayurmunipalli",
-      email: "mailto:26munipallia@gmail.com"
-    }
-  }
+  // {
+  //   name: "Ayur Munipalli",
+  //   role: "Founder & Co-CEO",
+  //   bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
+  //   vision: "Making complex AI concepts approachable and exciting for every student.",
+  //   image: "images/ayur.png",
+  //   links: {
+  //     linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
+  //     github: "https://github.com/ayurmunipalli",
+  //     email: "mailto:26munipallia@gmail.com"
+  //   }
+  // }
 ];
 
 export default function Founders() {
@@ -62,8 +62,9 @@ export default function Founders() {
       {/* Founders Cards */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {founders.map((founder, index) => (
+          <div className="flex justify-center">
+            <div className="max-w-2xl">
+              {founders.map((founder, index) => (
               <div 
                 key={founder.name}
                 className="group bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 relative overflow-hidden"
@@ -144,7 +145,8 @@ export default function Founders() {
                 {/* Elegant shine effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
               </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
