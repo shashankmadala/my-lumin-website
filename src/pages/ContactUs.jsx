@@ -79,8 +79,8 @@ const ContactUs = () => {
     {
       icon: <Instagram className="w-5 h-5" />,
       name: "Instagram",
-      handle: "@lumin.ai",
-      link: "https://instagram.com/lumin.ai"
+      handle: "@luminlearningai",
+      link: "https://www.instagram.com/luminlearningai/"
     }
   ];
 
