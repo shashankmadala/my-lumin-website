@@ -439,6 +439,53 @@ export default function SummerProgram() {
         </div>
       </section>
 
+      {/* Teachers Section */}
+      <section className="py-16 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Meet Your Instructors</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Learn from experienced AI educators and industry professionals who are passionate about making AI accessible to young minds
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="/images/shashank1.png" 
+                  alt="Shashank Madala" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold">Shashank Madala</h3>
+            </div>
+
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="images/ayur.png" 
+                  alt="Ayur Munipalli" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold">Ayur Munipalli</h3>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden shadow-lg">
+                <img 
+                  src="/images/aayush.png" 
+                  alt="Aayush" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold">Aayush</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Special Keynote Speaker Section */}
       <section className="py-16 bg-gradient-to-br from-blue-800 to-purple-900 text-white relative">
         <div className="max-w-5xl mx-auto px-4">
