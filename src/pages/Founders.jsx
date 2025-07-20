@@ -14,18 +14,18 @@ const founders = [
       email: "mailto:madala.shashank@gmail.com"
     }
   },
-  // {
-  //   name: "Ayur Munipalli",
-  //   role: "Founder & Co-CEO",
-  //   bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
-  //   vision: "Making complex AI concepts approachable and exciting for every student.",
-  //   image: "images/ayur.png",
-  //   links: {
-  //     linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
-  //     github: "https://github.com/ayurmunipalli",
-  //     email: "mailto:26munipallia@gmail.com"
-  //   }
-  // }
+  {
+    name: "Ayur Munipalli",
+    role: "Founder & Co-CEO",
+    bio: "Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.",
+    vision: "Making complex AI concepts approachable and exciting for every student.",
+    image: "/images/ayur.png",
+    links: {
+      linkedin: "https://www.linkedin.com/in/ayur-munipalli/",
+      github: "https://github.com/ayurmunipalli",
+      email: "mailto:26munipallia@gmail.com"
+    }
+  }
 ];
 
 export default function Founders() {
