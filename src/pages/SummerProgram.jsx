@@ -480,7 +480,7 @@ export default function SummerProgram() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-bold">Aayush</h3>
+              <h3 className="text-xl font-bold">Aayush Chebolu</h3>
             </div>
           </div>
         </div>
