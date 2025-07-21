@@ -1,8 +1,2 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+About the Organization
+LuminAI is a student-founded 501(c)(3) nonprofit dedicated to expanding access to artificial intelligence (AI) education for students in grades 6–12. Since launching in 2023, LuminAI has delivered accessible, hands-on AI programming to over 5200 students across five countries, including regions in South Asia, Eastern Europe, and rural areas of the United States. With an emphasis on ethical use, technical skill development, and real-world relevance, LuminAI equips students with the tools to understand and shape the future of technology.
