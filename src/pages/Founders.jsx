@@ -29,7 +29,7 @@ const founders = [
 ];
 
 const aayush = {
-  name: "Aayush",
+  name: "Aayush Chebolu",
   role: "Co-Founder & CTO",
   bio: "Passionate about creating innovative solutions and driving technological advancement in education.",
   vision: "Building the future of AI education through collaboration and innovation.",
