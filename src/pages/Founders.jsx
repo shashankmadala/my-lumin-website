@@ -46,7 +46,7 @@ const wilson = {
   role: "National Policy Lead",
   bio: "Leading policy initiatives and strategic partnerships to advance AI education across the nation.",
   vision: "Creating inclusive policies that make AI education accessible to all students.",
-  image: "", // Blank profile for Wilson
+  image: "/images/wilson.png",
   links: {
     linkedin: "#",
     github: "#",
@@ -54,7 +54,7 @@ const wilson = {
   }
 };
 
-export default function Founders() {
+export default function Leadership() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
@@ -74,7 +74,7 @@ export default function Founders() {
               Leadership Team
             </div>
             <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Leadership Team
+              Leadership
             </h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Meet the passionate leaders dedicated to transforming AI education and empowering the next generation of innovators
@@ -83,7 +83,7 @@ export default function Founders() {
         </div>
       </section>
 
-      {/* Founders Cards */}
+      {/* Leadership Cards */}
       <section className="pb-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center">
@@ -277,11 +277,11 @@ export default function Founders() {
                     <div className="relative mb-6">
                       <div className="w-32 h-32 rounded-full overflow-hidden shadow-2xl mb-4 relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full"></div>
-                        <div className="w-full h-full bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center relative z-10">
-                          <div className="text-4xl font-bold text-orange-400">
-                            {wilson.name.charAt(0)}
-                          </div>
-                        </div>
+                        <img 
+                          src={wilson.image} 
+                          alt={wilson.name}
+                          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 relative z-10"
+                        />
                       </div>
                       {/* Status indicator */}
                       <div className="absolute bottom-2 right-2 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>

@@ -6,7 +6,7 @@ export default function Footer() {
   const footerLinks = {
     company: [
       { name: 'About Us', path: '/about' },
-      { name: 'Founders', path: '/founders' },
+      { name: 'Leadership', path: '/founders' },
       { name: 'Careers', path: '/careers' },
       { name: 'Contact Us', path: '/contact-us' },
     ],

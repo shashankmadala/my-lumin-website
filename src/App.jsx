@@ -5,7 +5,7 @@ import SummerProgram from './pages/SummerProgram.jsx';
 import ContactUs from './pages/ContactUs.jsx';
 import Learn from './pages/Learn.jsx';
 import Navigation from './components/Navigation.jsx';
-import Founders from './pages/Founders.jsx';
+import Leadership from './pages/Founders.jsx';
 import PolicyTeam from './pages/PolicyTeam.jsx';
 import Chapters from './pages/Chapters.jsx';
 import JoinUs from './pages/JoinUs.jsx';
@@ -21,7 +21,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
             <Route path='/contact-us' element={<ContactUs />} />
-            <Route path='/founders' element={<Founders />} />
+            <Route path='/founders' element={<Leadership />} />
             <Route path='/policy-team' element={<PolicyTeam />} />
             <Route path='/chapters' element={<Chapters />} />
             <Route path='/join-us' element={<JoinUs />} />

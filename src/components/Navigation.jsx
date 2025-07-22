@@ -8,7 +8,7 @@ const links = [
     text: 'About',
     id: 'about',
     dropdown: [
-      { to: '/founders', text: 'Founders', id: 'founders' },
+      { to: '/founders', text: 'Leadership', id: 'founders' },
       { to: '/chapters', text: 'Chapters', id: 'chapters' },
     ]
   },
