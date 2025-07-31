@@ -608,7 +608,7 @@ export default function SummerProgram() {
                     <Calendar className="w-6 h-6 text-blue-200 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Available Session:</p>
-                      <p className="text-blue-100">Session 2: August 7 - September 5, 2025</p>
+                      <p className="text-blue-100">Session 2: August 9 - September 7, 2025</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
