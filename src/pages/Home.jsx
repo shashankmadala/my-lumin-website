@@ -55,7 +55,7 @@ export default function HomePage() {
   const animateNumbers = () => {
     const targets = {
       students: 5500,
-      raised: 10000,
+      raised: 10200,
       modules: 20,
       countries: 6,
       chapters: 15
