@@ -332,6 +332,95 @@ export default function SummerProgram() {
         </div>
       </section>
 
+      {/* Session 1 Overview Video Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50 relative">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+              <PlayCircle className="w-6 h-6 text-blue-600" />
+            </div>
+            <h2 className="text-3xl font-bold mb-3">See Our Program in Action!</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Watch highlights from Session 1 and hear directly from our students about their experience
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Video */}
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+              <div className="aspect-video relative">
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="/images/lumin.png"
+                  preload="metadata"
+                >
+                  <source src="/videos/session1-overview.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-sm text-gray-600">
+                  <span className="font-semibold text-blue-600">Duration:</span> 1 minute 4 seconds
+                </p>
+              </div>
+            </div>
+
+            {/* Content alongside video */}
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">Student Testimonials & Program Highlights</h3>
+                <p className="text-gray-600 mb-6">
+                  Hear directly from our participants about their favorite parts of the program and see how they engaged with AI concepts.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Star className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">What Students Loved</h4>
+                    <p className="text-gray-600 text-sm">Hear directly from our participants about their favorite parts of the program</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Brain className="w-5 h-5 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Learning Experience</h4>
+                    <p className="text-gray-600 text-sm">See how students engaged with AI concepts and hands-on projects</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Users className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Community & Fun</h4>
+                    <p className="text-gray-600 text-sm">Witness the collaborative learning environment and student camaraderie</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <a 
+                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+                >
+                  Enroll for Session 2
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Program Overview Section */}
       <section className="py-16 bg-white relative">
         <div className="max-w-7xl mx-auto px-4">
