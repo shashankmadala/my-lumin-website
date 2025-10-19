@@ -8,6 +8,7 @@ const links = [
   { to: '/chapters', text: 'Chapters', id: 'chapters' },
   { to: '/join-us', text: 'Join Us', id: 'join' },
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
+  { to: '/hackathon', text: 'Hackathon', id: 'hackathon' },
   { to: '/learn', text: 'Learn', id: 'learn' },
   { to: '/contact-us', text: 'Contact', id: 'contact' }
 ];

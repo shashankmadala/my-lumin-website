@@ -9,6 +9,7 @@ import Leadership from './pages/Founders.jsx';
 import PolicyTeam from './pages/PolicyTeam.jsx';
 import Chapters from './pages/Chapters.jsx';
 import JoinUs from './pages/JoinUs.jsx';
+import Hackathon from './pages/Hackathon.jsx';
 import { Analytics } from "@vercel/analytics/react"
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='/policy-team' element={<PolicyTeam />} />
             <Route path='/chapters' element={<Chapters />} />
             <Route path='/join-us' element={<JoinUs />} />
+            <Route path='/hackathon' element={<Hackathon />} />
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
