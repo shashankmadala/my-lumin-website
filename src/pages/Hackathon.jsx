@@ -155,7 +155,7 @@ export default function HackathonPage() {
                   <Users className="w-6 h-6 text-purple-600" />
                   <span className="font-semibold text-gray-900">Participants</span>
                 </div>
-                <p className="text-sm text-gray-600">62 participants</p>
+                <p className="text-sm text-gray-600">127 participants</p>
               </div>
             </div>
           </div>
