@@ -308,6 +308,112 @@ export default function Chapters() {
         </div>
       </section>
 
+      {/* Meet Chapter Founders Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Meet Chapter Founders</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Passionate leaders bringing AI education to their local communities around the world
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Founder 1 */}
+            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
+                <img 
+                  src="/images/shashank1.png" 
+                  alt="Shashank Madala"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
+                  <Users className="w-16 h-16 text-blue-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Shashank Madala</h3>
+              <p className="text-sm text-gray-600 mb-3">Co-Founder & Co-CEO</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Committed to revolutionizing STEM education through accessible AI learning. Leads Lumin AI's mission to empower the next generation of innovators.
+              </p>
+            </div>
+
+            {/* Founder 2 */}
+            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
+                <img 
+                  src="/images/ayur.png" 
+                  alt="Ayur Munipalli"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
+                  <Users className="w-16 h-16 text-blue-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Ayur Munipalli</h3>
+              <p className="text-sm text-gray-600 mb-3">Co-Founder & Co-CEO</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.
+              </p>
+            </div>
+
+            {/* Founder 3 */}
+            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
+                <img 
+                  src="/images/aayush.png" 
+                  alt="Aayush Chebolu"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
+                  <Users className="w-16 h-16 text-blue-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Aayush Chebolu</h3>
+              <p className="text-sm text-gray-600 mb-3">Co-Founder & CTO</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Passionate about creating innovative solutions and driving technological advancement in education. Building the future of AI education through collaboration.
+              </p>
+            </div>
+
+            {/* Founder 4 */}
+            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
+                <img 
+                  src="/images/wilson.png" 
+                  alt="Wilson Stavros"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
+                  <Users className="w-16 h-16 text-blue-600" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Wilson Stavros</h3>
+              <p className="text-sm text-gray-600 mb-3">National Policy Lead</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Leading policy initiatives and strategic partnerships to advance AI education across the nation. Creating inclusive policies that make AI education accessible to all.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-3xl mx-auto px-4 text-center text-white">

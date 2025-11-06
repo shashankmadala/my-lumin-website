@@ -54,10 +54,10 @@ export default function HomePage() {
 
   const animateNumbers = () => {
     const targets = {
-      students: 5500,
-      raised: 10200,
+      students: 15000,
+      raised: 19800,
       modules: 20,
-      countries: 6,
+      countries: 16,
       chapters: 15
     };
 
@@ -231,7 +231,10 @@ export default function HomePage() {
                   
                   {/* Number */}
                   <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-all duration-500 group-hover:scale-110">
-                    {stat.prefix || ''}{stat.value.toLocaleString()}{stat.suffix}
+                    {stat.key === 'raised' 
+                      ? `$${(stat.value / 1000).toFixed(1)}K`
+                      : `${stat.prefix || ''}${stat.value.toLocaleString()}${stat.suffix}`
+                    }
                   </div>
                   
                   {/* Label */}
@@ -289,7 +292,7 @@ export default function HomePage() {
               {
                 icon: <Globe className="w-6 h-6 text-blue-600"/>,
                 title: "Global Community",
-                description: "Join our international network of 15+ chapters across 6 countries"
+                description: "Join our international network of 15+ chapters across 16 countries"
               },
               {
                 icon: <Award className="w-6 h-6 text-blue-600"/>,
@@ -337,7 +340,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Chapters Section */}
             <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-4 mb-6">
@@ -347,11 +350,11 @@ export default function HomePage() {
                 <h3 className="text-2xl font-bold">Global Chapters</h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Our international network spans 6 countries with 15+ active chapters, bringing AI education to students worldwide.
+                Our international network spans 16 countries with 15+ active chapters, bringing AI education to students worldwide.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">6</div>
+                  <div className="text-2xl font-bold text-blue-600">16</div>
                   <div className="text-sm text-gray-600">Countries</div>
                 </div>
                 <div className="text-center">
@@ -398,6 +401,40 @@ export default function HomePage() {
                 className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium"
               >
                 Start Learning Today
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* NJ AI Hub Section */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                  <Building className="w-6 h-6 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold">NJ AI Hub</h3>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Partnering with NJ AI Hub to implement digital literacy lessons in 30+ schools across New Jersey.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Digital literacy curriculum</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">30+ partner schools</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-green-500" />
+                  <span className="text-sm text-gray-600">Expanding AI education access</span>
+                </div>
+              </div>
+              <Link 
+                to="/policy-team" 
+                className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium"
+              >
+                Learn More
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
