@@ -243,25 +243,40 @@ export default function SummerProgram() {
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
+          {/* Closed Banner */}
+          <div className="mb-8 animate-on-scroll from-bottom">
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl p-6 shadow-xl border-4 border-red-600">
+              <div className="flex items-center justify-center gap-4 text-white">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <Calendar className="w-6 h-6" />
+                </div>
+                <div className="text-center">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">Program Closed for 2024</h2>
+                  <p className="text-lg md:text-xl opacity-90">Thank you for your interest! The summer program has concluded for this year. Check back in 2025 for next year's sessions!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-on-scroll from-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full text-gray-600 mb-6">
                 <Star className="w-4 h-4" />
-                Summer Session Available:
+                Program Status: Closed
               </div>
               <div className="flex gap-4 mb-6">
-                <div className="px-4 py-2 bg-pink-100 rounded-full text-pink-700">
+                <div className="px-4 py-2 bg-gray-100 rounded-full text-gray-600 line-through">
                   Session 2: August 7 - September 5
                 </div>
               </div>
               <div className="mb-6">
-                <div className="inline-flex flex-wrap items-center gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-5 py-3 shadow-sm">
-                  <Clock className="w-5 h-5 text-yellow-500 mr-2" />
-                  <span className="font-semibold text-gray-800">Available Times (EST):</span>
-                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">10–11am</span>
-                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">11–12pm</span>
-                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-yellow-700 border border-yellow-200">12–1pm</span>
-                  <span className="text-gray-600 text-sm ml-2">(Pick your preferred time!)</span>
+                <div className="inline-flex flex-wrap items-center gap-3 bg-gray-50 border border-gray-300 rounded-xl px-5 py-3 shadow-sm opacity-60">
+                  <Clock className="w-5 h-5 text-gray-500 mr-2" />
+                  <span className="font-semibold text-gray-600">Available Times (EST):</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-gray-500 border border-gray-300 line-through">10–11am</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-gray-500 border border-gray-300 line-through">11–12pm</span>
+                  <span className="bg-white rounded-full px-3 py-1 text-sm font-medium text-gray-500 border border-gray-300 line-through">12–1pm</span>
+                  <span className="text-gray-500 text-sm ml-2">(Program closed)</span>
                 </div>
               </div>
               <h1 className="text-6xl font-bold text-gray-900 tracking-tight mb-6">
@@ -274,13 +289,18 @@ export default function SummerProgram() {
                 Join our 5-week AI program designed specifically for middle school students ages 11-14 (grades 6-8)
               </p>
               <div className="flex gap-4">
+                <button
+                  disabled
+                  className="inline-flex items-center gap-2 bg-gray-400 text-white px-8 py-3 rounded-full cursor-not-allowed opacity-60"
+                >
+                  Program Closed
+                  <Calendar className="w-5 h-5" />
+                </button>
                 <a 
-                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  href="/contact-us"
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 >
-                  Apply Now
+                  Contact Us
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
@@ -635,8 +655,8 @@ export default function SummerProgram() {
       <section className="py-24 bg-white relative">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Program Details & Enrollment</h2>
-            <p className="text-xl text-gray-600">Invest in your child's AI education journey</p>
+            <h2 className="text-4xl font-bold mb-4">Program Details</h2>
+            <p className="text-xl text-gray-600">Program closed for 2024 - Check back in 2025!</p>
           </div>
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl overflow-hidden shadow-lg mb-16">
@@ -679,13 +699,18 @@ export default function SummerProgram() {
                   </div>
                 </div>
                 
-                <a 
-                  href="https://forms.gle/YzAwMRgzQq8saqrPA" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300"
+                <button
+                  disabled
+                  className="inline-flex items-center gap-2 bg-gray-400 text-white px-8 py-3 rounded-lg cursor-not-allowed opacity-60"
                 >
-                  Enroll Now
+                  Enrollment Closed
+                  <Calendar className="w-5 h-5" />
+                </button>
+                <a 
+                  href="/contact-us"
+                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300 mt-4"
+                >
+                  Contact Us for 2025
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
@@ -843,20 +868,26 @@ export default function SummerProgram() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-24 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Start Your AI Journey Today</h2>
+          <h2 className="text-4xl font-bold mb-6">Program Closed for 2024</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join our innovative summer program and discover the exciting world of artificial intelligence
+            Thank you for your interest in the LuminAI Summer Seminar! The program has concluded for this year. 
+            Check back in 2025 for next year's exciting AI education opportunities.
           </p>
           <div className="flex justify-center gap-4">
             <a 
-              href="https://forms.gle/YzAwMRgzQq8saqrPA" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              href="/contact-us"
+              className="inline-flex items-center gap-2 bg-white text-gray-700 px-8 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              Apply Now
+              Contact Us
+              <ArrowRight className="w-5 h-5" />
+            </a>
+            <a 
+              href="/learn"
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            >
+              Explore Free Learning
               <ArrowRight className="w-5 h-5" />
             </a>
           </div>

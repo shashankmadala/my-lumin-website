@@ -110,7 +110,7 @@ export default function HomePage() {
 
   // Define gallery images - these will be loaded from the public folder
   const galleryImages = [
-    { src: "/gallery/IMG_8314-2.jpg", alt: "Students learning AI concepts" },
+    { src: "/images/home.png", alt: "Lumin AI home hero" },
     { src: "/gallery/IMG_8315.jpg", alt: "Interactive AI workshop" },
     { src: "/gallery/IMG_8316.jpg", alt: "Students collaborating on projects" },
     { src: "/gallery/IMG_8317.jpg", alt: "AI education in action" },
@@ -161,14 +161,14 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <Link 
                   to="/summer-program" 
-                  className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
-                  style={{ boxShadow: '0 0 32px 8px rgba(168, 85, 247, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
+                  className="inline-flex items-center gap-2 bg-gray-500 text-white px-8 py-4 rounded-full hover:bg-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
+                  style={{ boxShadow: '0 0 32px 8px rgba(107, 114, 128, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Join Summer Program
+                    Summer Program (Closed)
                   </span>
-                  <span className="ml-3 relative z-10 bg-yellow-400 text-purple-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse whitespace-nowrap">
-                    Limited Time!
+                  <span className="ml-3 relative z-10 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap">
+                    Closed 2024
                   </span>
                 </Link>
                 <Link 
@@ -575,11 +575,11 @@ export default function HomePage() {
                   </Link>
                   <Link
                     to="/summer-program"
-                    className="bg-purple-600 text-white px-8 py-4 rounded-xl hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                    className="bg-gray-500 text-white px-8 py-4 rounded-xl hover:bg-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2 opacity-75"
                   >
                     <Users className="w-8 h-8" />
-                    <span className="font-semibold">Join Summer Program</span>
-                    <span className="text-sm text-purple-100">Live online sessions</span>
+                    <span className="font-semibold">Summer Program</span>
+                    <span className="text-sm text-gray-200">Closed for 2024</span>
                   </Link>
                   <Link
                     to="/join-us"
