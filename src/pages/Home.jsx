@@ -186,7 +186,7 @@ export default function HomePage() {
                 <img 
                   src={galleryImages[0].src}
                   alt={galleryImages[0].alt}
-                  className="relative rounded-3xl shadow-2xl w-80 h-80 lg:w-96 lg:h-96 object-cover transform -rotate-3 hover:rotate-0 transition-transform duration-500" 
+                  className="relative rounded-3xl shadow-2xl w-80 lg:w-[32rem] h-auto object-contain bg-white transform -rotate-3 hover:rotate-0 transition-transform duration-500" 
                   onError={(e) => {
                     e.target.style.display = 'none';
                     console.log('Image failed to load:', e.target.src);
