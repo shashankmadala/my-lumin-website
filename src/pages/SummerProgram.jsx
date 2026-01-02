@@ -251,7 +251,7 @@ export default function SummerProgram() {
                   <Calendar className="w-6 h-6" />
                 </div>
                 <div className="text-center">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">Program Closed for 2024</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-2">Program Closed for 2025</h2>
                   <p className="text-lg md:text-xl opacity-90">Thank you for your interest! The summer program has concluded for this year. Check back in 2025 for next year's sessions!</p>
                 </div>
               </div>
@@ -656,7 +656,7 @@ export default function SummerProgram() {
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Program Details</h2>
-            <p className="text-xl text-gray-600">Program closed for 2024 - Check back in 2025!</p>
+            <p className="text-xl text-gray-600">Program closed for 2025 - Check back in 2026!</p>
           </div>
 
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl overflow-hidden shadow-lg mb-16">
@@ -870,7 +870,7 @@ export default function SummerProgram() {
       {/* Final CTA */}
       <section className="py-24 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Program Closed for 2024</h2>
+          <h2 className="text-4xl font-bold mb-6">Program Closed for 2025</h2>
           <p className="text-xl mb-8 opacity-90">
             Thank you for your interest in the LuminAI Summer Seminar! The program has concluded for this year. 
             Check back in 2025 for next year's exciting AI education opportunities.
