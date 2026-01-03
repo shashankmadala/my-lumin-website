@@ -873,7 +873,7 @@ export default function SummerProgram() {
           <h2 className="text-4xl font-bold mb-6">Program Closed for 2025</h2>
           <p className="text-xl mb-8 opacity-90">
             Thank you for your interest in the LuminAI Summer Seminar! The program has concluded for this year. 
-            Check back in 2025 for next year's exciting AI education opportunities.
+            Check back in 2026 for next year's exciting AI education opportunities.
           </p>
           <div className="flex justify-center gap-4">
             <a 
