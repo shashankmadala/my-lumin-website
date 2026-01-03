@@ -252,7 +252,7 @@ export default function SummerProgram() {
                 </div>
                 <div className="text-center">
                   <h2 className="text-2xl md:text-3xl font-bold mb-2">Program Closed for 2025</h2>
-                  <p className="text-lg md:text-xl opacity-90">Thank you for your interest! The summer program has concluded for this year. Check back in 2025 for next year's sessions!</p>
+                  <p className="text-lg md:text-xl opacity-90">Thank you for your interest! The summer program has concluded for this year. Check back in 2026 for next year's sessions!</p>
                 </div>
               </div>
             </div>
