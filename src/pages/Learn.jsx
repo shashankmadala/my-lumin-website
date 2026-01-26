@@ -110,8 +110,7 @@ export default function Learn() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
-      
-      {/* Progress Bar */}
+
       <div className="fixed top-16 left-0 right-0 h-1 bg-gray-100 z-50">
         <div 
           className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-all duration-1000 progress-bar"
@@ -156,7 +155,7 @@ export default function Learn() {
             />
           ) : (
             <div className="grid grid-cols-12 gap-8">
-              {/* Sidebar Toggle (Mobile) */}
+              
               <button
                 className="fixed bottom-4 right-4 lg:hidden z-50 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300"
                 onClick={() => setShowSidebar(!showSidebar)}
@@ -164,7 +163,6 @@ export default function Learn() {
                 <Brain className="w-6 h-6" />
               </button>
 
-              {/* Main Content */}
               <div className={`${activeLesson ? 'col-span-12 lg:col-span-8' : 'col-span-12'}`}>
                 {activeLesson ? (
                   <div>
@@ -186,13 +184,12 @@ export default function Learn() {
                   </div>
                 ) : (
                   <div className="space-y-8">
-                    {/* Progress Tracker */}
+                    
                     <ProgressTracker 
                       progress={progress}
                       totalLessons={calculateTotalLessons()}
                     />
 
-                    {/* Quick Actions */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                       <button 
                         onClick={handleStartExam}
@@ -235,13 +232,11 @@ export default function Learn() {
                       </button>
                     </div>
 
-                    {/* Course Title - Only show once here */}
                     <div className="text-center mb-12">
                       <h1 className="text-4xl font-bold text-gray-900 mb-4">AI Fundamentals</h1>
                       <p className="text-xl text-gray-600">Master the fundamentals of artificial intelligence and machine learning</p>
                     </div>
 
-                    {/* Module List */}
                     <ModuleList 
                       modules={courseData.modules.slice(0, 2)}
                       progress={progress}
@@ -251,7 +246,6 @@ export default function Learn() {
                       showTitle={false}
                     />
 
-                    {/* Remaining Modules */}
                     <ModuleList 
                       modules={courseData.modules.slice(2)}
                       progress={progress}
@@ -264,7 +258,6 @@ export default function Learn() {
                 )}
               </div>
 
-              {/* Sidebar (visible in lesson view) */}
               {activeLesson && (
                 <div className={`col-span-12 lg:col-span-4 ${
                   showSidebar ? 'fixed lg:relative inset-0 lg:inset-auto z-40' : 'hidden lg:block'

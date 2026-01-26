@@ -15,17 +15,16 @@ import {
 export default function JoinUs() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+      
       <section className="pt-32 pb-12 relative overflow-hidden text-white">
-        {/* Animated background with floating elements */}
+        
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
-          {/* Floating geometric shapes */}
+          
           <div className="absolute top-16 left-10 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute top-32 right-16 w-20 h-20 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-16 left-1/4 w-32 h-32 bg-blue-300/20 rounded-full blur-xl animate-pulse delay-2000"></div>
           <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-indigo-300/20 rounded-full blur-xl animate-pulse delay-500"></div>
-          
-          {/* Animated grid pattern */}
+
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0" style={{
               backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px),
@@ -33,16 +32,14 @@ export default function JoinUs() {
               backgroundSize: '50px 50px'
             }}></div>
           </div>
-          
-          {/* Floating particles */}
+
           <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
           <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-bounce delay-300"></div>
           <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-purple-300 rounded-full animate-bounce delay-700"></div>
           <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce delay-1000"></div>
           <div className="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce delay-500"></div>
           <div className="absolute top-3/4 right-1/6 w-1 h-1 bg-green-300 rounded-full animate-bounce delay-1200"></div>
-          
-          {/* Gradient overlay for better text readability */}
+
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
         </div>
         
@@ -66,7 +63,7 @@ export default function JoinUs() {
           
           <div className="mt-8">
             <a 
-              href="https://forms.gle/g5MLJphJCwd3otyN8" 
+              href="https://forms.gle/g5MLJphJCwd3otyN8"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-2xl text-lg font-bold shadow-lg"
@@ -78,7 +75,6 @@ export default function JoinUs() {
         </div>
       </section>
 
-      {/* Opportunity Section */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -122,7 +118,6 @@ export default function JoinUs() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -166,7 +161,6 @@ export default function JoinUs() {
         </div>
       </section>
 
-      {/* Benefits Section */}
       <section className="py-12 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -242,7 +236,6 @@ export default function JoinUs() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
           <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
@@ -251,7 +244,7 @@ export default function JoinUs() {
           </p>
           <div className="flex justify-center gap-4">
             <a 
-              href="https://forms.gle/g5MLJphJCwd3otyN8" 
+              href="https://forms.gle/g5MLJphJCwd3otyN8"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"

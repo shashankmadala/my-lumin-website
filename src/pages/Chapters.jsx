@@ -169,9 +169,9 @@ export default function Chapters() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+      
       <section className="pt-20 pb-16 relative overflow-hidden text-white">
-        {/* Simple gradient background */}
+        
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700"></div>
         
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -190,9 +190,7 @@ export default function Chapters() {
           
           <div className="mt-8">
             <a 
-              href="https://forms.gle/g5MLJphJCwd3otyN8" 
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/join-us"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 text-sm font-medium"
             >
               Start a Chapter
@@ -202,7 +200,6 @@ export default function Chapters() {
         </div>
       </section>
 
-      {/* Chapters Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -216,7 +213,7 @@ export default function Chapters() {
           <div className="grid lg:grid-cols-2 gap-8">
             {chapters.map((chapter, index) => (
               <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                {/* Country Header */}
+                
                 <div className="flex items-center gap-4 mb-8">
                   <div className="text-4xl">{chapter.flag}</div>
                   <div>
@@ -226,8 +223,7 @@ export default function Chapters() {
                     </p>
                   </div>
                 </div>
-                
-                {/* States List */}
+
                 <div className="space-y-6">
                   {chapter.states.map((state, stateIndex) => (
                     <div key={stateIndex} className="bg-white rounded-2xl p-6 border border-gray-100">
@@ -263,7 +259,6 @@ export default function Chapters() {
         </div>
       </section>
 
-      {/* Chapter Approach */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -308,7 +303,6 @@ export default function Chapters() {
         </div>
       </section>
 
-      {/* Meet Chapter Founders Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -319,7 +313,7 @@ export default function Chapters() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Founder 1 */}
+            
             <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
               <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
                 <img 
@@ -342,7 +336,6 @@ export default function Chapters() {
               </p>
             </div>
 
-            {/* Founder 2 */}
             <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
               <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
                 <img 
@@ -365,7 +358,6 @@ export default function Chapters() {
               </p>
             </div>
 
-            {/* Founder 3 */}
             <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
               <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
                 <img 
@@ -388,7 +380,6 @@ export default function Chapters() {
               </p>
             </div>
 
-            {/* Founder 4 */}
             <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
               <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
                 <img 
@@ -414,7 +405,6 @@ export default function Chapters() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-3xl mx-auto px-4 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Start a Chapter</h2>

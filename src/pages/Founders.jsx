@@ -29,24 +29,24 @@ const founders = [
 ];
 
 const aayush = {
-  name: "Aayush Chebolu",
-  role: "Co-Founder & CTO",
+  name: "Rohit Vadi",
+  role: "CTO",
   bio: "Passionate about creating innovative solutions and driving technological advancement in education.",
   vision: "Building the future of AI education through collaboration and innovation.",
-  image: "/images/aayush.png",
+  image: "/images/rohit.png",
   links: {
-    linkedin: "https://www.linkedin.com/in/aayush-chebolu-2227a730a/",
+    linkedin: "#",
     github: "#",
     email: "mailto:aayushchebolu@gmail.com"
   }
 };
 
 const wilson = {
-  name: "Wilson",
-  role: "National Policy Lead",
-  bio: "Leading policy initiatives and strategic partnerships to advance AI education across the nation.",
+  name: "Rohash Desai",
+  role: "National Chapters Coordinator",
+  bio: "Leading chapter initiatives and strategic partnerships throughout the USA to advance AI education.",
   vision: "Creating inclusive policies that make AI education accessible to all students.",
-  image: "/images/wilson.png",
+  image: "/images/rohash.JPG",
   links: {
     linkedin: "#",
     github: "#",
@@ -57,9 +57,9 @@ const wilson = {
 export default function Leadership() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      {/* Hero Section */}
+      
       <section className="pt-16 pb-8 relative overflow-hidden">
-        {/* Animated background elements */}
+        
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
@@ -67,7 +67,7 @@ export default function Leadership() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          {/* Header */}
+          
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-4">
               <Sparkles className="w-4 h-4" />
@@ -83,7 +83,6 @@ export default function Leadership() {
         </div>
       </section>
 
-      {/* Leadership Cards */}
       <section className="pb-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center">
@@ -93,10 +92,9 @@ export default function Leadership() {
                 key={founder.name}
                 className="group bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 relative overflow-hidden"
               >
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
                 
-                {/* Floating particles */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
+
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                   <div className="absolute top-4 left-4 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
                   <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
@@ -105,7 +103,7 @@ export default function Leadership() {
 
                 <div className="relative z-10">
                   <div className="flex flex-col items-center">
-                    {/* Profile Image */}
+                    
                     <div className="relative mb-8">
                       <div className="w-48 h-48 rounded-full overflow-hidden shadow-2xl mb-4 relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full"></div>
@@ -115,11 +113,10 @@ export default function Leadership() {
                           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 relative z-10"
                         />
                       </div>
-                      {/* Status indicator */}
+                      
                       <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
                     </div>
 
-                    {/* Content */}
                     <div className="text-center">
                       <h2 className="text-3xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-500">
                         {founder.name}
@@ -137,7 +134,6 @@ export default function Leadership() {
                         </p>
                       </div>
 
-                      {/* Social Links */}
                       <div className="flex justify-center gap-4">
                         <a 
                           href={founder.links.linkedin}
@@ -165,8 +161,7 @@ export default function Leadership() {
                     </div>
                   </div>
                 </div>
-                
-                {/* Elegant shine effect on hover */}
+
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
               </div>
               ))}
@@ -175,17 +170,15 @@ export default function Leadership() {
         </div>
       </section>
 
-      {/* Team Members Section */}
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl">
-              {/* Aayush Card */}
+              
               <div className="group bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 relative overflow-hidden">
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 to-blue-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
                 
-                {/* Floating particles */}
+                <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 to-blue-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
+
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                   <div className="absolute top-4 left-4 w-1 h-1 bg-green-400 rounded-full animate-ping"></div>
                   <div className="absolute top-8 right-6 w-1 h-1 bg-blue-400 rounded-full animate-ping delay-300"></div>
@@ -194,7 +187,7 @@ export default function Leadership() {
 
                 <div className="relative z-10">
                   <div className="flex flex-col items-center">
-                    {/* Profile Image */}
+                    
                     <div className="relative mb-6">
                       <div className="w-32 h-32 rounded-full overflow-hidden shadow-2xl mb-4 relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full"></div>
@@ -204,11 +197,10 @@ export default function Leadership() {
                           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 relative z-10"
                         />
                       </div>
-                      {/* Status indicator */}
+                      
                       <div className="absolute bottom-2 right-2 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
                     </div>
 
-                    {/* Content */}
                     <div className="text-center">
                       <h2 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-green-600 transition-colors duration-500">
                         {aayush.name}
@@ -226,7 +218,6 @@ export default function Leadership() {
                         </p>
                       </div>
 
-                      {/* Social Links */}
                       <div className="flex justify-center gap-3">
                         <a 
                           href={aayush.links.linkedin}
@@ -254,17 +245,14 @@ export default function Leadership() {
                     </div>
                   </div>
                 </div>
-                
-                {/* Elegant shine effect on hover */}
+
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
               </div>
 
-              {/* Wilson Card */}
               <div className="group bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100/50 relative overflow-hidden">
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 to-red-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
                 
-                {/* Floating particles */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 to-red-50/30 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl"></div>
+
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                   <div className="absolute top-4 left-4 w-1 h-1 bg-orange-400 rounded-full animate-ping"></div>
                   <div className="absolute top-8 right-6 w-1 h-1 bg-red-400 rounded-full animate-ping delay-300"></div>
@@ -273,7 +261,7 @@ export default function Leadership() {
 
                 <div className="relative z-10">
                   <div className="flex flex-col items-center">
-                    {/* Profile Image */}
+                    
                     <div className="relative mb-6">
                       <div className="w-32 h-32 rounded-full overflow-hidden shadow-2xl mb-4 relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full"></div>
@@ -283,11 +271,10 @@ export default function Leadership() {
                           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110 relative z-10"
                         />
                       </div>
-                      {/* Status indicator */}
+                      
                       <div className="absolute bottom-2 right-2 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
                     </div>
 
-                    {/* Content */}
                     <div className="text-center">
                       <h2 className="text-2xl font-bold mb-2 text-gray-900 group-hover:text-orange-600 transition-colors duration-500">
                         {wilson.name}
@@ -305,7 +292,6 @@ export default function Leadership() {
                         </p>
                       </div>
 
-                      {/* Social Links */}
                       <div className="flex justify-center gap-3">
                         <a 
                           href={wilson.links.linkedin}
@@ -333,8 +319,7 @@ export default function Leadership() {
                     </div>
                   </div>
                 </div>
-                
-                {/* Elegant shine effect on hover */}
+
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
               </div>
             </div>

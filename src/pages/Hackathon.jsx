@@ -16,7 +16,7 @@ export default function HackathonPage() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, []);np
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -72,14 +72,13 @@ export default function HackathonPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background effects */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
         <div className="absolute top-40 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
       </div>
 
-      {/* Hero Section */}
       <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
@@ -103,11 +102,10 @@ export default function HackathonPage() {
               Join hackathon participants worldwide in building innovative AI-powered solutions. 
               No experience required - just bring your curiosity and creativity!
             </p>
-            
-            {/* CTA Buttons */}
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <a 
-                href="https://lumin-hacks.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open"
+                href="https://forms.gle/YzAwMRgzQq8saqrPA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
@@ -124,7 +122,6 @@ export default function HackathonPage() {
               </button>
             </div>
 
-            {/* Key Info Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <div className="bg-white/95 backdrop-blur-md rounded-xl p-6 shadow-lg border border-gray-200/50">
                 <div className="flex items-center gap-3 mb-3">
@@ -162,7 +159,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* Wave Separator */}
       <div className="w-full">
         <svg className="w-full h-24" viewBox="0 0 1440 100" preserveAspectRatio="none">
           <path 
@@ -173,7 +169,6 @@ export default function HackathonPage() {
         </svg>
       </div>
 
-      {/* About Section */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -216,7 +211,6 @@ export default function HackathonPage() {
             </div>
           </div>
 
-          {/* Why Participate */}
           <div className="bg-gray-50 rounded-2xl p-8">
             <h3 className="text-2xl font-bold mb-6 text-center">Why Participate?</h3>
             <div className="grid md:grid-cols-2 gap-6">
@@ -253,7 +247,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* Requirements Section */}
       <section id="requirements-section" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -264,7 +257,7 @@ export default function HackathonPage() {
           </div>
 
           <div className="space-y-8">
-            {/* What to Build */}
+            
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -322,7 +315,6 @@ export default function HackathonPage() {
               </div>
             </div>
 
-            {/* What to Submit */}
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
@@ -398,7 +390,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* Prizes Section */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -429,8 +420,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-
-      {/* Judging Criteria Section */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -468,7 +457,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* Eligibility Section */}
       <section className="py-24 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">Who Can Participate</h2>
@@ -498,7 +486,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Build Something Amazing?</h2>
@@ -507,7 +494,7 @@ export default function HackathonPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
-              href="https://lumin-hacks.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open"
+              href="https://forms.gle/YzAwMRgzQq8saqrPA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
@@ -525,7 +512,6 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      {/* Floating CTA Button */}
       <div className={`fixed bottom-8 right-8 z-50 flex flex-col gap-4 transition-all duration-300 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
         <button
           onClick={scrollToTop}
@@ -534,7 +520,7 @@ export default function HackathonPage() {
           <ArrowRight className="w-6 h-6 text-gray-600 group-hover:text-blue-600 rotate-[-90deg]" />
         </button>
         <a 
-          href="https://lumin-hacks.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open"
+          href="https://forms.gle/YzAwMRgzQq8saqrPA"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"

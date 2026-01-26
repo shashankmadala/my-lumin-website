@@ -80,7 +80,7 @@ const ContactUs = () => {
       icon: <Instagram className="w-5 h-5" />,
       name: "Instagram",
       handle: "@luminlearningai",
-      link: "https://www.instagram.com/luminlearningai/"
+      link: "https://instagram.com/lumin.ai"
     }
   ];
 
@@ -121,13 +121,12 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background effects */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
         <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
       </div>
 
-      {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center animate-on-scroll">
@@ -145,7 +144,6 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* Contact Methods */}
       <section className="py-12 relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
@@ -172,7 +170,6 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="py-16 bg-white relative">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
@@ -210,11 +207,10 @@ const ContactUs = () => {
         </div>
       </section>
 
-      {/* Support Hours & Social Links */}
       <section className="py-16 bg-gray-50 relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Support Hours */}
+            
             <div className="bg-white rounded-xl p-8 animate-on-scroll shadow-lg">
               <div className="flex items-center gap-3 mb-6">
                 <Clock className="w-6 h-6 text-blue-600" />
@@ -235,7 +231,6 @@ const ContactUs = () => {
               </div>
             </div>
 
-            {/* Social Links */}
             <div className="bg-white rounded-xl p-8 animate-on-scroll shadow-lg">
               <div className="flex items-center gap-3 mb-6">
                 <Globe className="w-6 h-6 text-blue-600" />

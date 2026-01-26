@@ -43,7 +43,7 @@ export default function Team() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      {/* Background effects */}
+      
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
@@ -52,7 +52,7 @@ export default function Team() {
 
       <div className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
-          {/* Header */}
+          
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold mb-4">Our Team</h1>
             <p className="text-xl text-gray-600">
@@ -60,7 +60,6 @@ export default function Team() {
             </p>
           </div>
 
-          {/* Chapter Stats */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300">
               <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
@@ -87,7 +86,6 @@ export default function Team() {
             </div>
           </div>
 
-          {/* Chapter Selection */}
           <div className="flex justify-center mb-16">
             <div className="inline-flex rounded-lg bg-white shadow-sm p-2">
               {chapters.map((chapter) => (
@@ -106,10 +104,9 @@ export default function Team() {
             </div>
           </div>
 
-          {/* Active Chapter Display */}
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Chapter Header */}
+              
               <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-white">
                 <div className="flex items-center gap-2 mb-2">
                   <MapPin className="w-5 h-5" />
@@ -119,7 +116,6 @@ export default function Team() {
                 <p className="text-blue-100">{activeChapter.description}</p>
               </div>
 
-              {/* Team Members */}
               <div className="p-8">
                 <div className="grid md:grid-cols-2 gap-6">
                   {activeChapter.members.map((member, index) => (
