@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Brain, Book, Trophy, ArrowLeft, Award, BookOpen, Code, Check } from 'lucide-react';
 import Navigation from '../components/Navigation';
+import SEO from '../components/SEO';
 import ModuleList from '../components/course/ModuleList';
 import LessonView from '../components/course/LessonView';
 import FinalExam from '../components/course/FinalExam';
@@ -109,6 +110,11 @@ export default function Learn() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Free AI & Machine Learning Course"
+        description="Learn AI fundamentals with Lumin AI's free interactive course. Modules on machine learning, neural networks, ethics, and hands-on projects. Start your AI journey today."
+        canonicalPath="/learn"
+      />
       <Navigation />
 
       <div className="fixed top-16 left-0 right-0 h-1 bg-gray-100 z-50">

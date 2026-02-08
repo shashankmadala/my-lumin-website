@@ -11,6 +11,7 @@ import {
   ChevronDown,
   MessagesSquare
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const ContactUs = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -121,7 +122,11 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      
+      <SEO
+        title="Contact Us – Get in Touch with Lumin AI"
+        description="Contact Lumin AI for partnerships, chapter inquiries, or support. Email, phone, and live chat. We'd love to hear from you."
+        canonicalPath="/contact-us"
+      />
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
         <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>

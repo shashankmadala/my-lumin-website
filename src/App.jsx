@@ -10,7 +10,7 @@ import PolicyTeam from './pages/PolicyTeam.jsx';
 import Chapters from './pages/Chapters.jsx';
 import JoinUs from './pages/JoinUs.jsx';
 import Hackathon from './pages/Hackathon.jsx';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (

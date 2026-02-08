@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin } from 'lucide-react';
 import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
+import SEO from '../components/SEO';
 
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -130,6 +131,11 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      <SEO
+        title="AI Education Made Easy for Students"
+        description="Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16 countries. Interactive courses, scholarships, and global chapters. Start learning today."
+        canonicalPath="/"
+      />
       {/* Background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>

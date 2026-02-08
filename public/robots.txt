@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap (update the host to your live domain if different)
+Sitemap: https://www.luminlearning.org/sitemap.xml

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Users, Calendar, DollarSign, Award, Clock, Globe, Brain, Code, Zap, Target, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import '../styles/animations.css';
+import SEO from '../components/SEO';
 
 export default function HackathonPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -16,7 +17,7 @@ export default function HackathonPage() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);np
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -72,7 +73,11 @@ export default function HackathonPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      
+      <SEO
+        title="AI Hackathon – Compete for $3500 in Prizes"
+        description="Lumin AI Hackathon: build AI projects and compete for $2000, $1000, and $500 prizes. Open to students. Dates and registration details."
+        canonicalPath="/hackathon"
+      />
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>

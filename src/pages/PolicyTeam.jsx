@@ -10,6 +10,7 @@ import {
   ArrowRight,
   CheckCircle
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function PolicyTeam() {
 
@@ -49,7 +50,11 @@ export default function PolicyTeam() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
+      <SEO
+        title="Policy Team – AI Literacy & K-12 Education"
+        description="Lumin AI Policy Team: advancing AI literacy in K-12 curriculum, teacher training, and equitable access to AI education. Meet our policy leads."
+        canonicalPath="/policy-team"
+      />
       <div className="pt-32 pb-24">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-4">Policy Team</h1>

@@ -10,6 +10,7 @@ import {
   Target,
   Award
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Chapters() {
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -169,7 +170,11 @@ export default function Chapters() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      
+      <SEO
+        title="Global Chapters – Find a Lumin AI Chapter Near You"
+        description="Explore Lumin AI chapters in 16+ countries. Find AI education workshops and student chapters in the US, India, and worldwide. Join a chapter near you."
+        canonicalPath="/chapters"
+      />
       <section className="pt-20 pb-16 relative overflow-hidden text-white">
         
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700"></div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { GithubIcon, LinkedinIcon, Mail, Sparkles, Award, Users, Globe } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const founders = [
   {
@@ -57,6 +58,11 @@ const wilson = {
 export default function Leadership() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <SEO
+        title="Our Founders & Leadership"
+        description="Meet the founders and leadership team behind Lumin AI: student leaders committed to expanding AI education for grades 6–12 worldwide."
+        canonicalPath="/founders"
+      />
       
       <section className="pt-16 pb-8 relative overflow-hidden">
         

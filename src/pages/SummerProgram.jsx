@@ -20,6 +20,7 @@ import {
   Heart,
   Mic
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function SummerProgram() {
   const [activeWeek, setActiveWeek] = useState(1);
@@ -233,6 +234,11 @@ export default function SummerProgram() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      <SEO
+        title="Summer Program – AI Seminar for Middle School"
+        description="Lumin AI Summer Seminar: 5-week AI program for students ages 11–14 (grades 6–8). Hands-on AI and machine learning. Check back for 2025 dates."
+        canonicalPath="/summer-program"
+      />
       {/* Background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>

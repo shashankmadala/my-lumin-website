@@ -11,10 +11,16 @@ import {
   Heart,
   Building
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function JoinUs() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Join Us – Start a Chapter & Compete for $3000 in Scholarships"
+        description="Start a Lumin AI chapter and compete for one of three $1000 scholarships. High school students: lead AI education in your community and earn scholarship money."
+        canonicalPath="/join-us"
+      />
       
       <section className="pt-32 pb-12 relative overflow-hidden text-white">
         
