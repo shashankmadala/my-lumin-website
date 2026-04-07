@@ -108,7 +108,7 @@ const ContactUs = () => {
     },
     {
       question: "What countries have Lumin AI chapters?",
-      answer: "We have chapters in 6 countries: United States, Canada, United Kingdom, India, Australia, and Germany with 15+ active chapters worldwide."
+      answer: "We list 15 flagship chapters across 15 countries (see our Chapters page for locations). Through online programs, partner schools, and events, we reach students in 16+ countries overall."
     },
     {
       question: "What is Lumin AI's mission?",

@@ -1,178 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Globe, 
-  Users, 
   MapPin, 
-  Star, 
   ArrowRight,
   Building,
-  Heart,
   Target,
-  Award
+  Award,
+  User
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { IMPACT, CHAPTER_NETWORK, formatChapterMembers } from '../data/impactStats';
+import { CHAPTER_FOUNDER_SPOTLIGHT, chapterFounderImageSrc } from '../data/chapterFounderSpotlight';
 
 export default function Chapters() {
-  const [selectedCountry, setSelectedCountry] = useState(null);
-
-  const chapters = [
-    {
-      country: "United States",
-      flag: "🇺🇸",
-      states: [
-        {
-          state: "California",
-          cities: [
-            { name: "San Francisco Chapter", location: "San Francisco, CA", status: "Active", members: "75+ students" },
-            { name: "Los Angeles Chapter", location: "Los Angeles, CA", status: "Active", members: "65+ students" },
-            { name: "San Diego Chapter", location: "San Diego, CA", status: "Active", members: "45+ students" }
-          ]
-        },
-        {
-          state: "New York",
-          cities: [
-            { name: "New York City Chapter", location: "New York, NY", status: "Active", members: "80+ students" },
-            { name: "Buffalo Chapter", location: "Buffalo, NY", status: "Active", members: "35+ students" }
-          ]
-        },
-        {
-          state: "Texas",
-          cities: [
-            { name: "Austin Chapter", location: "Austin, TX", status: "Active", members: "55+ students" },
-            { name: "Houston Chapter", location: "Houston, TX", status: "Active", members: "50+ students" },
-            { name: "Dallas Chapter", location: "Dallas, TX", status: "Active", members: "45+ students" }
-          ]
-        },
-        {
-          state: "New Jersey",
-          cities: [
-            { name: "Newark Chapter", location: "Newark, NJ", status: "Active", members: "40+ students" },
-            { name: "Princeton Chapter", location: "Princeton, NJ", status: "Active", members: "30+ students" }
-          ]
-        }
-      ],
-      description: "Our largest chapter network with multiple active locations across the country."
-    },
-    {
-      country: "Canada",
-      flag: "🇨🇦",
-      states: [
-        {
-          state: "Ontario",
-          cities: [
-            { name: "Toronto Chapter", location: "Toronto, ON", status: "Active", members: "60+ students" },
-            { name: "Ottawa Chapter", location: "Ottawa, ON", status: "Active", members: "35+ students" }
-          ]
-        },
-        {
-          state: "British Columbia",
-          cities: [
-            { name: "Vancouver Chapter", location: "Vancouver, BC", status: "Active", members: "50+ students" },
-            { name: "Victoria Chapter", location: "Victoria, BC", status: "Active", members: "25+ students" }
-          ]
-        }
-      ],
-      description: "Expanding AI education across Canadian provinces with growing student engagement."
-    },
-    {
-      country: "United Kingdom",
-      flag: "🇬🇧",
-      states: [
-        {
-          state: "England",
-          cities: [
-            { name: "London Chapter", location: "London, UK", status: "Active", members: "70+ students" },
-            { name: "Manchester Chapter", location: "Manchester, UK", status: "Active", members: "40+ students" },
-            { name: "Birmingham Chapter", location: "Birmingham, UK", status: "Active", members: "35+ students" }
-          ]
-        },
-        {
-          state: "Scotland",
-          cities: [
-            { name: "Edinburgh Chapter", location: "Edinburgh, UK", status: "Active", members: "30+ students" },
-            { name: "Glasgow Chapter", location: "Glasgow, UK", status: "Active", members: "25+ students" }
-          ]
-        }
-      ],
-      description: "Bringing AI literacy to British students through innovative educational programs."
-    },
-    {
-      country: "India",
-      flag: "🇮🇳",
-      states: [
-        {
-          state: "Maharashtra",
-          cities: [
-            { name: "Mumbai Chapter", location: "Mumbai, MH", status: "Active", members: "80+ students" },
-            { name: "Pune Chapter", location: "Pune, MH", status: "Active", members: "45+ students" }
-          ]
-        },
-        {
-          state: "Karnataka",
-          cities: [
-            { name: "Bangalore Chapter", location: "Bangalore, KA", status: "Active", members: "75+ students" },
-            { name: "Mysore Chapter", location: "Mysore, KA", status: "Active", members: "30+ students" }
-          ]
-        },
-        {
-          state: "Delhi",
-          cities: [
-            { name: "New Delhi Chapter", location: "New Delhi, DL", status: "Active", members: "60+ students" },
-            { name: "Gurgaon Chapter", location: "Gurgaon, DL", status: "Active", members: "35+ students" }
-          ]
-        }
-      ],
-      description: "Rapidly growing presence in India's tech hubs with strong student communities."
-    },
-    {
-      country: "Australia",
-      flag: "🇦🇺",
-      states: [
-        {
-          state: "New South Wales",
-          cities: [
-            { name: "Sydney Chapter", location: "Sydney, NSW", status: "Active", members: "50+ students" },
-            { name: "Newcastle Chapter", location: "Newcastle, NSW", status: "Active", members: "25+ students" }
-          ]
-        },
-        {
-          state: "Victoria",
-          cities: [
-            { name: "Melbourne Chapter", location: "Melbourne, VIC", status: "Active", members: "45+ students" },
-            { name: "Geelong Chapter", location: "Geelong, VIC", status: "Active", members: "20+ students" }
-          ]
-        }
-      ],
-      description: "Expanding AI education across Australian cities with local partnerships."
-    },
-    {
-      country: "Germany",
-      flag: "🇩🇪",
-      states: [
-        {
-          state: "Berlin",
-          cities: [
-            { name: "Berlin Chapter", location: "Berlin, DE", status: "Active", members: "55+ students" },
-            { name: "Potsdam Chapter", location: "Potsdam, DE", status: "Active", members: "25+ students" }
-          ]
-        },
-        {
-          state: "Bavaria",
-          cities: [
-            { name: "Munich Chapter", location: "Munich, DE", status: "Active", members: "45+ students" },
-            { name: "Nuremberg Chapter", location: "Nuremberg, DE", status: "Active", members: "30+ students" }
-          ]
-        }
-      ],
-      description: "Building AI literacy in German schools through innovative programs."
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       <SEO
         title="Global Chapters – Find a Lumin AI Chapter Near You"
-        description="Explore Lumin AI chapters in 16+ countries. Find AI education workshops and student chapters in the US, India, and worldwide. Join a chapter near you."
+        description={`Lumin AI has ${IMPACT.chapterLocations} flagship chapters across ${IMPACT.countriesWithChapter} countries and reaches students in ${IMPACT.countriesReachedTotal}+ countries through partners and online programs.`}
         canonicalPath="/chapters"
       />
       <section className="pt-20 pb-16 relative overflow-hidden text-white">
@@ -190,10 +37,32 @@ export default function Chapters() {
           </h1>
           
           <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Our international chapter network brings AI education to students across the globe.
+            {IMPACT.chapterLocations} flagship chapter locations across {IMPACT.countriesWithChapter} countries —{' '}
+            <span className="font-semibold text-white">{IMPACT.chapterParticipantsMinTotal.toLocaleString()}+</span> active chapter participants.
+            Overall, we have reached <span className="font-semibold text-white">{IMPACT.studentsReachedTotal.toLocaleString()}+</span> students in{' '}
+            {IMPACT.countriesReachedTotal}+ countries through chapters, our online course, partner schools, and events.
           </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto mb-8 text-sm">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-3 py-3 border border-white/15">
+              <div className="text-2xl font-bold">{IMPACT.chapterLocations}</div>
+              <div className="text-blue-100">Chapters listed</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-3 py-3 border border-white/15">
+              <div className="text-2xl font-bold">{IMPACT.countriesWithChapter}</div>
+              <div className="text-blue-100">Chapter countries</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-3 py-3 border border-white/15">
+              <div className="text-2xl font-bold">{IMPACT.chapterParticipantsMinTotal.toLocaleString()}+</div>
+              <div className="text-blue-100">Chapter participants</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl px-3 py-3 border border-white/15">
+              <div className="text-2xl font-bold">{IMPACT.countriesReachedTotal}+</div>
+              <div className="text-blue-100">Countries reached</div>
+            </div>
+          </div>
           
-          <div className="mt-8">
+          <div className="mt-4">
             <a 
               href="/join-us"
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-full hover:bg-gray-100 transition-all duration-300 text-sm font-medium"
@@ -205,62 +74,117 @@ export default function Chapters() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      {/* Chapter founders — floating card + overlapping avatars (reads as one team, not a loose grid) */}
+      <div className="relative z-20 px-4 -mt-10 sm:-mt-14 pb-4 sm:pb-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="rounded-3xl bg-white p-6 sm:p-8 shadow-[0_25px_50px_-12px_rgba(30,58,138,0.18)] ring-1 ring-gray-200/80">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+                Chapter founders
+              </h2>
+              <div className="flex flex-col gap-2 shrink-0 sm:text-right">
+                <Link
+                  to="/join-us"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-800"
+                >
+                  Start a chapter
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link to="/founders" className="text-xs text-gray-500 hover:text-gray-800">
+                  Core nonprofit team →
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative rounded-2xl bg-gradient-to-br from-slate-100/90 via-blue-50/50 to-violet-100/60 px-4 py-8 sm:py-10 overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.35] pointer-events-none bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(59,130,246,0.25),transparent)]" aria-hidden />
+              <div className="relative flex justify-center">
+                <ul
+                  className="flex flex-row items-center justify-center list-none p-0 m-0 pl-3 sm:pl-4"
+                  aria-label="Chapter founder portraits"
+                >
+                  {CHAPTER_FOUNDER_SPOTLIGHT.map(({ file }, index) => (
+                    <li
+                      key={file}
+                      className="relative -ml-3 sm:-ml-4 first:ml-0 transition-transform duration-300 ease-out hover:scale-110 hover:z-30 focus-within:z-30"
+                      style={{ zIndex: index + 1 }}
+                    >
+                      <div className="rounded-full p-[3px] bg-gradient-to-br from-white via-white to-blue-100/80 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                        <div className="rounded-full overflow-hidden w-[4.25rem] h-[4.25rem] sm:w-[5.25rem] sm:h-[5.25rem] ring-2 ring-white/90 bg-gray-200">
+                          <img
+                            src={chapterFounderImageSrc(file)}
+                            alt=""
+                            width={84}
+                            height={84}
+                            className="w-full h-full object-cover object-center"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section className="py-16 bg-white pt-10 sm:pt-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Our Global Chapters</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Discover our international network of Lumin AI chapters, each bringing AI education 
-              to students in their local communities.
+              Each location below is an active chapter. Participant counts are minimums and sum to{' '}
+              <span className="font-semibold text-gray-800">{IMPACT.chapterParticipantsMinTotal.toLocaleString()}+</span> students in the chapter network.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {chapters.map((chapter, index) => (
-              <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300">
-                
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="text-4xl">{chapter.flag}</div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">{chapter.country}</h3>
-                    <p className="text-gray-600">
-                      {chapter.states.reduce((total, state) => total + state.cities.length, 0)} active chapters
-                    </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {CHAPTER_NETWORK.map((ch) => (
+              <div
+                key={`${ch.country}-${ch.chapterName}`}
+                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex items-start gap-3 mb-4">
+                  <span className="text-3xl leading-none" aria-hidden>{ch.flag}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide">{ch.country}</p>
+                    <h3 className="text-lg font-bold text-gray-900 leading-tight">{ch.chapterName}</h3>
                   </div>
                 </div>
-
-                <div className="space-y-6">
-                  {chapter.states.map((state, stateIndex) => (
-                    <div key={stateIndex} className="bg-white rounded-2xl p-6 border border-gray-100">
-                      <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        {state.state}
-                      </h4>
-                      <div className="grid gap-3">
-                        {state.cities.map((city, cityIndex) => (
-                          <div key={cityIndex} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200 group">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h5 className="font-medium text-gray-900 text-sm">{city.name}</h5>
-                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              </div>
-                              <div className="flex items-center gap-2 text-xs text-gray-500">
-                                <MapPin className="w-3 h-3" />
-                                <span>{city.location}</span>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-sm font-medium text-gray-700">{city.members}</div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                  <MapPin className="w-4 h-4 shrink-0" />
+                  <span>{ch.location}</span>
+                </div>
+                <div className="flex items-start gap-2 text-sm text-gray-700 mb-3 p-3 rounded-xl bg-blue-50/80 border border-blue-100/80">
+                  <User className="w-4 h-4 shrink-0 text-blue-600 mt-0.5" aria-hidden />
+                  <div>
+                    <span className="text-xs font-semibold uppercase tracking-wide text-blue-700/90">Chapter lead</span>
+                    <p className="font-medium text-gray-900 leading-snug">{ch.leadName}</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span className="text-sm text-gray-600">Status</span>
+                  <span className="text-sm font-medium text-green-600 flex items-center gap-1.5">
+                    <span className="w-2 h-2 bg-green-500 rounded-full" aria-hidden />
+                    Active
+                  </span>
+                </div>
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-sm text-gray-600">Participants</span>
+                  <span className="text-sm font-semibold text-gray-800">{formatChapterMembers(ch.membersMin)}</span>
                 </div>
               </div>
             ))}
           </div>
+
+          <p className="text-center text-sm text-gray-500 max-w-2xl mx-auto mt-10">
+            The <strong>{IMPACT.studentsReachedTotal.toLocaleString()}+ students</strong> figure reflects cumulative reach across our{' '}
+            {IMPACT.courseModules}+ module online curriculum ({IMPACT.certificatesIssued.toLocaleString()}+ certificates issued), chapter programs, partner schools, summer offerings, and events such as our{' '}
+            {IMPACT.hackathonParticipants}+ participant hackathon—not a sum of the rows above.
+          </p>
         </div>
       </section>
 
@@ -308,108 +232,6 @@ export default function Chapters() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Meet Chapter Founders</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Passionate leaders bringing AI education to their local communities around the world
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            
-            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
-              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
-                <img 
-                  src="/images/shashank1.png" 
-                  alt="Shashank Madala"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
-                  <Users className="w-16 h-16 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Shashank Madala</h3>
-              <p className="text-sm text-gray-600 mb-3">Co-Founder & Co-CEO</p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Committed to revolutionizing STEM education through accessible AI learning. Leads Lumin AI's mission to empower the next generation of innovators.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
-              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
-                <img 
-                  src="/images/ayur.png" 
-                  alt="Ayur Munipalli"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
-                  <Users className="w-16 h-16 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Ayur Munipalli</h3>
-              <p className="text-sm text-gray-600 mb-3">Co-Founder & Co-CEO</p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Driven by the vision of making advanced technology education engaging and accessible. Shapes Lumin AI's innovative approach to teaching artificial intelligence.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
-              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
-                <img 
-                  src="/images/aayush.png" 
-                  alt="Aayush Chebolu"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
-                  <Users className="w-16 h-16 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Aayush Chebolu</h3>
-              <p className="text-sm text-gray-600 mb-3">Co-Founder & CTO</p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Passionate about creating innovative solutions and driving technological advancement in education. Building the future of AI education through collaboration.
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-6 text-center hover:shadow-lg transition-all duration-300">
-              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-md">
-                <img 
-                  src="/images/wilson.png" 
-                  alt="Wilson Stavros"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'flex';
-                  }}
-                />
-                <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center" style={{display: 'none'}}>
-                  <Users className="w-16 h-16 text-blue-600" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Wilson Stavros</h3>
-              <p className="text-sm text-gray-600 mb-3">National Policy Lead</p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Leading policy initiatives and strategic partnerships to advance AI education across the nation. Creating inclusive policies that make AI education accessible to all.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-12 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-3xl mx-auto px-4 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Start a Chapter</h2>
@@ -429,4 +251,4 @@ export default function Chapters() {
       </section>
     </div>
   );
-} 
+}

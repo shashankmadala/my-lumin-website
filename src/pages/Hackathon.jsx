@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Users, Calendar, DollarSign, Award, Clock, Globe, Brain, Code, Zap, Target, Star, ChevronDown, ChevronUp } from 'lucide-react';
 import '../styles/animations.css';
 import SEO from '../components/SEO';
+import { IMPACT } from '../data/impactStats';
 
 export default function HackathonPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -157,7 +158,7 @@ export default function HackathonPage() {
                   <Users className="w-6 h-6 text-purple-600" />
                   <span className="font-semibold text-gray-900">Participants</span>
                 </div>
-                <p className="text-sm text-gray-600">450 Hackers</p>
+                <p className="text-sm text-gray-600">{IMPACT.hackathonParticipants}+ participants</p>
               </div>
             </div>
           </div>

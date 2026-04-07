@@ -4,12 +4,14 @@ import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, Che
 import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
 import SEO from '../components/SEO';
+import { IMPACT } from '../data/impactStats';
 
 export default function HomePage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [animatedNumbers, setAnimatedNumbers] = useState({
     students: 0,
+    certificates: 0,
     raised: 0,
     modules: 0,
     countries: 0,
@@ -55,11 +57,12 @@ export default function HomePage() {
 
   const animateNumbers = () => {
     const targets = {
-      students: 15000,
-      raised: 19800,
-      modules: 20,
-      countries: 16,
-      chapters: 15
+      students: IMPACT.studentsReachedTotal,
+      certificates: IMPACT.certificatesIssued,
+      raised: IMPACT.raisedUsd,
+      modules: IMPACT.courseModules,
+      countries: IMPACT.countriesReachedTotal,
+      chapters: IMPACT.chapterLocations
     };
 
     const duration = 2000; // 2 seconds for faster animation
@@ -77,6 +80,7 @@ export default function HomePage() {
       
       setAnimatedNumbers({
         students: Math.floor(targets.students * easeOutQuart),
+        certificates: Math.floor(targets.certificates * easeOutQuart),
         raised: Math.floor(targets.raised * easeOutQuart),
         modules: Math.floor(targets.modules * easeOutQuart),
         countries: Math.floor(targets.countries * easeOutQuart),
@@ -93,19 +97,19 @@ export default function HomePage() {
 
   const testimonials = [
     {
-      name: "Sarah Chen",
-      role: "Middle School Student",
-      quote: "I never thought I could understand AI, but Lumin AI made it so fun and easy! I loved building my own chatbot and showing it to my friends."
+      name: "Jordan Reyes",
+      role: "Grade 8, New Jersey",
+      quote: "Before this I thought AI was just ChatGPT. We actually walked through how models learn from data, and I got a small image-sorting project working. It finally clicked."
     },
     {
-      name: "David Park",
-      role: "Parent",
-      quote: "My son was always interested in technology, and this program gave him the perfect introduction to AI. The weekend sessions fit perfectly with his schedule."
+      name: "Priya Nair",
+      role: "Parent of a 7th grader",
+      quote: "He talks about the modules at dinner now—not just the games, but why bias in data matters. The pacing worked for us; he could do a chunk after soccer practice without feeling behind."
     },
     {
-      name: "Maya Patel",
-      role: "Middle School Student",
-      quote: "The hands-on projects were my favorite part! I learned how to make a simple AI that can recognize different types of flowers in my garden."
+      name: "Ethan Okonkwo",
+      role: "Grade 9, Texas",
+      quote: "The quizzes were hard enough that I had to redo a couple, which I actually liked. By the end I could explain to my sister what a neural net is without sounding like I was reading a textbook."
     }
   ];
 
@@ -133,7 +137,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       <SEO
         title="AI Education Made Easy for Students"
-        description="Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16 countries. Interactive courses, scholarships, and global chapters. Start learning today."
+        description="Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16+ countries, with 5,200+ certificates issued and 15 flagship chapters. Start learning today."
         canonicalPath="/"
       />
       {/* Background effects */}
@@ -174,7 +178,7 @@ export default function HomePage() {
                     Summer Program (Closed)
                   </span>
                   <span className="ml-3 relative z-10 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap">
-                    Closed 2024
+                    Closed 2025
                   </span>
                 </Link>
                 <Link 
@@ -202,12 +206,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-16 stagger-children stats-section">
+          {/* Stats — all figures from impactStats.js */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-16 stagger-children stats-section">
             {[
-              { key: 'students', label: 'Students', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
+              { key: 'students', label: 'Students reached', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
+              { key: 'certificates', label: 'Certificates', value: animatedNumbers.certificates, suffix: '+', icon: '🎓', color: 'yellow' },
               { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰', color: 'green' },
-              { key: 'modules', label: 'Modules', value: animatedNumbers.modules, suffix: '+', icon: '📚', color: 'purple' },
+              { key: 'modules', label: 'Course modules', value: animatedNumbers.modules, suffix: '+', icon: '📚', color: 'purple' },
               { key: 'countries', label: 'Countries', value: animatedNumbers.countries, suffix: '+', icon: '🌍', color: 'indigo' },
               { key: 'chapters', label: 'Chapters', value: animatedNumbers.chapters, suffix: '+', icon: '🏢', color: 'pink' },
             ].map((stat, index) => (
@@ -298,7 +303,7 @@ export default function HomePage() {
               {
                 icon: <Globe className="w-6 h-6 text-blue-600"/>,
                 title: "Global Community",
-                description: "Join our international network of 15+ chapters across 16 countries"
+                description: `Join our international network of ${IMPACT.chapterLocations}+ chapters across ${IMPACT.countriesReachedTotal}+ countries`
               },
               {
                 icon: <Award className="w-6 h-6 text-blue-600"/>,
@@ -356,16 +361,17 @@ export default function HomePage() {
                 <h3 className="text-2xl font-bold">Global Chapters</h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Our international network spans 16 countries with 15+ active chapters, bringing AI education to students worldwide.
+                Our flagship chapter network spans {IMPACT.countriesWithChapter} countries with {IMPACT.chapterLocations} active chapters and{' '}
+                {IMPACT.chapterParticipantsMinTotal.toLocaleString()}+ chapter participants. Overall programming reaches students in {IMPACT.countriesReachedTotal}+ countries.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">16</div>
-                  <div className="text-sm text-gray-600">Countries</div>
+                  <div className="text-2xl font-bold text-blue-600">{IMPACT.countriesReachedTotal}+</div>
+                  <div className="text-sm text-gray-600">Countries reached</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">400+</div>
-                  <div className="text-sm text-gray-600">Students</div>
+                  <div className="text-2xl font-bold text-purple-600">{IMPACT.chapterParticipantsMinTotal.toLocaleString()}+</div>
+                  <div className="text-sm text-gray-600">Chapter participants</div>
                 </div>
               </div>
               <Link 
