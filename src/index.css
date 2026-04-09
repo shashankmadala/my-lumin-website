@@ -52,3 +52,19 @@
 .stagger-children > *:nth-child(3) { transition-delay: 0.3s; }
 .stagger-children > *:nth-child(4) { transition-delay: 0.4s; }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-blob.animation-delay-2000,
+  .animate-blob.animation-delay-4000 {
+    animation: none !important;
+  }
+  .floating {
+    animation: none !important;
+  }
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+

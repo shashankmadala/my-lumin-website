@@ -29,7 +29,7 @@ export default function Navigation() {
         <div className="flex items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-2 group">
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2">
               <div className="w-8 h-8 relative overflow-hidden">
                 <img 
                   src="/images/lumin.png" 
@@ -49,7 +49,7 @@ export default function Navigation() {
               <Link 
                 key={link.id}
                 to={link.to}
-                className="flex items-center h-full px-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 relative group"
+                className="flex items-center h-full px-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 relative group rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
                 {link.text}
                 <span className="absolute inset-x-0 -bottom-[1px] h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"/>
@@ -59,8 +59,9 @@ export default function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 ml-auto"
+            className="md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 ml-auto rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -76,7 +77,7 @@ export default function Navigation() {
                   key={link.id}
                   to={link.to}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-left px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                  className="block w-full text-left px-6 py-4 text-gray-700 hover:bg-gray-50 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600"
                 >
                   {link.text}
                 </Link>

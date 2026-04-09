@@ -11,13 +11,14 @@ import Chapters from './pages/Chapters.jsx';
 import JoinUs from './pages/JoinUs.jsx';
 import Hackathon from './pages/Hackathon.jsx';
 import { Analytics } from '@vercel/analytics/react';
+import Footer from './components/Footer.jsx';
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className="min-h-screen flex flex-col">
         <Navigation />
-        <main>
+        <main className="flex-1">
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/summer-program' element={<SummerProgram />} />
@@ -30,6 +31,7 @@ function App() {
             <Route path='/learn' element={<Learn />} />
           </Routes>
         </main>
+        <Footer />
         <Analytics />
       </div>
     </Router>

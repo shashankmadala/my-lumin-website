@@ -1,6 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin } from 'lucide-react';
+
+/** Full Tailwind class strings so hover gradients/borders are included in the build (dynamic `from-${color}` is purged). */
+const STAT_CARD_STYLES = {
+  students: {
+    hoverGradient: 'bg-gradient-to-br from-blue-50/30 to-blue-100/20',
+    borderGlow: 'border-blue-200/0 group-hover:border-blue-200/50',
+    pings: ['bg-blue-400', 'bg-blue-300', 'bg-sky-400'],
+  },
+  certificates: {
+    hoverGradient: 'bg-gradient-to-br from-yellow-50/30 to-amber-100/20',
+    borderGlow: 'border-yellow-200/0 group-hover:border-yellow-200/50',
+    pings: ['bg-yellow-400', 'bg-amber-400', 'bg-orange-300'],
+  },
+  raised: {
+    hoverGradient: 'bg-gradient-to-br from-green-50/30 to-emerald-100/20',
+    borderGlow: 'border-green-200/0 group-hover:border-green-200/50',
+    pings: ['bg-green-400', 'bg-emerald-400', 'bg-teal-400'],
+  },
+  modules: {
+    hoverGradient: 'bg-gradient-to-br from-purple-50/30 to-purple-100/20',
+    borderGlow: 'border-purple-200/0 group-hover:border-purple-200/50',
+    pings: ['bg-purple-400', 'bg-violet-400', 'bg-fuchsia-400'],
+  },
+  countries: {
+    hoverGradient: 'bg-gradient-to-br from-indigo-50/30 to-indigo-100/20',
+    borderGlow: 'border-indigo-200/0 group-hover:border-indigo-200/50',
+    pings: ['bg-indigo-400', 'bg-blue-500', 'bg-violet-500'],
+  },
+  chapters: {
+    hoverGradient: 'bg-gradient-to-br from-pink-50/30 to-pink-100/20',
+    borderGlow: 'border-pink-200/0 group-hover:border-pink-200/50',
+    pings: ['bg-pink-400', 'bg-rose-400', 'bg-fuchsia-400'],
+  },
+};
 import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
 import SEO from '../components/SEO';
@@ -168,26 +202,34 @@ export default function HomePage() {
               <p className="text-xl text-gray-600 mb-8">
                 Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link 
-                  to="/summer-program" 
-                  className="inline-flex items-center gap-2 bg-gray-500 text-white px-8 py-4 rounded-full hover:bg-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium relative group overflow-visible shadow-lg"
-                  style={{ boxShadow: '0 0 32px 8px rgba(107, 114, 128, 0.25), 0 2px 8px rgba(0,0,0,0.08)' }}
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Summer Program (Closed)
-                  </span>
-                  <span className="ml-3 relative z-10 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap">
-                    Closed 2025
-                  </span>
-                </Link>
-                <Link 
-                  to="/join-us" 
-                  className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium"
-                >
-                  Start a Chapter
-                  <Globe className="w-5 h-5" />
-                </Link>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                  <Link 
+                    to="/learn" 
+                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                  >
+                    Start learning
+                    <BookOpen className="w-5 h-5" />
+                  </Link>
+                  <Link 
+                    to="/join-us" 
+                    className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
+                  >
+                    Start a Chapter
+                    <Globe className="w-5 h-5" />
+                  </Link>
+                </div>
+                <div className="flex justify-center lg:justify-start">
+                  <Link
+                    to="/summer-program"
+                    className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition-colors hover:border-gray-400 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                  >
+                    Summer Program
+                    <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
+                      Closed 2025
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end animate-on-scroll from-right">
@@ -209,13 +251,15 @@ export default function HomePage() {
           {/* Stats — all figures from impactStats.js */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-16 stagger-children stats-section">
             {[
-              { key: 'students', label: 'Students reached', value: animatedNumbers.students, suffix: '+', icon: '👥', color: 'blue' },
-              { key: 'certificates', label: 'Certificates', value: animatedNumbers.certificates, suffix: '+', icon: '🎓', color: 'yellow' },
-              { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰', color: 'green' },
-              { key: 'modules', label: 'Course modules', value: animatedNumbers.modules, suffix: '+', icon: '📚', color: 'purple' },
-              { key: 'countries', label: 'Countries', value: animatedNumbers.countries, suffix: '+', icon: '🌍', color: 'indigo' },
-              { key: 'chapters', label: 'Chapters', value: animatedNumbers.chapters, suffix: '+', icon: '🏢', color: 'pink' },
-            ].map((stat, index) => (
+              { key: 'students', label: 'Students reached', value: animatedNumbers.students, suffix: '+', icon: '👥' },
+              { key: 'certificates', label: 'Certificates', value: animatedNumbers.certificates, suffix: '+', icon: '🎓' },
+              { key: 'raised', label: 'Raised', value: animatedNumbers.raised, prefix: '$', suffix: '+', icon: '💰' },
+              { key: 'modules', label: 'Course modules', value: animatedNumbers.modules, suffix: '+', icon: '📚' },
+              { key: 'countries', label: 'Countries', value: animatedNumbers.countries, suffix: '+', icon: '🌍' },
+              { key: 'chapters', label: 'Chapters', value: animatedNumbers.chapters, suffix: '+', icon: '🏢' },
+            ].map((stat, index) => {
+              const cardStyle = STAT_CARD_STYLES[stat.key];
+              return (
               <div 
                 key={stat.key} 
                 className={`animate-on-scroll ${index % 2 === 0 ? '' : 'from-right'} text-center p-4 bg-white/95 backdrop-blur-md rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 group border border-gray-200/50 relative overflow-hidden`}
@@ -225,13 +269,13 @@ export default function HomePage() {
                 }}
               >
                 {/* Animated background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-${stat.color}-50/30 to-${stat.color}-100/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-xl`}></div>
+                <div className={`absolute inset-0 ${cardStyle.hoverGradient} opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-xl`}></div>
                 
                 {/* Floating particles effect */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                  <div className="absolute top-2 left-2 w-1 h-1 bg-blue-400 rounded-full animate-ping"></div>
-                  <div className="absolute top-4 right-4 w-1 h-1 bg-purple-400 rounded-full animate-ping delay-300"></div>
-                  <div className="absolute bottom-4 left-4 w-1 h-1 bg-pink-400 rounded-full animate-ping delay-700"></div>
+                  <div className={`absolute top-2 left-2 w-1 h-1 ${cardStyle.pings[0]} rounded-full animate-ping`}></div>
+                  <div className={`absolute top-4 right-4 w-1 h-1 ${cardStyle.pings[1]} rounded-full animate-ping delay-300`}></div>
+                  <div className={`absolute bottom-4 left-4 w-1 h-1 ${cardStyle.pings[2]} rounded-full animate-ping delay-700`}></div>
                 </div>
                 
                 <div className="relative z-10">
@@ -258,9 +302,10 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
                 
                 {/* Subtle border glow */}
-                <div className={`absolute inset-0 rounded-xl border-2 border-${stat.color}-200/0 group-hover:border-${stat.color}-200/50 transition-all duration-500`}></div>
+                <div className={`absolute inset-0 rounded-xl border-2 ${cardStyle.borderGlow} transition-all duration-500`}></div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
@@ -579,27 +624,27 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <Link
                     to="/learn"
-                    className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                    className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   >
                     <BookOpen className="w-8 h-8" />
                     <span className="font-semibold">Start Learning</span>
                     <span className="text-sm text-blue-100">Free online course</span>
                   </Link>
                   <Link
-                    to="/summer-program"
-                    className="bg-gray-500 text-white px-8 py-4 rounded-xl hover:bg-gray-600 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2 opacity-75"
-                  >
-                    <Users className="w-8 h-8" />
-                    <span className="font-semibold">Summer Program</span>
-                    <span className="text-sm text-gray-200">Closed for 2024</span>
-                  </Link>
-                  <Link
                     to="/join-us"
-                    className="bg-green-600 text-white px-8 py-4 rounded-xl hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2"
+                    className="bg-green-600 text-white px-8 py-4 rounded-xl hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex flex-col items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                   >
                     <Globe className="w-8 h-8" />
                     <span className="font-semibold">Start a Chapter</span>
                     <span className="text-sm text-green-100">$1000 scholarship opportunity</span>
+                  </Link>
+                  <Link
+                    to="/summer-program"
+                    className="border-2 border-gray-200 bg-gray-50 text-gray-700 px-8 py-4 rounded-xl transition-all duration-300 hover:border-gray-300 hover:bg-gray-100 flex flex-col items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                  >
+                    <Users className="w-8 h-8 text-gray-500" />
+                    <span className="font-semibold">Summer Program</span>
+                    <span className="text-sm text-gray-500">Closed · 2025</span>
                   </Link>
                 </div>
               </div>
@@ -625,14 +670,15 @@ export default function HomePage() {
       {/* Floating CTA Button */}
       <div className={`fixed bottom-8 right-8 z-50 flex flex-col gap-4 transition-all duration-300 ${showScrollTop ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>
         <button
+          type="button"
           onClick={scrollToTop}
-          className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+          className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
         >
           <ArrowUp className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
         </button>
         <Link
           to="/learn"
-          className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2"
+          className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
         >
           Start Learning
           <ArrowRight className="w-5 h-5" />
