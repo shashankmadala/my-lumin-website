@@ -1,6 +1,6 @@
 /**
  * Chapter founder photos in public/images/chapter_founders/
- * Display is anonymous (role only); chapter cards use fictional leadName in impactStats.js.
+ * Display is anonymous (role only); chapter leads live in chaptersByCountry.js.
  */
 export const CHAPTER_FOUNDER_SPOTLIGHT = [
   { file: 'Screenshot 2025-11-28 at 2.56.50\u202fPM - Aarnav Garg.png' },

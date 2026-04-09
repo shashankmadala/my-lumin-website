@@ -108,7 +108,7 @@ const ContactUs = () => {
     },
     {
       question: "What countries have Lumin AI chapters?",
-      answer: "We list 15 flagship chapters across 15 countries (see our Chapters page for locations). Through online programs, partner schools, and events, we reach students in 16+ countries overall."
+      answer: "Our Chapters page lists dozens of local chapters across 15 countries—open any country to see cities and student leads. Through online programs, partner schools, and events, we reach students in 16+ countries overall."
     },
     {
       question: "What is Lumin AI's mission?",

@@ -137,7 +137,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       <SEO
         title="AI Education Made Easy for Students"
-        description="Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16+ countries, with 5,200+ certificates issued and 15 flagship chapters. Start learning today."
+        description={`Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16+ countries, with 5,200+ certificates issued and ${IMPACT.chapterLocations}+ chapter locations. Start learning today.`}
         canonicalPath="/"
       />
       {/* Background effects */}
@@ -361,7 +361,7 @@ export default function HomePage() {
                 <h3 className="text-2xl font-bold">Global Chapters</h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Our flagship chapter network spans {IMPACT.countriesWithChapter} countries with {IMPACT.chapterLocations} active chapters and{' '}
+                Our chapter network spans {IMPACT.countriesWithChapter} countries with {IMPACT.chapterLocations} active chapter locations and{' '}
                 {IMPACT.chapterParticipantsMinTotal.toLocaleString()}+ chapter participants. Overall programming reaches students in {IMPACT.countriesReachedTotal}+ countries.
               </p>
               <div className="grid grid-cols-2 gap-4 mb-6">
