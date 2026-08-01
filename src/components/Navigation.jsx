@@ -13,6 +13,7 @@ const mainLinks = [
   { to: '/summer-program', text: 'Summer Program', id: 'summer' },
   { to: '/hackathon', text: 'Hackathon', id: 'hackathon' },
   { to: '/learn', text: 'Learn', id: 'learn' },
+  { to: '/learn/educators', text: 'Educators', id: 'educators' },
   { to: '/contact-us', text: 'Contact', id: 'contact' },
 ];
 
