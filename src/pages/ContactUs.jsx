@@ -127,15 +127,11 @@ const ContactUs = () => {
         description="Contact Lumin AI for partnerships, chapter inquiries, or support. Email, phone, and live chat. We'd love to hear from you."
         canonicalPath="/contact-us"
       />
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-      </div>
 
       <section className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center animate-on-scroll">
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-6">
               Get in Touch
               <span className="block text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mt-2">
                 We're Here to Support Your AI Learning Journey

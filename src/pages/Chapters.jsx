@@ -76,15 +76,13 @@ export default function Chapters() {
       />
       <section className="pt-20 pb-16 relative overflow-hidden text-white">
         
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700"></div>
-        
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white mb-6 border border-white/20">
             <Globe className="w-4 h-4" />
             <span className="font-medium">Global Network</span>
           </div>
           
-          <h1 className="text-5xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
             Lumin AI Chapters
           </h1>
           
@@ -186,7 +184,7 @@ export default function Chapters() {
       <section className="py-16 bg-white pt-10 sm:pt-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-4xl font-bold mb-4">Our Global Chapters</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Our Global Chapters</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Pick a region, then open a country to see cities and student leads. A few locations are{' '}
               <span className="font-semibold text-gray-800">opening soon</span>. Enrolled counts total{' '}

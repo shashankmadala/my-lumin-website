@@ -43,18 +43,12 @@ export default function Team() {
 
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
-      
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
-      </div>
 
       <div className="pt-32 pb-24 relative">
         <div className="max-w-7xl mx-auto px-4">
           
           <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold mb-4">Our Team</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Our Team</h1>
             <p className="text-xl text-gray-600">
               Meet the dedicated individuals bringing AI education to your community
             </p>

@@ -240,11 +240,6 @@ export default function SummerProgram() {
         canonicalPath="/summer-program"
       />
       {/* Background effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
-      </div>
 
       {/* Hero Section */}
       <section className="pt-32 pb-24 relative">
@@ -312,7 +307,6 @@ export default function SummerProgram() {
               </div>
             </div>
             <div className="relative animate-on-scroll from-right">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl transform rotate-3"></div>
               <div className="relative bg-white rounded-2xl p-8 shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
@@ -451,7 +445,7 @@ export default function SummerProgram() {
       <section className="py-16 bg-white relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Program Overview</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Program Overview</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Our comprehensive 5-week AI education program takes students from basic concepts to building their own AI chatbots
             </p>
@@ -492,10 +486,10 @@ export default function SummerProgram() {
       </section>
 
       {/* Interactive Timeline Section */}
-      <section className="py-24 relative bg-gray-50">
+      <section className="py-16 sm:py-20 relative bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Program Timeline</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Program Timeline</h2>
             <p className="text-xl text-gray-600">Your 5-week journey to AI mastery</p>
           </div>
 
@@ -558,7 +552,7 @@ export default function SummerProgram() {
       <section className="py-16 bg-white relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Meet Your Instructors</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Meet Your Instructors</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Learn from experienced AI educators and industry professionals who are passionate about making AI accessible to young minds
             </p>
@@ -608,7 +602,7 @@ export default function SummerProgram() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4 mx-auto">
               <Mic className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-4xl font-bold mb-4">Special Keynote Speaker</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Special Keynote Speaker</h2>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
               Wrap up your AI learning journey with inspiration from a leader at <span className="font-bold text-white">CoreWeave</span>, a pioneering company powering the next generation of AI innovation.
             </p>
@@ -658,10 +652,10 @@ export default function SummerProgram() {
       </section>
 
       {/* Pricing & Payment Section */}
-      <section className="py-24 bg-white relative">
+      <section className="py-16 sm:py-20 bg-white relative">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Program Details</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Program Details</h2>
             <p className="text-xl text-gray-600">Program closed for 2025 - Check back in 2026!</p>
           </div>
 
@@ -775,10 +769,10 @@ export default function SummerProgram() {
       </section>
 
       {/* Our Impact Section */}
-      <section className="py-24 bg-gray-50 relative">
+      <section className="py-16 sm:py-20 bg-gray-50 relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Our Impact</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Our Impact</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               As a nonprofit organization, 100% of program fees directly support our mission to make AI education accessible to all students
             </p>
@@ -874,9 +868,9 @@ export default function SummerProgram() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 bg-gradient-to-r from-gray-600 to-gray-700">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Program Closed for 2025</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Program Closed for 2025</h2>
           <p className="text-xl mb-8 opacity-90">
             Thank you for your interest in the LuminAI Summer Seminar! The program has concluded for this year. 
             Check back in 2026 for next year's exciting AI education opportunities.

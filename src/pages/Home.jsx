@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin } from 'lucide-react';
+import { ArrowRight, Check, Brain, Users, Rocket, Construction, ChevronLeft, ChevronRight, ArrowUp, BookOpen, Globe, Award, Building, MapPin, Sparkles } from 'lucide-react';
 
 /** Full Tailwind class strings so hover gradients/borders are included in the build (dynamic `from-${color}` is purged). */
 const STAT_CARD_STYLES = {
@@ -39,6 +39,7 @@ import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
 import SEO from '../components/SEO';
 import InitiativeBanner from '../components/InitiativeBanner';
+import { Eyebrow, Button } from '../components/ui/Page';
 import { IMPACT } from '../data/impactStats';
 
 export default function HomePage() {
@@ -55,6 +56,12 @@ export default function HomePage() {
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
+    // Arm the reveal styles only now that the observer is about to run, and
+    // disarm shortly after so nothing can be left hidden if something fails.
+    const root = document.documentElement;
+    root.classList.add('reveal-armed');
+    const disarm = setTimeout(() => root.classList.remove('reveal-armed'), 3000);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -85,6 +92,8 @@ export default function HomePage() {
 
     window.addEventListener('scroll', handleScroll);
     return () => {
+      clearTimeout(disarm);
+      root.classList.remove('reveal-armed');
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
@@ -176,58 +185,46 @@ export default function HomePage() {
         canonicalPath="/"
       />
       <InitiativeBanner />
-      {/* Background effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute top-40 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
-      </div>
-
       {/* Hero Section */}
-      <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
-        {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-100/20 rounded-full blur-xl animate-pulse delay-2000"></div>
-        </div>
+      <section className="pt-32 pb-20 relative overflow-hidden">
+        {/* single soft wash instead of a stack of animated blobs */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 h-[32rem] -z-10 bg-gradient-to-b from-blue-50/80 via-white to-transparent"
+        />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-center lg:text-left animate-on-scroll from-bottom">
-              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 tracking-tight mb-6">
-                AI Education
-                <span className="block text-4xl lg:text-6xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-                  Made Easy
+            {/* Hero is above the fold — render it immediately rather than waiting
+                on the scroll observer, which left it invisible for ~1s on load. */}
+            <div className="text-center lg:text-left">
+              <Eyebrow icon={Sparkles} tone="blue">Free forever · No signup</Eyebrow>
+              <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-[1.05] mb-5">
+                AI education,
+                <span className="block bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
+                  made actually understandable
                 </span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Discover a new way to learn AI - interactive, comprehensive, and designed for the future.
+              <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+                Interactive lessons, hands-on simulations, and real AI tools — built by students,
+                for students and the teachers who guide them.
               </p>
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <Link 
-                    to="/learn" 
-                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-                  >
-                    Start learning
-                    <BookOpen className="w-5 h-5" />
-                  </Link>
-                  <Link 
-                    to="/join-us" 
-                    className="inline-flex items-center gap-2 bg-green-600 text-white px-8 py-4 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105 hover:shadow-lg text-lg font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
-                  >
-                    Start a Chapter
-                    <Globe className="w-5 h-5" />
-                  </Link>
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
+                  <Button to="/learn" size="lg">
+                    Start learning <BookOpen className="w-5 h-5" />
+                  </Button>
+                  <Button to="/join-us" variant="outline" size="lg">
+                    Start a chapter <Globe className="w-5 h-5" />
+                  </Button>
                 </div>
                 <div className="flex justify-center lg:justify-start">
                   <Link
                     to="/summer-program"
-                    className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm transition-colors hover:border-gray-400 hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2 rounded-lg"
                   >
                     Summer Program
-                    <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
+                    <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-600">
                       Closed 2025
                     </span>
                   </Link>
@@ -236,7 +233,6 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center lg:justify-end animate-on-scroll from-right">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl transform rotate-3 blur-sm"></div>
                 <img 
                   src={galleryImages[0].src}
                   alt={galleryImages[0].alt}
@@ -301,7 +297,6 @@ export default function HomePage() {
                 </div>
                 
                 {/* Elegant shine effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%]"></div>
                 
                 {/* Subtle border glow */}
                 <div className={`absolute inset-0 rounded-xl border-2 ${cardStyle.borderGlow} transition-all duration-500`}></div>
@@ -532,9 +527,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
           <div className="absolute bottom-20 right-10 w-24 h-24 bg-purple-200 rounded-full opacity-20 animate-pulse animation-delay-1000"></div>
-          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-pink-200 rounded-full opacity-20 animate-pulse animation-delay-2000"></div>
         </div>
 
         <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -557,7 +550,6 @@ export default function HomePage() {
 
               <div className="relative max-w-4xl mx-auto px-16">
                 {/* Background cards for depth effect */}
-                <div className="absolute inset-0 transform rotate-2 bg-gray-100 rounded-2xl opacity-30"></div>
                 <div className="absolute inset-0 transform -rotate-1 bg-gray-200 rounded-2xl opacity-20"></div>
                 
                 {/* Main testimonial card */}
@@ -653,7 +645,6 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center animate-on-scroll from-right">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl transform -rotate-3 blur-sm"></div>
                 <img 
                   src={galleryImages[4].src} 
                   alt={galleryImages[4].alt}

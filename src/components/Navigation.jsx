@@ -1,206 +1,235 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
-const aboutSubLinks = [
-  { to: '/founders', text: 'Leadership', id: 'founders' },
-  { to: '/social-media-team', text: 'Social Media Team', id: 'social-media-team' },
-  { to: '/chapters', text: 'Chapters', id: 'chapters' },
+// Grouped navigation: fewer top-level items, related pages tucked into menus.
+const NAV = [
+  { type: 'link', to: '/', text: 'Home' },
+  {
+    type: 'menu',
+    text: 'Learn',
+    items: [
+      { to: '/learn', text: 'All courses', desc: 'Browse everything we offer' },
+      { to: '/learn/ai-foundations', text: 'AI Foundations', desc: 'For students, grades 7–12' },
+      { to: '/learn/educators', text: 'AI for Educators', desc: 'Teacher PD with certificate' },
+    ],
+  },
+  {
+    type: 'menu',
+    text: 'Programs',
+    items: [
+      { to: '/summer-program', text: 'Summer Program', desc: 'Five-week intensive' },
+      { to: '/hackathon', text: 'Hackathon', desc: 'Build something real' },
+      { to: '/chapters', text: 'Chapters', desc: 'Find or start one near you' },
+    ],
+  },
+  {
+    type: 'menu',
+    text: 'About',
+    items: [
+      { to: '/founders', text: 'Leadership', desc: 'The people behind Lumin AI' },
+      { to: '/social-media-team', text: 'Social Media Team', desc: 'Our content crew' },
+      { to: '/contact-us', text: 'Contact', desc: 'Get in touch' },
+    ],
+  },
 ];
 
-const mainLinks = [
-  { to: '/', text: 'Home', id: 'home' },
-  { to: '/join-us', text: 'Join Us', id: 'join' },
-  { to: '/summer-program', text: 'Summer Program', id: 'summer' },
-  { to: '/hackathon', text: 'Hackathon', id: 'hackathon' },
-  { to: '/learn', text: 'Learn', id: 'learn' },
-  { to: '/learn/educators', text: 'Educators', id: 'educators' },
-  { to: '/contact-us', text: 'Contact', id: 'contact' },
-];
+const focusRing =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-lg';
 
-function isAboutPath(pathname) {
-  return aboutSubLinks.some((l) => l.to === pathname);
+function DesktopMenu({ entry, pathname }) {
+  const [open, setOpen] = useState(false);
+  const timer = useRef(null);
+  const active = entry.items.some((i) => pathname === i.to);
+
+  const show = () => { clearTimeout(timer.current); setOpen(true); };
+  const hide = () => { timer.current = setTimeout(() => setOpen(false), 120); };
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  return (
+    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors ${focusRing} ${
+          active || open ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'
+        }`}
+      >
+        {entry.text}
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      <div
+        role="menu"
+        className={`absolute left-0 top-full pt-2 transition-all duration-150 ${
+          open ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none'
+        }`}
+      >
+        <div className="w-72 rounded-2xl border border-gray-200/80 bg-white p-2 shadow-lg shadow-gray-900/5">
+          {entry.items.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={`block px-3 py-2.5 rounded-xl transition-colors ${
+                pathname === item.to ? 'bg-blue-50' : 'hover:bg-gray-50'
+              }`}
+            >
+              <span className={`block text-sm font-medium ${pathname === item.to ? 'text-blue-700' : 'text-gray-900'}`}>
+                {item.text}
+              </span>
+              <span className="block text-xs text-gray-500 mt-0.5">{item.desc}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
-
-const linkFocusClass =
-  'rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
 
 export default function Navigation() {
   const location = useLocation();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  const aboutActive = isAboutPath(location.pathname);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-  const closeMobile = () => {
-    setMobileMenuOpen(false);
-    setMobileAboutOpen(false);
-  };
+  // Close the mobile drawer whenever the route changes.
+  useEffect(() => {
+    setMobileOpen(false);
+    setOpenGroup(null);
+  }, [location.pathname]);
 
   return (
-    <nav className="fixed w-full z-50 bg-white/60 backdrop-blur-xl border-b border-gray-100/50">
+    <nav
+      className={`fixed w-full z-50 transition-all duration-200 ${
+        scrolled
+          ? 'bg-white/85 backdrop-blur-xl border-b border-gray-200/70 shadow-sm'
+          : 'bg-white/60 backdrop-blur-xl border-b border-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center h-16">
-          <div className="flex items-center gap-2 group">
-            <Link
-              to="/"
-              className={`flex items-center gap-2 rounded-md ${linkFocusClass}`}
-            >
-              <div className="w-8 h-8 relative overflow-hidden">
-                <img
-                  src="/images/lumin.png"
-                  alt="Lumin AI Logo"
-                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-              <span className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                Lumin AI
-              </span>
-            </Link>
+        <div className="flex items-center h-16 gap-1">
+          {/* Brand */}
+          <Link to="/" className={`flex items-center gap-2 mr-4 group ${focusRing}`}>
+            <img
+              src="/images/lumin.png"
+              alt="Lumin AI"
+              className="w-8 h-8 object-contain group-hover:scale-105 transition-transform duration-300"
+            />
+            <span className="text-lg font-bold tracking-tight text-gray-900">Lumin AI</span>
+          </Link>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-0.5 flex-1">
+            {NAV.map((entry) =>
+              entry.type === 'link' ? (
+                <Link
+                  key={entry.to}
+                  to={entry.to}
+                  className={`px-3 py-2 text-sm font-medium transition-colors ${focusRing} ${
+                    location.pathname === entry.to ? 'text-blue-600' : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {entry.text}
+                </Link>
+              ) : (
+                <DesktopMenu key={entry.text} entry={entry} pathname={location.pathname} />
+              )
+            )}
           </div>
 
-          {/* Desktop */}
-          <div className="hidden md:flex ml-8 gap-6 flex-1 items-center">
-            <Link
-              to="/"
-              className={`flex items-center h-full px-2 py-2 relative group/nav ${linkFocusClass} ${
-                location.pathname === '/' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
-              } transition-colors duration-300`}
-            >
-              Home
-              <span className="absolute inset-x-0 -bottom-[1px] h-0.5 bg-blue-600 scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300 origin-left" />
-            </Link>
+          {/* Desktop CTA */}
+          <Link
+            to="/join-us"
+            className={`hidden md:inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 rounded-xl transition-colors ${focusRing}`}
+          >
+            Join us
+          </Link>
 
-            {/* About dropdown */}
-            <div className="relative group/about">
-              <button
-                type="button"
-                className={`flex items-center gap-1 h-full px-2 py-2 text-sm font-medium transition-colors duration-300 ${linkFocusClass} ${
-                  aboutActive ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
-                }`}
-                aria-haspopup="menu"
-                aria-label="About menu"
-              >
-                About
-                <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover/about:rotate-180" />
-              </button>
-              <div
-                className="absolute left-0 top-full pt-1 opacity-0 invisible translate-y-1 pointer-events-none transition-all duration-150 group-hover/about:opacity-100 group-hover/about:visible group-hover/about:translate-y-0 group-hover/about:pointer-events-auto group-focus-within/about:opacity-100 group-focus-within/about:visible group-focus-within/about:translate-y-0 group-focus-within/about:pointer-events-auto"
-                role="menu"
-                aria-label="About"
-              >
-                <div className="rounded-xl border border-gray-100 bg-white py-1.5 shadow-lg min-w-[12rem]">
-                  {aboutSubLinks.map((item) => (
-                    <Link
-                      key={item.id}
-                      to={item.to}
-                      role="menuitem"
-                      className={`block px-4 py-2.5 text-sm transition-colors ${linkFocusClass} ${
-                        location.pathname === item.to
-                          ? 'bg-blue-50 text-blue-700 font-medium'
-                          : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
-                      }`}
-                    >
-                      {item.text}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {mainLinks.slice(1).map((link) => (
-              <Link
-                key={link.id}
-                to={link.to}
-                className={`flex items-center h-full px-2 py-2 relative group/nav ${linkFocusClass} ${
-                  location.pathname === link.to ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
-                } transition-colors duration-300`}
-              >
-                {link.text}
-                <span className="absolute inset-x-0 -bottom-[1px] h-0.5 bg-blue-600 scale-x-0 group-hover/nav:scale-x-100 transition-transform duration-300 origin-left" />
-              </Link>
-            ))}
-          </div>
-
+          {/* Mobile toggle */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden p-2 text-gray-600 hover:text-blue-600 transition-colors duration-300 ml-auto rounded-md ${linkFocusClass}`}
-            aria-label="Toggle mobile menu"
-            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
+            className={`md:hidden ml-auto p-2 text-gray-700 hover:text-blue-600 transition-colors ${focusRing}`}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
-            <div className="py-2">
-              <Link
-                to="/"
-                onClick={closeMobile}
-                className={`block w-full text-left px-6 py-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 ${
-                  location.pathname === '/' ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-50'
-                }`}
-              >
-                Home
-              </Link>
-
-              <div className="border-t border-gray-50">
-                <button
-                  type="button"
-                  onClick={() => setMobileAboutOpen((o) => !o)}
-                  className={`flex w-full items-center justify-between px-6 py-4 text-left text-gray-700 hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 ${
-                    aboutActive ? 'bg-blue-50/80 text-blue-700' : ''
-                  }`}
-                  aria-expanded={mobileAboutOpen}
-                >
-                  <span className="font-medium">About</span>
-                  <ChevronDown
-                    className={`w-5 h-5 shrink-0 transition-transform duration-200 ${
-                      mobileAboutOpen ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-                {mobileAboutOpen && (
-                  <div className="bg-gray-50/80 pb-2">
-                    {aboutSubLinks.map((item) => (
-                      <Link
-                        key={item.id}
-                        to={item.to}
-                        onClick={closeMobile}
-                        className={`block pl-10 pr-6 py-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 ${
-                          location.pathname === item.to
-                            ? 'text-blue-700 font-medium bg-white/80'
-                            : 'text-gray-600 hover:bg-white/60 hover:text-blue-600'
-                        }`}
-                      >
-                        {item.text}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {mainLinks.slice(1).map((link) => (
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="px-3 py-3 space-y-0.5">
+            {NAV.map((entry) =>
+              entry.type === 'link' ? (
                 <Link
-                  key={link.id}
-                  to={link.to}
-                  onClick={closeMobile}
-                  className={`block w-full text-left px-6 py-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 ${
-                    location.pathname === link.to
-                      ? 'bg-blue-50 text-blue-700 font-medium'
+                  key={entry.to}
+                  to={entry.to}
+                  className={`block px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    location.pathname === entry.to
+                      ? 'bg-blue-50 text-blue-700'
                       : 'text-gray-700 hover:bg-gray-50'
                   }`}
                 >
-                  {link.text}
+                  {entry.text}
                 </Link>
-              ))}
-            </div>
+              ) : (
+                <div key={entry.text}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenGroup((g) => (g === entry.text ? null : entry.text))}
+                    aria-expanded={openGroup === entry.text}
+                    className="flex w-full items-center justify-between px-3 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    {entry.text}
+                    <ChevronDown
+                      className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${
+                        openGroup === entry.text ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {openGroup === entry.text && (
+                    <div className="pl-3 pb-1 space-y-0.5">
+                      {entry.items.map((item) => (
+                        <Link
+                          key={item.to}
+                          to={item.to}
+                          className={`block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                            location.pathname === item.to
+                              ? 'bg-blue-50 text-blue-700 font-medium'
+                              : 'text-gray-600 hover:bg-gray-50'
+                          }`}
+                        >
+                          {item.text}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+            <Link
+              to="/join-us"
+              className="block mt-2 px-3 py-3 rounded-xl bg-gray-900 text-white text-sm font-semibold text-center hover:bg-gray-800 transition-colors"
+            >
+              Join us
+            </Link>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 }

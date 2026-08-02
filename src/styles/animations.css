@@ -5,23 +5,41 @@
     100% { transform: translate(0px, 0px) scale(1); }
   }
   
+  /* Reveal-on-scroll.
+     Content must never START invisible: if the observer misses an element
+     (already in view on load, JS slow, reduced motion), the old rules left
+     whole heroes permanently blank. So the resting state is fully visible and
+     the entrance is opt-in — JS adds .reveal-armed to <html>, which is the
+     only thing that can hide an element, and only briefly. */
   .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .reveal-armed .animate-on-scroll:not(.animate-in) {
     opacity: 0;
-    transform: translateX(-100px);
-    transition: all 1s ease-out;
+    transform: translateY(16px);
   }
-  
-  .animate-on-scroll.from-right {
-    transform: translateX(100px);
+
+  .reveal-armed .animate-on-scroll.from-right:not(.animate-in) {
+    transform: translateX(24px);
   }
-  
-  .animate-on-scroll.from-bottom {
-    transform: translateY(100px);
+
+  .reveal-armed .animate-on-scroll.from-bottom:not(.animate-in) {
+    transform: translateY(24px);
   }
-  
+
   .animate-on-scroll.animate-in {
     opacity: 1;
-    transform: translateX(0) translateY(0);
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-armed .animate-on-scroll:not(.animate-in) {
+      opacity: 1;
+      transform: none;
+    }
   }
   
   .animate-blob {

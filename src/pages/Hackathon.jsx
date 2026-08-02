@@ -79,18 +79,8 @@ export default function HackathonPage() {
         description="Lumin AI Hackathon: build AI projects and compete for $2000, $1000, and $500 prizes. Open to students. Dates and registration details."
         canonicalPath="/hackathon"
       />
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"/>
-        <div className="absolute top-40 left-1/2 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"/>
-      </div>
 
       <section className="pt-32 pb-24 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200/20 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-100/20 rounded-full blur-xl animate-pulse delay-2000"></div>
-        </div>
 
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
@@ -175,10 +165,10 @@ export default function HackathonPage() {
         </svg>
       </div>
 
-      <section className="py-24 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Welcome to LuminHacks</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Welcome to LuminHacks</h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
               Where Anyone Can Build With AI! AI is changing the way we create, learn, and solve problems, 
               and now you can harness its power for your own projects, regardless of your experience level.
@@ -253,10 +243,10 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      <section id="requirements-section" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section id="requirements-section" className="py-16 sm:py-20 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Requirements</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Requirements</h2>
             <p className="text-xl text-gray-600">
               Projects must be new and original for this event! No recycled code or reused project ideas from previous years.
             </p>
@@ -396,10 +386,10 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Prizes</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Prizes</h2>
             <p className="text-xl text-gray-600">$3,500 in prizes</p>
           </div>
 
@@ -426,10 +416,10 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Judging Criteria</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">Judging Criteria</h2>
             <p className="text-xl text-gray-600">How your project will be evaluated</p>
           </div>
 
@@ -463,7 +453,7 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-br from-green-50 to-blue-50">
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">Who Can Participate</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -492,9 +482,9 @@ export default function HackathonPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Build Something Amazing?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Ready to Build Something Amazing?</h2>
           <p className="text-xl mb-8 opacity-90">
             Join LuminHacks and create the next big thing with AI. No experience required - just bring your creativity!
           </p>

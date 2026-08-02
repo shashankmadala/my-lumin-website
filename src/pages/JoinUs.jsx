@@ -25,11 +25,6 @@ export default function JoinUs() {
       <section className="pt-32 pb-12 relative overflow-hidden text-white">
         
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700">
-          
-          <div className="absolute top-16 left-10 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-32 right-16 w-20 h-20 bg-purple-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-16 left-1/4 w-32 h-32 bg-blue-300/20 rounded-full blur-xl animate-pulse delay-2000"></div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-indigo-300/20 rounded-full blur-xl animate-pulse delay-500"></div>
 
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0" style={{
@@ -38,15 +33,9 @@ export default function JoinUs() {
               backgroundSize: '50px 50px'
             }}></div>
           </div>
-
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
           <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white rounded-full animate-bounce delay-300"></div>
-          <div className="absolute bottom-1/3 left-1/2 w-1.5 h-1.5 bg-purple-300 rounded-full animate-bounce delay-700"></div>
           <div className="absolute top-2/3 right-1/4 w-1 h-1 bg-blue-300 rounded-full animate-bounce delay-1000"></div>
-          <div className="absolute top-1/2 left-1/6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-bounce delay-500"></div>
           <div className="absolute top-3/4 right-1/6 w-1 h-1 bg-green-300 rounded-full animate-bounce delay-1200"></div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
         </div>
         
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -55,7 +44,7 @@ export default function JoinUs() {
             <span className="font-semibold">$3000 Total Scholarship Opportunity</span>
           </div>
           
-          <h1 className="text-5xl font-bold mb-4 drop-shadow-lg">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 drop-shadow-lg">
             Join Lumin AI
             <span className="block text-3xl text-blue-200 mt-2 font-medium">
               Become a Chapter Lead
@@ -84,7 +73,7 @@ export default function JoinUs() {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">The Opportunity</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">The Opportunity</h2>
             <p className="text-xl text-gray-600">
               We are expanding our organization and want to start chapters across the USA and internationally!
             </p>
@@ -127,7 +116,7 @@ export default function JoinUs() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">How It Works</h2>
             <p className="text-xl text-gray-600">
               Chapter leads will form a state team and do stuff in the chapter. They will then start to encourage Lumin chapters in cities/towns in that state.
             </p>
@@ -244,7 +233,7 @@ export default function JoinUs() {
 
       <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Ready to Get Started?</h2>
           <p className="text-xl mb-8 opacity-90">
             Join Lumin AI today and compete for one of THREE $1000 INTERNATIONAL SCHOLARSHIPS!
           </p>
