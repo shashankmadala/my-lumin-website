@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 
 const aboutSubLinks = [
   { to: '/founders', text: 'Leadership', id: 'founders' },
+  { to: '/social-media-team', text: 'Social Media Team', id: 'social-media-team' },
   { to: '/chapters', text: 'Chapters', id: 'chapters' },
 ];
 

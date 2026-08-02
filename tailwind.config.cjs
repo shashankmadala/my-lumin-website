@@ -11,8 +11,13 @@ export default {
       },
       animation: {
         'blob': 'blob 7s infinite',
+        'shimmer': 'shimmer 3.5s ease-in-out infinite',
       },
       keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' },
+        },
         blob: {
           '0%': {
             transform: 'translate(0px, 0px) scale(1)',

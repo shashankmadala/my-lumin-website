@@ -10,6 +10,7 @@ import CertificatePage from './pages/learn/CertificatePage.jsx';
 import Navigation from './components/Navigation.jsx';
 import Leadership from './pages/Founders.jsx';
 import PolicyTeam from './pages/PolicyTeam.jsx';
+import SocialMediaTeam from './pages/SocialMediaTeam.jsx';
 import Chapters from './pages/Chapters.jsx';
 import JoinUs from './pages/JoinUs.jsx';
 import Hackathon from './pages/Hackathon.jsx';
@@ -28,6 +29,7 @@ function App() {
             <Route path='/contact-us' element={<ContactUs />} />
             <Route path='/founders' element={<Leadership />} />
             <Route path='/policy-team' element={<PolicyTeam />} />
+            <Route path='/social-media-team' element={<SocialMediaTeam />} />
             <Route path='/chapters' element={<Chapters />} />
             <Route path='/join-us' element={<JoinUs />} />
             <Route path='/hackathon' element={<Hackathon />} />

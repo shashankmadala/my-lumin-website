@@ -38,6 +38,7 @@ const STAT_CARD_STYLES = {
 import '../styles/animations.css';
 import ImageCarousel from '../components/ImageCarousel';
 import SEO from '../components/SEO';
+import InitiativeBanner from '../components/InitiativeBanner';
 import { IMPACT } from '../data/impactStats';
 
 export default function HomePage() {
@@ -174,6 +175,7 @@ export default function HomePage() {
         description={`Lumin AI delivers free AI and machine learning education to 15,000+ students in grades 6–12 across 16+ countries, with 5,200+ certificates issued and ${IMPACT.chapterLocations}+ chapter locations. Start learning today.`}
         canonicalPath="/"
       />
+      <InitiativeBanner />
       {/* Background effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"/>
