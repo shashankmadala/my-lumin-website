@@ -36,35 +36,72 @@
     <meta name="twitter:description" content="Free AI and machine learning education for grades 6–12. 15,000+ students worldwide." />
     <meta name="twitter:image" content="https://www.luminlearning.org/images/home.png" />
 
-    <!-- Schema.org JSON-LD: Organization + WebSite -->
+    <!-- Schema.org JSON-LD: Organization + WebSite.
+         The founder edge points at the Person node defined on shashankmadala.com,
+         which reciprocally asserts worksFor/founder back at this #organization id.
+         Keep the two graphs consistent: changing name, url, logo, foundingDate or
+         nonprofitStatus here means updating the mirrored org node there too. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "EducationalOrganization",
+          "@type": ["EducationalOrganization", "NGO"],
           "@id": "https://www.luminlearning.org/#organization",
           "name": "Lumin AI",
-          "url": "https://www.luminlearning.org",
-          "logo": "https://www.luminlearning.org/images/lumin.png",
-          "description": "Lumin AI is a student-founded 501(c)(3) nonprofit expanding access to AI education for students in grades 6–12. We deliver hands-on AI programming to thousands of students worldwide.",
+          "alternateName": "Lumin",
+          "url": "https://www.luminlearning.org/",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://www.luminlearning.org/#logo",
+            "url": "https://www.luminlearning.org/images/lumin.png",
+            "contentUrl": "https://www.luminlearning.org/images/lumin.png",
+            "caption": "Lumin AI"
+          },
+          "image": { "@id": "https://www.luminlearning.org/#logo" },
+          "description": "Lumin AI is a student-founded 501(c)(3) nonprofit expanding access to AI education for students in grades 6-12. We deliver hands-on AI programming to thousands of students worldwide.",
           "foundingDate": "2023",
-          "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 1 },
+          "nonprofitStatus": "Nonprofit501c3",
+          "founder": [
+            { "@id": "https://www.shashankmadala.com/#person" },
+            { "@id": "https://www.luminlearning.org/founders#ayur-munipalli" }
+          ],
+          "email": "luminai321@gmail.com",
+          "telephone": "+1-609-200-0017",
           "areaServed": { "@type": "Place", "name": "Worldwide" },
-          "sameAs": []
+          "knowsAbout": [
+            "Artificial intelligence education",
+            "Machine learning",
+            "AI literacy",
+            "K-12 STEM education",
+            "Teacher professional development"
+          ],
+          "sameAs": [
+            "https://luminlearning.ai/",
+            "https://www.linkedin.com/company/lumin-ai-321",
+            "https://www.instagram.com/lumin.ai"
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://www.luminlearning.org/founders#ayur-munipalli",
+          "name": "Ayur Munipalli",
+          "jobTitle": "Founder and Co-CEO, Lumin AI",
+          "worksFor": { "@id": "https://www.luminlearning.org/#organization" },
+          "sameAs": [
+            "https://www.linkedin.com/in/ayur-munipalli/",
+            "https://github.com/ayurmunipalli"
+          ]
         },
         {
           "@type": "WebSite",
           "@id": "https://www.luminlearning.org/#website",
-          "url": "https://www.luminlearning.org",
+          "url": "https://www.luminlearning.org/",
           "name": "Lumin AI",
           "description": "Free AI education and machine learning courses for students. Learn AI with interactive modules, start a chapter, or join our summer program.",
+          "inLanguage": "en-US",
           "publisher": { "@id": "https://www.luminlearning.org/#organization" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.luminlearning.org/learn",
-            "query-input": "required name=search_term_string"
-          }
+          "copyrightHolder": { "@id": "https://www.luminlearning.org/#organization" }
         }
       ]
     }
