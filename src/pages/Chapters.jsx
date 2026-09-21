@@ -443,6 +443,9 @@ export default function Chapters() {
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
+          <p className="mt-6 text-xs text-blue-100/80">
+            New chapters are onboarded by <span className="font-medium text-white/90">Archis Joshi</span>, Chapter Onboarding Coordinator.
+          </p>
         </div>
       </section>
     </div>
