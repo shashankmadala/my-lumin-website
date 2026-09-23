@@ -1,6 +1,6 @@
-import { Award, GithubIcon, LinkedinIcon, Mail, Users } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, Mail, Users } from 'lucide-react';
 import SEO from '../components/SEO';
-import { PageShell, PageHero, Section, SectionHeading, Card } from '../components/ui/Page';
+import { PageShell, PageHero, Section, Card } from '../components/ui/Page';
 
 const founders = [
   {
@@ -93,34 +93,6 @@ export default function Leadership() {
             </Card>
           ))}
         </div>
-      </Section>
-
-      <Section width="5xl" className="bg-gray-50/60">
-        <SectionHeading
-          eyebrow="Recognition"
-          icon={Award}
-          tone="amber"
-          title="New Jersey Senate Citation"
-          subtitle="Shashank Madala was honored by Senator Angela V. McKnight on behalf of the 31st New Jersey Legislative District for representing New Jersey and the United States."
-        />
-        <Card hover={false} className="p-3 sm:p-4">
-          <a
-            href="/images/recognition/nj-senate-citation-shashank-madala.jpg"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View the full New Jersey Senate Citation"
-          >
-            <img
-              src="/images/recognition/nj-senate-citation-shashank-madala.jpg"
-              alt="New Jersey Senate Citation awarded to Shashank Madala by Senator Angela V. McKnight, 31st Legislative District, dated September 3, 2026"
-              loading="lazy"
-              className="w-full h-auto rounded-xl"
-            />
-          </a>
-          <p className="text-sm text-gray-500 text-center mt-3">
-            Presented September 3, 2026 · 31st New Jersey Legislative District
-          </p>
-        </Card>
       </Section>
     </PageShell>
   );
