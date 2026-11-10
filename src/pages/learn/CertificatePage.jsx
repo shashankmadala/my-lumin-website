@@ -8,12 +8,23 @@ import useCourse from '../../hooks/useCourse';
 import useCourseProgress from '../../hooks/useCourseProgress';
 import { courseTheme } from '../../components/course/courseTheme';
 
+function Signature({ signer, grow }) {
+  return (
+    <div className={`text-center ${grow ? 'flex-1' : ''}`}>
+      <p className="font-serif italic text-lg text-gray-800 mb-1">{signer.name}</p>
+      <div className="w-44 h-px bg-gray-400 mx-auto mb-1.5" />
+      <p className="text-xs text-gray-500">{signer.role}</p>
+    </div>
+  );
+}
+
 function CertificateInner({ meta, course }) {
   const { progress, stats, setCertificateName } = useCourseProgress(course);
   const [nameInput, setNameInput] = useState(progress.certificateName || '');
   const [editing, setEditing] = useState(!progress.certificateName);
   const certificateRef = useRef(null);
   const t = courseTheme(course.color);
+  const signers = course.certificate.signers ?? [];
 
   const earned =
     progress.assessment.passed &&
@@ -127,26 +138,14 @@ function CertificateInner({ meta, course }) {
                   {course.certificate.courseName}
                 </p>
 
-                <div className="flex items-end justify-between max-w-2xl mx-auto">
-                  <div className="text-center flex-1">
-                    <p className="font-serif italic text-lg text-gray-800 mb-1">
-                      {course.certificate.signers[0]?.name}
-                    </p>
-                    <div className="w-44 h-px bg-gray-400 mx-auto mb-1.5" />
-                    <p className="text-xs text-gray-500">{course.certificate.signers[0]?.role}</p>
-                  </div>
+                <div className="flex items-end justify-center max-w-2xl mx-auto">
+                  {signers[0] && <Signature signer={signers[0]} grow={signers.length > 1} />}
                   <div className="flex-shrink-0 mx-6 mb-2">
                     <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-md">
                       <Award className="w-8 h-8 text-white" />
                     </div>
                   </div>
-                  <div className="text-center flex-1">
-                    <p className="font-serif italic text-lg text-gray-800 mb-1">
-                      {course.certificate.signers[1]?.name}
-                    </p>
-                    <div className="w-44 h-px bg-gray-400 mx-auto mb-1.5" />
-                    <p className="text-xs text-gray-500">{course.certificate.signers[1]?.role}</p>
-                  </div>
+                  {signers[1] && <Signature signer={signers[1]} grow />}
                 </div>
 
                 <p className="text-xs text-gray-400 mt-8">

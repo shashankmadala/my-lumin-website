@@ -25,7 +25,6 @@ const course = {
     requiresAllLessons: false,
     signers: [
       { name: 'Shashank Madala', role: 'Co-Founder & Co-CEO, Lumin AI' },
-      { name: 'Ayur Munipalli', role: 'Co-Founder & Co-CEO, Lumin AI' },
     ],
   },
 };
